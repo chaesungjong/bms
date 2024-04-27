@@ -1,29 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Spring Boot Application</title>
-    <link rel="stylesheet" href="css/style.css"> <!-- CSS 스타일링 -->
-</head>
-<body>
-    <header>
-        <h1>Welcome to My Spring Boot Application</h1>
-    </header>
-    <nav>
-        <!-- 내비게이션 링크 -->
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-    </nav>
-    <main>
-        <p>This is the content of the home page.</p>
-    </main>
-    <footer>
-        <p>Copyright © 2024 by MyCompany.</p>
-    </footer>
-    <script src="js/script.js"></script> <!-- 자바스크립트 파일 -->
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+
+    <th:block layout:fragment="head">
+        <title>Spring Boot</title>
+    </th:block>
+
+    <body>
+        <th:block layout:fragment="header" th:replace="partials/header"></th:block>
+        <div layout:fragment="content" class="content">
+            <h2>테스트</h2>
+        </div>
+        <th:block layout:fragment="footer" th:replace="partials/footer"></th:block>
+    </body>
 </html>

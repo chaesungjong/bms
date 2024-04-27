@@ -30,6 +30,16 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Thymeleaf와 스프링 부트 통합
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // Thymeleaf Layout Dialect
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0'
+ 	// MSSQL
+    implementation 'com.microsoft.sqlserver:mssql-jdbc:8.4.1.jre8'
+    // MyBatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+
 }
 
 tasks.named('test') {
