@@ -30,7 +30,6 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
     // Thymeleaf와 스프링 부트 통합
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     // Thymeleaf Layout Dialect
@@ -39,7 +38,8 @@ dependencies {
     implementation 'com.microsoft.sqlserver:mssql-jdbc:8.4.1.jre8'
     // MyBatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-
+    // 사용할 데이터베이스 드라이버 예시 (H2 데이터베이스)
+    runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {

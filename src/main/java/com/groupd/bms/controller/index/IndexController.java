@@ -1,4 +1,4 @@
-package com.groupd.bms.controller;
+package com.groupd.bms.controller.index;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +13,8 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("title", "테스트"); // `index.html`에서 사용될 타이틀
-        return "index"; // `index.html` 템플릿 반환
+        model.addAttribute("title", "테스트"); 
+        return "index"; 
     }
     
 }
