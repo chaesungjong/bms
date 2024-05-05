@@ -13,8 +13,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("title", "테스트"); 
-        return "index"; 
+        return "redirect:/mmb/login"; 
     }
     
 }

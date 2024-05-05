@@ -1,0 +1,26 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #4C4FCA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-form input {
+    margin-top: 10px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
