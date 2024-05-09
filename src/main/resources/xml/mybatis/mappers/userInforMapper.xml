@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.groupd.bms.repository.UserRepository">
-    <select id="checkuserInfotmation" resultType="java.util.HashMap">
-        SELECT * FROM Users 
-    </select>
+
+  <!-- 로그인 시도 프로시저 Start -->
+  <select id="memLoginProc" statementType="CALLABLE">
+    { #{retVal, mode=OUT, jdbcType=INTEGER} = call [dbo].[memLoginProc](#{userid}, #{userpw}, #{ip}, #{sysGubun},  #{errMsg, mode=OUT, jdbcType=VARCHAR}) }
+  </select>
+  <!-- 로그인 시도 프로시저 End -->
+
     <select id="insertRegister" resultType="java.util.HashMap">
         SELECT * FROM Users 
     </select>

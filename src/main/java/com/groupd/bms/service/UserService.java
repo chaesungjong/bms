@@ -4,8 +4,10 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.groupd.bms.model.User;
+
+import com.groupd.bms.model.MemberLogin;
 import com.groupd.bms.repository.UserRepository;
+import com.groupd.bms.util.StringUtil;
 
 /**
  * UserService
@@ -27,20 +29,20 @@ public class UserService {
      * @param password
      * @return HashMap<String, Object>
      */
-    public HashMap<String, Object> login(String userID, String password) {
+    public HashMap<String, Object> login(MemberLogin memberLogin) {
+
+      HashMap<String, Object> result = new HashMap<>();
 
       //사용자가 입력한 아이디와 비밀번호를 체크한다.
-      HashMap<String, Object> resultHashMap = userRepository.checkuserInfotmation(userID, password);
+      userRepository.memLoginProc(memberLogin);
 
+      String retVal = StringUtil.objectToString(memberLogin.getRetVal()); //로그인 성공 여부
+      String errMsg = StringUtil.objectToString(memberLogin.getErrMsg()); //에러 메시지
+      
+      result.put("retVal", retVal);
+      result.put("errMsg", errMsg);
 
-      if (resultHashMap != null ) {
-        User u = new User();
-        u.setId("test");
-        u.setUsername("이름");
-        u.setPassword("1234");
-      }
-
-      return null; // or throw exception
+      return result;
     }
 
     /**

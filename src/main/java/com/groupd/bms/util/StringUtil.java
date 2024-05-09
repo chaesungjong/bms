@@ -1,5 +1,7 @@
 package com.groupd.bms.util;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 /**
  * StringUtil
  * 문자열 처리를 위한 유틸리티 클래스

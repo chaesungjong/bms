@@ -1,6 +1,9 @@
 package com.groupd.bms.controller.login;
 
+import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.groupd.bms.model.User;
+import com.groupd.bms.model.MemberLogin;
 import com.groupd.bms.service.UserService;
 import com.groupd.bms.util.SHA256Util;
+import com.groupd.bms.util.StringUtil;
+import com.groupd.bms.util.Util;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.HashMap;
 import org.springframework.ui.Model;
@@ -52,18 +59,14 @@ public class LoginController {
      * @return ModelAndView
      */
     @RequestMapping(value="/loginProcess.do", method = { RequestMethod.POST, RequestMethod.GET })
-    public ModelAndView login(@RequestParam("userId") String userID, @RequestParam("password") String password) {
-        HashMap<String, Object> user = userService.login(userID, password);
-        ModelAndView modelAndView = new ModelAndView();
-        
-        if (user != null) {
-            modelAndView.setViewName("dashboard");
-            modelAndView.addObject("user", user);
-        } else {
-            modelAndView.setViewName("login");
-            modelAndView.addObject("error", "Invalid username or password");
-        }
-        return modelAndView; 
+    public ResponseEntity<?> login(@RequestParam("userId") String userID, @RequestParam("password") String password, HttpServletRequest request) {
+
+        // 로그인 시도
+        HashMap<String, Object> loginResultMap = userService.login(new MemberLogin(userID, SHA256Util.hashWithSHA256(password), Util.getUserIP(request), "BMS"));
+
+        if (loginResultMap != null) return ResponseEntity.ok(loginResultMap);
+        else return ResponseEntity.status(500).build();
+
     }
 
     /*
@@ -82,13 +85,10 @@ public class LoginController {
         HashMap<String, Object> user = userService.register(userID, SHA256Util.hashWithSHA256(password), username, firstName, lastName, email);
         ModelAndView modelAndView = new ModelAndView();
         
-        if (user != null) {
-            modelAndView.setViewName("dashboard");
-            modelAndView.addObject("user", user);
-        } else {
-            modelAndView.setViewName("login");
-            modelAndView.addObject("error", "Invalid username or password");
-        }
+        modelAndView.setViewName("mmb/login");
+        if (user != null)  modelAndView.addObject("user", user);
+        else modelAndView.addObject("error", "Invalid username or password");
+        
         return modelAndView; // ModelAndView 객체를 반환
     }
     
