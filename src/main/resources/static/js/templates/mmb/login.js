@@ -41,9 +41,10 @@ $(document).ready(function () {
         // ajaxRequest 함수를 사용하여 로그인 처리
         ajaxRequest("/mmb/loginProcess.do", loginData,"POST", function(response) {
             // 로그인 성공 시 대시보드 페이지로 리디렉트
-            alert(response.errMsg);
             if (response.retVal == 0) {
                 location.href = "/dashboard/main";
+            }else{
+                alert(response.errMsg);
             }
         }, function() {
             alert('현재 기능 개발 준비중 입니다.');
