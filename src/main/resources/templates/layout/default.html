@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BMS 업체 관리 시스템</title>
-        <!-- 공통 CSS 영역 -->
-        <th:block th:include="layout/config :: common_css"></th:block>
-        <!-- 공통 JS 영역 -->
-        <th:block th:include="layout/config :: common_js"></th:block>
-    </head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-    <body>
-        <div layout:fragment="header"></div>
-        <div layout:fragment="content"></div>
-        <div layout:fragment="footer"></div>
-        
-        <!-- 커스텀 CSS 영역 -->
-        <th:block layout:fragment="customCSS"></th:block>
-        <!-- 커스텀 JS 영역 -->
-        <th:block layout:fragment="customJS"></th:block>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMS 업체 관리 시스템</title>
+    <!-- 공통 CSS 영역 -->
+    <th:block th:include="layout/config :: common_css"></th:block>
+    <!-- 공통 JS 영역 -->
+    <th:block th:include="layout/config :: common_js"></th:block>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 사이드바 영역  -->
+            <th:block th:if="${#strings.startsWith(currentUri, '/dashboard')}">
+                <div th:replace="/partials/sidebar :: sidebar"></div>
+            </th:block>
+            <!-- 메인화면 영역  -->
+            <div layout:fragment="content"></div>
+        </div>
+    </div>
+    <!-- 커스텀 CSS 영역 -->
+    <th:block layout:fragment="customCSS"></th:block>
+    <!-- 커스텀 JS 영역 -->
+    <th:block layout:fragment="customJS"></th:block>
+</body>
+
 </html>

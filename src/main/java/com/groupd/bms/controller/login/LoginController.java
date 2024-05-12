@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.groupd.bms.model.MemberLogin;
 import com.groupd.bms.service.UserService;
 import com.groupd.bms.util.SHA256Util;
-import com.groupd.bms.util.StringUtil;
 import com.groupd.bms.util.Util;
 
 import jakarta.servlet.http.HttpServletRequest;

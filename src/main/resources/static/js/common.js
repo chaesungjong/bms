@@ -52,3 +52,6 @@ const forbiddenWords = [
   // 디렉토리 탐색(Directory Traversal)
   "../", "..\\", "%2e%2e/", "%2e%2e\\"
 ];
+function showAlert(message) {
+  alert(message);
+}
