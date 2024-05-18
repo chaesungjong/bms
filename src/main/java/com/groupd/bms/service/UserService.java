@@ -5,8 +5,10 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.groupd.bms.model.Member;
 import com.groupd.bms.model.MemberLogin;
 import com.groupd.bms.repository.UserRepository;
+import com.groupd.bms.util.MapperUtil;
 import com.groupd.bms.util.StringUtil;
 
 /**
@@ -38,6 +40,14 @@ public class UserService {
 
       String retVal = StringUtil.objectToString(memberLogin.getRetVal()); //로그인 성공 여부
       String errMsg = StringUtil.objectToString(memberLogin.getErrMsg()); //에러 메시지
+
+      if("0".equals(retVal)){
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("gubun", "MEM_USERINFO");
+        hashMap.put("userid", memberLogin.getUserid());
+        result.put("member", MapperUtil.mapToMember(userRepository.memUserInfo(hashMap)));
+      }
       
       result.put("retVal", retVal);
       result.put("errMsg", errMsg);

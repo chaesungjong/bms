@@ -3,12 +3,14 @@ package com.groupd.bms.util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 @Slf4j
-public class LoggerInterceptor implements HandlerInterceptor {
+public class BmsInterceptor implements HandlerInterceptor {
+
+    private static final String[] LOGIN_CHECK_EXCLUDE_PATHS = {"/mmb/login","/","/error","/mmb/loginProcess.do" };
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -16,7 +18,16 @@ public class LoggerInterceptor implements HandlerInterceptor {
         log.debug("===============================================");
         log.debug("==================== BEGIN ====================");
         log.debug("Request URI ===> " + request.getRequestURI());
-        return HandlerInterceptor.super.preHandle(request, response, handler);
+
+        // 세션 체크 로직
+        if (!Arrays.asList(LOGIN_CHECK_EXCLUDE_PATHS).contains(request.getRequestURI())) {
+            if (request.getSession().getAttribute("member") == null) {
+                log.debug("No session found, redirecting to login page.");
+                response.sendRedirect("/mmb/login");
+                return false; // 현재 요청을 중지하고 로그인 페이지로 리다이렉트
+            }
+        }
+        return true; // 로그인, 등록, 로그아웃 페이지는 세션 체크를 하지 않음
     }
 
     @Override

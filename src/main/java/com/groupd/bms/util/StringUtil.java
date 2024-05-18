@@ -1,6 +1,5 @@
 package com.groupd.bms.util;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * StringUtil

@@ -8,7 +8,23 @@
   </select>
   <!-- 로그인 시도 프로시저 End -->
 
-    <select id="insertRegister" resultType="java.util.HashMap">
-        SELECT * FROM Users 
-    </select>
+  <!-- 회원정보 관리 프로시저 Start -->
+  <select id="memUserInfo" resultType="java.util.HashMap"  statementType="CALLABLE">
+        { call [dbo].[memJoinModify](
+            #{gubun},
+            #{userid},
+            #{pwd},
+            #{name},
+            #{hpno},
+            #{email},
+            #{birthday},
+            #{gender},
+            #{grade},
+            #{state},
+            #{siteCode},
+            #{ip}
+        )
+    }
+  </select>
+  <!-- 회원정보 관리 프로시저 End -->
 </mapper>

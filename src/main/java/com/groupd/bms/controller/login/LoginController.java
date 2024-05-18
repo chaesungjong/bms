@@ -63,7 +63,15 @@ public class LoginController {
         // 로그인 시도
         HashMap<String, Object> loginResultMap = userService.login(new MemberLogin(userID, SHA256Util.hashWithSHA256(password), Util.getUserIP(request), "BMS"));
 
-        if (loginResultMap != null) return ResponseEntity.ok(loginResultMap);
+
+        if (loginResultMap != null){
+
+            if(loginResultMap.get("member") != null){
+                request.getSession().setAttribute("member", loginResultMap.get("member"));
+            }
+            
+            return ResponseEntity.ok(loginResultMap);
+        }
         else return ResponseEntity.status(500).build();
 
     }
