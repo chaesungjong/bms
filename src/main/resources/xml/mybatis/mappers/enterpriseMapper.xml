@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.groupd.bms.repository.EnterpriseRepository">
+
+  <!-- 로그인 시도 프로시저 Start -->
+  <select id="siteInfoModify" resultType="java.util.HashMap" statementType="CALLABLE">
+    {#{ retVal, mode=OUT, jdbcType=INTEGER} = call [dbo].[siteInfoModify] ( #{gubun}, #{siteKey}, #{siteCode}, #{siteName}, #{siteState}, #{cntBlogPos}, #{siteURL},  #{siteDomainExpdt},
+        #{siteHostingExpdt}, #{address}, #{addressDesc}, #{postNo}, #{contractSdate}, #{contractEdate}, #{contractState}, #{contractPlanPDesign}, #{contractPlanVideo}, #{boardUseYN},
+        #{memo}, #{siteClass}, #{ceoName},  #{siteTelno}, #{managerName}, #{managerPhone}, #{managerEmail}, #{userid}, #{retSiteCode, mode=OUT, jdbcType=VARCHAR  }, #{retSiteKey , mode=OUT, jdbcType=INTEGER}, #{retMsg , mode=OUT, jdbcType=VARCHAR} ) }
+  </select>
+  <!-- 로그인 시도 프로시저 End -->
+</mapper>
