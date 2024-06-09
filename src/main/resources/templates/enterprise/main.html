@@ -14,6 +14,16 @@
         <div class="invalid-feedback">
         </div>
       </div>
+      <div class="col-md-5">
+        <label for="boardUseYN" class="form-label">업체 상태</label>
+        <select class="form-select" id="siteState" name="siteState" required>
+          <th:block th:each="state : ${siteState}">
+            <option th:value="${state['code']}" th:text="${state['codeName']}"></option>
+        </th:block>
+        </select>
+        <input type="text" class="form-control" id="contractSdate" name="contractSdate" placeholder="시작일">
+        <input type="text" class="form-control" id="contractEdate" name="contractEdate" placeholder="동료일">
+      </div>
       <div class="col-12">
         <label for="siteName" class="form-label">업체명</label>
         <input type="text" class="form-control" id="siteName" name="siteName" placeholder="업체명" required>
@@ -34,8 +44,7 @@
       </div>
       <div class="col-12">
         <label for="siteDomainExpdt" class="form-label">도메인 만료일</label>
-        <input type="text" class="form-control" id="datePicker" name="datePicker" placeholder="도메인 만료일"
-          required>
+        <input type="text" class="form-control" id="datePicker" name="datePicker" placeholder="도메인 만료일" required>
         <div class="invalid-feedback">
         </div>
       </div>
@@ -59,41 +68,21 @@
       </div>
       <h4 class="mb-3">계약 플랜 (영상)</h4>
       <div class="my-3">
-        <div class="form-check">
-          <input id="Basic" name="contractPlanVideo" type="radio" class="form-check-input" checked required>
-          <label class="form-check-label" for="Basic">Basic</label>
-        </div>
-        <div class="form-check">
-          <input id="Standard" name="contractPlanVideo" type="radio" class="form-check-input" required>
-          <label class="form-check-label" for="Standard">Standard</label>
-        </div>
-        <div class="form-check">
-          <input id="Premium" name="contractPlanVideo" type="radio" class="form-check-input" required>
-          <label class="form-check-label" for="Premium">Premium</label>
-        </div>
-        <div class="form-check">
-          <input id="Unused" name="contractPlanVideo" type="radio" class="form-check-input" required>
-          <label class="form-check-label" for="Unused">미사용</label>
-        </div>
+        <th:block th:each="plan : ${contractPlans}">
+          <div class="form-check">
+            <input type="radio" th:id="${plan['code']}" th:name="contractPlan" th:value="${plan['code']}" class="form-check-input" required>
+            <label class="form-check-label" th:for="${plan['code']}" th:text="${plan['codeName']}"></label>
+          </div>
+        </th:block>
       </div>
       <h4 class="mb-3">계약 플랜 (포스팅/디자인)</h4>
       <div class="my-3">
-        <div class="form-check">
-          <input id="Basic" name="contractPlanPDesign" type="radio" class="form-check-input" checked required>
-          <label class="form-check-label" for="Basic">Basic</label>
-        </div>
-        <div class="form-check">
-          <input id="Standard" name="contractPlanPDesign" type="radio" class="form-check-input" required>
-          <label class="form-check-label" for="Standard">Standard</label>
-        </div>
-        <div class="form-check">
-          <input id="Premium" name="contractPlanPDesign" type="radio" class="form-check-input" required>
-          <label class="form-check-label" for="Premium">Premium</label>
-        </div>
-        <div class="form-check">
-          <input id="Unused" name="contractPlanPDesign" type="radio" class="form-check-input" required>
-          <label class="form-check-label" for="Unused">미사용</label>
-        </div>
+        <th:block th:each="plan : ${contractPlans}">
+          <div class="form-check">
+            <input type="radio" th:id="${plan['code']}" th:name="contractPlan" th:value="${plan['code']}" class="form-check-input" required>
+            <label class="form-check-label" th:for="${plan['code']}" th:text="${plan['codeName']}"></label>
+          </div>
+        </th:block>
       </div>
       <h4 class="mb-3">고객게시판 사용 가능 여부</h4>
       <div class="my-3">
@@ -106,11 +95,19 @@
           <label class="form-check-label" for="clientBoardN">사용 중지</label>
         </div>
       </div>
+      <div class="col-12">
+        <label for="siteDomainExpdt" class="form-label">도메인 만료일</label>
+        <input type="text" class="form-control" id="datePicker" name="datePicker" placeholder="도메인 만료일"
+          required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
       <div class="col-md-5">
         <label for="boardUseYN" class="form-label">계약기간</label>
         <select class="form-select" id="boardUseYN" name="boardUseYN" required>
-          <option value="Y">계약 전</option>
-          <option value="N">계약 후 </option>
+          <th:block th:each="state : ${contractState}">
+              <option th:value="${state['code']}" th:text="${state['codeName']}"></option>
+          </th:block>
         </select>
         <input type="text" class="form-control" id="contractSdate" name="contractSdate" placeholder="시작일">
         <input type="text" class="form-control" id="contractEdate" name="contractEdate" placeholder="동료일">

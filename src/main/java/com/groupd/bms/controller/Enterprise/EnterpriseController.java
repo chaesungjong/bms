@@ -12,6 +12,8 @@ import com.groupd.bms.model.Member;
 import com.groupd.bms.service.EnterpriseService;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -27,12 +29,231 @@ public class EnterpriseController {
     private EnterpriseService enterpriseService;
 
     /*
+     * 치과 업체 등록 페이지를 보여준다.
+     */
+    @GetMapping("/registration")
+    public String Registration(Model model) {
+
+        /*
+         * 업체 상태 코드를 가져온다.
+         */
+        HashMap<String, Object> getStateCode = new HashMap<>();
+
+        getStateCode.put("gubun", "LIST");
+        getStateCode.put("codeGubun", "siteState"); 
+        getStateCode.put("code", ""); 
+        getStateCode.put("codeName", ""); 
+
+        List<Map<String, Object>> reList = enterpriseService.codeMgtViewSiteState(getStateCode);
+
+        model.addAttribute("siteState", reList);
+
+        /**
+         * 계약 상태 코드를 가져온다.
+         */
+        HashMap<String, Object> contractState = new HashMap<>();
+        contractState.put("gubun", "LIST");
+        contractState.put("codeGubun", "contractState"); 
+        contractState.put("code", ""); 
+        contractState.put("codeName", ""); 
+
+        List<Map<String, Object>> contractreList = enterpriseService.codeMgtViewSiteState(contractState);
+        model.addAttribute("contractState", contractreList);
+
+        /**
+         * 계약 계약플랜(포스팅/디자인)을 가져온다.
+         */
+        HashMap<String, Object> contractPlanPDesign = new HashMap<>();
+
+        contractPlanPDesign.put("gubun", "LIST");
+        contractPlanPDesign.put("codeGubun", "contractPlanPDesign"); 
+        contractPlanPDesign.put("code", ""); 
+        contractPlanPDesign.put("codeName", ""); 
+
+        List<Map<String, Object>> contractPlanPDesignList = enterpriseService.codeMgtViewSiteState(contractPlanPDesign);
+        model.addAttribute("contractPlans", contractPlanPDesignList);
+
+        
+        /**
+         * 계약 계약플랜(포스팅/디자인)을 가져온다.
+         */
+        HashMap<String, Object> contractPlanVideo = new HashMap<>();
+
+        contractPlanVideo.put("gubun", "LIST");
+        contractPlanVideo.put("codeGubun", "contractPlanVideo"); 
+        contractPlanVideo.put("code", ""); 
+        contractPlanVideo.put("codeName", ""); 
+
+        List<Map<String, Object>> contractPlanVideoList = enterpriseService.codeMgtViewSiteState(contractPlanVideo);
+        model.addAttribute("contractPlanVideo", contractPlanVideoList);
+
+        /**
+         * SNS 상태 값을 가져온다.
+         */
+        HashMap<String, Object> snsType = new HashMap<>();
+
+        snsType.put("gubun", "LIST");
+        snsType.put("codeGubun", "snsType"); 
+        snsType.put("code", ""); 
+        snsType.put("codeName", ""); 
+
+        List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState(snsType);
+        model.addAttribute("snsTypeList", snsTypeList);
+        
+        return "enterprise/Registration";
+    }
+
+
+    /*
      * 대시보드 페이지를 보여준다.
      */
     @GetMapping("/main")
     public String main(Model model) {
+
+        /*
+         * 업체 상태 코드를 가져온다.
+         */
+        HashMap<String, Object> getStateCode = new HashMap<>();
+
+        getStateCode.put("gubun", "LIST");
+        getStateCode.put("codeGubun", "siteState"); 
+        getStateCode.put("code", ""); 
+        getStateCode.put("codeName", ""); 
+
+        List<Map<String, Object>> reList = enterpriseService.codeMgtViewSiteState(getStateCode);
+
+        model.addAttribute("siteState", reList);
+
+        /**
+         * 계약 상태 코드를 가져온다.
+         */
+        HashMap<String, Object> contractState = new HashMap<>();
+        contractState.put("gubun", "LIST");
+        contractState.put("codeGubun", "contractState"); 
+        contractState.put("code", ""); 
+        contractState.put("codeName", ""); 
+
+        List<Map<String, Object>> contractreList = enterpriseService.codeMgtViewSiteState(contractState);
+        model.addAttribute("contractState", contractreList);
+
+        /**
+         * 계약 계약플랜(포스팅/디자인)을 가져온다.
+         */
+        HashMap<String, Object> contractPlanPDesign = new HashMap<>();
+
+        contractPlanPDesign.put("gubun", "LIST");
+        contractPlanPDesign.put("codeGubun", "contractPlanPDesign"); 
+        contractPlanPDesign.put("code", ""); 
+        contractPlanPDesign.put("codeName", ""); 
+
+        List<Map<String, Object>> contractPlanPDesignList = enterpriseService.codeMgtViewSiteState(contractPlanPDesign);
+        model.addAttribute("contractPlans", contractPlanPDesignList);
+
+        
+        /**
+         * 계약 계약플랜(포스팅/디자인)을 가져온다.
+         */
+        HashMap<String, Object> contractPlanVideo = new HashMap<>();
+
+        contractPlanVideo.put("gubun", "LIST");
+        contractPlanVideo.put("codeGubun", "contractPlanVideo"); 
+        contractPlanVideo.put("code", ""); 
+        contractPlanVideo.put("codeName", ""); 
+
+        List<Map<String, Object>> contractPlanVideoList = enterpriseService.codeMgtViewSiteState(contractPlanVideo);
+        model.addAttribute("contractPlanVideo", contractPlanVideoList);
+
+        /**
+         * 계약 계약플랜(포스팅/디자인)을 가져온다.
+         */
+        HashMap<String, Object> snsType = new HashMap<>();
+
+        snsType.put("gubun", "LIST");
+        snsType.put("codeGubun", "snsType"); 
+        snsType.put("code", ""); 
+        snsType.put("codeName", ""); 
+
+        List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState(snsType);
+        model.addAttribute("snsTypeList", snsTypeList);
+
         return "enterprise/main";
     }
+
+    /*
+     * 대시보드 페이지를 보여준다.
+     */
+    @GetMapping("/mainback")
+    public String mainback(Model model) {
+
+                /*
+         * 업체 상태 코드를 가져온다.
+         */
+        HashMap<String, Object> getStateCode = new HashMap<>();
+
+        getStateCode.put("gubun", "LIST");
+        getStateCode.put("codeGubun", "siteState"); 
+        getStateCode.put("code", ""); 
+        getStateCode.put("codeName", ""); 
+
+        List<Map<String, Object>> reList = enterpriseService.codeMgtViewSiteState(getStateCode);
+
+        model.addAttribute("siteState", reList);
+
+        /**
+         * 계약 상태 코드를 가져온다.
+         */
+        HashMap<String, Object> contractState = new HashMap<>();
+        contractState.put("gubun", "LIST");
+        contractState.put("codeGubun", "contractState"); 
+        contractState.put("code", ""); 
+        contractState.put("codeName", ""); 
+
+        List<Map<String, Object>> contractreList = enterpriseService.codeMgtViewSiteState(contractState);
+        model.addAttribute("contractState", contractreList);
+
+        /**
+         * 계약 계약플랜(포스팅/디자인)을 가져온다.
+         */
+        HashMap<String, Object> contractPlanPDesign = new HashMap<>();
+
+        contractPlanPDesign.put("gubun", "LIST");
+        contractPlanPDesign.put("codeGubun", "contractPlanPDesign"); 
+        contractPlanPDesign.put("code", ""); 
+        contractPlanPDesign.put("codeName", ""); 
+
+        List<Map<String, Object>> contractPlanPDesignList = enterpriseService.codeMgtViewSiteState(contractPlanPDesign);
+        model.addAttribute("contractPlans", contractPlanPDesignList);
+
+        
+        /**
+         * 계약 계약플랜(포스팅/디자인)을 가져온다.
+         */
+        HashMap<String, Object> contractPlanVideo = new HashMap<>();
+
+        contractPlanVideo.put("gubun", "LIST");
+        contractPlanVideo.put("codeGubun", "contractPlanVideo"); 
+        contractPlanVideo.put("code", ""); 
+        contractPlanVideo.put("codeName", ""); 
+
+        List<Map<String, Object>> contractPlanVideoList = enterpriseService.codeMgtViewSiteState(contractPlanVideo);
+        model.addAttribute("contractPlanVideo", contractPlanVideoList);
+
+        /**
+         * SNS 상태 값을 가져온다.
+         */
+        HashMap<String, Object> snsType = new HashMap<>();
+
+        snsType.put("gubun", "LIST");
+        snsType.put("codeGubun", "snsType"); 
+        snsType.put("code", ""); 
+        snsType.put("codeName", ""); 
+
+        List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState(snsType);
+        model.addAttribute("snsTypeList", snsTypeList);
+        
+        return "enterprise/mainback";
+    }
+
 
     /*
      * 업체 등록 페이지를 보여준다.

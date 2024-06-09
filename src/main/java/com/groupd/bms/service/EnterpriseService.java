@@ -1,6 +1,8 @@
 package com.groupd.bms.service;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +28,14 @@ public class EnterpriseService {
     public void enterpriseInsert(HashMap<String, Object> requestHashMap) {
 
         enterpriseRepository.siteInfoModify(requestHashMap);
+    }
+
+    /**
+     * 업체 코드관리를 한다.
+     * @param requestHashMap
+     */
+    public List<Map<String, Object>> codeMgtViewSiteState(HashMap<String, Object> requestHashMap) {
+        List<Map<String, Object>> reList = enterpriseRepository.codeMgtViewSiteState(requestHashMap);
+        return reList;
     }
 }

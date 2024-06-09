@@ -1,8 +1,9 @@
 package com.groupd.bms.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 @Mapper
 public interface EnterpriseRepository {
@@ -12,6 +13,13 @@ public interface EnterpriseRepository {
      * 
      * @return
      */
-    HashMap<String, Object> siteInfoModify(Map<String, Object> params);
+    void siteInfoModify(Map<String, Object> params);
+
+    /**
+     * 거래처 코드관리
+     * 
+     * @return
+     */
+    List<Map<String, Object>> codeMgtViewSiteState(Map<String, Object> params);
 
 }
