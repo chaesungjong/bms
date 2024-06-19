@@ -14,6 +14,13 @@ public interface EnterpriseRepository {
      * @return
      */
     void siteInfoModify(Map<String, Object> params);
+    
+    /**
+     * 거래처 정보 등록/수정
+     * 
+     * @return
+     */
+    void mngRegist(Map<String, Object> params);
 
     /**
      * 거래처 코드관리

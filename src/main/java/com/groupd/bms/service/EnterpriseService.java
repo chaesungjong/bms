@@ -7,6 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.groupd.bms.repository.EnterpriseRepository;
+import com.groupd.bms.util.StringUtil;
+
+import org.json.JSONObject;
 
 /**
  * EnterpriseService
@@ -23,15 +26,55 @@ public class EnterpriseService {
 
     /**
      * 업체 정보를 등록/수정한다.
+     * 
      * @param requestHashMap
      */
     public void enterpriseInsert(HashMap<String, Object> requestHashMap) {
 
         enterpriseRepository.siteInfoModify(requestHashMap);
+
+        String retVal = StringUtil.objectToString(requestHashMap.get("retVal"));
+
+        if ("0".equals(retVal)) {
+            // 성공
+            String sitekey = StringUtil.objectToString(requestHashMap.get("retSiteKey"));
+            String userid = (String) requestHashMap.get("userid");
+            JSONObject jsonObject = (JSONObject) requestHashMap.get("sns");
+            // 필요한 정보 출력
+            jsonObject.keys().forEachRemaining(key -> {
+
+                JSONObject snsObject = jsonObject.getJSONObject(key);
+                String siteDomain = snsObject.optString(key + "siteDomain");
+                String id = snsObject.optString(key + "id");
+                String pw = snsObject.optString(key + "pw");
+
+                HashMap<String, Object> siteSnsInfoMap = new HashMap<>();
+                siteSnsInfoMap.put("svrGubun", "siteSnsInfo");
+                siteSnsInfoMap.put("gubun", "REGIST");
+                siteSnsInfoMap.put("loginUserid", userid);
+                siteSnsInfoMap.put("loginUserip", "testIp");
+                siteSnsInfoMap.put("i_param1", sitekey);
+                siteSnsInfoMap.put("i_param2", key);
+                siteSnsInfoMap.put("i_param3", siteDomain);
+                siteSnsInfoMap.put("i_param4", id);
+                siteSnsInfoMap.put("i_param5", pw);
+                siteSnsInfoMap.put("i_param6", "");
+                siteSnsInfoMap.put("i_param7", "");
+                siteSnsInfoMap.put("i_param8", "");
+                siteSnsInfoMap.put("i_param9", "");
+
+                enterpriseRepository.mngRegist(siteSnsInfoMap);
+            });
+
+        } else {
+
+        }
+
     }
 
     /**
      * 업체 코드관리를 한다.
+     * 
      * @param requestHashMap
      */
     public List<Map<String, Object>> codeMgtViewSiteState(HashMap<String, Object> requestHashMap) {

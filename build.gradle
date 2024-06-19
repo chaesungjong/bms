@@ -29,11 +29,13 @@ dependencies {
     implementation 'com.microsoft.sqlserver:mssql-jdbc:8.4.1.jre8'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
     implementation 'org.modelmapper:modelmapper:3.1.0'
+    implementation 'org.json:json:20211205'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
     runtimeOnly 'com.h2database:h2'

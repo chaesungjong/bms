@@ -1,5 +1,6 @@
 package com.groupd.bms.controller.Enterprise;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.groupd.bms.model.Member;
 import com.groupd.bms.service.EnterpriseService;
+import com.groupd.bms.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,9 +42,9 @@ public class EnterpriseController {
         HashMap<String, Object> getStateCode = new HashMap<>();
 
         getStateCode.put("gubun", "LIST");
-        getStateCode.put("codeGubun", "siteState"); 
-        getStateCode.put("code", ""); 
-        getStateCode.put("codeName", ""); 
+        getStateCode.put("codeGubun", "siteState");
+        getStateCode.put("code", "");
+        getStateCode.put("codeName", "");
 
         List<Map<String, Object>> reList = enterpriseService.codeMgtViewSiteState(getStateCode);
 
@@ -53,9 +55,9 @@ public class EnterpriseController {
          */
         HashMap<String, Object> contractState = new HashMap<>();
         contractState.put("gubun", "LIST");
-        contractState.put("codeGubun", "contractState"); 
-        contractState.put("code", ""); 
-        contractState.put("codeName", ""); 
+        contractState.put("codeGubun", "contractState");
+        contractState.put("code", "");
+        contractState.put("codeName", "");
 
         List<Map<String, Object>> contractreList = enterpriseService.codeMgtViewSiteState(contractState);
         model.addAttribute("contractState", contractreList);
@@ -66,23 +68,22 @@ public class EnterpriseController {
         HashMap<String, Object> contractPlanPDesign = new HashMap<>();
 
         contractPlanPDesign.put("gubun", "LIST");
-        contractPlanPDesign.put("codeGubun", "contractPlanPDesign"); 
-        contractPlanPDesign.put("code", ""); 
-        contractPlanPDesign.put("codeName", ""); 
+        contractPlanPDesign.put("codeGubun", "contractPlanPDesign");
+        contractPlanPDesign.put("code", "");
+        contractPlanPDesign.put("codeName", "");
 
         List<Map<String, Object>> contractPlanPDesignList = enterpriseService.codeMgtViewSiteState(contractPlanPDesign);
         model.addAttribute("contractPlans", contractPlanPDesignList);
 
-        
         /**
          * 계약 계약플랜(포스팅/디자인)을 가져온다.
          */
         HashMap<String, Object> contractPlanVideo = new HashMap<>();
 
         contractPlanVideo.put("gubun", "LIST");
-        contractPlanVideo.put("codeGubun", "contractPlanVideo"); 
-        contractPlanVideo.put("code", ""); 
-        contractPlanVideo.put("codeName", ""); 
+        contractPlanVideo.put("codeGubun", "contractPlanVideo");
+        contractPlanVideo.put("code", "");
+        contractPlanVideo.put("codeName", "");
 
         List<Map<String, Object>> contractPlanVideoList = enterpriseService.codeMgtViewSiteState(contractPlanVideo);
         model.addAttribute("contractPlanVideo", contractPlanVideoList);
@@ -90,19 +91,19 @@ public class EnterpriseController {
         /**
          * SNS 상태 값을 가져온다.
          */
-        HashMap<String, Object> snsType = new HashMap<>();
+        // HashMap<String, Object> snsType = new HashMap<>();
 
-        snsType.put("gubun", "LIST");
-        snsType.put("codeGubun", "snsType"); 
-        snsType.put("code", ""); 
-        snsType.put("codeName", ""); 
+        // snsType.put("gubun", "LIST");
+        // snsType.put("codeGubun", "snsType");
+        // snsType.put("code", "");
+        // snsType.put("codeName", "");
 
-        List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState(snsType);
-        model.addAttribute("snsTypeList", snsTypeList);
-        
+        // List<Map<String, Object>> snsTypeList =
+        // enterpriseService.codeMgtViewSiteState(snsType);
+        // model.addAttribute("snsTypeList", snsTypeList);
+
         return "enterprise/Registration";
     }
-
 
     /*
      * 대시보드 페이지를 보여준다.
@@ -116,9 +117,9 @@ public class EnterpriseController {
         HashMap<String, Object> getStateCode = new HashMap<>();
 
         getStateCode.put("gubun", "LIST");
-        getStateCode.put("codeGubun", "siteState"); 
-        getStateCode.put("code", ""); 
-        getStateCode.put("codeName", ""); 
+        getStateCode.put("codeGubun", "siteState");
+        getStateCode.put("code", "");
+        getStateCode.put("codeName", "");
 
         List<Map<String, Object>> reList = enterpriseService.codeMgtViewSiteState(getStateCode);
 
@@ -129,9 +130,9 @@ public class EnterpriseController {
          */
         HashMap<String, Object> contractState = new HashMap<>();
         contractState.put("gubun", "LIST");
-        contractState.put("codeGubun", "contractState"); 
-        contractState.put("code", ""); 
-        contractState.put("codeName", ""); 
+        contractState.put("codeGubun", "contractState");
+        contractState.put("code", "");
+        contractState.put("codeName", "");
 
         List<Map<String, Object>> contractreList = enterpriseService.codeMgtViewSiteState(contractState);
         model.addAttribute("contractState", contractreList);
@@ -142,23 +143,22 @@ public class EnterpriseController {
         HashMap<String, Object> contractPlanPDesign = new HashMap<>();
 
         contractPlanPDesign.put("gubun", "LIST");
-        contractPlanPDesign.put("codeGubun", "contractPlanPDesign"); 
-        contractPlanPDesign.put("code", ""); 
-        contractPlanPDesign.put("codeName", ""); 
+        contractPlanPDesign.put("codeGubun", "contractPlanPDesign");
+        contractPlanPDesign.put("code", "");
+        contractPlanPDesign.put("codeName", "");
 
         List<Map<String, Object>> contractPlanPDesignList = enterpriseService.codeMgtViewSiteState(contractPlanPDesign);
         model.addAttribute("contractPlans", contractPlanPDesignList);
 
-        
         /**
          * 계약 계약플랜(포스팅/디자인)을 가져온다.
          */
         HashMap<String, Object> contractPlanVideo = new HashMap<>();
 
         contractPlanVideo.put("gubun", "LIST");
-        contractPlanVideo.put("codeGubun", "contractPlanVideo"); 
-        contractPlanVideo.put("code", ""); 
-        contractPlanVideo.put("codeName", ""); 
+        contractPlanVideo.put("codeGubun", "contractPlanVideo");
+        contractPlanVideo.put("code", "");
+        contractPlanVideo.put("codeName", "");
 
         List<Map<String, Object>> contractPlanVideoList = enterpriseService.codeMgtViewSiteState(contractPlanVideo);
         model.addAttribute("contractPlanVideo", contractPlanVideoList);
@@ -169,9 +169,9 @@ public class EnterpriseController {
         HashMap<String, Object> snsType = new HashMap<>();
 
         snsType.put("gubun", "LIST");
-        snsType.put("codeGubun", "snsType"); 
-        snsType.put("code", ""); 
-        snsType.put("codeName", ""); 
+        snsType.put("codeGubun", "snsType");
+        snsType.put("code", "");
+        snsType.put("codeName", "");
 
         List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState(snsType);
         model.addAttribute("snsTypeList", snsTypeList);
@@ -185,15 +185,15 @@ public class EnterpriseController {
     @GetMapping("/mainback")
     public String mainback(Model model) {
 
-                /*
+        /*
          * 업체 상태 코드를 가져온다.
          */
         HashMap<String, Object> getStateCode = new HashMap<>();
 
         getStateCode.put("gubun", "LIST");
-        getStateCode.put("codeGubun", "siteState"); 
-        getStateCode.put("code", ""); 
-        getStateCode.put("codeName", ""); 
+        getStateCode.put("codeGubun", "siteState");
+        getStateCode.put("code", "");
+        getStateCode.put("codeName", "");
 
         List<Map<String, Object>> reList = enterpriseService.codeMgtViewSiteState(getStateCode);
 
@@ -204,9 +204,9 @@ public class EnterpriseController {
          */
         HashMap<String, Object> contractState = new HashMap<>();
         contractState.put("gubun", "LIST");
-        contractState.put("codeGubun", "contractState"); 
-        contractState.put("code", ""); 
-        contractState.put("codeName", ""); 
+        contractState.put("codeGubun", "contractState");
+        contractState.put("code", "");
+        contractState.put("codeName", "");
 
         List<Map<String, Object>> contractreList = enterpriseService.codeMgtViewSiteState(contractState);
         model.addAttribute("contractState", contractreList);
@@ -217,23 +217,22 @@ public class EnterpriseController {
         HashMap<String, Object> contractPlanPDesign = new HashMap<>();
 
         contractPlanPDesign.put("gubun", "LIST");
-        contractPlanPDesign.put("codeGubun", "contractPlanPDesign"); 
-        contractPlanPDesign.put("code", ""); 
-        contractPlanPDesign.put("codeName", ""); 
+        contractPlanPDesign.put("codeGubun", "contractPlanPDesign");
+        contractPlanPDesign.put("code", "");
+        contractPlanPDesign.put("codeName", "");
 
         List<Map<String, Object>> contractPlanPDesignList = enterpriseService.codeMgtViewSiteState(contractPlanPDesign);
         model.addAttribute("contractPlans", contractPlanPDesignList);
 
-        
         /**
          * 계약 계약플랜(포스팅/디자인)을 가져온다.
          */
         HashMap<String, Object> contractPlanVideo = new HashMap<>();
 
         contractPlanVideo.put("gubun", "LIST");
-        contractPlanVideo.put("codeGubun", "contractPlanVideo"); 
-        contractPlanVideo.put("code", ""); 
-        contractPlanVideo.put("codeName", ""); 
+        contractPlanVideo.put("codeGubun", "contractPlanVideo");
+        contractPlanVideo.put("code", "");
+        contractPlanVideo.put("codeName", "");
 
         List<Map<String, Object>> contractPlanVideoList = enterpriseService.codeMgtViewSiteState(contractPlanVideo);
         model.addAttribute("contractPlanVideo", contractPlanVideoList);
@@ -244,16 +243,15 @@ public class EnterpriseController {
         HashMap<String, Object> snsType = new HashMap<>();
 
         snsType.put("gubun", "LIST");
-        snsType.put("codeGubun", "snsType"); 
-        snsType.put("code", ""); 
-        snsType.put("codeName", ""); 
+        snsType.put("codeGubun", "snsType");
+        snsType.put("code", "");
+        snsType.put("codeName", "");
 
         List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState(snsType);
         model.addAttribute("snsTypeList", snsTypeList);
-        
+
         return "enterprise/mainback";
     }
-
 
     /*
      * 업체 등록 페이지를 보여준다.
@@ -273,6 +271,19 @@ public class EnterpriseController {
             RegistrationMap.put(key, value[0]);
         });
 
+        /**
+         * SNS 상태 값을 가져온다.
+         */
+        HashMap<String, Object> snsType = new HashMap<>();
+
+        snsType.put("gubun", "LIST");
+        snsType.put("codeGubun", "snsType");
+        snsType.put("code", "");
+        snsType.put("codeName", "");
+
+        List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState(snsType);
+
+        RegistrationMap.put("sns", getSMSData(snsTypeList, RegistrationMap));
         enterpriseService.enterpriseInsert(RegistrationMap);
 
         if (RegistrationMap != null)
@@ -282,4 +293,51 @@ public class EnterpriseController {
 
     }
 
+    public JSONObject getSMSData(List<Map<String, Object>> a, HashMap<String, Object> b)  {
+        String snsTypeListStr = a.toString();
+        String registrationMapStr = b.toString();
+
+        // Convert snsTypeListStr to array of maps
+        snsTypeListStr = snsTypeListStr.replace("[", "").replace("]", "").replace(", ", ",");
+        String[] snsTypeListArray = snsTypeListStr.split("},");
+        Map<String, String> codeMap = new HashMap<>();
+        for (String snsType : snsTypeListArray) {
+            snsType = snsType.replace("{", "").replace("}", "");
+            String[] keyValuePairs = snsType.split(",");
+            Map<String, String> snsTypeMap = new HashMap<>();
+            for (String pair : keyValuePairs) {
+                String[] entry = pair.split("=");
+                if (entry.length == 2) { // 배열 길이가 2인지 확인
+                    snsTypeMap.put(entry[0].trim(), entry[1].trim()); // 공백 제거
+                }
+            }
+            codeMap.put(snsTypeMap.get("code"), snsTypeMap.get("codeName"));
+        }
+
+        // Convert registrationMapStr to map
+        registrationMapStr = registrationMapStr.replace("{", "").replace("}", "");
+        String[] registrationEntries = registrationMapStr.split(",");
+        Map<String, String> registrationMap = new HashMap<>();
+        for (String entry : registrationEntries) {
+            String[] keyValue = entry.split("=");
+            if (keyValue.length == 2) { // 배열 길이가 2인지 확인
+                registrationMap.put(keyValue[0].trim(), keyValue[1].trim()); // 공백 제거
+            }
+        }
+
+        // Create JSON based on codeMap
+        JSONObject resultJson = new JSONObject();
+        for (String code : codeMap.keySet()) {
+            JSONObject codeJson = new JSONObject();
+            for (String key : registrationMap.keySet()) {
+                if (key.startsWith(code)) {
+                    codeJson.put(key, StringUtil.objectToString(registrationMap.get(key)));
+                }
+            }
+            resultJson.put(code, codeJson);
+        }
+
+        // Print the result JSON
+        return resultJson;
+    }
 }

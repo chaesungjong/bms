@@ -20,6 +20,7 @@
             #{birthday},
             #{gender},
             #{grade},
+            #{departCode},
             #{state},
             #{siteCode},
             #{ip}

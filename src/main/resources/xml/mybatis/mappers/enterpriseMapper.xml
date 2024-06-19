@@ -16,4 +16,27 @@
   </select>
   <!-- codeMgtView 프로시저 호출 End -->
 
+
+    <!-- 치과 계정 등록 Start -->
+  <select id="mngRegist" resultType="java.util.HashMap" statementType="CALLABLE">
+    {#{retVal, mode=OUT, jdbcType=INTEGER} = call dbo.mngRegist(
+      #{svrGubun, jdbcType=VARCHAR, mode=IN},
+      #{gubun, jdbcType=VARCHAR, mode=IN},
+      #{loginUserid, jdbcType=VARCHAR, mode=IN},
+      #{loginUserip, jdbcType=VARCHAR, mode=IN},
+      #{i_param1, jdbcType=VARCHAR, mode=IN},
+      #{i_param2, jdbcType=VARCHAR, mode=IN},
+      #{i_param3, jdbcType=VARCHAR, mode=IN},
+      #{i_param4, jdbcType=VARCHAR, mode=IN},
+      #{i_param5, jdbcType=VARCHAR, mode=IN},
+      #{i_param6, jdbcType=VARCHAR, mode=IN},
+      #{i_param7, jdbcType=VARCHAR, mode=IN},
+      #{i_param8, jdbcType=VARCHAR, mode=IN},
+      #{i_param9, jdbcType=VARCHAR, mode=IN},
+      #{retParam, jdbcType=VARCHAR, mode=OUT},
+      #{retMsg, jdbcType=VARCHAR, mode=OUT}
+    )}
+  </select>
+  <!-- 치과 계정 등록 End -->
+
 </mapper>
