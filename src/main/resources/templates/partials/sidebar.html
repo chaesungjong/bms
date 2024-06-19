@@ -1,5 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <div th:fragment="sidebar" class="flex-shrink-0 p-3" style="width: 280px;">
     <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
         <svg class="bi pe-none me-2" width="30" height="24">
@@ -11,107 +11,32 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
         <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                 data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                프로젝트 정보
+                고객지원 게시판
             </button>
             <div class="collapse show" id="home-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" onclick="showAlert('준비중 입니다.')" class="link-body-emphasis d-inline-flex text-decoration-none rounded">준비중</a>
-                    </li>
-                    <li><a href="#" onclick="showAlert('준비중 입니다.')"class="link-body-emphasis d-inline-flex text-decoration-none rounded">준비중</a>
-                    </li>
-                    <li><a href="#" onclick="showAlert('준비중 입니다.')"class="link-body-emphasis d-inline-flex text-decoration-none rounded">준비중</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                사원 관리
-            </button>
-            <div class="collapse" id="orders-collapse">
-                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="/dashboard/commute" class="link-body-emphasis d-inline-flex text-decoration-none rounded">사원 목록</a></li>
-                    <li><a href="#" onclick="showAlert('준비중 입니다.')" class="link-body-emphasis d-inline-flex text-decoration-none rounded">사원 등록</a>
-                    </li>
-                    <li><a href="#" onclick="showAlert('준비중 입니다.')" class="link-body-emphasis d-inline-flex text-decoration-none rounded">퇴사 사원</a>
+                    <li><a href="/enterprise/mainback" class="link-body-emphasis d-inline-flex text-decoration-none rounded">업체 관리</a>
                     </li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a href="/dashboard/customerSupport" class="nav-link active" aria-current="page">
+            <a href="/dashboard/commute" onclick="" class="nav-link active" aria-current="page">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#home"></use>
                 </svg>
-                고객지원 게시판
+                이미지 붙여넣기
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" onclick="showAlert('준비중 입니다.')" class="nav-link active" aria-current="page">
+            <a href="#" onclick="logout();" class="nav-link active" aria-current="page">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#home"></use>
                 </svg>
-                인트라넷
+                로그아웃
             </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" onclick="showAlert('준비중 입니다.')" class="nav-link active" aria-current="page">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#home"></use>
-                </svg>
-                마이페이지
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" onclick="showAlert('준비중 입니다.')" class="nav-link active" aria-current="page">
-                <svg class="bi pe-none me-2" width="16" height="16">
-                    <use xlink:href="#home"></use>
-                </svg>
-                사내 게시판
-            </a>
-        </li>
-        <li>
-            <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                  <strong class="mb-1">User ID:<span th:text="${session.member.userid}"></span></strong>
-                </div>
-                <div class="col-10 mb-1 small"></div>
-              </a>
-        </li>
-        <li>
-            <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                    <strong class="mb-1">Email :<span th:text="${session.member.email}"></span></strong>
-                </div>
-                <div class="col-10 mb-1 small"></div>
-              </a>
-        </li>
-        <li>
-            <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                    <strong class="mb-1">grade :<span th:text="${session.member.grade}"></strong>
-                </div>
-                <div class="col-10 mb-1 small"></div>
-              </a>
-        </li>
-        <li>
-            <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                    <strong class="mb-1">siteName :<span th:text="${session.member.siteName}"></strong>
-                </div>
-                <div class="col-10 mb-1 small"></div>
-              </a>
-        </li>
-        <li>
-            <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                    <strong class="mb-1">codeName :<span th:text="${session.member.codeName}"></strong>
-                </div>
-                <div class="col-10 mb-1 small"></div>
-              </a>
         </li>
     </ul>
 </div>
+
 </html>

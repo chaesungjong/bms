@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+<th:block layout:fragment="customCSS">
+</th:block>
+
+<body>
+  <div layout:fragment="content" class="col-md-10">
+    <form id="frmSubmit" method="POST">
+      <div class="col-12">
+        <label for="siteCode" class="form-label">업체코드</label>
+        <input type="text" class="form-control" id="siteCode" name="siteCode" placeholder="업체 코드" required>
+        <div class="col-10 mb-1 small">YYYYMM-00000</div>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <label for="boardUseYN" class="form-label">업체 상태</label>
+        <select class="form-select" id="siteState" name="siteState" required>
+          <th:block th:each="state : ${siteState}">
+            <option th:value="${state['code']}" th:text="${state['codeName']}"></option>
+        </th:block>
+        </select>
+        <input type="text" class="form-control" id="contractSdate" name="contractSdate" placeholder="시작일">
+        <input type="text" class="form-control" id="contractEdate" name="contractEdate" placeholder="동료일">
+      </div>
+      <div class="col-12">
+        <label for="siteName" class="form-label">업체명</label>
+        <input type="text" class="form-control" id="siteName" name="siteName" placeholder="업체명" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="cntBlogPos" class="form-label">블로그 포스팅</label>
+        <input type="number" class="form-control" id="cntBlogPos" name="cntBlogPos" placeholder="블로그 포스팅" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="siteURL" class="form-label">홈페이지 도메인</label>
+        <input type="text" class="form-control" id="siteURL" name="siteURL" placeholder="홈페이지 도메인" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="siteDomainExpdt" class="form-label">도메인 만료일</label>
+        <input type="text" class="form-control" id="datePicker" name="datePicker" placeholder="도메인 만료일" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="siteHostingExpdt" class="form-label">호스팅 만료일</label>
+        <input type="text" class="form-control" id="siteHostingExpdt" name="siteHostingExpdt" placeholder="도메인 만료일"
+          required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="address" class="form-label">주소</label>
+        <div class="input-group">
+          <input type="text" id="postNo" name="postNo" class="form-control" placeholder="">
+          <button type="button" id="addressSearch" class="btn btn-secondary">우편 검색</button>
+        </div>
+        <input type="text" class="form-control" id="address" name="address" placeholder="주소" required>
+        <input type="text" class="form-control" id="addressDesc" name="addressDesc" placeholder="나머지 주소" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <h4 class="mb-3">계약 플랜 (영상)</h4>
+      <div class="my-3">
+        <th:block th:each="plan : ${contractPlans}">
+          <div class="form-check">
+            <input type="radio" th:id="${plan['code']}" th:name="contractPlan" th:value="${plan['code']}" class="form-check-input" required>
+            <label class="form-check-label" th:for="${plan['code']}" th:text="${plan['codeName']}"></label>
+          </div>
+        </th:block>
+      </div>
+      <h4 class="mb-3">계약 플랜 (포스팅/디자인)</h4>
+      <div class="my-3">
+        <th:block th:each="plan : ${contractPlans}">
+          <div class="form-check">
+            <input type="radio" th:id="${plan['code']}" th:name="contractPlan" th:value="${plan['code']}" class="form-check-input" required>
+            <label class="form-check-label" th:for="${plan['code']}" th:text="${plan['codeName']}"></label>
+          </div>
+        </th:block>
+      </div>
+      <h4 class="mb-3">고객게시판 사용 가능 여부</h4>
+      <div class="my-3">
+        <div class="form-check">
+          <input id="clientBoardY" name="boardUseYN" type="radio" class="form-check-input" checked required>
+          <label class="form-check-label" for="clientBoardY">사용가능</label>
+        </div>
+        <div class="form-check">
+          <input id="clientBoardN" name="boardUseYN" type="radio" class="form-check-input" required>
+          <label class="form-check-label" for="clientBoardN">사용 중지</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="siteDomainExpdt" class="form-label">도메인 만료일</label>
+        <input type="text" class="form-control" id="datePicker" name="datePicker" placeholder="도메인 만료일"
+          required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <label for="boardUseYN" class="form-label">계약기간</label>
+        <select class="form-select" id="boardUseYN" name="boardUseYN" required>
+          <th:block th:each="state : ${contractState}">
+              <option th:value="${state['code']}" th:text="${state['codeName']}"></option>
+          </th:block>
+        </select>
+        <input type="text" class="form-control" id="contractSdate" name="contractSdate" placeholder="시작일">
+        <input type="text" class="form-control" id="contractEdate" name="contractEdate" placeholder="동료일">
+      </div>
+      <h4 class="mb-3">메모</h4>
+      <input type="text" class="form-control" id="memo" name="memo" placeholder="메모">
+      <h4 class="mb-3">계정정보 FTP</h4>
+      <div class="col-12">
+        <label for="FTPDomain" class="form-label">도메인</label>
+        <input type="text" class="form-control" id="FTPDomain" name="FTPDomain" placeholder="도메인 주소" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="FTPId" class="form-label">ID</label>
+        <input type="text" class="form-control" id="FTPId" name="FTPId" placeholder="도메인 ID" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="FTPPassword" class="form-label">PW</label>
+        <input type="text" class="form-control" id="FTPPassword" name="FTPPassword" placeholder="도메인 PW" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <h4 class="mb-3">플레이스</h4>
+      <div class="col-12">
+        <label for="placeDomain" class="form-label">도메인</label>
+        <input type="text" class="form-control" id="placeDomain" name="placeDomain" placeholder="플레이스 주소" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="placeId" class="form-label">ID</label>
+        <input type="text" class="form-control" id="placeId" name="placeId" placeholder="플레이스 ID" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="placePassword" class="form-label">PW</label>
+        <input type="text" class="form-control" id="placePassword" name="placePassword" placeholder="플레이스 PW" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <h4 class="mb-3">네이버 광고</h4>
+      <div class="col-12">
+        <label for="naverDomain" class="form-label">도메인</label>
+        <input type="text" class="form-control" id="naverDomain" name="naverDomain" placeholder="네이버 광고 주소" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="naverId" class="form-label">ID</label>
+        <input type="text" class="form-control" id="naverId" name="naverId" placeholder="네이버 광고 ID" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="naverPassword" class="form-label">PW</label>
+        <input type="text" class="form-control" id="naverPassword" name="naverPassword" placeholder="네이버 광고 PW"
+          required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <h4 class="mb-3">카카오 비지니스</h4>
+      <div class="col-12">
+        <label for="kakaoDomain" class="form-label">도메인</label>
+        <input type="text" class="form-control" id="kakaoDomain" name="kakaoDomain" placeholder="카카오 비지니스 도메인" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="kakaoId" class="form-label">ID</label>
+        <input type="text" class="form-control" id="kakaoId" name="kakaoId" placeholder="카카오 비지니스 ID" required>
+        <div class="invalid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="kakaoPassword" class="form-label">PW</label>
+        <input type="text" class="form-control" id="kakaoPassword" name="kakaoPassword" placeholder="카카오 비지니스 PW"
+          required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <h4 class="mb-3">인스타그램</h4>
+      <div class="col-12">
+        <label for="instarDomain" class="form-label">도메인</label>
+        <input type="text" class="form-control" id="instarDomain" name="instarDomain" placeholder="인스타그램 도메인" required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <div class="col-12">
+        <label for="instarId" class="form-label">ID</label>
+        <input type="text" class="form-control" id="instarId" name="instarId" placeholder="인스타그램 ID" required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <div class="col-12">
+        <label for="instarPassword" class="form-label">PW</label>
+        <input type="text" class="form-control" id="instarPassword" name="instarPassword" placeholder="인스타그램 PW"
+          required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <h4 class="mb-3">카페24</h4>
+      <div class="col-12">
+        <label for="cafe24Domain" class="form-label">도메인</label>
+        <input type="text" class="form-control" id="cafe24Domain" name="cafe24Domain" placeholder="카페24 도메인" required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <div class="col-12">
+        <label for="cafe24Id" class="form-label">ID</label>
+        <input type="text" class="form-control" id="cafe24Id" name="cafe24Id" placeholder="카페24  ID" required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <div class="col-12">
+        <label for="cafe24Password" class="form-label">PW</label>
+        <input type="text" class="form-control" id="cafe24Password" name="cafe24Password" placeholder="카페24  PW"
+          required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <h4 class="mb-3">업체 담당자 정보</h4>
+      <div class="col-12">
+        <label for="enterpriseName" class="form-label">성명</label>
+        <input type="text" class="form-control" id="enterpriseName" name="enterpriseName" placeholder="성명" required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <div class="col-12">
+        <label for="enterpriseNumber" class="form-label">연락처</label>
+        <input type="text" class="form-control" id="enterpriseNumber" name="enterpriseNumber" placeholder="연락처"
+          required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <div class="col-12">
+        <label for="enterpriseEmail" class="form-label">이메일</label>
+        <input type="text" class="form-control" id="enterpriseEmail" name="enterpriseEmail" placeholder="이메일" required>
+        <div class="invalid-feedback"></div>
+      </div>
+      <button type="button" id="Registration" name="Registration" class="btn btn-primary">등록</button>
+    </form>
+  </div>
+  <!-- 커스텀 JS 영역 -->
+  <th:block layout:fragment="customJS">
+    <script src="/js/templates/enterprise/main.js"></script>
+  </th:block>
+</body>
+
+</html>

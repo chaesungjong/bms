@@ -3,7 +3,6 @@ package com.groupd.bms.repository;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.groupd.bms.model.MemberLogin;
-import com.groupd.bms.model.Member;
 import java.util.Map;
 import java.util.HashMap; 
 

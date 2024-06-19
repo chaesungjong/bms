@@ -1,8 +1,6 @@
 package com.groupd.bms.controller.login;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,6 +72,20 @@ public class LoginController {
         }
         else return ResponseEntity.status(500).build();
 
+    }
+
+    /*
+     * 로그아웃을 시도한다.
+     * @param request
+     * @return ModelAndView
+     * @throws Exception
+     */
+    @RequestMapping(value="/logout.do", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<?> logout(HttpServletRequest request) throws Exception {
+        request.getSession().removeAttribute("member");
+        HashMap<String, Object> loginoutMap = new HashMap<String, Object>();
+        loginoutMap.put("result", "success");
+        return ResponseEntity.ok(loginoutMap);
     }
 
     /*

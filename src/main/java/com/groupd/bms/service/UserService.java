@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.groupd.bms.model.Member;
 import com.groupd.bms.model.MemberLogin;
 import com.groupd.bms.repository.UserRepository;
 import com.groupd.bms.util.MapperUtil;
@@ -16,7 +14,6 @@ import com.groupd.bms.util.StringUtil;
  * 사용자 정보를 관리하기 위한 서비스
  * @version 1.0
  * @since 2024.04.26
- * @see com.groupd.bms.controller.login.LoginController
  */
 @Service
 public class UserService {
