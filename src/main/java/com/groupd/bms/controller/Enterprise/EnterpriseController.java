@@ -256,6 +256,7 @@ public class EnterpriseController {
     /*
      * 업체 등록 페이지를 보여준다.
      */
+    @SuppressWarnings("unused")
     @RequestMapping(value = "/Registration.do", method = { RequestMethod.POST, RequestMethod.GET })
     public ResponseEntity<?> Registration(HttpServletRequest request) {
 
@@ -293,7 +294,7 @@ public class EnterpriseController {
 
     }
 
-    public JSONObject getSMSData(List<Map<String, Object>> a, HashMap<String, Object> b)  {
+    public JSONObject getSMSData(List<Map<String, Object>> a, HashMap<String, Object> b) {
         String snsTypeListStr = a.toString();
         String registrationMapStr = b.toString();
 

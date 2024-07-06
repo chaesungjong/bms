@@ -7,6 +7,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.groupd.bms.util.ForbiddenWordFilter;
+
+import io.micrometer.common.lang.NonNull;
+
 import com.groupd.bms.util.BmsInterceptor;
 
 /**
@@ -33,7 +36,7 @@ public class WebConfig implements WebMvcConfigurer {
 	}
 
 	@Override
-    public void addInterceptors(InterceptorRegistry registry) {
+	public void addInterceptors(@SuppressWarnings("null") @NonNull InterceptorRegistry registry) {
         registry.addInterceptor(new BmsInterceptor())
                 .excludePathPatterns("/css/**", "/images/**", "/js/**");
     }

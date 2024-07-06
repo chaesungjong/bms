@@ -14,8 +14,9 @@ function ajaxRequest(url, data, method, successCallback, errorCallback) {
   $.ajax({
     url: url,
     method: method || "GET", // 기본값으로 "GET" 설정
-    data: data,
+    data: $.param(data), // 데이터를 URL 인코딩된 문자열로 변환
     dataType: "json",
+    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
     success: successCallback,
     error: errorCallback
   });
@@ -92,6 +93,71 @@ function setDatepicker(id){
       //changeYear : 년이 변경되는 호출
       //changeCentury : 한 세기가 변경되면 호출 ex) 20세기에서 21세기가 되는 순간
       // e.date를 찍어보면 Thu Jun 27 2019 00:00:00 GMT+0900 (한국 표준시) 위와 같은 형태로 보인다.
+  });
+
+}
+
+/**
+ * 이미지 업로드 관련 함수 모음
+ * @param {*} event 
+ */
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drag(event) {
+  event.dataTransfer.setData("text", event.target.id);
+}
+
+function drop(event) {
+  event.preventDefault();
+  const data = event.dataTransfer.getData("text");
+  const draggedImg = document.getElementById(data);
+  const targetImg = event.target;
+
+  if (targetImg.tagName === 'IMG') {
+    // Swap the image sources
+    const tempSrc = draggedImg.src;
+    draggedImg.src = targetImg.src;
+    targetImg.src = tempSrc;
+  }
+}
+/**
+ * 이미지 업로드 관련 함수 모음 끝
+ */
+
+
+/*
+ * 파일 업로드 관련 함수
+ */
+function uploadFile(file,callback) {
+
+  const storage = window.storage;
+  const uploadBytes = window.uploadBytes;
+
+  if (!file) {
+      alert('파일을 선택해 주세요.');
+      return;
+  }
+  
+  const storageRef  = window.ref(storage,  file.name);
+
+  uploadBytes(storageRef, file).then((snapshot) => {
+      setfileUrlAddress(file.name,callback);
+  }).catch((error) => {
+    console.log(error);
+  });
+}
+
+function setfileUrlAddress(fileName,callback){
+    
+  const getDownloadURL = window.getDownloadURL;
+  getDownloadURL(ref(window.storage, fileName))
+  .then((url) => {
+    callback(url);
+  })
+  .catch((error) => {
+    console.log(error);
   });
 
 }

@@ -41,4 +41,12 @@ public class StringUtil {
             return obj.toString();
         }
     }
+    
+    public static String objectToString(Object obj, String init) {
+        if (obj == null) {
+            return init;
+        } else {
+            return obj.toString();
+        }
+    }
 }

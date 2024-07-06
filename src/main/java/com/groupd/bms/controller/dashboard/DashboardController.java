@@ -19,7 +19,7 @@ public class DashboardController {
      */
     @GetMapping("/main")
     public String main(Model model) {
-        return "redirect:/dashboard/customerSupport"; 
+        return "redirect:/setting/board?etcParam=NAV_PL"; 
     }
 
     /*

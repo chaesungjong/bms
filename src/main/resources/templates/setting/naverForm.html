@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+
+<th:block layout:fragment="customCSS">
+  <style>
+    /* 외부 CSS 내용을 여기 인라인으로 포함 */
+    body {
+        font-family: Arial, sans-serif;
+    }
+  </style>
+</th:block>
+
+<body>
+  <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <div class="container-fluid">
+
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            
+            <div class="card mb-4">
+              <div class="card-header">
+                네이버 플레이스 정보 입력
+              </div>
+              <div class="card-body">
+                <input type="text" class="form-control" id="contents" name="contents" placeholder="제목을 입력하세요" th:value="${board != null ? board.contents : ''}">
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                플레이스 이미지 1 
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_0" name="imgPath_seq_0" th:value="${imgPath_seq_0 != null ? imgPath_seq_0 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"  style="width: 25rem;"  th:src="${ imgPath_0 != null ? imgPath_0: ''}" id="imgPath_0" name="imgPath_0" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                  </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_0">이미지 등록</a>
+              </div>
+            </div>
+            <div class="card mb-4">
+              <div class="card-header">
+                플레이스 이미지 2
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_1" name="imgPath_seq_1" th:value="${imgPath_seq_1 != null ? imgPath_seq_1 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_1 != null ? imgPath_1: ''}"  id="imgPath_1" name="imgPath_1" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_1">이미지 등록</a>
+              </div>
+            </div>
+            <div class="card mb-4">
+              <div class="card-header">
+                플레이스 이미지 3
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_2" name="imgPath_seq_2" th:value="${imgPath_seq_2 != null ? imgPath_seq_2 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_2 != null ? imgPath_2: ''}"  id="imgPath_2" name="imgPath_2" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_2">이미지 등록</a>
+              </div>
+            </div>
+            <div class="card mb-4">
+              <div class="card-header">
+                플레이스 이미지 4
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_3" name="imgPath_seq_3" th:value="${imgPath_seq_3 != null ? imgPath_seq_3 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_3 != null ? imgPath_3: ''}"  id="imgPath_4" name="imgPath_4" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_4">이미지 등록</a>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                플레이스 이미지 5
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_4" name="imgPath_seq_4" th:value="${imgPath_seq_4 != null ? imgPath_seq_4 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_4 != null ? imgPath_4: ''}"  id="imgPath_4" name="imgPath_4" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_4">이미지 등록</a>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                검색 플레이스 이미지 1
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_5" name="imgPath_seq_5" th:value="${imgPath_seq_5 != null ? imgPath_seq_5 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_5 != null ? imgPath_5: ''}" id="imgPath_5" name="imgPath_5" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_5">이미지 등록</a>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                검색 플레이스 이미지 2
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <inpu type="hidden" id="imgPath_seq_6" name="imgPath_seq_6" th:value="${imgPath_seq_6 != null ? imgPath_seq_6 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_6 != null ? imgPath_6: ''}" id="imgPath_6" name="imgPath_6" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_6">이미지 등록</a>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                검색 플레이스 이미지 3
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_7" name="imgPath_seq_7" th:value="${imgPath_seq_7 != null ? imgPath_seq_7 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_7 != null ? imgPath_7: ''}" id="imgPath_7" name="imgPath_7" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_7">이미지 등록</a>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                검색 플레이스 이미지 4
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_8" name="imgPath_seq_8" th:value="${imgPath_seq_8 != null ? imgPath_seq_8 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_8 != null ? imgPath_8: ''}" id="imgPath_8" name="imgPath_8" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_8">이미지 등록</a>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">
+                검색 플레이스 이미지 5
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <input type="hidden" id="imgPath_seq_9" name="imgPath_seq_9" th:value="${imgPath_seq_9 != null ? imgPath_seq_9 : ''}"/>
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_9 != null ? imgPath_9: ''}" id="imgPath_9" name="imgPath_9" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_9">이미지 등록</a>
+              </div>
+            </div>
+
+
+            <div class="card mb-4">
+              <div class="card-header">
+                검색 플레이스 이미지 6
+              </div>
+              <div class="card-body">
+                <div class="text-center"> 
+                  <input type="hidden" id="imgPath_seq_10" name="imgPath_seq_10" th:value="${imgPath_seq_10 != null ? imgPath_seq_10 : ''}"/> 
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_10 != null ? imgPath_10 : ''}" id="imgPath_10" name="imgPath_10" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_10">이미지 등록</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">버튼</h6>
+              </div>
+              <div class="card-body">
+                  <a href="javascript:void(0);" class="btn btn-primary btn-icon-split" id="save">
+                      <span class="text">저장하기</span>
+                  </a>
+                  <a href="javascript:void(0);" class="btn btn-success btn-icon-split" id="pdf_save">
+                      <span class="text">PDF 내보내기</span>
+                  </a>
+                  <a href="javascript:void(0);" class="btn btn-info btn-icon-split" id="jpg_save">
+                      <span class="text">JPG 내보내기</span>
+                  </a> 
+              </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <input type="file" id="file_imgPath_0" name="file_imgPath_0" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_1" name="file_imgPath_1" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_2" name="file_imgPath_2" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_3" name="file_imgPath_3" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_4" name="file_imgPath_4" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_5" name="file_imgPath_5" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_6" name="file_imgPath_6" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_7" name="file_imgPath_7" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_8" name="file_imgPath_8" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_9" name="file_imgPath_9" style="display: none;" accept="image/*"/>
+  <input type="file" id="file_imgPath_10" name="file_imgPath_10" style="display: none;" accept="image/*"/>
+  <input type="hidden" id="boardSeq" name="boardSeq" th:value="${board != null ? board.boardSeq : ''}"/>
+  
+  <!-- 커스텀 JS 영역 -->
+  <th:block layout:fragment="customJS">
+    <script src="/js/templates/setting/naverPlaceSetting.js"></script>
+  </th:block>
+</body>
+</html>

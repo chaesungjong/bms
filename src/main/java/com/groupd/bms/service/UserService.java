@@ -63,7 +63,7 @@ public class UserService {
      * @return HashMap<String, Object>
      */
     public HashMap<String, Object> register(String userid,String password, String name,String firstName,String lastName, String email) {
-      HashMap<String, Object> user = userRepository.insertRegister( userid, password, name, firstName, lastName, email);
+      //HashMap<String, Object> user = userRepository.insertRegister( userid, password, name, firstName, lastName, email);
       return null; // or throw exception
   }
     

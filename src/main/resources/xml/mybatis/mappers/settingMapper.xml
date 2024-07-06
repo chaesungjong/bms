@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.groupd.bms.repository.NaverPlaceBoardRepository">
+
+  <!-- Naver Place Board 관리 프로시저 호출 Start -->
+  <select id="manageNaverPlaceBoard" resultType="java.util.HashMap" statementType="CALLABLE">
+    {#{retVal, mode=OUT, jdbcType=INTEGER} = call dbo.Manage_Naver_Place_Board(
+      #{gubun, jdbcType=VARCHAR, mode=IN},
+      #{idx, jdbcType=INTEGER, mode=IN},
+      #{title, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_1, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_2, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_3, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_4, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_5, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_1, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_2, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_3, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_4, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_5, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_6, jdbcType=VARCHAR, mode=IN},
+      #{adminID, jdbcType=VARCHAR, mode=IN}
+    )}
+  </select>
+  <!-- Naver Place Board 관리 프로시저 호출 End -->
+
+
+  <!-- Naver Place Board 관리 프로시저 호출 Start -->
+  <select id="selectNaverPlaceBoard" resultType="java.util.HashMap" statementType="CALLABLE">
+    {#{retVal, mode=OUT, jdbcType=INTEGER} = call dbo.Manage_Naver_Place_Board(
+      #{gubun, jdbcType=VARCHAR, mode=IN},
+      #{idx, jdbcType=INTEGER, mode=IN},
+      #{title, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_1, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_2, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_3, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_4, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_5, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_1, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_2, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_3, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_4, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_5, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_6, jdbcType=VARCHAR, mode=IN},
+      #{adminID, jdbcType=VARCHAR, mode=IN}
+    )}
+  </select>
+  <!-- Naver Place Board 관리 프로시저 호출 End -->
+
+  <!-- Board 관리 프로시저 호출 Start -->
+  <select id="selectPlaceBoard" resultType="java.util.HashMap" statementType="CALLABLE">
+    {#{retVal, mode=OUT, jdbcType=INTEGER} = call dbo.Manage_Naver_Place_Board(
+      #{gubun, jdbcType=VARCHAR, mode=IN},
+      #{idx, jdbcType=INTEGER, mode=IN},
+      #{title, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_1, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_2, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_3, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_4, jdbcType=VARCHAR, mode=IN},
+      #{main_image_path_5, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_1, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_2, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_3, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_4, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_5, jdbcType=VARCHAR, mode=IN},
+      #{search_image_path_6, jdbcType=VARCHAR, mode=IN},
+      #{adminID, jdbcType=VARCHAR, mode=IN}
+    )}
+  </select>
+  <!-- Board Board 관리 프로시저 호출 End -->
+
+</mapper>
