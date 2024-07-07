@@ -1,11 +1,16 @@
 package com.groupd.bms.controller.Setting;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import com.groupd.bms.model.Member;
 import com.groupd.bms.service.BoardService;
@@ -126,7 +131,7 @@ public class SettingController extends BaseController {
                 model.addAttribute("board", boardListMap.get(0));
 
                 for (int i = 0; i < boardListMap.size(); i++) {
-                    model.addAttribute("imgPath_" + i, boardListMap.get(i).get("imgPath"));
+                    model.addAttribute("imgPath_" + i, "/setting/proxy?url="+boardListMap.get(i).get("imgPath"));
                     model.addAttribute("imgPath_seq_" + i, boardListMap.get(i).get("seq"));
                 }
             }
@@ -186,28 +191,26 @@ public class SettingController extends BaseController {
 
         // 게시판 등록 성공 시 이미지 설정 등록/수정
         if ("0".equals(StringUtil.objectToString(registrationMap.get("retVal")))) {
+
             for (int i = 0; i <= 10; i++) {
-                String imgPath = StringUtil.objectToString(imgPathMap.get("imgPath_" + i));
+
+                String imgPath = StringUtil.objectToString(imgPathMap.get("imgPath_" + i)).replace("/setting/proxy?url=", "");
                 String imgPathSeq = StringUtil.objectToString(imgPathSeqMap.get("imgPath_seq_" + i));
-
-                if (!imgPath.isEmpty())  {
-                    HashMap<String, Object> imageMap = new HashMap<>();
-                    imageMap.put("gubun", imgPathSeq.isEmpty() ? "REGIST" : "MODIFY");
-                    imageMap.put("loginUserid", member.getUserid());
-                    imageMap.put("loginUserip", request.getRemoteAddr());
-                    imageMap.put("boardSeq", boardSeq == 0 ? StringUtil.objectToString(registrationMap.get("retBoardSeq")) : boardSeq);
-                    imageMap.put("boardSTSeq", StringUtil.objectToString(imgPathSeqMap.get("imgPath_seq_" + i)));
-                    imageMap.put("bs_title", getParameterOrDefault(request, "contents", ""));
-                    imageMap.put("bs_contents", getParameterOrDefault(request, "contents", ""));
-                    imageMap.put("bs_contents2", getParameterOrDefault(request, "contents", ""));
-                    imageMap.put("imgPath", imgPath);
-                    imageMap.put("linkUrl", imgPath);
-                    imageMap.put("viewSeq", i);
-                    imageMap.put("state", "Y");
-
-                    boardService.boardSettingRegModify(imageMap);
-                    System.out.println("imageMap : " + imageMap);
-                }
+                HashMap<String, Object> imageMap = new HashMap<>();
+                imageMap.put("gubun", imgPathSeq.isEmpty() ? "REGIST" : "MODIFY");
+                imageMap.put("loginUserid", member.getUserid());
+                imageMap.put("loginUserip", request.getRemoteAddr());
+                imageMap.put("boardSeq", boardSeq == 0 ? StringUtil.objectToString(registrationMap.get("retBoardSeq")) : boardSeq);
+                imageMap.put("boardSTSeq", StringUtil.objectToString(imgPathSeqMap.get("imgPath_seq_" + i)));
+                imageMap.put("bs_title", getParameterOrDefault(request, "contents", ""));
+                imageMap.put("bs_contents", "");
+                imageMap.put("bs_contents2", getParameterOrDefault(request, "contents", ""));
+                imageMap.put("imgPath", imgPath);
+                imageMap.put("linkUrl", imgPath);
+                imageMap.put("viewSeq", i);
+                imageMap.put("state", "Y");
+                boardService.boardSettingRegModify(imageMap);
+                
             }
         }
 
@@ -235,5 +238,22 @@ public class SettingController extends BaseController {
     private String getParameterOrDefault(HttpServletRequest request, String parameterName, String defaultValue) {
         String parameter = request.getParameter(parameterName);
         return (parameter != null) ? parameter : defaultValue;
+    }
+
+        @CrossOrigin
+    @RequestMapping("/proxy")
+    public ResponseEntity<byte[]> proxy(@RequestParam String url) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.ORIGIN, "http://localhost:8080");
+
+        ResponseEntity<byte[]> response = restTemplate.exchange(
+            url,
+            HttpMethod.GET,
+            new org.springframework.http.HttpEntity<>(headers),
+            byte[].class
+        );
+
+        return response;
     }
 }

@@ -74,9 +74,9 @@
               <div class="card-body">
                 <div class="text-center">
                   <input type="hidden" id="imgPath_seq_3" name="imgPath_seq_3" th:value="${imgPath_seq_3 != null ? imgPath_seq_3 : ''}"/>
-                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_3 != null ? imgPath_3: ''}"  id="imgPath_4" name="imgPath_4" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_3 != null ? imgPath_3: ''}"  id="imgPath_3" name="imgPath_3" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
                 </div>
-                <a rel="nofollow" href="javascript:void(0);" id="imgPath_4">이미지 등록</a>
+                <a rel="nofollow" href="javascript:void(0);" id="imgPath_3">이미지 등록</a>
               </div>
             </div>
 
@@ -213,6 +213,8 @@
   
   <!-- 커스텀 JS 영역 -->
   <th:block layout:fragment="customJS">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="/js/templates/setting/naverPlaceSetting.js"></script>
   </th:block>
 </body>

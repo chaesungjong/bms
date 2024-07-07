@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
     implementation 'org.modelmapper:modelmapper:3.1.0'
     implementation 'org.json:json:20211205'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
