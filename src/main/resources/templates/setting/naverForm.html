@@ -112,7 +112,8 @@
               </div>
               <div class="card-body">
                 <div class="text-center">
-                  <inpu type="hidden" id="imgPath_seq_6" name="imgPath_seq_6" th:value="${imgPath_seq_6 != null ? imgPath_seq_6 : ''}"/>
+                  
+                  <input type="hidden" id="imgPath_seq_6" name="imgPath_seq_6" th:value="${imgPath_seq_6 != null ? imgPath_seq_6 : ''}"/>
                   <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" th:src="${ imgPath_6 != null ? imgPath_6: ''}" id="imgPath_6" name="imgPath_6" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
                 </div>
                 <a rel="nofollow" href="javascript:void(0);" id="imgPath_6">이미지 등록</a>

@@ -196,6 +196,7 @@ public class SettingController extends BaseController {
 
                 String imgPath = StringUtil.objectToString(imgPathMap.get("imgPath_" + i)).replace("/setting/proxy?url=", "");
                 String imgPathSeq = StringUtil.objectToString(imgPathSeqMap.get("imgPath_seq_" + i));
+                
                 HashMap<String, Object> imageMap = new HashMap<>();
                 imageMap.put("gubun", imgPathSeq.isEmpty() ? "REGIST" : "MODIFY");
                 imageMap.put("loginUserid", member.getUserid());
