@@ -21,6 +21,11 @@ public class BmsInterceptor implements HandlerInterceptor {
         log.debug("==================== BEGIN ====================");
         log.debug("Request URI ===> " + request.getRequestURI());
 
+        //디자이너 화면은 예외 처리 
+        if(request.getRequestURI().contains("Designer")){
+            return true;
+        }
+
         // 세션 체크 로직
         if (!Arrays.asList(LOGIN_CHECK_EXCLUDE_PATHS).contains(request.getRequestURI())) {
              if (request.getSession().getAttribute("member") == null) {

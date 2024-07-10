@@ -18,7 +18,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body id="page-top">
     <div id="wrapper">
         <!-- 사이드바 영역  -->
-        <th:block th:if="${#strings.startsWith(currentUri, '/dashboard') or #strings.startsWith(currentUri, '/setting')}">
+        <th:block th:if="${#strings.startsWith(currentUri, '/dashboard') or #strings.startsWith(currentUri, '/setting') or #strings.startsWith(currentUri, '/Designer')} ">
             <div th:replace="/partials/sidebar :: sidebar"></div>
         </th:block>
         <!-- 메인화면 영역  -->

@@ -3,6 +3,7 @@ package com.groupd.bms.controller.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,31 +43,36 @@ public class SettingController extends BaseController {
      */
     @GetMapping("/board")
     public String board(HttpServletRequest request, Model model) {
-        // 로그인 시도
-        HashMap<String, Object> registrationMap = setRequest(request);
-        Member member = (Member) request.getSession().getAttribute("member");
-        String etcParam = (String) registrationMap.get("etcParam");
+        try {
+            // 로그인 시도
+            HashMap<String, Object> registrationMap = setRequest(request);
+            Member member = (Member) request.getSession().getAttribute("member");
+            String etcParam = (String) registrationMap.get("etcParam");
 
-        HashMap<String, Object> boardMap = new HashMap<>();
-        boardMap.put("etcParam", etcParam);
-        boardMap.put("userid", member.getUserid());
-        boardMap.put("PageNo", "1");
-        boardMap.put("PageSize", "10");
+            HashMap<String, Object> boardMap = new HashMap<>();
+            boardMap.put("etcParam", etcParam);
+            boardMap.put("userid", member.getUserid());
+            boardMap.put("PageNo", "1");
+            boardMap.put("PageSize", "10");
 
-        // 게시판 리스트 및 카운트 조회
-        boardMap.put("gubun", "BOARD_LIST_CNT");
-        List<Map<String, Object>> boardListCntMap = boardService.mngList(boardMap);
+            // 게시판 리스트 및 카운트 조회
+            boardMap.put("gubun", "BOARD_LIST_CNT");
+            List<Map<String, Object>> boardListCntMap = boardService.mngList(boardMap);
 
-        boardMap.put("gubun", "BOARD_LIST");
-        List<Map<String, Object>> boardListMap = boardService.mngList(boardMap);
+            boardMap.put("gubun", "BOARD_LIST");
+            List<Map<String, Object>> boardListMap = boardService.mngList(boardMap);
 
-        model.addAttribute("boardListCnt", boardListCntMap);
-        model.addAttribute("boardList", boardListMap);
+            model.addAttribute("boardListCnt", boardListCntMap);
+            model.addAttribute("boardList", boardListMap);
 
-        if ("NAV_PL".equals(etcParam)) {
-            return "setting/naverPlace";
-        } else {
-            return "setting/board";
+            if ("NAV_PL".equals(etcParam)) {
+                return "setting/naverPlace";
+            } else {
+                //return "setting/board";
+                return "setting/naverPlace";
+            }
+        } catch (Exception e) {
+            return "error/500";
         }
     }
 
@@ -77,30 +83,34 @@ public class SettingController extends BaseController {
      */
     @RequestMapping(value = "/dataTable.json", method = { RequestMethod.POST, RequestMethod.GET })
     public ResponseEntity<?> dataTable(HttpServletRequest request) {
-        // 로그인 시도
-        HashMap<String, Object> registrationMap = setRequest(request);
-        if (registrationMap == null) {
-            return ResponseEntity.status(500).build();
+        try {
+            // 로그인 시도
+            HashMap<String, Object> registrationMap = setRequest(request);
+            if (registrationMap == null) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+
+            Member member = (Member) request.getSession().getAttribute("member");
+            String etcParam = (String) registrationMap.get("etcParam");
+
+            HashMap<String, Object> boardMap = new HashMap<>();
+            boardMap.put("etcParam", etcParam);
+            boardMap.put("userid", member.getUserid());
+            boardMap.put("PageNo", "1");
+            boardMap.put("PageSize", "100");
+            boardMap.put("gubun", "BOARD_LIST");
+
+            // 게시판 리스트 조회
+            List<Map<String, Object>> boardListMap = boardService.mngList(boardMap);
+
+            // 반환할 데이터를 wrapping
+            HashMap<String, Object> response = new HashMap<>();
+            response.put("data", boardListMap);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred: " + e.getMessage());
         }
-
-        Member member = (Member) request.getSession().getAttribute("member");
-        String etcParam = (String) registrationMap.get("etcParam");
-
-        HashMap<String, Object> boardMap = new HashMap<>();
-        boardMap.put("etcParam", etcParam);
-        boardMap.put("userid", member.getUserid());
-        boardMap.put("PageNo", "1");
-        boardMap.put("PageSize", "100");
-        boardMap.put("gubun", "BOARD_LIST");
-
-        // 게시판 리스트 조회
-        List<Map<String, Object>> boardListMap = boardService.mngList(boardMap);
-
-        // 반환할 데이터를 wrapping
-        HashMap<String, Object> response = new HashMap<>();
-        response.put("data", boardListMap);
-
-        return ResponseEntity.ok(response);
     }
 
     /**
@@ -110,34 +120,38 @@ public class SettingController extends BaseController {
      */
     @GetMapping("/naverForm")
     public String naverPlaceSetting(HttpServletRequest request, Model model) {
-        // 로그인 시도
-        HashMap<String, Object> registrationMap = setRequest(request);
-        Member member = (Member) request.getSession().getAttribute("member");
+        try {
+            // 로그인 시도
+            HashMap<String, Object> registrationMap = setRequest(request);
+            Member member = (Member) request.getSession().getAttribute("member");
 
-        String seq = (String) registrationMap.get("seq");
+            String seq = (String) registrationMap.get("seq");
 
-        if (seq != null) {
-            HashMap<String, Object> boardMap = new HashMap<>();
-            boardMap.put("etcParam", seq);
-            boardMap.put("userid", member.getUserid());
-            boardMap.put("PageNo", "0");
-            boardMap.put("PageSize", "0");
-            boardMap.put("gubun", "BOARD_SETTING_LIST");
+            if (seq != null) {
+                HashMap<String, Object> boardMap = new HashMap<>();
+                boardMap.put("etcParam", seq);
+                boardMap.put("userid", member.getUserid());
+                boardMap.put("PageNo", "0");
+                boardMap.put("PageSize", "0");
+                boardMap.put("gubun", "BOARD_SETTING_LIST");
 
-            // 게시판 설정 리스트 조회
-            List<Map<String, Object>> boardListMap = boardService.mngList(boardMap);
+                // 게시판 설정 리스트 조회
+                List<Map<String, Object>> boardListMap = boardService.mngList(boardMap);
 
-            if (boardListMap != null && !boardListMap.isEmpty()) {
-                model.addAttribute("board", boardListMap.get(0));
+                if (boardListMap != null && !boardListMap.isEmpty()) {
+                    model.addAttribute("board", boardListMap.get(0));
 
-                for (int i = 0; i < boardListMap.size(); i++) {
-                    model.addAttribute("imgPath_" + i, "/setting/proxy?url="+boardListMap.get(i).get("imgPath"));
-                    model.addAttribute("imgPath_seq_" + i, boardListMap.get(i).get("seq"));
+                    for (int i = 0; i < boardListMap.size(); i++) {
+                        model.addAttribute("imgPath_" + i, "/setting/proxy?url="+boardListMap.get(i).get("imgPath"));
+                        model.addAttribute("imgPath_seq_" + i, boardListMap.get(i).get("seq"));
+                    }
                 }
             }
-        }
 
-        return "setting/naverForm";
+            return "setting/naverForm";
+        } catch (Exception e) {
+            return "error/500";
+        }
     }
 
     /**
@@ -147,75 +161,79 @@ public class SettingController extends BaseController {
      */
     @RequestMapping(value = "/naverPlaceRegist.do", method = { RequestMethod.POST, RequestMethod.GET })
     public ResponseEntity<?> naverPlaceRegist(HttpServletRequest request) {
-        HashMap<String, Object> registrationMap = new HashMap<>();
-        Map<String, String> imgPathMap = new HashMap<>();
-        Map<String, String> imgPathSeqMap = new HashMap<>();
-        Member member = (Member) request.getSession().getAttribute("member");
+        try {
+            HashMap<String, Object> registrationMap = new HashMap<>();
+            Map<String, String> imgPathMap = new HashMap<>();
+            Map<String, String> imgPathSeqMap = new HashMap<>();
+            Member member = (Member) request.getSession().getAttribute("member");
 
-        String boardSeqParam = request.getParameter("boardSeq");
-        String gdUserKeyParam = request.getParameter("gd_userkey");
-        String siteKeyParam = request.getParameter("sitekey");
+            String boardSeqParam = request.getParameter("boardSeq");
+            String gdUserKeyParam = request.getParameter("gd_userkey");
+            String siteKeyParam = request.getParameter("sitekey");
 
-        int boardSeq = parseIntegerParameter(boardSeqParam);
-        int gdUserKey = parseIntegerParameter(gdUserKeyParam);
-        int siteKey = parseIntegerParameter(siteKeyParam);
-
-        for (int i = 0; i <= 10; i++) {
-            String key = "imgPath_" + i;
-            String keySeq = "imgPath_seq_" + i;
-            String value = request.getParameter(key);
-            String valueSeq = request.getParameter(keySeq);
-            if (value != null)  imgPathMap.put(key, value);
-            if (valueSeq != null)  imgPathSeqMap.put(keySeq, valueSeq);
-            
-        }
-
-        registrationMap.put("gubun", boardSeq == 0 ? "REGIST" : "MODIFY");
-        registrationMap.put("loginUserid", member.getUserid());
-        registrationMap.put("loginUserip", request.getRemoteAddr());
-        registrationMap.put("boardSeq", boardSeq);
-        registrationMap.put("boardType", "NAV_PL");
-        registrationMap.put("title", getParameterOrDefault(request, "contents", ""));
-        registrationMap.put("contents", getParameterOrDefault(request, "contents", ""));
-        registrationMap.put("state", getParameterOrDefault(request, "state", "Y"));
-        registrationMap.put("gd_depart", getParameterOrDefault(request, "gd_depart", ""));
-        registrationMap.put("gd_userkey", gdUserKey);
-        registrationMap.put("sitekey", siteKey);
-        registrationMap.put("siteNameDI", getParameterOrDefault(request, "siteNameDI", ""));
-        registrationMap.put("retBoardSeq", -10);
-        registrationMap.put("retVal", -10);
-        registrationMap.put("retMsg", "");
-
-        boardService.boardRegModify(registrationMap);
-        System.out.println("RegistrationMap : " + registrationMap);
-
-        // 게시판 등록 성공 시 이미지 설정 등록/수정
-        if ("0".equals(StringUtil.objectToString(registrationMap.get("retVal")))) {
+            int boardSeq = parseIntegerParameter(boardSeqParam);
+            int gdUserKey = parseIntegerParameter(gdUserKeyParam);
+            int siteKey = parseIntegerParameter(siteKeyParam);
 
             for (int i = 0; i <= 10; i++) {
+                String key = "imgPath_" + i;
+                String keySeq = "imgPath_seq_" + i;
+                String value = request.getParameter(key);
+                String valueSeq = request.getParameter(keySeq);
+                if (value != null)  imgPathMap.put(key, value);
+                if (valueSeq != null)  imgPathSeqMap.put(keySeq, valueSeq);
 
-                String imgPath = StringUtil.objectToString(imgPathMap.get("imgPath_" + i)).replace("/setting/proxy?url=", "");
-                String imgPathSeq = StringUtil.objectToString(imgPathSeqMap.get("imgPath_seq_" + i));
-                
-                HashMap<String, Object> imageMap = new HashMap<>();
-                imageMap.put("gubun", imgPathSeq.isEmpty() ? "REGIST" : "MODIFY");
-                imageMap.put("loginUserid", member.getUserid());
-                imageMap.put("loginUserip", request.getRemoteAddr());
-                imageMap.put("boardSeq", boardSeq == 0 ? StringUtil.objectToString(registrationMap.get("retBoardSeq")) : boardSeq);
-                imageMap.put("boardSTSeq", StringUtil.objectToString(imgPathSeqMap.get("imgPath_seq_" + i)));
-                imageMap.put("bs_title", getParameterOrDefault(request, "contents", ""));
-                imageMap.put("bs_contents", "");
-                imageMap.put("bs_contents2", getParameterOrDefault(request, "contents", ""));
-                imageMap.put("imgPath", imgPath);
-                imageMap.put("linkUrl", imgPath);
-                imageMap.put("viewSeq", i);
-                imageMap.put("state", "Y");
-                boardService.boardSettingRegModify(imageMap);
-                
             }
-        }
 
-        return ResponseEntity.ok(registrationMap);
+            registrationMap.put("gubun", boardSeq == 0 ? "REGIST" : "MODIFY");
+            registrationMap.put("loginUserid", member.getUserid());
+            registrationMap.put("loginUserip", request.getRemoteAddr());
+            registrationMap.put("boardSeq", boardSeq);
+            registrationMap.put("boardType", "NAV_PL");
+            registrationMap.put("title", getParameterOrDefault(request, "contents", ""));
+            registrationMap.put("contents", getParameterOrDefault(request, "contents", ""));
+            registrationMap.put("state", getParameterOrDefault(request, "state", "Y"));
+            registrationMap.put("gd_depart", getParameterOrDefault(request, "gd_depart", ""));
+            registrationMap.put("gd_userkey", gdUserKey);
+            registrationMap.put("sitekey", siteKey);
+            registrationMap.put("siteNameDI", getParameterOrDefault(request, "siteNameDI", ""));
+            registrationMap.put("retBoardSeq", -10);
+            registrationMap.put("retVal", -10);
+            registrationMap.put("retMsg", "");
+
+            boardService.boardRegModify(registrationMap);
+            System.out.println("RegistrationMap : " + registrationMap);
+
+            // 게시판 등록 성공 시 이미지 설정 등록/수정
+            if ("0".equals(StringUtil.objectToString(registrationMap.get("retVal")))) {
+
+                for (int i = 0; i <= 10; i++) {
+
+                    String imgPath = StringUtil.objectToString(imgPathMap.get("imgPath_" + i)).replace("/setting/proxy?url=", "");
+                    String imgPathSeq = StringUtil.objectToString(imgPathSeqMap.get("imgPath_seq_" + i));
+
+                    HashMap<String, Object> imageMap = new HashMap<>();
+                    imageMap.put("gubun", imgPathSeq.isEmpty() ? "REGIST" : "MODIFY");
+                    imageMap.put("loginUserid", member.getUserid());
+                    imageMap.put("loginUserip", request.getRemoteAddr());
+                    imageMap.put("boardSeq", boardSeq == 0 ? StringUtil.objectToString(registrationMap.get("retBoardSeq")) : boardSeq);
+                    imageMap.put("boardSTSeq", StringUtil.objectToString(imgPathSeqMap.get("imgPath_seq_" + i)));
+                    imageMap.put("bs_title", getParameterOrDefault(request, "contents", ""));
+                    imageMap.put("bs_contents", "");
+                    imageMap.put("bs_contents2", getParameterOrDefault(request, "contents", ""));
+                    imageMap.put("imgPath", imgPath);
+                    imageMap.put("linkUrl", imgPath);
+                    imageMap.put("viewSeq", i);
+                    imageMap.put("state", "Y");
+                    boardService.boardSettingRegModify(imageMap);
+
+                }
+            }
+
+            return ResponseEntity.ok(registrationMap);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred: " + e.getMessage());
+        }
     }
 
     /**
@@ -241,20 +259,24 @@ public class SettingController extends BaseController {
         return (parameter != null) ? parameter : defaultValue;
     }
 
-        @CrossOrigin
+    @CrossOrigin
     @RequestMapping("/proxy")
     public ResponseEntity<byte[]> proxy(@RequestParam String url) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.ORIGIN, "http://localhost:8080");
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.ORIGIN, "http://localhost:8080");
 
-        ResponseEntity<byte[]> response = restTemplate.exchange(
-            url,
-            HttpMethod.GET,
-            new org.springframework.http.HttpEntity<>(headers),
-            byte[].class
-        );
+            ResponseEntity<byte[]> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                new org.springframework.http.HttpEntity<>(headers),
+                byte[].class
+            );
 
-        return response;
+            return response;
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
