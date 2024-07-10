@@ -1,25 +1,24 @@
-body, html {
+body,
+html {
     height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #4C4FCA;
+    background-image: url(/img/login_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.login-form {
+.login_wrap {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
-    width: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    width: 650px;
 }
-
 .login-form input {
     margin-top: 10px;
 }
-
 .header {
     text-align: center;
     margin-bottom: 20px;
