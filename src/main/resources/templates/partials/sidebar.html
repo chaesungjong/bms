@@ -1,41 +1,133 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-<div th:fragment="sidebar">
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">그룹디</div>
-        </a>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>세팅</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">세팅 양식</h6>
-                    <a class="collapse-item" href="/setting/board?etcParam=NAV_PL">플레이스 광고</a>
-                    <a class="collapse-item" href="/setting/naverPlaceSetting">플레이스 등록 테스트</a>
-                    <a class="collapse-item" href="#">네이버 톡톡</a>
-                    <a class="collapse-item" href="#">네이버 스킨</a>
-                    <a class="collapse-item" href="#">당근 광고</a>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/dashboard/sidebar.css" />
+    </th:block>
+    <div th:fragment="sidebar">
+        <!-- Sidebar -->
+        <div class="sidebar_wrap">
+            <div class="sidebar_top">
+                <a class="sidebar_logo" href="index.html"><img src="/img/sidebar_logo.svg" alt="주식회사 그룹디" /></a>
+                <div class="sidebar_user">
+                    <div class="sidebar_user_info">
+                        <div class="sidebar_user_left">
+                            <span class="sidebar_user_name">이수은</span>
+                            <span class="sidebar_user_grade">디자인팀 과장</span>
+                        </div>
+                        <div class="sidebar_user_right">
+                            <a href="#" class="user_info_btn"><img src="/img/sidebar_user_right01.svg" alt="회원정보" /></a>
+                            <a href="#" class="user_logout_btn"><img src="/img/sidebar_user_right02.svg" alt="로그아웃" /></a>
+                        </div>
+                    </div>
+                    <div class="sidebar_user_menu">
+                        <a href="#" class="sidebar_user_menu01"><img src="/img/sidebar_user_menu01.svg" alt="My 업무" />My 업무</a>
+                        <a href="#" class="sidebar_user_menu02"><img src="/img/sidebar_user_menu02.svg" alt="My 프로젝트" />My 프로젝트</a>
+                        <a href="#" class="sidebar_user_menu03"><img src="/img/sidebar_user_menu03.svg" alt="업무일지" />업무일지</a>
+                    </div>
                 </div>
             </div>
-        </li>
-    </ul>
-</div>
-
+            <div class="sidebar_bot">
+                <ul class="side_menu">
+                    <li class="side_menu01">
+                        <a href="index.html" class="active"><img src="/img/side_menu01.svg" alt="대시보드 홈" />대시보드 홈</a>
+                    </li>
+                    <li class="side_menu02">
+                        <a href="#none"><img src="/img/side_menu02.svg" alt="프로젝트 정보" />프로젝트 정보</a>
+                        <ul class="side_sub_menu">
+                            <li><a href="#">마케팅 / 기획</a></li>
+                            <li><a href="#">광고관리</a></li>
+                            <li><a href="#">디자인</a></li>
+                            <li><a href="#">퍼블리싱</a></li>
+                            <li><a href="#">관리</a></li>
+                            <li><a href="#">영상</a></li>
+                        </ul>
+                    </li>
+                    <li class="side_menu03">
+                        <a href="#none"><img src="/img/side_menu03.svg" alt="고객지원 게시판" />고객지원 게시판</a>
+                        <ul class="side_sub_menu">
+                            <li><a href="#">유지보수 게시판</a></li>
+                            <li><a href="#">진료일정 게시판</a></li>
+                            <li><a href="#">임상글 요청 게시판</a></li>
+                            <li><a href="#">업체관리</a></li>
+                        </ul>
+                    </li>
+                    <li class="side_menu04">
+                        <a href="#none"><img src="/img/side_menu04.svg" alt="인트라넷" />인트라넷홈</a>
+                        <ul class="side_sub_menu">
+                            <li><a href="#">메일함</a></li>
+                            <li><a href="#">예약</a></li>
+                            <li><a href="#">전자결재</a></li>
+                            <li><a href="#">문서관리</a></li>
+                        </ul>
+                    </li>
+                    <li class="side_menu05">
+                        <a href="#none"><img src="/img/side_menu05.svg" alt="캘린더" />캘린더</a>
+                    </li>
+                    <li class="side_menu06">
+                        <a href="#none"><img src="/img/side_menu06.svg" alt="사내 게시판" />사내 게시판</a>
+                        <ul class="side_sub_menu">
+                            <li><a href="#">전자 게시판</a></li>
+                            <li><a href="#">부서 게시판</a></li>
+                        </ul>
+                    </li>
+                    <li class="side_menu07">
+                        <a href="#none"><img src="/img/side_menu07.svg" alt="사원관리" />사원관리</a>
+                        <ul class="side_sub_menu">
+                            <li><a href="#">사원 목록</a></li>
+                            <li><a href="#">근태 관리</a></li>
+                        </ul>
+                    </li>
+                    <li class="side_menu08">
+                        <a href="#none"><img src="/img/side_menu08.svg" alt="부가관리" />부가관리</a>
+                        <ul class="side_sub_menu">
+                            <li><a href="#">정보 수정</a></li>
+                            <li><a href="#">신규 거래 관리 (특수 페이지)</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('.side_menu > li > a').click(function (e) {
+                    e.preventDefault();
+                    $(this).toggleClass('open');
+                    $('.side_menu > li > a').not(this).removeClass('open');
+                    var subMenu = $(this).siblings('.side_sub_menu');
+                    $('.side_sub_menu').not(subMenu).slideUp();
+                    subMenu.slideToggle();
+                });
+            });
+        </script>
+        <!-- <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">그룹디</div>
+            </a>
+            <hr class="sidebar-divider my-0" />
+            <li class="nav-item">
+                <a
+                    class="nav-link collapsed"
+                    href="#"
+                    data-toggle="collapse"
+                    data-target="#collapseUtilities"
+                    aria-expanded="true"
+                    aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>세팅</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">세팅 양식</h6>
+                        <a class="collapse-item" href="/setting/board?etcParam=NAV_PL">플레이스 광고</a>
+                        <a class="collapse-item" href="/setting/naverPlaceSetting">플레이스 등록 테스트</a>
+                        <a class="collapse-item" href="#">네이버 톡톡</a>
+                        <a class="collapse-item" href="#">네이버 스킨</a>
+                        <a class="collapse-item" href="#">당근 광고</a>
+                    </div>
+                </div>
+            </li>
+        </ul> -->
+    </div>
 </html>
