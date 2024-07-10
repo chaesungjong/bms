@@ -39,7 +39,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(@SuppressWarnings("null") @NonNull InterceptorRegistry registry) {
         registry.addInterceptor(new BmsInterceptor())
-                .excludePathPatterns("/css/**", "/images/**", "/js/**");
+                .excludePathPatterns("/css/**", "/img/**", "/js/**");
     }
 
     @Override

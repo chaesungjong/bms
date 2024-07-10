@@ -2,7 +2,7 @@ body,
 html {
     height: 100%;
     width: 100%;
-    background-image: url(https://github.com/chaesungjong/bms/blob/567d2e09d2d3d187d960b1dbb8c23859d94a29c9/src/main/resources/static/img/login_bg.jpg?raw=true);
+    background-image: url(/img/login_bg.jpg?raw=true);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
