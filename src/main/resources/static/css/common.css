@@ -2,7 +2,7 @@
 * {
     box-sizing: border-box;
     scroll-behavior: smooth;
-    letter-spacing: -0.05em;
+    /* letter-spacing: -0.05em; */
 }
 body,
 html {
