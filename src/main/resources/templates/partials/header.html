@@ -1,88 +1,142 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <th:block layout:fragment="customCSS">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    <header th:fragment="header" class="header">
         <link rel="stylesheet" href="/css/dashboard/header.css" />
-    </th:block>
-    <header th:fragment="header">
-        <div class="hd_center sub_center">
-            <div class="hd_top">
-                <div class="hd_result">
-                    <div class="hd_result_name">
-                        <h2>더서울치과의원<span class="state state_normal">보통</span></h2>
+        <div class="modal_bg"></div>
+        <div class="hd_wrap">
+            <div class="hd_center sub_center">
+                <div class="hd_top">
+                    <div class="hd_result state_normal">
+                        <div class="hd_result_name">
+                            <h2>더서울치과의원<span class="state state_normal">보통</span></h2>
+                        </div>
+                        <div class="hd_result_content">
+                            <div class="hd_result_type01">도메인 만료<span>D-7</span></div>
+                            <div class="hd_result_type02">2023.03.01 ~<span>거래중</span></div>
+                            <div class="hd_result_type03">2023.03.01 ~ 2023.07.01<span class="end">거래종료</span></div>
+                            <span class="hd_result_btn"><img src="/img/hd_result_btn.svg" alt="확장" /></span>
+                        </div>
                     </div>
-                    <div class="hd_result_content">
-                        <div class="hd_result_type01">도메인 만료<span>D-7</span></div>
-                        <div class="hd_result_type02">2023.03.01 ~<span>거래중</span></div>
-                        <div class="hd_result_type03">2023.03.01 ~2023.07.01<span>거래종료</span></div>
-                        <span class="hd_result_btn"></span>
+                    <div class="hd_search_wrap">
+                        <span class="hd_search_btn">
+                            업체 검색
+                            <img src="/img/hd_search_btn.svg" alt="찾기" />
+                        </span>
+                        <div class="hd_search_modal">
+                            <div class="search_modal_top">
+                                <h3>업체 검색<span class="search_modal_count">(126)</span></h3>
+                                <span class="search_modal_close"><img src="/img/search_modal_close.svg" alt="닫기" /></span>
+                            </div>
+                            <div class="search_modal_input">
+                                <form class="search_modal_form">
+                                    <input type="text" class="pre" name="hd_search_name" id="hd_search_name" placeholder="업체명을 검색해주세요." />
+                                    <input type="button" class="hd_search_submit pre" value="검색" />
+                                    <button type="reset" class="hd_search_reset"><img src="/img/hd_search_reset.svg" alt="새로고침" /></button>
+                                </form>
+                            </div>
+                            <ul class="hd_search_list_wrap">
+                                <li class="hd_search_list">
+                                    <a href="#none"><span class="state state_bad">불안</span>안양바른플러스치과</a>
+                                </li>
+                                <li class="hd_search_list">
+                                    <a href="#none"><span class="state state_normal">보통</span>더서울치과의원</a>
+                                </li>
+                                <li class="hd_search_list">
+                                    <a href="#none"><span class="state state_safe">안정</span>서울센텀구강내과치과의원</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="hd_search_wrap">
-                    <span class="hd_search_btn">
-                        업체 검색
-                        <img src="" alt="찾기" />
-                    </span>
-                    <div class="hd_search_modal">
-                        <div class="search_modal_top">
-                            <h3>업체 검색<span class="search_modal_count">(126)</span></h3>
-                            <span class="search_modal_close"><img src="/img/search_modal_close.svg" alt="닫기" /></span>
+                <div class="hd_ext">
+                    <div class="hd_ext_top">
+                        <h3>블로그 포스팅</h3>
+                        <div class="hd_ext_con">
+                            <div class="hd_ext_count">
+                                <div class="hd_ext_count01">이번달 작성 예정건<span>100</span></div>
+                                <div class="hd_ext_count02">현재 포스팅 발행 건<span>0</span></div>
+                                <div class="hd_ext_count03">남은 포스팅 건<span>6</span></div>
+                            </div>
+                            <div class="hd_ext_btn">
+                                <a href="#" class="hd_ext_btn01">업체 정보</a>
+                                <a href="#" class="hd_ext_btn02">사용자 관리</a>
+                                <a href="#" class="hd_ext_btn03">게시판 관리</a>
+                            </div>
+                            <div class="hd_ext_info">
+                                <div class="hd_ext_info_list">
+                                    <div class="hd_ext_info_list01">임상<span>100</span></div>
+                                    <div class="hd_ext_info_list02">일상<span>100</span></div>
+                                    <div class="hd_ext_info_list03">홍보<span>100</span></div>
+                                    <div class="hd_ext_info_list04">정보성<span>100</span></div>
+                                    <div class="hd_ext_info_list05">특화 진료<span>100</span></div>
+                                </div>
+                                <div class="hd_ext_info_btn">
+                                    <a href="#" class="hd_ext_info_btn01">포스팅 이월</a>
+                                    <a href="#" class="hd_ext_info_btn02">이월 취소</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="search_modal_input">
-                            <form class="search_modal_form">
-                                <input type="text" name="hd_search_name" id="hd_search_name" placeholder="업체명을 검색해주세요." />
-                                <input type="button" class="hd_search_submit" value="검색" />
-                                <button type="reset" class="hd_search_reset"><img src="" alt="새로고침" /></button>
-                            </form>
-                        </div>
-                        <ul class="hd_search_list_wrap">
-                            <li class="hd_search_list">
-                                <a href=""><span class="state state_bad">불안</span>안양바른플러스치과</a>
-                            </li>
-                            <li class="hd_search_list">
-                                <a href=""><span class="state state_normal">보통</span>더서울치과의원</a>
-                            </li>
-                            <li class="hd_search_list">
-                                <a href=""><span class="state state_safe">안정</span>서울센텀구강내과치과의원</a>
-                            </li>
-                        </ul>
+                        <span class="hd_ext_tgl"><img src="/img/hd_ext_tgl.svg" alt="확장토글" /></span>
                     </div>
                 </div>
             </div>
-            <div class="hd_ext">
-                <div class="hd_ext_top">
-                    <h3>블로그 포스팅</h3>
-                    <div class="hd_ext_con">
-                        <div>
-                            <div class="hd_ext_count01">이번달 작성 예정건<span>100</span></div>
-                            <div class="hd_ext_count02">현재 포스팅 발행 건<span>0</span></div>
-                            <div class="hd_ext_count03">남은 포스팅 건<span>6</span></div>
-                        </div>
-                        <div>
-                            <a href="" class="hd_ext_btn01">업체 정보</a>
-                            <a href="" class="hd_ext_btn02">사용자 관리</a>
-                            <a href="" class="hd_ext_btn03">게시판 관리</a>
-                        </div>
-                        <div class="hd_ext_info">
-                            <div></div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <span class="hd_ext_tgl"></span>
+            <aside class="hd_side main_side">
+                <div class="hd_menu01">
+                    <a href="#"><img src="/img/hd_menu01.svg" alt="수신함" /><span class="alert_count">10</span></a>
                 </div>
-            </div>
+                <div class="hd_menu02">
+                    <a href="#"><img src="/img/hd_menu02.svg" alt="캘린더" /><span class="calender_count">111</span></a>
+                </div>
+                <div class="hd_menu03">
+                    <a href="#"><img src="/img/hd_menu03.svg" alt="연락처" /></a>
+                </div>
+                <div class="hd_menu04">
+                    <a href="#"
+                        ><img src="/img/hd_menu04.png" alt="마이페이지" /><span class="hd_menu_arrow"
+                            ><img src="/img/hd_menu_arrow.svg" alt="확장" /></span
+                    ></a>
+                </div>
+            </aside>
         </div>
-        <aside class="hd_side main_side">
-            <div class="hd_menu01">
-                <a href="#"><img src="/img/hd_menu01.svg" alt="수신함" /><span class="alert_count">10</span></a>
-            </div>
-            <div class="hd_menu02">
-                <a href="#"><img src="/img/hd_menu02.svg" alt="캘린더" /><span class="calender_count">111</span></a>
-            </div>
-            <div class="hd_menu03">
-                <a href="#"><img src="/img/hd_menu03.svg" alt="연락처" /></a>
-            </div>
-            <div class="hd_menu04">
-                <a href="#"><img src="/img/hd_menu04.jpg" alt="마이페이지" /><span class="hd_menu_arrow"></span></a>
-            </div>
-        </aside>
     </header>
+    <script>
+        $(function () {
+            var $modalBg = $('.modal_bg');
+            var $hdSearchModal = $('.hd_search_modal');
+            var $hdResult = $('.hd_result');
+            var $hdTop = $('.hd_top');
+
+            function toggleModal(open) {
+                $modalBg.toggleClass('open', open);
+                $hdSearchModal.toggleClass('open', open);
+            }
+
+            $('.hd_search_btn').click(function () {
+                toggleModal(true);
+            });
+
+            $modalBg.add('.search_modal_close').click(function () {
+                toggleModal(false);
+            });
+
+            $('.hd_search_list a').click(function () {
+                toggleModal(false);
+                $hdResult.addClass('open');
+                $hdTop.css('justify-content', 'space-between');
+            });
+
+            $('.hd_result_btn').click(function () {
+                $(this).toggleClass('open');
+                $('.hd_ext').toggleClass('open');
+            });
+
+            $('.hd_ext_tgl').click(function () {
+                $(this).toggleClass('open');
+                $('.hd_ext_info').toggleClass('open');
+            });
+        });
+    </script>
 </html>

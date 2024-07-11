@@ -18,6 +18,9 @@ body {
     -webkit-font-smoothing: antialiased;
     word-break: keep-all;
 }
+.pre {
+    font-family: 'Pretendard', sans-serif;
+}
 ul {
     list-style: none;
     padding: 0;
@@ -50,6 +53,16 @@ strong {
 }
 .center {
     max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+}
+.sub_center {
+    max-width: 1235px;
+    width: 100%;
+    margin: 0 auto;
+}
+.main_side {
+    max-width: 227px;
     width: 100%;
     margin: 0 auto;
 }
