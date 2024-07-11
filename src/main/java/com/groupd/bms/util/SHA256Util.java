@@ -13,6 +13,11 @@ import java.security.NoSuchAlgorithmException;
  */
 public class SHA256Util {
     
+    /**
+     * SHA-256 해시 알고리즘을 사용하여 문자열을 해싱
+     * @param text
+     * @return String
+     */
     public static String hashWithSHA256(String text) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
-    <th:block layout:fragment="customCSS">
-        <link rel="stylesheet" href="/css/acm/login.css" />
-    </th:block>
+<th:block layout:fragment="customCSS">
+    <link rel="stylesheet" href="/css/acm/login.css" />
+</th:block>
     <body>
         <div layout:fragment="content" class="container">
             <div class="login_wrap">
@@ -27,12 +27,7 @@
                             <label for="password" class="login_pw login_text">
                                 <span>비밀번호</span>
                                 <div class="login_text_line"></div>
-                                <input
-                                    type="password"
-                                    class="form-control form-control-user"
-                                    id="password"
-                                    name="password"
-                                    placeholder="비밀번호" />
+                                <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="비밀번호" />
                             </label>
                         </div>
                         <div class="form-group login_check">
@@ -45,11 +40,9 @@
                                 <label class="custom-control-label" for="autoLogin">자동 로그인</label>
                             </div>
                         </div>
-                        <a href="javascript:void(0);" id="loginBtn" name="loginBtn" class="btn btn-primary btn-user btn-block">로그인</a>
+                        <a href="javascript:void(0);" id="loginBtn" name="loginBtn" class="btn btn-primary btn-user btn-block"> 로그인 </a>
                     </form>
-                    <p>
-                        <span>상담시간</span>평일 : 09:00 ~ 18:00 (공휴일, 토/일요일 휴무)
-                    </p>
+                    <p><span>상담시간</span>평일 : 09:00 ~ 18:00 (공휴일, 토/일요일 휴무)</p>
                 </div>
                 <div class="login_info">
                     <address>인천 남동구 구월남로 126 동우메트로피아 2층 그룹디</address>

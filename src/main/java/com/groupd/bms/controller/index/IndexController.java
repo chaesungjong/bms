@@ -15,7 +15,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        return "redirect:/mmb/login"; 
+        return "redirect:/acm/login"; 
     }
 
     /**

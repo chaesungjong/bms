@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 대시보드 페이지를 보여주기 위한 컨트롤러
  */
 @Controller
-@RequestMapping("dashboard")
+@RequestMapping("dhp")
 public class DashboardController {
     
     /*

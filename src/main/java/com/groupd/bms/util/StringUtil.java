@@ -10,6 +10,11 @@ package com.groupd.bms.util;
  */
 public class StringUtil {
 
+    /**
+     * 문자열이 null 또는 빈 문자열인지 확인
+     * @param str
+     * @return boolean
+     */
     public static boolean isNull(String str) {
         if(str == null || str.trim().length() == 0) {
             return true;
@@ -18,6 +23,11 @@ public class StringUtil {
         }
     }
 
+    /**
+     * 문자열을 정수로 변환
+     * @param str
+     * @return Integer
+     */
     public static Integer stringToInt(String str) {
         try {
             return Integer.parseInt(str);
@@ -26,6 +36,11 @@ public class StringUtil {
         }
     }
 
+    /**
+     * 문자열을 실수로 변환
+     * @param str
+     * @return Double
+     */
     public static Double stringToDouble(String str) {
         try {
             return Double.parseDouble(str);
@@ -34,6 +49,11 @@ public class StringUtil {
         }
     }
     
+    /**
+     * 객체를 문자열로 변환
+     * @param obj
+     * @return String
+     */
     public static String objectToString(Object obj) {
         if (obj == null) {
             return "";
@@ -42,6 +62,12 @@ public class StringUtil {
         }
     }
     
+    /**
+     * 객체를 문자열로 변환
+     * @param obj
+     * @param init
+     * @return String
+     */
     public static String objectToString(Object obj, String init) {
         if (obj == null) {
             return init;
