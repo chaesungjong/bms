@@ -1,6 +1,8 @@
-.sidebar_wrap {
+.sidebar {
     max-width: 324px;
     width: 100%;
+}
+.sidebar_wrap {
     background-color: #fff;
 }
 .sidebar_top {
