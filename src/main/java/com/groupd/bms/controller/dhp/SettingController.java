@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * SettingController
- * 그룹디 광고 설정 페이지를 보여주기 위한 컨트롤러
+ * 그룹디 광고 설정 페이지를 보여주기 위한 컨트롤러 삭제 예정
  */
 @Controller
 @RequestMapping("dhp")

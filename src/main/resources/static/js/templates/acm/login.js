@@ -42,7 +42,7 @@ $(document).ready(function () {
         ajaxRequest("/acm/loginProcess.do", loginData, "POST", function (response) {
             // 로그인 성공 시 대시보드 페이지로 리디렉트
             if (response.retVal == 0) {
-                location.href = "/dashboard/main";
+                location.href = "/dsb/main";
             } else {
                 alert(response.errMsg);
             }

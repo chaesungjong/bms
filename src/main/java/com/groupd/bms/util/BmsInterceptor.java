@@ -61,7 +61,7 @@ public class BmsInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     @Override
-    public void postHandle(@SuppressWarnings("null") HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
         String currentUri = request.getRequestURI();
 

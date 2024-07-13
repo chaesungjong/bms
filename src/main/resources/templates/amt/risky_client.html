@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+
+<!-- 불안 거래처  CSS -->
+<th:block layout:fragment="customCSS">
+    <link rel="stylesheet" href="/css/amt/risky_client.css" />
+</th:block>
+
+<body>
+    <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+        <h1> 불안 거래처 </h1>
+    </div>
+</body>
+
+<!-- 불안 거래처  Javascript -->
+<th:block layout:fragment="customJS">   
+    <script src="/js/templates/amt/risky_client.js"></script>
+</th:block>
+</html>

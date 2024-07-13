@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+
+<!-- 디자인  CSS -->
+<th:block layout:fragment="customCSS">
+    <link rel="stylesheet" href="/css/pif/design.css" />
+</th:block>
+
+<body>
+    <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+        <h1> 디자인 </h1>
+    </div>
+</body>
+
+<!-- 디자인  Javascript -->
+<th:block layout:fragment="customJS">   
+    <script src="/js/templates/pif/design.js"></script>
+</th:block>
+</html>

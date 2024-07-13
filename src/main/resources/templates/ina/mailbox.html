@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+
+<!-- 메일함  CSS -->
+<th:block layout:fragment="customCSS">
+    <link rel="stylesheet" href="/css/ina/mailbox.css" />
+</th:block>
+
+<body>
+    <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+        <h1> 메일함 </h1>
+    </div>
+</body>
+
+<!-- 메일함  Javascript -->
+<th:block layout:fragment="customJS">   
+    <script src="/js/templates/ina/mailbox.js"></script>
+</th:block>
+</html>
