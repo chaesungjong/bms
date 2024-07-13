@@ -27,7 +27,7 @@ import java.util.Map;
  * 그룹디 광고 설정 페이지를 보여주기 위한 컨트롤러
  */
 @Controller
-@RequestMapping("setting")
+@RequestMapping("dhp")
 public class SettingController extends BaseController {
 
     @Autowired
