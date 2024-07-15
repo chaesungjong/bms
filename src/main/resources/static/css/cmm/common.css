@@ -21,6 +21,14 @@ body {
 .pre {
     font-family: 'Pretendard', sans-serif;
 }
+input,
+select {
+    font-family: 'Pretendard', sans-serif;
+}
+select:focus-visible,
+input:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}
 a {
     color: #333;
     text-decoration: none;

@@ -47,12 +47,22 @@ html {
     font-weight: 500;
     color: #000;
     letter-spacing: normal;
+    padding: 1.5rem 1rem;
+    appearance: none;
+    line-height: 1.5;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    font-family: 'Pretendard', sans-serif;
+}
+.form-group {
+    margin-bottom: 1rem;
 }
 .login_wrap .login_text input:focus {
     box-shadow: none;
 }
 .login_wrap .login_text > span {
-    width: 78px;
+    width: 85px;
     display: inline-block;
     text-align: justify;
 }
@@ -81,6 +91,9 @@ html {
     line-height: 56px;
     margin: 34px 0px 20px;
     padding: 0px;
+    display: inline-block;
+    width: 100%;
+    color: #fff;
 }
 .login_inner > p {
     font-size: 18px;
