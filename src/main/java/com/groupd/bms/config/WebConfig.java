@@ -38,8 +38,13 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(@NonNull InterceptorRegistry registry) {
-        registry.addInterceptor(new BmsInterceptor())
+        registry.addInterceptor(authInterceptor())
                 .excludePathPatterns("/css/**", "/img/**", "/js/**");
+    }
+
+	@Bean
+    public BmsInterceptor authInterceptor(){
+    	return new BmsInterceptor();
     }
 
     @Override

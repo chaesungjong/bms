@@ -6,7 +6,6 @@ $(document).ready(function () {
         $('#rememberMe').prop('checked', true);
     }
 
-
     /**
      * 로그인 버튼
      */
@@ -30,6 +29,17 @@ $(document).ready(function () {
             localStorage.setItem('userId', username); // 로컬 스토리지에 아이디 저장
         } else {
             localStorage.removeItem('userId'); // 저장된 아이디 삭제
+        }
+
+        // 자동 로그인 체크박스 검사
+        if ($('#autoLogin').is(':checked')) {
+            document.cookie = "autoLogin=true; path=/;";
+            document.cookie = "userId=" + username + "; path=/;";
+            document.cookie = "password=" + password + "; path=/;";
+        } else {
+            document.cookie = "autoLogin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         }
 
         // 로그인 데이터 준비
