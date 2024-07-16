@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>BMS 업체 관리 시스템</title>
-    <!-- 공통 CSS 영역 -->
-    <th:block th:include="layout/config :: common_css"></th:block>
-    <!-- 공통 JS 영역 -->
-    <th:block th:include="layout/config :: common_js"></th:block>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>BMS 업체 관리 시스템</title>
+        <!-- 공통 CSS 영역 -->
+        <th:block th:include="layout/config :: common_css"></th:block>
+        <!-- 공통 JS 영역 -->
+        <th:block th:include="layout/config :: common_js"></th:block>
+    </head>
 
-<body id="page-top">
-    <div id="wrapper">
-        <!-- 사이드바 영역  -->
-        <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
-            <div th:replace="/partials/sidebar :: sidebar"></div>
-        </th:block>
-        <div>
-            <!-- 공통헤더 영역 -->
+    <body id="page-top">
+        <div id="wrapper">
+            <!-- 사이드바 영역  -->
             <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
-                <div th:replace="/partials/header :: header"></div>
+                <div th:replace="/partials/sidebar :: sidebar"></div>
             </th:block>
-            <!-- 메인화면 영역  -->
-            <div id="main-content" layout:fragment="content"></div>
+            <div style="width: 100%">
+                <!-- 공통헤더 영역 -->
+                <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
+                    <div th:replace="/partials/header :: header"></div>
+                </th:block>
+                <!-- 메인화면 영역  -->
+                <div id="main-content" layout:fragment="content"></div>
+            </div>
         </div>
-    </div>
-    <!-- 커스텀 CSS 영역 -->
-    <th:block layout:fragment="customCSS"></th:block>
-    <!-- 커스텀 JS 영역 -->
-    <th:block layout:fragment="customJS"></th:block>
-</body>
+        <!-- 커스텀 CSS 영역 -->
+        <th:block layout:fragment="customCSS"></th:block>
+        <!-- 커스텀 JS 영역 -->
+        <th:block layout:fragment="customJS"></th:block>
+    </body>
 </html>

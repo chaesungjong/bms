@@ -1,11 +1,12 @@
-.sidebar_wrap {
+.sidebar {
     max-width: 324px;
     width: 100%;
-    background-color: #fff;
+    border-radius: 0px 40px 0px 0px;
+    overflow: hidden;
+    background: #fff;
 }
 .sidebar_top {
     padding: 38px 24px 29px;
-    border-radius: 0px 40px 0px 0px;
 }
 .sidebar_user {
     margin-top: 47px;
