@@ -1,0 +1,132 @@
+<style>
+    /* sidebar */
+    .sidebar {
+        width: 100%;
+        max-width: 324px;
+        height: 100%;
+        background-color: #ccc;
+    }
+    .add_emp_wrap {
+        padding: 40px;
+        width: 100%;
+    }
+    .add_emp_wrap > h2 {
+        font-size: 36px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 17px;
+    }
+    .add_emp_board {
+        border-radius: 20px;
+        box-shadow: 0px 16px 36px rgba(27, 28, 83, 0.12);
+        overflow: hidden;
+    }
+    .add_emp_info {
+        width: 100%;
+        background-color: #fff;
+    }
+
+    .add_emp_title {
+        background-color: #f2f2f2;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+    }
+</style>
+<div class="add_emp_wrap">
+    <h2>사원 기본정보</h2>
+    <div class="add_emp_board">
+        <form action="">
+            <div class="add_emp_info">
+                <table cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" class="add_emp_title">
+                                <input type="file" name="emp_profile[]" class="emp_profile" />
+                            </td>
+                            <td colspan="3">
+                                <label for="">성명<input type="text" name="" id="" /></label>
+                                <label for="">영문명<input type="text" name="" id="" /></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <label for=""
+                                    >부서 / 팀 / 직위 / 직급<select name="" id="">
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option></select
+                                ></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="add_emp_title">4</td>
+                            <td colspan="3">5</td>
+                        </tr>
+                        <tr>
+                            <td class="add_emp_title">6</td>
+                            <td colspan="3">7</td>
+                        </tr>
+                        <tr>
+                            <td class="add_emp_title">8</td>
+                            <td colspan="3">9</td>
+                        </tr>
+                        <tr>
+                            <td class="add_emp_title">10</td>
+                            <td>11</td>
+                            <td class="add_emp_title">12</td>
+                            <td>13</td>
+                        </tr>
+                        <tr>
+                            <td class="add_emp_title">14</td>
+                            <td>15</td>
+                            <td class="add_emp_title">16</td>
+                            <td>17</td>
+                        </tr>
+                        <tr>
+                            <td class="add_emp_title">18</td>
+                            <td colspan="3">19</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" class="add_emp_title">20</td>
+                            <td colspan="3">21</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">22</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">23</td>
+                        </tr>
+                        <tr>
+                            <td class="add_emp_title">24</td>
+                            <td colspan="3">25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="add_emp_file">
+                <h3>사원 관련 서류</h3>
+                <table cellspacing="0">
+                    <tbody>
+                        <tr>
+                            <td class="add_emp_title">1</td>
+                            <td>2</td>
+                            <td class="add_emp_title">3</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td class="add_emp_title">5</td>
+                            <td>6</td>
+                            <td class="add_emp_title">7</td>
+                            <td>8</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="add_emp_btn_wrap">
+                <input type="button" value="저장" class="add_emp_btn" />
+            </div>
+        </form>
+    </div>
+</div>
