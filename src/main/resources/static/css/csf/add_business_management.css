@@ -28,7 +28,7 @@
 .add_bm_board table {
     width: 100%;
 }
-.add_bm_name {
+.bm_bname {
     border: none;
     font-size: 24px;
     font-weight: 600;
