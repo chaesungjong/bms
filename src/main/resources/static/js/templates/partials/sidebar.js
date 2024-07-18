@@ -26,4 +26,14 @@ $(document).ready(function () {
         $('.member_info_wrap').addClass('out');
         $('body, html').removeClass('modal-active');
     });
+
+    $('#member_logout').click(function () {
+        // ajaxRequest 함수를 사용하여 로그아웃 처리
+        ajaxRequest("/acm/logout.do", '', "POST", function (response) {
+            // 로그인 성공 시 대시보드 페이지로 리디렉트
+            location.href = "/acm/login";
+        }, function () {
+            alert('현재 기능 개발 준비중 입니다.');
+        });
+    });
 });
