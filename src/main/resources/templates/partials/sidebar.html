@@ -10,9 +10,9 @@
                 <a class="sidebar_logo" href="#"><img src="/img/sidebar_logo.svg" alt="주식회사 그룹디" /></a>
                 <div class="sidebar_user">
                     <div class="sidebar_user_info">
-                        <div class="sidebar_user_left">
-                            <span class="sidebar_user_name">이수은</span>
-                            <span class="sidebar_user_grade">디자인팀 과장</span>
+                        <div class="sidebar_user_left">      
+                            <span class="sidebar_user_name" th:text="${member.name}"></span>
+                            <span class="sidebar_user_grade" th:text="${member.codeName}"></span>
                         </div>
                         <div class="sidebar_user_right">
                             <a href="#" class="user_info_btn" id="member_info"><img src="/img/sidebar_user_right01.svg" alt="회원정보" /></a>

@@ -43,6 +43,11 @@ public class BmsInterceptor implements HandlerInterceptor {
                  log.debug("No session found, redirecting to login page.");
                  response.sendRedirect("/acm/login");
                  return false; // 현재 요청을 중지하고 로그인 페이지로 리다이렉트
+             }else{
+                Member member = (Member) request.getSession().getAttribute("member");
+                log.debug("Session found, member: " + member.toString());
+                request.setAttribute("member", member);
+                
              }
 
          }
