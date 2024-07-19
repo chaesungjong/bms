@@ -1,132 +1,313 @@
-<style>
-    /* sidebar */
-    .sidebar {
-        width: 100%;
-        max-width: 324px;
-        height: 100%;
-        background-color: #ccc;
-    }
-    .add_emp_wrap {
-        padding: 40px;
-        width: 100%;
-    }
-    .add_emp_wrap > h2 {
-        font-size: 36px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 17px;
-    }
-    .add_emp_board {
-        border-radius: 20px;
-        box-shadow: 0px 16px 36px rgba(27, 28, 83, 0.12);
-        overflow: hidden;
-    }
-    .add_emp_info {
-        width: 100%;
-        background-color: #fff;
-    }
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    <!-- 사원 등록 CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/ems/add_employees.css" />
+    </th:block>
 
-    .add_emp_title {
-        background-color: #f2f2f2;
-        font-size: 16px;
-        font-weight: 600;
-        color: #333;
-    }
-</style>
-<div class="add_emp_wrap">
-    <h2>사원 기본정보</h2>
-    <div class="add_emp_board">
-        <form action="">
-            <div class="add_emp_info">
-                <table cellspacing="0">
-                    <tbody>
-                        <tr>
-                            <td rowspan="2" class="add_emp_title">
-                                <input type="file" name="emp_profile[]" class="emp_profile" />
-                            </td>
-                            <td colspan="3">
-                                <label for="">성명<input type="text" name="" id="" /></label>
-                                <label for="">영문명<input type="text" name="" id="" /></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <label for=""
-                                    >부서 / 팀 / 직위 / 직급<select name="" id="">
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option></select
-                                ></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="add_emp_title">4</td>
-                            <td colspan="3">5</td>
-                        </tr>
-                        <tr>
-                            <td class="add_emp_title">6</td>
-                            <td colspan="3">7</td>
-                        </tr>
-                        <tr>
-                            <td class="add_emp_title">8</td>
-                            <td colspan="3">9</td>
-                        </tr>
-                        <tr>
-                            <td class="add_emp_title">10</td>
-                            <td>11</td>
-                            <td class="add_emp_title">12</td>
-                            <td>13</td>
-                        </tr>
-                        <tr>
-                            <td class="add_emp_title">14</td>
-                            <td>15</td>
-                            <td class="add_emp_title">16</td>
-                            <td>17</td>
-                        </tr>
-                        <tr>
-                            <td class="add_emp_title">18</td>
-                            <td colspan="3">19</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3" class="add_emp_title">20</td>
-                            <td colspan="3">21</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">22</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">23</td>
-                        </tr>
-                        <tr>
-                            <td class="add_emp_title">24</td>
-                            <td colspan="3">25</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="add_emp_wrap">
+                <h2>사원 기본정보</h2>
+                <div class="add_emp_board">
+                    <form action="">
+                        <div class="add_emp_info">
+                            <table cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="2" class="add_emp_title">
+                                            <div class="profile_box">
+                                                <img src="#" alt="" id="profile_preview" />
+                                                <input type="file" class="real_upload profile" accept="image/*" required multiple />
+                                                <div class="upload"></div>
+                                            </div>
+                                        </td>
+                                        <td colspan="3">
+                                            <label for="">성명<input type="text" name="" id="" class="name_box" /></label>
+                                            <label for="">영문명<input type="text" name="" id="" class="name_en_box" /></label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="team_gr">
+                                            <label for=""
+                                                >부서 / 팀 / 직위 / 직급
+                                                <select name="" onchange="categoryChange(this)" class="team_wrap">
+                                                    <option value="" selected disabled>부서</option>
+                                                    <option value="관리">관리</option>
+                                                    <option value="광고관리">광고관리</option>
+                                                    <option value="디자인">디자인</option>
+                                                    <option value="미디어제작">미디어제작</option>
+                                                    <option value="마케팅">마케팅</option>
+                                                    <option value="재무">재무</option>
+                                                </select>
+
+                                                <select name="" id="team_count">
+                                                    <option value="" selected disabled>팀</option>
+                                                </select>
+
+                                                <select name="" id="">
+                                                    <option value="" selected disabled>직위</option>
+                                                    <option value="사원">사원</option>
+                                                    <option value="대리">대리</option>
+                                                    <option value="과장">과장</option>
+                                                    <option value="과장">차장</option>
+                                                    <option value="부장">부장</option>
+                                                    <option value="대표">대표</option>
+                                                </select>
+
+                                                <select name="" id="">
+                                                    <option value="" selected disabled>직급</option>
+                                                    <option value="팀원">팀원</option>
+                                                    <option value="파트장">파트장</option>
+                                                    <option value="부팀장">부팀장</option>
+                                                    <option value="팀장">팀장</option>
+                                                </select>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">입사일</td>
+                                        <td colspan="3">
+                                            <label for=""
+                                                >상태 및 기간
+                                                <select name="" id="" class="" style="margin: 0 8px 0 28px">
+                                                    <option value="" selected disabled>선택</option>
+                                                    <option value="재직">재직</option>
+                                                    <option value="휴직">휴직</option>
+                                                    <option value="퇴사">퇴사</option>
+                                                </select>
+                                            </label>
+                                            <label for="before_date"
+                                                ><input
+                                                    type="date"
+                                                    name="before_date"
+                                                    value="2024-04-20"
+                                                    id="before_date"
+                                                    class="info_date"
+                                                    size="11"
+                                                    maxlength="10"
+                                            /></label>
+                                            <small>~</small>
+                                            <label for="today_date"
+                                                ><input
+                                                    type="date"
+                                                    name="today_date"
+                                                    value=""
+                                                    id="today_date"
+                                                    class="info_date"
+                                                    size="11"
+                                                    maxlength="10"
+                                            /></label>
+
+                                            <input type="text" value="2년 2개월 근속" readonly size="16" style="margin-left: 8px" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">채용구분</td>
+                                        <td colspan="3">
+                                            <label for="">
+                                                <select name="" id="">
+                                                    <option value="" selected disabled>선택</option>
+                                                    <option value="경력">경력</option>
+                                                    <option value="신입">신입</option>
+                                                </select>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">생년원일</td>
+                                        <td colspan="3">
+                                            <select name="" id="" style="margin-right: 8px">
+                                                <option value="" selected disabled>선택</option>
+                                                <option value="양력">양력</option>
+                                                <option value="음력">음력</option>
+                                            </select>
+                                            <label for="birth"
+                                                ><input
+                                                    type="date"
+                                                    name="birth"
+                                                    value="1996-11-22"
+                                                    id="today_date"
+                                                    class="birth_date"
+                                                    size="11"
+                                                    maxlength="10" />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">이메일</td>
+                                        <td>
+                                            <input type="email" value="sueunlee@group-d.co.kr" size="34" />
+                                        </td>
+                                        <td class="add_emp_title">부서 이메일</td>
+                                        <td>
+                                            <input type="email" value="design1@group-d.co.kr" size="34" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">휴대폰 번호</td>
+                                        <td>
+                                            <input type="tel" value="010-5550-6640" size="34" />
+                                        </td>
+                                        <td class="add_emp_title">업무폰 번호</td>
+                                        <td>
+                                            <input type="tel" value="010-1111-1111" size="34" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">주소</td>
+                                        <td colspan="3" class="post_wrap">
+                                            <input type="text" id="sample6_postcode" placeholder="우편번호" />
+                                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색" />
+                                            <input type="text" id="sample6_address" placeholder="주소" /><br />
+                                            <input type="text" id="sample6_detailAddress" placeholder="상세주소" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3" class="add_emp_title">개인정보</td>
+                                        <td colspan="3">
+                                            <label for="">
+                                                <span>급여 지급 방법</span>
+                                                <select name="" class="">
+                                                    <option value="" selected disabled>선택</option>
+                                                    <option value="계좌">계좌</option>
+                                                    <option value="기타">기타</option>
+                                                </select>
+                                            </label>
+                                            <label for="">
+                                                <span class="sub_span">은행</span>
+                                                <input type="text" class="bank_box" />
+                                            </label>
+                                            <label for="">
+                                                <span class="sub_span">계좌번호</span>
+                                                <input type="text" />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <label for="">
+                                                <span>가족사항</span>
+                                                <select name="" id="">
+                                                    <option value="" selected disabled>선택</option>
+                                                    <option value="미혼">미혼</option>
+                                                    <option value="기혼">기혼</option>
+                                                </select>
+                                            </label>
+                                            <label for="">
+                                                <span class="sub_span">주민번호</span>
+                                                <input type="text" />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="radio_wrap">
+                                            <span> 게시판 사용<br />가능 여부 </span>
+                                            <label> <input type="radio" name="board" checked />사용가능 </label>
+                                            <label> <input type="radio" name="board" />사용중지 </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">메모</td>
+                                        <td colspan="3" style="padding: 18px 22px">
+                                            <textarea name="" id="" placeholder="입사 00시기 팀장 진급 현재 직무 홈페이지 위주건 진행"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="add_emp_file">
+                            <h3>사원 관련 서류</h3>
+                            <table cellspacing="0">
+                                <tbody>
+                                    <!-- <tr>
+                                    <td class="add_emp_title">
+                                        통장사본
+                                    </td>
+                                    <td>
+                                        <div class="file_preview_box">
+                                            <img src="#" alt="" class="file_preview1">
+                                        </div>
+                                        <input type="file" name="emp_file1[]" class="emp_file1" />
+                                    </td>
+                                    <td class="add_emp_title">가족관계증명서</td>
+                                    <td>
+                                        <div class="file_preview_box">
+                                            <img src="#" alt="" class="file_preview2">
+                                        </div>
+                                        <input type="file" name="emp_file2[]" class="emp_file2" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="add_emp_title">사원 프로필 사진</td>
+                                    <td>
+                                        <div class="file_preview_box">
+                                            <img src="#" alt="" class="file_preview3">
+                                        </div>
+                                        <input type="file" name="emp_file3[]" class="emp_file3 profile" />
+                                    </td>
+                                    <td class="add_emp_title">이외 자료</td>
+                                    <td>
+                                        <div class="file_preview_box">
+                                            <img src="#" alt="" class="file_preview4">
+                                        </div>
+                                        <input type="file" name="emp_file4[]" class="emp_file4" />
+                                    </td>
+                                </tr> -->
+                                    <tr class="add_bm_file01">
+                                        <td class="add_emp_title">통장사본</td>
+                                        <td class="add_bm_con">
+                                            <div>
+                                                <input type="file" name="" id="bm_file01" multiple />
+                                                <label class="bm_file_btn" for="bm_file01">파일선택</label>
+                                                <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            </div>
+                                        </td>
+                                        <td class="add_emp_title">가족관계증명서</td>
+                                        <td class="add_bm_con">
+                                            <div>
+                                                <input type="file" name="" id="bm_file02" multiple />
+                                                <label class="bm_file_btn" for="bm_file02">파일선택</label>
+                                                <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="add_bm_file01">
+                                        <td class="add_emp_title">사원 프로필 사진</td>
+                                        <td class="add_bm_con">
+                                            <div>
+                                                <input type="file" name="" id="bm_file01" multiple />
+                                                <label class="bm_file_btn" for="bm_file01">파일선택</label>
+                                                <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            </div>
+                                        </td>
+                                        <td class="add_emp_title">이외 자료</td>
+                                        <td class="add_bm_con">
+                                            <div>
+                                                <input type="file" name="" id="bm_file02" multiple />
+                                                <label class="bm_file_btn" for="bm_file02">파일선택</label>
+                                                <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="add_emp_btn_wrap">
+                            <input type="button" value="저장" class="add_emp_btn" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="add_emp_file">
-                <h3>사원 관련 서류</h3>
-                <table cellspacing="0">
-                    <tbody>
-                        <tr>
-                            <td class="add_emp_title">1</td>
-                            <td>2</td>
-                            <td class="add_emp_title">3</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td class="add_emp_title">5</td>
-                            <td>6</td>
-                            <td class="add_emp_title">7</td>
-                            <td>8</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="add_emp_btn_wrap">
-                <input type="button" value="저장" class="add_emp_btn" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
+    </body>
+
+    <!-- 사원 등록 Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/ems/add_employees.js"></script>
+    </th:block>
+</html>
