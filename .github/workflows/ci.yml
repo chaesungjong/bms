@@ -9,7 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK
@@ -18,9 +17,14 @@ jobs:
           java-version: '17'  # 사용하는 JDK 버전에 맞게 수정
           distribution: 'temurin'
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew  # 이 부분은 gradlew 파일이 있는 디렉토리에서 실행되어야 합니다.
+        run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew clean build -x test  # 또는 전체 경로를 사용: 프로젝트 루트 디렉토리/gradlew clean build -x test
+        run: ./gradlew clean build -x test  # 테스트 제외하고 빌드
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact  # 아티팩트 이름 설정 (build/libs 대신)
+          path: build/libs/ROOT.war  # ROOT.war 파일 경로 지정
 
   deploy:
     needs: build
@@ -30,7 +34,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: build/libs
+          name: build-artifact  # 아티팩트 이름 일치시킴
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.1
         with:
