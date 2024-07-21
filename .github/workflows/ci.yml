@@ -55,3 +55,4 @@ jobs:
             sudo /tomcat/bin/shutdown.bat  # 톰캣 종료
             sleep 6  # 6초 대기
             sudo /tomcat/bin/startup.bat  # 톰캣 시작
+            
