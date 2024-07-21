@@ -25,6 +25,7 @@ jobs:
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
+          local-dir: build/libs/
           server-dir: /tomcat/webapps-javaee/  # 변경된 서버 디렉토리
           clean-destination-dir: false  # 기존 파일 삭제하지 않음
       - name: Shutdown and Restart Tomcat
