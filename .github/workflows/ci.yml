@@ -39,3 +39,45 @@ jobs:
           local-dir: build/libs/
           server-dir: /www/webapps/ROOT  # Cafe24 웹 루트 디렉토리
           clean-destination-dir: false  # 기존 파일 삭제하지 않음
+
+
+name: Deploy to Cafe24 Tomcat
+
+on:
+  push:
+    branches:
+      - main  # 배포할 브랜치 지정
+
+jobs:
+  build:
+    # ... (build 단계는 동일)
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build/libs
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.1
+        with:
+          host: gdbmsdev.cafe24.com
+          port: 21
+          username: gdbmsdev
+          password: ${{ secrets.SSH_PASSWORD }}
+          server-dir: /tomcat/webapps-javaee/  # 변경된 서버 디렉토리
+          clean-destination-dir: false  # 기존 파일 삭제하지 않음
+      - name: Shutdown and Restart Tomcat
+        uses: appleboy/ssh-action@master
+        with:
+          host: gdbmsdev.cafe24.com
+          port: 21
+          username: gdbmsdev
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            sudo /tomcat/bin/shutdown.bat  # 톰캣 종료
+            sleep 6  # 6초 대기
+            sudo /tomcat/bin/startup.bat  # 톰캣 시작
