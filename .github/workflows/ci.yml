@@ -1,5 +1,4 @@
 name: Deploy to Tomcat
-
 on:
   push:
     branches:
@@ -29,17 +28,14 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: build/libs  # Gradle 빌드 결과물 디렉토리
-      - name: Deploy to Tomcat
-        uses: appleboy/ssh-action@master
+          name: build/libs
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.1
         with:
           host: gdbmsdev.cafe24.com
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            sudo service tomcat stop
-            sudo rm -rf /usr/local/tomcat/webapps/ROOT  # 기존 ROOT 디렉토리 삭제
-            sudo rm -rf /usr/local/tomcat/webapps/ROOT.war  # 기존 ROOT.war 파일 삭제
-            sudo unzip -qq build/libs/*.war -d /usr/local/tomcat/webapps/ROOT  # ROOT 디렉토리에 압축 해제
-            sudo service tomcat start
+          local-dir: build/libs/
+          server-dir: /www/webapps/ROOT  # Cafe24 웹 루트 디렉토리
+          clean-destination-dir: false  # 기존 파일 삭제하지 않음
