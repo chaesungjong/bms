@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('.side_menu > li > a').click(function (e) {
         e.preventDefault();
         $(this).toggleClass('open');
@@ -36,4 +37,20 @@ $(document).ready(function () {
             alert('현재 기능 개발 준비중 입니다.');
         });
     });
+
+    // 현재 URL 가져오기
+    var currentUrl = window.location.pathname; 
+
+    // 모든 메뉴 항목에서 "active" 클래스 제거
+    $('.side_menu a').removeClass('active');
+
+    // URL에서 첫 번째 경로 부분 추출 (path1)
+    var path1 = currentUrl.split('/')[1]; 
+
+    // 해당 id를 가진 메뉴 항목 찾기
+    var targetMenuItem = $('#side_' + path1);
+
+    // 찾은 메뉴 항목 클릭 이벤트 트리거
+    targetMenuItem.trigger('click');
+
 });
