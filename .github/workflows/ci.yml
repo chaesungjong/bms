@@ -43,15 +43,14 @@ jobs:
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
           server-dir: /tomcat/webapps-javaee/
-          # clean-destination-dir: false  # 더 이상 사용되지 않음 (필요 없으면 제거)
       - name: Shutdown and Restart Tomcat
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v2 # v2 버전 사용
         with:
           server: gdbmsdev.cafe24.com
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            sudo /tomcat/bin/shutdown.bat  # 톰캣 종료
+            sudo /tomcat/bin/shutdown.sh  # 톰캣 종료 (.sh 스크립트 사용)
             sleep 6  # 6초 대기
-            sudo /tomcat/bin/startup.bat  # 톰캣 시작
+            sudo /tomcat/bin/startup.sh  # 톰캣 시작 (.sh 스크립트 사용)
