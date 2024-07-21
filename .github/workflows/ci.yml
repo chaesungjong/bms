@@ -25,7 +25,7 @@ jobs:
         with:
           name: build-artifact  # 아티팩트 이름 설정 (build/libs 대신)
           path: build/libs/ROOT.war  # ROOT.war 파일 경로 지정
-          
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.3.1  # 액션 버전 확인 (최신 버전 사용 권장)
         with:
-          host: gdbmsdev.cafe24.com
+          server: gdbmsdev.cafe24.com
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
@@ -48,7 +48,7 @@ jobs:
       - name: Shutdown and Restart Tomcat
         uses: appleboy/ssh-action@master
         with:
-          host: gdbmsdev.cafe24.com
+          server: gdbmsdev.cafe24.com
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
