@@ -2,20 +2,28 @@ package com.groupd.bms.util;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.groupd.bms.model.Member;
+import com.groupd.bms.model.MemberLogin;
+import com.groupd.bms.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.HashMap;
 
 @Slf4j
 public class BmsInterceptor implements HandlerInterceptor {
 
 
     private static final String[] LOGIN_CHECK_EXCLUDE_PATHS = {"/acm/login","/","/error","/acm/loginProcess.do" };
+
+    @Autowired
+    private UserService userService;
 
     /*
      * preHandle은 컨트롤러가 실행되기 전에 실행되는 메소드
@@ -40,17 +48,68 @@ public class BmsInterceptor implements HandlerInterceptor {
 
         // 세션 체크 로직
         if (!Arrays.asList(LOGIN_CHECK_EXCLUDE_PATHS).contains(request.getRequestURI())) {
-
+            
+            // 로그인이 되어있지 않은 상태
              if (request.getSession().getAttribute("member") == null) {
-                 log.debug("No session found, redirecting to login page.");
+
+                 // 쿠키에 아이디 비밀번호가 있으면 로그인 시도
+                if(request.getCookies() != null){
+
+                    String autoLogin = "";              // 자동 로그인 여부
+                    String userID    = "";              // 아이디
+                    String password    = "";            // 비밀번호
+
+
+                    // 쿠키에서 아이디, 비밀번호, 자동 로그인 여부를 가져옴
+                    for (int i = 0; i < request.getCookies().length; i++) {
+                        
+                        // 자동 로그인 쿠키가 있는지 확인
+                        if(request.getCookies()[i].getName().equals("autoLogin")){
+                            autoLogin = request.getCookies()[i].getValue();
+                        }
+
+                        // 아이디 쿠키가 있는지 확인
+                        if(request.getCookies()[i].getName().equals("userId")){
+                            userID = request.getCookies()[i].getValue();
+                        }
+
+                        // 비밀번호 쿠키가 있는지 확인
+                        if(request.getCookies()[i].getName().equals("pw")){
+                            password = request.getCookies()[i].getValue();
+                        }
+                        
+                    }
+
+                    // 자동 로그인 쿠키가 있으면 로그인 시도
+                    if(autoLogin.equals("true") && !userID.equals("") && !password.equals("")){
+
+                        // 로그인 시도
+                        HashMap<String, Object> loginResultMap = userService.login(new MemberLogin(userID, SHA256Util.hashWithSHA256(password), Util.getUserIP(request), "BMS"));
+
+                        // 로그인 성공 시 세션에 회원 정보를 저장
+                        if (loginResultMap != null && loginResultMap.get("retVal").equals("0") && loginResultMap.get("member") != null){
+
+                            setMember(request);
+                            return true; 
+
+                        }
+                    }
+                }
+
                  response.sendRedirect("/acm/login");
                  return false; // 현재 요청을 중지하고 로그인 페이지로 리다이렉트
-             }else{
-                Member member = (Member) request.getSession().getAttribute("member");
-                log.debug("Session found, member: " + member.toString());
-                request.setAttribute("member", member);
-                
              }
+
+             setMember(request);
+
+         }else{
+            // 로그인이 되어있지 않은 상태
+            if (request.getSession().getAttribute("member") != null) {
+                
+                setMember(request);
+                response.sendRedirect("/dsb/main");
+                return false; // 현재 요청을 중지하고 메인 페이지로 리다이렉트
+            }
 
          }
 
@@ -97,6 +156,17 @@ public class BmsInterceptor implements HandlerInterceptor {
             log.error("Request processing error", ex);
         }
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+    }
+
+
+    /*
+     * setMember는 세션에 저장된 회원 정보를 request에 저장
+     * @param request
+     * @return void
+     */
+    private void setMember(HttpServletRequest request) {
+        Member member = (Member) request.getSession().getAttribute("member");
+        request.setAttribute("member", member);
     }
 
 }
