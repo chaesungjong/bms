@@ -1,17 +1,67 @@
 /*
  * csf/add_business_management.html 연동 스크립트 영역
  */
-document.addEventListener('DOMContentLoaded', function () {
-    const radioButtons = document.querySelectorAll('input[type="radio"]');
 
-    radioButtons.forEach((radio) => {
-        radio.addEventListener('click', function (e) {
-            if (this.previousChecked) {
-                this.checked = false;
-            }
-            this.previousChecked = this.checked;
+$(document).ready(function () {
+
+    const fileTarget = $('.add_bm_file input');
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+    
+        radioButtons.forEach((radio) => {
+            radio.addEventListener('click', function (e) {
+                if (this.previousChecked) {
+                    this.checked = false;
+                }
+                this.previousChecked = this.checked;
+            });
         });
     });
+
+    fileTarget.on('change', function () {
+        var files = $(this)[0].files;
+        var fileArr = [];
+        for (var i = 0; i < files.length; i++) {
+            fileArr.push(files[i].name);
+        }
+
+        var fileList = fileArr.join('<br>');
+        $(this).siblings('.bm_file_text').html(fileList);
+    });
+
+    // 등록 하기 버튼
+    $("#Registration").click(function () {
+
+        let form = document.getElementById('frmSubmit');
+        let inputs = form.querySelectorAll('input[required], select[required]');
+        let allFilled = true;
+
+        for (let input of inputs) {
+            if (!input.value.trim()) {
+                allFilled = false;
+                alert(input.placeholder + " 를 입력해주세요.");
+                break; // exit the loop if a required field is empty
+            }
+        }
+
+
+        const formData = new FormData(form);
+        const jsonObject = Object.fromEntries(formData.entries());
+
+        console.log(jsonObject);
+
+        if (allFilled) {
+            // ajaxRequest 함수를 사용하여 로그인 처리
+            ajaxRequest("/csf/Registration.do", jsonObject, "POST", function (response) {
+                alert(response.retMsg);
+            }, function () {
+                alert('현재 기능 개발 준비중 입니다.');
+            });
+        }
+    });
+
+    
 });
 
 function bm_execDaumPostcode() {
@@ -23,38 +73,9 @@ function bm_execDaumPostcode() {
             } else {
                 addr = data.jibunAddress;
             }
-            document.getElementById('bm_postcode').value = data.zonecode;
-            document.getElementById('bm_address').value = addr;
-            document.getElementById('bm_detailAddress').focus();
+            document.getElementById('postNo').value = data.zonecode;
+            document.getElementById('address').value = addr;
+            document.getElementById('addressDesc').focus();
         },
     }).open();
 }
-
-function bm_execDaumPostcode() {
-    new daum.Postcode({
-        oncomplete: function (data) {
-            var addr = '';
-            if (data.userSelectedType === 'R') {
-                addr = data.roadAddress;
-            } else {
-                addr = data.jibunAddress;
-            }
-            document.getElementById('bm_postcode').value = data.zonecode;
-            document.getElementById('bm_address').value = addr;
-            document.getElementById('bm_detailAddress').focus();
-        },
-    }).open();
-}
-
-const fileTarget = $('.add_bm_file input');
-
-fileTarget.on('change', function () {
-    var files = $(this)[0].files;
-    var fileArr = [];
-    for (var i = 0; i < files.length; i++) {
-        fileArr.push(files[i].name);
-    }
-
-    var fileList = fileArr.join('<br>');
-    $(this).siblings('.bm_file_text').html(fileList);
-});
