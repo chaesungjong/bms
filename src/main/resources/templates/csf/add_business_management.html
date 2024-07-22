@@ -109,17 +109,15 @@
                                                 <div class="add_bm_plan01">
                                                     <span>블로그/디자인</span>
                                                     <th:block th:each="plan : ${contractPlans}">
-                                                        <label for="bm_plan01" th:text="${plan['codeName']}">
-                                                            <input type="radio" th:name="contractPlanPDesign" th:id="${plan['code']}" class="bm_plan01" th:value="${plan['code']}" />
-                                                        </label>
+                                                        <input type="radio" th:name="contractPlanPDesign" th:id="${plan['code']}" class="bm_plan01" th:value="${plan['code']}" />
+                                                        <label for="bm_plan01" th:text="${plan['codeName']}"></label>
                                                     </th:block>
                                                 </div>
                                                 <div class="add_bm_plan02">
                                                     <span>영상</span>
                                                     <th:block th:each="plan : ${contractPlans}">
-                                                        <label for="bm_plan04" th:text="${plan['codeName']}">
-                                                            <input type="radio" th:name="contractPlanVideo" th:id="${plan['code']}" class="bm_plan04" th:value="${plan['code']}" />
-                                                        </label>
+                                                        <input type="radio" th:name="contractPlanVideo" th:id="${plan['code']}" class="bm_plan04" th:value="${plan['code']}" />
+                                                        <label for="bm_plan04" th:text="${plan['codeName']}"></label>
                                                     </th:block>
                                                 </div>
                                             </div>
@@ -142,13 +140,7 @@
                             </table>
                         </div>
                         <div class="add_bm_acc">
-                            <h3>
-                                업체 계정 정보
-                                <!--<div class="bm_acc_count">
-                                    <button class="bm_acc_countdown" type="button"><img src="/img/countdown.svg" alt="다운" /></button>
-                                    <button class="bm_acc_countup" type="button"><img src="/img/countup.svg" alt="업" /></button>
-                                </div> -->
-                            </h3>
+                            <h3> 업체 계정 정보 </h3>
                             <table cellspacing="0">
                                 <tbody>
                                     <th:block th:each="sns : ${snsTypeList}">

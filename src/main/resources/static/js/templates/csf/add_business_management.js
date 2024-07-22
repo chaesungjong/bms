@@ -4,6 +4,13 @@
 
 $(document).ready(function () {
 
+    $("#siteDomainExpdt").val(getTodayDate());
+    $("#siteHostingExpdt").val(getTodayDate());
+    
+    $("#contractSdate").val(getTodayDate());
+    $("#contractEdate").val(getTodayDate());
+
+
     const fileTarget = $('.add_bm_file input');
 
     document.addEventListener('DOMContentLoaded', function () {
