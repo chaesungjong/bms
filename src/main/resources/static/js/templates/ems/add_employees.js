@@ -1,6 +1,22 @@
 /*
  * ems/add_employees.html 연동 스크립트 영역
  */
+$(document).ready(function () {
+
+    $('.profile').change(function () {
+        readURL(this);
+    });
+
+    $('.bank_box, .name_box').keyup(function (event) {
+        regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+        v = $(this).val();
+        if (regexp.test(v)) {
+            alert('한글만 입력가능 합니다.');
+            $(this).val(v.replace(regexp, ''));
+        }
+    });
+    
+});
 // 첨부파일 이미지 띄우기
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -14,10 +30,6 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-$('.profile').change(function () {
-    readURL(this);
-});
 
 const realUpload = document.querySelector('.real_upload');
 const upload = document.querySelector('.upload');
@@ -45,17 +57,6 @@ function categoryChange(e) {
     }
 }
 
-//은행 , 이름입력
-$(function () {
-    $('.bank_box, .name_box').keyup(function (event) {
-        regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
-        v = $(this).val();
-        if (regexp.test(v)) {
-            alert('한글만 입력가능 합니다.');
-            $(this).val(v.replace(regexp, ''));
-        }
-    });
-});
 
 // 날짜
 window.onload = function () {
