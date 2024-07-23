@@ -40,7 +40,6 @@ public class EmployeeManagementSystemController extends BaseController{
      */
     @GetMapping("/add_employees")
     public String add_employees(HttpServletRequest request, Model model) {
-        logger.debug("Detailed debug information");
 
         //서명 리스트 불러오기
         List<Map<String, Object>> departNameList = enterpriseService.codeMgtViewSiteState("LIST", "departName", "","");
