@@ -74,11 +74,17 @@ public class EnterpriseService {
 
     /**
      * 업체 코드관리를 한다.
-     * 
-     * @param requestHashMap
      */
-    public List<Map<String, Object>> codeMgtViewSiteState(HashMap<String, Object> requestHashMap) {
-        List<Map<String, Object>> reList = enterpriseRepository.codeMgtViewSiteState(requestHashMap);
+    public List<Map<String, Object>> codeMgtViewSiteState(String gubun, String codeGubun, String code, String codeName) {
+
+        HashMap<String, Object> getStateCode = new HashMap<>();
+
+        getStateCode.put("gubun", gubun);
+        getStateCode.put("codeGubun", codeGubun);
+        getStateCode.put("code", code);
+        getStateCode.put("codeName", codeName);
+
+        List<Map<String, Object>> reList = enterpriseRepository.codeMgtViewSiteState(getStateCode);
         return reList;
     }
 }
