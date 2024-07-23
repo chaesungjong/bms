@@ -36,35 +36,27 @@
                                             <label for=""
                                                 >부서 / 팀 / 직위 / 직급
                                                 <select name="" onchange="categoryChange(this)" class="team_wrap">
-                                                    <option value="" selected disabled>부서</option>
-                                                    <option value="관리">관리</option>
-                                                    <option value="광고관리">광고관리</option>
-                                                    <option value="디자인">디자인</option>
-                                                    <option value="미디어제작">미디어제작</option>
-                                                    <option value="마케팅">마케팅</option>
-                                                    <option value="재무">재무</option>
+                                                    <th:block th:each="departName : ${departNameList}">
+                                                        <option th:value="${departName['code']}" th:text="${departName['codeName']}"></option>
+                                                    </th:block> 
                                                 </select>
 
                                                 <select name="" id="team_count">
-                                                    <option value="" selected disabled>팀</option>
+                                                    <th:block th:each="teamName : ${teamNameList}">
+                                                        <option th:value="${teamName['code']}" th:text="${teamName['codeName']}"></option>
+                                                    </th:block> 
                                                 </select>
 
                                                 <select name="" id="">
-                                                    <option value="" selected disabled>직위</option>
-                                                    <option value="사원">사원</option>
-                                                    <option value="대리">대리</option>
-                                                    <option value="과장">과장</option>
-                                                    <option value="과장">차장</option>
-                                                    <option value="부장">부장</option>
-                                                    <option value="대표">대표</option>
+                                                    <th:block th:each="jobPosition : ${jobPositionList}">
+                                                        <option th:value="${jobPosition['code']}" th:text="${jobPosition['codeName']}"></option>
+                                                    </th:block> 
                                                 </select>
 
                                                 <select name="" id="">
-                                                    <option value="" selected disabled>직급</option>
-                                                    <option value="팀원">팀원</option>
-                                                    <option value="파트장">파트장</option>
-                                                    <option value="부팀장">부팀장</option>
-                                                    <option value="팀장">팀장</option>
+                                                    <th:block th:each="jobTitle : ${jobTitleList}">
+                                                        <option th:value="${jobTitle['code']}" th:text="${jobTitle['codeName']}"></option>
+                                                    </th:block> 
                                                 </select>
                                             </label>
                                         </td>
@@ -75,10 +67,9 @@
                                             <label for=""
                                                 >상태 및 기간
                                                 <select name="" id="" class="" style="margin: 0 8px 0 28px">
-                                                    <option value="" selected disabled>선택</option>
-                                                    <option value="재직">재직</option>
-                                                    <option value="휴직">휴직</option>
-                                                    <option value="퇴사">퇴사</option>
+                                                    <th:block th:each="jobStatus : ${jobStatusList}">
+                                                        <option th:value="${jobStatus['code']}" th:text="${jobStatus['codeName']}"></option>
+                                                    </th:block> 
                                                 </select>
                                             </label>
                                             <label for="before_date"
@@ -111,9 +102,9 @@
                                         <td colspan="3">
                                             <label for="">
                                                 <select name="" id="">
-                                                    <option value="" selected disabled>선택</option>
-                                                    <option value="경력">경력</option>
-                                                    <option value="신입">신입</option>
+                                                    <th:block th:each="hireType : ${hireTypeList}">
+                                                        <option th:value="${hireType['code']}" th:text="${hireType['codeName']}"></option>
+                                                    </th:block> 
                                                 </select>
                                             </label>
                                         </td>
@@ -122,9 +113,9 @@
                                         <td class="add_emp_title">생년원일</td>
                                         <td colspan="3">
                                             <select name="" id="" style="margin-right: 8px">
-                                                <option value="" selected disabled>선택</option>
-                                                <option value="양력">양력</option>
-                                                <option value="음력">음력</option>
+                                                <th:block th:each="calendarType : ${calendarTypeList}">
+                                                    <option th:value="${calendarType['code']}" th:text="${calendarType['codeName']}"></option>
+                                                </th:block> 
                                             </select>
                                             <label for="birth"
                                                 ><input
@@ -173,9 +164,9 @@
                                             <label for="">
                                                 <span>급여 지급 방법</span>
                                                 <select name="" class="">
-                                                    <option value="" selected disabled>선택</option>
-                                                    <option value="계좌">계좌</option>
-                                                    <option value="기타">기타</option>
+                                                    <th:block th:each="payGiveType : ${payGiveTypeList}">
+                                                        <option th:value="${payGiveType['code']}" th:text="${payGiveType['codeName']}"></option>
+                                                    </th:block> 
                                                 </select>
                                             </label>
                                             <label for="">
@@ -193,9 +184,9 @@
                                             <label for="">
                                                 <span>가족사항</span>
                                                 <select name="" id="">
-                                                    <option value="" selected disabled>선택</option>
-                                                    <option value="미혼">미혼</option>
-                                                    <option value="기혼">기혼</option>
+                                                    <th:block th:each="marriedType : ${marriedTypeList}">
+                                                        <option th:value="${marriedType['code']}" th:text="${marriedType['codeName']}"></option>
+                                                    </th:block> 
                                                 </select>
                                             </label>
                                             <label for="">
