@@ -1,0 +1,393 @@
+.dw_wrap {
+    padding: 40px;
+    width: 100%;
+}
+.dw_wrap > h2 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 17px;
+}
+.dw_board {
+    border-radius: 20px;
+    box-shadow: 0px 16px 36px rgba(27, 28, 83, 0.12);
+    overflow: hidden;
+}
+.dw_board_top {
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    padding: 15px 24px;
+    align-items: center;
+    border-top: 1px solid #dddddd;
+    justify-content: space-between;
+}
+.dw_board_date {
+    display: flex;
+    align-items: center;
+}
+.dw_board_date > label {
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 0px 12px;
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+}
+.dw_board_date input {
+    border: none;
+    height: 48px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+.dw_board_date > span {
+    font-size: 20px;
+    font-weight: 400;
+    color: #999;
+    margin: 0px 12px;
+}
+
+.dw_board_search {
+    display: flex;
+    margin: 0px 12px;
+    align-items: center;
+}
+.dw_board_search select {
+    height: 48px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+    width: 200px;
+    padding: 0px 16px;
+}
+.dw_board_search label {
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 0px 0px 0px 12px;
+    display: flex;
+    width: 280px;
+    justify-content: space-between;
+    margin-left: 4px;
+    overflow: hidden;
+}
+#sch_word {
+    border: none;
+    height: 48px;
+    width: 73%;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+.sch_btn {
+    background: url(../img/sch_btn.svg) #4446a9 no-repeat center center;
+    border: none;
+    color: transparent;
+    width: 60px;
+    height: 48px;
+    cursor: pointer;
+}
+.dw_board_btn {
+    display: flex;
+    align-items: center;
+}
+.dw_board_refrash {
+    padding: 11px 12px;
+    background-color: #cbcbcb;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+.dw_board_mybtn {
+    padding: 0px 19px;
+    line-height: 44px;
+    background-color: #cbcbcb;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    margin-left: 12px;
+}
+.dw_reg {
+    margin-left: 10px;
+    display: inline-block;
+    background-color: #4446a9;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 40px;
+    padding: 0px 16px;
+}
+.dw_guide {
+    display: inline-block;
+    background-color: #333333;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 40px;
+    padding: 0px 16px;
+}
+
+/* dw_board_table */
+.dw_board_table {
+    width: 100%;
+    text-align: center;
+    padding: 0px 24px;
+    background-color: #fff;
+}
+.dw_board_th {
+    background-color: #f6f6f6;
+    line-height: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+.dw_board_th th {
+    border-collapse: collapse;
+    padding: 0;
+}
+.dw_board_td {
+    background-color: #fff;
+    line-height: 130%;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+.dw_board_td tr {
+    height: 75px;
+}
+.dw_board_table td,
+.dw_board_table th {
+    border-right: 1px solid #ddd;
+    padding: 0;
+    border-bottom: 1px solid #ddd;
+}
+.dw_board_table td:last-child,
+.dw_board_table th:last-child {
+    border-right: none;
+}
+.main_board_wrstate {
+    /* width: 60px; */
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 999px;
+    line-height: 25px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #dddddd;
+    padding: 0px 16px;
+}
+.dw_wr_state .state_hold {
+    background-color: #fff;
+    color: #333;
+}
+.dw_wr_state .state_plan {
+    background-color: #ff8800;
+    color: #fff;
+}
+.dw_wr_state .state_progress {
+    background-color: #39aa4c;
+    color: #fff;
+}
+.dw_wr_state .state_design {
+    background-color: #2d4bb6;
+    color: #fff;
+}
+.dw_wr_state .state_edit {
+    background-color: #dddddd;
+    color: #333;
+}
+.dw_wr_state .state_editend {
+    background-color: #844a29;
+    color: #fff;
+}
+.dw_wr_state .state_setting {
+    background-color: #3e3c3c;
+    color: #fff;
+}
+.state_select {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+    background: #fff;
+    z-index: 1;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #b1b1b1;
+}
+.state_select span {
+    padding: 0px 16px;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 999px;
+    line-height: 25px;
+    cursor: pointer;
+    margin: 4px 0px;
+    border: 1px solid #dddddd;
+}
+.state_progress {
+    display: inline-block;
+    font-weight: 500;
+    color: #fff;
+    line-height: 30px;
+    background-color: #3a75bb;
+    border: 1px solid #dddddd;
+    padding: 0px 16px;
+    border-radius: 999px;
+}
+.dw_cont_ing {
+    display: inline-block;
+    font-weight: 500;
+    color: #39aa4c;
+    line-height: 30px;
+    background-color: #f2f2f2;
+    border: 1px solid #dddddd;
+    padding: 0px 16px;
+    border-radius: 999px;
+}
+.dw_wr_cdate {
+    font-weight: 300;
+    color: #333;
+}
+.dw_wr_etc {
+    color: #000;
+}
+/* 페이징 */
+.pg_wrap {
+    background-color: #fff;
+    text-align: center;
+    padding: 46px 0px 35px;
+}
+.pg {
+    display: inline-block;
+}
+.pg_page,
+.pg_current {
+    color: #333;
+    display: inline-block;
+    float: left;
+    width: 32px;
+    line-height: 32px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+}
+.pg a:focus,
+.pg a:hover {
+    background-color: #f3f3f3;
+}
+.pg_page {
+    background: #f2f2f2;
+    text-decoration: none;
+}
+.pg_start {
+    background: url(../img/page_1.svg) #f2f2f2 50% 50% no-repeat;
+    width: 32px;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    margin-right: 4px;
+}
+.pg_prev {
+    background: url(../img/page_2.svg) #f2f2f2 50% 50% no-repeat;
+    width: 32px;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    margin-right: 16px;
+}
+.pg_next {
+    background: url(../img/page_3.svg) #f2f2f2 50% 50% no-repeat;
+    width: 32px;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    margin-left: 16px;
+}
+.pg_end {
+    background: url(../img/page_4.svg) #f2f2f2 50% 50% no-repeat;
+    width: 32px;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    margin-left: 4px;
+}
+.pg_current {
+    display: inline-block;
+    background: #4446a9;
+    color: #fff;
+}
+.design_board_title {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 16px 14px 28px;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+}
+.design_board_title h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+.design_board_type {
+    background-color: #f2f2f2;
+    border-radius: 999px;
+    padding: 3px 4px;
+    display: flex;
+}
+.design_board_type > span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #999;
+    line-height: 39px;
+    display: inline-block;
+    padding: 0px 20px;
+    cursor: pointer;
+    border-radius: 999px;
+}
+.design_board_type > span.active {
+    background-color: #4446a9;
+    color: #fff;
+}
+.design_board_type > span > span {
+    margin-left: 10px;
+}
+.dw_board_top_left {
+    display: flex;
+}
+.dw_wr_btn_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dw_wr_btn_wrap > a {
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dw_wr_edit {
+    margin-right: 8px;
+}
