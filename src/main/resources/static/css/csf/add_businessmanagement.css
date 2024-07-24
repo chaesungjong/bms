@@ -161,7 +161,7 @@
     background-color: #fff;
     cursor: pointer;
 }
-#bm_postcode {
+#postNo {
     font-size: 16px;
     font-weight: 400;
     color: #999;
@@ -185,7 +185,7 @@
     margin-right: 16px;
     cursor: pointer;
 }
-#bm_address {
+#address {
     font-size: 16px;
     font-weight: 400;
     color: #999;
@@ -194,7 +194,7 @@
     border: 1px solid #ddd;
     width: 52%;
 }
-#bm_detailAddress {
+#addressDesc {
     font-size: 16px;
     font-weight: 400;
     color: #333;

@@ -10,13 +10,13 @@ html {
     justify-content: center;
     text-align: center;
 }
-
+#wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+}
 .login_wrap {
     background: white;
-
-    border-radius: 20px;
     width: 650px;
-    overflow: hidden;
 }
 .login_inner {
     padding: 80px 48px 0px;

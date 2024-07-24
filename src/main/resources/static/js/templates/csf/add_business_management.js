@@ -3,19 +3,17 @@
  */
 
 $(document).ready(function () {
+    $('#siteDomainExpdt').val(getTodayDate());
+    $('#siteHostingExpdt').val(getTodayDate());
 
-    $("#siteDomainExpdt").val(getTodayDate());
-    $("#siteHostingExpdt").val(getTodayDate());
-    
-    $("#contractSdate").val(getTodayDate());
-    $("#contractEdate").val(getTodayDate());
-
+    $('#contractSdate').val(getTodayDate());
+    $('#contractEdate').val(getTodayDate());
 
     const fileTarget = $('.add_bm_file input');
 
     document.addEventListener('DOMContentLoaded', function () {
         const radioButtons = document.querySelectorAll('input[type="radio"]');
-    
+
         radioButtons.forEach((radio) => {
             radio.addEventListener('click', function (e) {
                 if (this.previousChecked) {
@@ -38,8 +36,7 @@ $(document).ready(function () {
     });
 
     // 등록 하기 버튼
-    $("#Registration").click(function () {
-
+    $('#Registration').click(function () {
         let form = document.getElementById('frmSubmit');
         let inputs = form.querySelectorAll('input[required], select[required]');
         let allFilled = true;
@@ -47,11 +44,10 @@ $(document).ready(function () {
         for (let input of inputs) {
             if (!input.value.trim()) {
                 allFilled = false;
-                alert(input.placeholder + " 를 입력해주세요.");
+                alert(input.placeholder + ' 를 입력해주세요.');
                 break; // exit the loop if a required field is empty
             }
         }
-
 
         const formData = new FormData(form);
         const jsonObject = Object.fromEntries(formData.entries());
@@ -60,15 +56,19 @@ $(document).ready(function () {
 
         if (allFilled) {
             // ajaxRequest 함수를 사용하여 로그인 처리
-            ajaxRequest("/csf/Registration.do", jsonObject, "POST", function (response) {
-                alert(response.retMsg);
-            }, function () {
-                alert('현재 기능 개발 준비중 입니다.');
-            });
+            ajaxRequest(
+                '/csf/Registration.do',
+                jsonObject,
+                'POST',
+                function (response) {
+                    alert(response.retMsg);
+                },
+                function () {
+                    alert('현재 기능 개발 준비중 입니다.');
+                }
+            );
         }
     });
-
-    
 });
 
 function bm_execDaumPostcode() {
@@ -86,3 +86,18 @@ function bm_execDaumPostcode() {
         },
     }).open();
 }
+document.addEventListener('DOMContentLoaded', (event) => {
+    const blogUp = document.getElementById('blogUp');
+    const blogDown = document.getElementById('blogDown');
+    const cntBlogPos = document.getElementById('cntBlogPos');
+
+    blogUp.addEventListener('click', () => {
+        let currentValue = parseInt(cntBlogPos.value, 10) || 0;
+        cntBlogPos.value = currentValue + 1;
+    });
+
+    blogDown.addEventListener('click', () => {
+        let currentValue = parseInt(cntBlogPos.value, 10) || 0;
+        cntBlogPos.value = Math.max(currentValue - 1, 0); // Prevent negative values
+    });
+});
