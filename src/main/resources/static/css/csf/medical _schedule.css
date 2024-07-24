@@ -1,0 +1,540 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+input {
+    height: 40px;
+    padding: 7px 12px;
+    border: 1px solid #dddddd;
+    outline: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+input[type='radio'] {
+    appearance: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    vertical-align: bottom;
+}
+
+input[type='radio']:checked {
+    border: 4px solid #4446a9;
+}
+
+input[type='checkbox'] {
+    accent-color: #4446a9;
+}
+
+select {
+    border: 1px solid #dddddd;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+}
+
+textarea {
+    resize: none;
+    padding: 7px 12px;
+    width: 100%;
+    height: 500px;
+    border: 1px solid #dddddd;
+    outline: none;
+    font-size: 16px;
+    letter-spacing: -0.25px;
+    line-height: 130%;
+    border-radius: 4px;
+}
+
+button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.required_on::before {
+    content: '* ';
+    color: red;
+    vertical-align: middle;
+}
+
+/* 중복설정 */
+
+.schedule_board_wrap {
+    padding: 40px;
+    width: 100%;
+}
+
+.schedule_board_wrap h2 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 17px;
+}
+
+.schedule_board {
+    border-radius: 20px;
+    box-shadow: 0px 16px 36px rgba(27, 28, 83, 0.12);
+    overflow: hidden;
+    background-color: #fff;
+    padding: 17px 22px;
+    margin-top: 23px;
+}
+
+/* // */
+
+.schedule_board_wrap .top_bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-wrap: nowrap;
+}
+
+.schedule_board_wrap .top_bar .input_wrap,
+.schedule_board_wrap .top_bar .input_wrap .search_wrap {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.schedule_board_wrap .top_bar .input_wrap .date_wrap {
+    margin-right: 12px;
+}
+
+.schedule_board_wrap .top_bar .input_wrap .date_wrap input {
+    width: 200px;
+}
+
+.schedule_board_wrap .top_bar .input_wrap .date_wrap small {
+    margin: 0 12px;
+}
+
+.schedule_board_wrap .top_bar .input_wrap .search_wrap select {
+    margin-right: 4px;
+}
+
+.schedule_board_wrap .top_bar .input_wrap .search_wrap .search_bar {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    width: 274px;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display: none;
+}
+
+.schedule_board_wrap .top_bar .input_wrap .search_wrap .search_bar button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4446a9;
+    width: 55px;
+    height: 100%;
+}
+
+.schedule_sub_wrap {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.schedule_sub_wrap .btn_wrap {
+    text-wrap: nowrap;
+}
+
+.schedule_sub_wrap .btn_wrap button {
+    font-size: 14px;
+    padding: 11px;
+    border: 1px solid #4446a9;
+    color: #4446a9;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.schedule_sub_wrap .btn_wrap button.blog {
+    background-color: #ecf5fe;
+    margin-right: 8px;
+}
+
+.schedule_sub_wrap .btn_wrap button.schedule {
+    background-color: #f9efef;
+}
+
+.schedule_sub_wrap .calendar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.schedule_sub_wrap .calendar button,
+.schedule_sub_wrap .sort_wrap button {
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.schedule_sub_wrap .calendar button.next {
+    transform: rotate(180deg);
+}
+
+.schedule_sub_wrap .calendar span {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 16px;
+}
+
+.schedule_sub_wrap .sort_wrap {
+    display: flex;
+    align-items: center;
+}
+
+.schedule_sub_wrap .sort_wrap button.reset_btn {
+    background-color: #cbcbcb;
+    height: 38px;
+    width: 40px;
+    background-image: url(/img/Cached.svg);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    margin-right: 8px;
+    padding: 8px 20px;
+    border: none;
+}
+
+.schedule_sub_wrap .sort_wrap select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    border: 1px solid #dbdbdb;
+    width: 100%;
+    background: url(/img/Arrow_range.svg) no-repeat 95% 50%;
+    border-radius: 6px;
+    height: 40px;
+    width: 100px;
+}
+
+.schedule_main_wrap {
+    width: 100%;
+    margin: 31px auto 52px;
+}
+
+.schedule_main_wrap table {
+    margin-bottom: 55px;
+}
+
+.schedule_main_wrap input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.schedule_main_wrap tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.schedule_main_wrap th,
+td {
+    padding: 14px;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.schedule_main_wrap td {
+    color: #555;
+}
+
+.schedule_main_wrap th:not(:last-child),
+.schedule_main_wrap td:not(:last-child) {
+    border-right: 1px solid #dddddd;
+}
+
+.schedule_main_wrap th {
+    background-color: #f2f2f2;
+    color: #676767;
+    font-size: 18px;
+    line-height: 130%;
+    font-weight: normal;
+}
+
+.schedule_main_wrap th button {
+    vertical-align: bottom;
+}
+
+.schedule_main_wrap th button img {
+    height: 20px;
+}
+
+.schedule_main_wrap td.ch_box {
+    width: 48px;
+}
+
+.schedule_main_wrap td.name_box {
+    width: 180px;
+}
+
+.schedule_main_wrap td.con_box {
+    width: 517px;
+}
+
+.schedule_main_wrap td.issue_box {
+    width: 362px;
+}
+
+.schedule_main_wrap td.place_box {
+    width: 167px;
+    color: #333;
+}
+
+.schedule_main_wrap td.confirm_box {
+    width: 167px;
+    position: relative;
+}
+
+.schedule_main_wrap td.con_box small {
+    display: inline-block;
+    width: 1px;
+    height: 12px;
+    background-color: #999;
+    margin: 0 4px;
+}
+
+.schedule_main_wrap td.con_box .green_day {
+    color: #218437;
+}
+
+.schedule_main_wrap td.con_box .red_day {
+    color: #cf1a1a;
+}
+
+.schedule_main_wrap td.con_box .night_day {
+    color: #1f25bd;
+}
+
+.schedule_main_wrap td.confirm_box input {
+    width: 72.4px;
+    height: 24.75px;
+    padding: 1.8px 22px;
+    border-radius: 999px;
+    color: #fff;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+}
+
+.schedule_main_wrap td.confirm_box .btn_popup {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: #fff;
+    width: 98px;
+    height: 215px;
+    box-shadow: 0px 16px 36px rgba(27, 28, 83, 0.12);
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    z-index: 3;
+    display: none;
+}
+
+.schedule_main_wrap td.confirm_box .btn_popup input {
+    display: block;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    margin: 9px 0;
+}
+
+.popup_wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: none;
+}
+
+.popup_wrap .bg {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: -2;
+}
+
+.popup_wrap .popup {
+    position: relative;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 432px;
+    height: 232px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.popup_wrap .popup .popup_inner {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 20px 21px;
+}
+
+.popup_wrap .popup .btn_wrap {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+
+.popup_wrap .popup .popup_inner p {
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+.popup_wrap .popup .popup_inner .title p {
+    text-align: center;
+}
+
+.popup_wrap .popup .popup_inner .con {
+    margin-top: 25px;
+}
+
+.popup_wrap .popup .popup_inner .con input {
+    width: 31px;
+    height: 28px;
+    padding: 0;
+    text-align: center;
+    font-weight: 400;
+    background-color: #dddddd;
+    font-size: 20px;
+}
+
+.popup_wrap .popup .popup_inner .con input::-webkit-outer-spin-button,
+.popup_wrap .popup .popup_inner .con input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.popup_wrap .popup .btn_wrap button {
+    width: 50%;
+    padding: 11px 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.popup_wrap .popup .btn_wrap button.exit_btn {
+    background-color: #dfdfdf;
+    color: #676767;
+}
+
+.popup_wrap .popup .btn_wrap button.enter_btn {
+    background-color: #2a3c7d;
+    color: #fff;
+}
+
+.schedule_popup .popup {
+    height: 332px;
+}
+
+.schedule_popup .popup .popup_inner .con {
+    margin-top: 16px;
+}
+
+.schedule_popup .popup .popup_inner .con textarea {
+    height: 194px;
+    background-color: #f2f2f2;
+    font-size: 20px;
+    line-height: 130%;
+}
+
+/* 페이징 */
+.pg_wrap {
+    background-color: #fff;
+    text-align: center;
+    padding: 46px 0px 35px;
+}
+.pg {
+    display: inline-block;
+}
+.pg_page,
+.pg_current {
+    color: #333;
+    display: inline-block;
+    float: left;
+    width: 32px;
+    line-height: 32px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+}
+.pg a:focus,
+.pg a:hover {
+    background-color: #f3f3f3;
+}
+.pg_page {
+    background: #f2f2f2;
+    text-decoration: none;
+}
+.pg_start {
+    background: url(/img/page_1.svg) #f2f2f2 50% 50% no-repeat;
+    width: 32px;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    margin-right: 4px;
+}
+.pg_prev {
+    background: url(/img/page_2.svg) #f2f2f2 50% 50% no-repeat;
+    width: 32px;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    margin-right: 16px;
+}
+.pg_next {
+    background: url(/img/page_3.svg) #f2f2f2 50% 50% no-repeat;
+    width: 32px;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    margin-left: 16px;
+}
+.pg_end {
+    background: url(/img/page_4.svg) #f2f2f2 50% 50% no-repeat;
+    width: 32px;
+    text-indent: -999px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: none;
+    margin-left: 4px;
+}
+.pg_current {
+    display: inline-block;
+    background: #4446a9;
+    color: #fff;
+}
