@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    <!-- 디자인  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/pif/design_portfolio.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="gallery_board_wrap">
+                <form action="">
+                    <div class="top_bar">
+                        <h2>포트폴리오 <small>(디자인팀)</small></h2>
+                    </div>
+                    <div class="gallery_board">
+                        <div class="gallery_sub_wrap">
+                            <div class="sub_title">
+                                <h3>내부 작업물</h3>
+                            </div>
+                            <ul class="btn_wrap">
+                                <li class="homepage click_on">
+                                    <button type="button"><span>홈페이지 </span><span class="num">10</span></button>
+                                </li>
+                                <li class="setting">
+                                    <button type="button"><span>세팅 </span><span class="num">14</span></button>
+                                </li>
+                                <li class="online">
+                                    <button type="button"><span>온라인 </span><span class="num">14</span></button>
+                                </li>
+                                <li class="offline">
+                                    <button type="button"><span>오프라인 </span><span class="num">14</span></button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="input_wrap">
+                            <div>
+                                <div class="date_wrap">
+                                    <input type="date" name="" id="" value="2024-05-01" />
+                                    <small>~</small>
+                                    <input type="date" name="" id="" value="2024-05-02" />
+                                </div>
+                                <div class="sort_wrap">
+                                    <select name="" id="">
+                                        <option value="">업체명</option>
+                                        <option value="">담당자</option>
+                                        <option value="">지역</option>
+                                    </select>
+                                    <div class="search_bar">
+                                        <input type="search" />
+                                        <button type="button">
+                                            <img src="/img/search.svg" alt="" />
+                                        </button>
+                                    </div>
+                                    <button type="button" class="reset_btn" onClick="window.location.reload()"></button>
+                                    <button type="button" class="my_btn">My</button>
+                                </div>
+                            </div>
+                            <div class="portfolio_btn_wrap">
+                                <button type="button" class="port_btn">포트폴리오 리스트</button>
+                                <button type="button" class="edit_btn">양식 만들기</button>
+                            </div>
+                        </div>
+                        <div class="page_btn_wrap">
+                            <ul class="btn_wrap">
+                                <li class="click_on onepage">
+                                    <button type="button"><span>원페이지 </span><span class="num">10</span></button>
+                                </li>
+                                <li class="multipage">
+                                    <button type="button"><span>멀티페이지 </span><span class="num">14</span></button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="gallery_main_wrap">
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <nav class="pg_wrap">
+                                <span class="pg">
+                                    <a href="#" class="pg_page pg_start">처음</a>
+                                    <a href="#" class="pg_page pg_prev">이전</a>
+                                    <strong class="pg_current">1</strong>
+                                    <a href="#" class="pg_page">2</a>
+                                    <a href="#" class="pg_page">3</a>
+                                    <a href="#" class="pg_page">4</a>
+                                    <a href="#" class="pg_page">5</a>
+                                    <a href="#" class="pg_page">6</a>
+                                    <a href="#" class="pg_page">7</a>
+                                    <a href="#" class="pg_page">8</a>
+                                    <a href="#" class="pg_page">9</a>
+                                    <a href="#" class="pg_page">10</a>
+                                    <a href="#" class="pg_page pg_next">다음</a>
+                                    <a href="#" class="pg_page pg_end">맨끝</a>
+                                </span>
+                            </nav>
+                        </div>
+                    </div>
+                </form>
+                <div class="popup_wrap">
+                    <div class="bg"></div>
+                    <div class="popup">
+                        <div class="popup_inner">
+                            <div class="popup_head">
+                                <span>포트폴리오 리스트</span>
+                                <button type="button" class="exit_btn">
+                                    <img src="/img/Close_w.svg" alt="" />
+                                </button>
+                            </div>
+                            <div class="popup_con">
+                                <div class="homepage_01">
+                                    <p class="title">홈페이지 (원페이지)</p>
+                                    <ul>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                                <div class="homepage_02">
+                                    <p class="title">홈페이지 (멀티페이지)</p>
+                                    <ul>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                                <div class="setting_01">
+                                    <p class="title">세팅 (플레이스)</p>
+                                </div>
+                                <div class="setting_02">
+                                    <p class="title">세팅 (스킨)</p>
+                                </div>
+                                <div class="setting_03">
+                                    <p class="title">세팅 (홍보성)</p>
+                                </div>
+                                <div class="setting_04">
+                                    <p class="title">세팅 (톡톡)</p>
+                                </div>
+                                <div class="online_01">
+                                    <p class="title">온라인 (사이니지)</p>
+                                </div>
+                                <div class="online_02">
+                                    <p class="title">온라인 (이벤트)</p>
+                                </div>
+                                <div class="online_03">
+                                    <p class="title">온라인 (랜딩/상세)</p>
+                                </div>
+                                <div class="online_04">
+                                    <p class="title">온라인 (광고)</p>
+                                </div>
+                                <div class="online_05">
+                                    <p class="title">온라인 (썸네일)</p>
+                                </div>
+                                <div class="offline_01">
+                                    <p class="title">오프라인 (옥외광고)</p>
+                                </div>
+                                <div class="offline_02">
+                                    <p class="title">오프라인 (책자/카달로그)</p>
+                                </div>
+                                <div class="offline_03">
+                                    <p class="title">오프라인 (원내 인쇄물)</p>
+                                </div>
+                                <div class="offline_04">
+                                    <p class="title">오프라인 (주의사항/동의서)</p>
+                                </div>
+                                <div class="offline_05">
+                                    <p class="title">오프라인 (포스터/전단)</p>
+                                </div>
+                                <div class="offline_06">
+                                    <p class="title">오프라인 (명함)</p>
+                                </div>
+                                <div class="offline_07">
+                                    <p class="title">오프라인 (봉투/홍보물)</p>
+                                </div>
+                                <div class="offline_08">
+                                    <p class="title">오프라인 (패키지/상품)</p>
+                                </div>
+                                <div class="btn_wrap">
+                                    <button type="button">리스트 수정</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 디자인  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/pif/design_portfolio.js"></script>
+    </th:block>
+</html>
