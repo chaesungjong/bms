@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    <!-- 진료 일정  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/csf/medical_schedule_write.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="schedule_write_wrap">
+                <div class="schedule_write">
+                    <h2>안앙바른플러스치과 진료일정</h2>
+                    <form action="" class="schedule_calendar">
+                        <div class="schedule_write_top">
+                            <div class="calendar_month">
+                                <button type="button" class="prev">
+                                    <img src="/img/left_arrow.svg" alt="이전" />
+                                </button>
+                                <span>2024.05</span>
+                                <button type="button" class="next">
+                                    <img src="/img/left_arrow.svg" alt="다음" />
+                                </button>
+                            </div>
+                            <div class="schedule_write_right">
+                                <div class="add_doctor">
+                                    <span class="add_doctor_btn"><img src="/img/add_doctor.svg" alt="추가" /></span>
+                                    <span class="doctor add_doctor01">박원장<img src="/img/Close.svg" alt="삭제" /></span>
+                                    <span class="doctor add_doctor02">김원장<img src="/img/Close.svg" alt="삭제" /></span>
+                                    <span class="doctor add_doctor03">최원장<img src="/img/Close.svg" alt="삭제" /></span>
+                                </div>
+                                <button type="submit">저장</button>
+                            </div>
+                        </div>
+                        <div class="calendar">
+                            <table cellspacing="0" class="calendar_table">
+                                <thead>
+                                    <tr>
+                                        <th class="sunday">
+                                            일
+                                            <select name="" id="">
+                                                <option value="일정 선택">일정 선택</option>
+                                                <option value="휴진">휴진</option>
+                                                <option value="야간진료">야간진료</option>
+                                                <option value="정상진료">정상진료</option>
+                                                <option value="오전휴진">오전휴진</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            월
+                                            <select name="" id="">
+                                                <option value="일정 선택">일정 선택</option>
+                                                <option value="휴진">휴진</option>
+                                                <option value="야간진료">야간진료</option>
+                                                <option value="정상진료">정상진료</option>
+                                                <option value="오전휴진">오전휴진</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            화
+                                            <select name="" id="">
+                                                <option value="일정 선택">일정 선택</option>
+                                                <option value="휴진">휴진</option>
+                                                <option value="야간진료">야간진료</option>
+                                                <option value="정상진료">정상진료</option>
+                                                <option value="오전휴진">오전휴진</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            수
+                                            <select name="" id="">
+                                                <option value="일정 선택">일정 선택</option>
+                                                <option value="휴진">휴진</option>
+                                                <option value="야간진료">야간진료</option>
+                                                <option value="정상진료">정상진료</option>
+                                                <option value="오전휴진">오전휴진</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            목
+                                            <select name="" id="">
+                                                <option value="일정 선택">일정 선택</option>
+                                                <option value="휴진">휴진</option>
+                                                <option value="야간진료">야간진료</option>
+                                                <option value="정상진료">정상진료</option>
+                                                <option value="오전휴진">오전휴진</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            금
+                                            <select name="" id="">
+                                                <option value="일정 선택">일정 선택</option>
+                                                <option value="휴진">휴진</option>
+                                                <option value="야간진료">야간진료</option>
+                                                <option value="정상진료">정상진료</option>
+                                                <option value="오전휴진">오전휴진</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            토
+                                            <select name="" id="">
+                                                <option value="일정 선택">일정 선택</option>
+                                                <option value="휴진">휴진</option>
+                                                <option value="야간진료">야간진료</option>
+                                                <option value="정상진료">정상진료</option>
+                                                <option value="오전휴진">오전휴진</option>
+                                            </select>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap other_month">
+                                                <p>28</p>
+                                                <span class="h_half">14:30 ~ 18:00 오전 휴진</span>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap other_month">
+                                                <p>29</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap other_month">
+                                                <p>30</p>
+                                                <span class="h_half">14:30 ~ 18:00 오전 휴진</span>
+                                                <span class="h_night">야간진료</span>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>1</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>2</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>3</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap">
+                                                <p>4</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap">
+                                                <p>5</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap">
+                                                <p>6</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap">
+                                                <p>7</p>
+                                                <span class="h_night">야간진료</span>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>8</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>9</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>10</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap">
+                                                <p>11</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap">
+                                                <p>12</p>
+                                                <span class="h_half">14:30 ~ 18:00 오전 휴진</span>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap">
+                                                <p>13</p>
+                                                <span class="h_normal">정상진료</span>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap">
+                                                <p>14</p>
+                                                <span class="h_night">야간진료</span>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>15</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>16</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>17</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap">
+                                                <p>18</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap">
+                                                <p>19</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap">
+                                                <p>20</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap">
+                                                <p>21</p>
+                                                <span class="h_night">야간진료</span>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>22</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>23</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>24</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap">
+                                                <p>25</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap">
+                                                <p>26</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap">
+                                                <p>27</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap">
+                                                <p>28</p>
+                                                <span class="h_night">야간진료</span>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>29</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>30</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>31</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap other_month">
+                                                <p>1</p>
+                                                <select name="" id="">
+                                                    <option value="일정 선택">일정 선택</option>
+                                                    <option value="휴진">휴진</option>
+                                                    <option value="야간진료">야간진료</option>
+                                                    <option value="정상진료">정상진료</option>
+                                                    <option value="오전휴진">오전휴진</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 진료 일정  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/csf/medical_schedule_write.js"></script>
+    </th:block>
+</html>
