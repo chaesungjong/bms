@@ -1,0 +1,398 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+input {
+    height: 40px;
+    padding: 7px 12px;
+    border: 1px solid #dddddd;
+    outline: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+select {
+    border: 1px solid #dddddd;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+}
+
+textarea {
+    resize: none;
+    padding: 7px 12px;
+    width: 100%;
+    height: 500px;
+    border: 1px solid #dddddd;
+    outline: none;
+    font-size: 16px;
+    letter-spacing: -0.25px;
+    line-height: 130%;
+    border-radius: 4px;
+}
+
+button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.required_on::before {
+    content: '* ';
+    color: red;
+    vertical-align: middle;
+}
+
+/* 중복설정 */
+
+.schedule_view_wrap {
+    padding: 40px;
+    width: 100%;
+}
+.schedule_view {
+    background-color: #fff;
+    border-radius: 20px;
+    padding-bottom: 1px;
+}
+.schedule_view > h2 {
+    padding: 0px 24px;
+    line-height: 64px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+.schedule_view_top {
+    padding: 18px 22px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+.calendar_month {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+.calendar_month > button {
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+.calendar_month > button.next {
+    transform: rotate(180deg);
+}
+.calendar_month span {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 16px;
+}
+.schedule_view_right {
+    display: flex;
+    align-items: center;
+}
+.add_doctor_btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eaeaea;
+    cursor: pointer;
+}
+.add_doctor {
+    display: flex;
+}
+.doctor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 16px;
+    width: 148px;
+    background-color: #eaeaea;
+    color: #999;
+    font-size: 14px;
+    font-weight: 500;
+    border-left: 1px solid #b7b7b7;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.doctor:hover {
+    color: #fff;
+    background-color: #4446a9;
+}
+.doctor:hover > img {
+    filter: invert(1);
+}
+.doctor > img {
+    transition: all 0.2s;
+}
+.schedule_view_right > button {
+    display: inline-block;
+    line-height: 40px;
+    width: 48px;
+    text-align: center;
+    background-color: #4446a9;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-left: 16px;
+}
+.calendar {
+    padding: 0px 22px;
+}
+.calendar thead {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #333;
+    background-color: #f2f2f2;
+}
+.calendar th {
+    padding: 4px 6px;
+    text-align: end;
+}
+.calendar th,
+.calendar td {
+    box-shadow: 1px 0 0 0 #ddd, 0 1px 0 0 #ddd, 1px 1px 0 0 #ddd, 1px 0 0 0 #ddd inset, 0 1px 0 0 #ddd inset;
+}
+.calendar .sunday {
+    color: #ea2323;
+}
+.calendar td {
+    height: 148px;
+    width: 14.285%;
+    padding: 0px;
+}
+.day_wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 16px 0px;
+    align-items: center;
+}
+.day_wrap p {
+    padding-left: 16px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+}
+.h_half {
+    color: #cf2727;
+    background-color: #fde9e9;
+    text-align: center;
+    line-height: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 176px;
+    text-align: center;
+    border-radius: 4px;
+}
+.h_normal {
+    color: #1a7940;
+    background-color: #eaf6eb;
+    text-align: center;
+    line-height: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 176px;
+    text-align: center;
+    border-radius: 4px;
+}
+.h_night {
+    color: #1c1a79;
+    background-color: #eaf2f6;
+    text-align: center;
+    line-height: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 176px;
+    text-align: center;
+    border-radius: 4px;
+}
+.coment {
+    color: #333;
+    background-color: #f2f2f2;
+    text-align: center;
+    line-height: 130%;
+    font-size: 14px;
+    font-weight: 500;
+    width: 176px;
+    padding: 4px 0px;
+    text-align: center;
+    border-radius: 4px;
+}
+.h_full {
+    color: #cf2727;
+    background-color: #fde9e9;
+    text-align: center;
+    line-height: 26px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 176px;
+    text-align: center;
+    border-radius: 4px;
+}
+.other_month {
+    opacity: 0.5;
+}
+.schedule_notice {
+    background-color: #f2f2f2;
+    width: 100%;
+    padding: 11px 13px;
+    display: flex;
+    align-items: center;
+}
+.schedule_notice > span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    display: inline-block;
+    line-height: 26px;
+    padding: 0px 12px;
+    border-radius: 999px;
+    margin-right: 7px;
+    background-color: #cacaca;
+}
+.schedule_notice > p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+}
+.schedule_view_left {
+    display: flex;
+    align-items: center;
+}
+.schedule_view_left > a {
+    display: inline-block;
+    line-height: 40px;
+    border-radius: 4px;
+    border: 1px solid #4446a9;
+    padding: 0px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4446a9;
+}
+.schedule_view_left > a:first-child {
+    margin-right: 8px;
+}
+
+.write_add_box {
+    border-bottom: 1px solid #dddddd;
+}
+
+.write_add_box .add_box_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 33px;
+}
+
+.write_add_box .add_box_info span {
+    font-size: 14px;
+    vertical-align: sub;
+}
+
+.write_add_box .add_box_info small {
+    margin-left: 37px;
+    color: #9999;
+    font-size: 14px;
+    vertical-align: sub;
+}
+
+.write_add_box .add_box_info .btn_wrap button {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+}
+
+.write_add_box .add_box_write {
+    width: calc(100% - 75px);
+    margin: 0 75px;
+}
+
+.write_add_box .add_box_write textarea {
+    border: none;
+    margin: 20px 0;
+    height: 120px;
+}
+
+.write_add_box .add_box_write .file_box_write {
+    padding-bottom: 71px;
+}
+
+.write_add_box .add_box_write .file_box_write button {
+    border: 1px solid #4446a9;
+    border-radius: 4px;
+    color: #4446a9;
+    margin-top: 12px;
+    cursor: pointer;
+    display: flex;
+}
+
+.add_box_new_write {
+    margin: 36px;
+    position: relative;
+}
+
+.add_box_new_write textarea {
+    height: 120px;
+}
+
+.add_box_new_write .btn_wrap {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    display: flex;
+    transform: translate(0, -50%);
+}
+
+.add_box_new_write .btn_wrap > div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 8px;
+}
+
+.add_box_new_write .btn_wrap > div label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add_box_new_write .btn_wrap button {
+    background-color: #f2f2f2;
+    width: 96px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add_box_new_write .btn_wrap button:first-child {
+    margin-bottom: 8px;
+}
+
+.add_box_new_write .btn_wrap button.enter_btn {
+    background-color: #4446a9;
+    width: 86px;
+    height: 56px;
+}
+
+.add_box_new_write .btn_wrap input {
+    height: auto;
+}

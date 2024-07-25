@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    <!-- 진료 일정  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/csf/medical_schedule_view.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="schedule_view_wrap">
+                <div class="schedule_view">
+                    <h2>안앙바른플러스치과 진료일정</h2>
+                    <form action="" class="schedule_calendar">
+                        <div class="schedule_notice">
+                            <span>특이사항</span>
+                            <p>눈에 잘띄게 제작 ※ 12월부터 수요일에는 점심휴게없이 오전10시부터 오후5시까지 진료</p>
+                        </div>
+                        <div class="schedule_view_top">
+                            <div class="schedule_view_left">
+                                <a href="">일정 수정요청</a>
+                                <a href="">컨펌완료</a>
+                            </div>
+                            <div class="calendar_month">
+                                <button type="button" class="prev">
+                                    <img src="/img/left_arrow.svg" alt="이전" />
+                                </button>
+                                <span>2024.05</span>
+                                <button type="button" class="next">
+                                    <img src="/img/left_arrow.svg" alt="다음" />
+                                </button>
+                            </div>
+                            <div class="schedule_view_right">
+                                <div class="add_doctor">
+                                    <span class="add_doctor_btn"><img src="/img/add_doctor.svg" alt="추가" /></span>
+                                    <span class="doctor add_doctor01">박원장<img src="/img/Close.svg" alt="삭제" /></span>
+                                    <span class="doctor add_doctor02">김원장<img src="/img/Close.svg" alt="삭제" /></span>
+                                    <span class="doctor add_doctor03">최원장<img src="/img/Close.svg" alt="삭제" /></span>
+                                </div>
+                                <button type="submit">수정</button>
+                            </div>
+                        </div>
+                        <div class="calendar">
+                            <table cellspacing="0" class="calendar_table">
+                                <thead>
+                                    <tr>
+                                        <th class="sunday">일</th>
+                                        <th>월</th>
+                                        <th>화</th>
+                                        <th>수</th>
+                                        <th>목</th>
+                                        <th>금</th>
+                                        <th>토</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap other_month">
+                                                <p>28</p>
+                                                <span class="h_half">14:30 ~ 18:00 오전 휴진</span>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap other_month">
+                                                <p>29</p>
+                                                <span class="h_normal">정상진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap other_month">
+                                                <p>30</p>
+                                                <span class="h_half">14:30 ~ 18:00 오전 휴진</span>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>1</p>
+                                                <span class="h_normal">정상진료</span>
+                                                <span class="coment"
+                                                    >직접입력 10:00 ~ 16:00<br />
+                                                    두줄까지 입력가능 이후 ...</span
+                                                >
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>2</p>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>3</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap">
+                                                <p>4</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap">
+                                                <p>5</p>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap">
+                                                <p>6</p>
+                                                <span class="h_full">휴진</span>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap">
+                                                <p>7</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>8</p>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>9</p>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>10</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap">
+                                                <p>11</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap">
+                                                <p>12</p>
+                                                <span class="h_half">14:30 ~ 18:00 오전 휴진</span>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap">
+                                                <p>13</p>
+                                                <span class="h_normal">정상진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap">
+                                                <p>14</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>15</p>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>16</p>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>17</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap">
+                                                <p>18</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap">
+                                                <p>19</p>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap">
+                                                <p>20</p>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap">
+                                                <p>21</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>22</p>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>23</p>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>24</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap">
+                                                <p>25</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sunday">
+                                            <div class="day_wrap">
+                                                <p>26</p>
+                                            </div>
+                                        </td>
+                                        <td class="monday">
+                                            <div class="day_wrap">
+                                                <p>27</p>
+                                            </div>
+                                        </td>
+                                        <td class="tuesday">
+                                            <div class="day_wrap">
+                                                <p>28</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="wednesday">
+                                            <div class="day_wrap">
+                                                <p>29</p>
+                                            </div>
+                                        </td>
+                                        <td class="thursday">
+                                            <div class="day_wrap">
+                                                <p>30</p>
+                                            </div>
+                                        </td>
+                                        <td class="friday">
+                                            <div class="day_wrap">
+                                                <p>31</p>
+                                                <span class="h_night">야간진료</span>
+                                            </div>
+                                        </td>
+                                        <td class="saturday">
+                                            <div class="day_wrap other_month">
+                                                <p>1</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="write_add_box">
+                            <div class="add_box_wrap">
+                                <div class="add_box_info">
+                                    <div>
+                                        <span>홍길동</span>
+                                        <small>2024-04-29</small>
+                                    </div>
+                                    <div class="btn_wrap">
+                                        <button type="button">
+                                            <img src="/img/Mode edit.svg" alt="" />
+                                        </button>
+                                        <button type="button">
+                                            <img src="/img/Close.svg" alt="" />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="add_box_write">
+                                    <textarea name="">@이수은 내용들어갑니다내용들어갑니다내용들어갑니다내용들어갑니다내용들어갑니다</textarea>
+                                    <div class="file_box_write">
+                                        <div class="img_wrap">
+                                            <img src="/img/Frame 86.png" alt="" />
+                                        </div>
+                                        <button type="button"><img src="/img/File download_color.svg" alt="" />이미지 한번에 내려받기</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add_box_new_write">
+                            <textarea name="" id="">@변가연 태그예시내용</textarea>
+                            <div class="btn_wrap">
+                                <div>
+                                    <button type="button">파일첨부</button>
+                                    <button type="button">@태그</button>
+                                </div>
+                                <div>
+                                    <button type="button" class="enter_btn">
+                                        <img src="/img/Arrow right alt.svg" alt="" />
+                                    </button>
+                                    <label> <input type="checkbox" />전체공개 </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 진료 일정  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/csf/medical_schedule_view.js"></script>
+    </th:block>
+</html>
