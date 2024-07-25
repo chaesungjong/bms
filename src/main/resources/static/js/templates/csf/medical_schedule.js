@@ -1,5 +1,5 @@
 /*
- * csf/medical _schedule.html 연동 스크립트 영역
+ * csf/medical_schedule.html 연동 스크립트 영역
  */
 // 오늘 날짜
 window.onload = function () {
