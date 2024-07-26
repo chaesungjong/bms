@@ -29,34 +29,37 @@
                                         <td colspan="3">
                                             <label for="">성명<input type="text" name="" id="" class="name_box" /></label>
                                             <label for="">영문명<input type="text" name="" id="" class="name_en_box" /></label>
+                                            <label for="">아이디<input type="text" name="" id="" class="id_box" /></label>
+                                            <label for="">비밀번호<input type="password" name="" id="" class="pw_box" /></label>
+                                            <label for="">비밀번호 확인<input type="password" name="" id="" class="pwr_box" /></label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" class="team_gr">
                                             <label for=""
-                                                >부서 / 팀 / 직위 / 직급
+                                                >부서 / 팀 / 직위 / 직책
                                                 <select name="" onchange="categoryChange(this)" class="team_wrap">
                                                     <th:block th:each="departName : ${departNameList}">
                                                         <option th:value="${departName['code']}" th:text="${departName['codeName']}"></option>
-                                                    </th:block> 
+                                                    </th:block>
                                                 </select>
 
                                                 <select name="" id="team_count">
                                                     <th:block th:each="teamName : ${teamNameList}">
                                                         <option th:value="${teamName['code']}" th:text="${teamName['codeName']}"></option>
-                                                    </th:block> 
+                                                    </th:block>
                                                 </select>
 
                                                 <select name="" id="">
                                                     <th:block th:each="jobPosition : ${jobPositionList}">
                                                         <option th:value="${jobPosition['code']}" th:text="${jobPosition['codeName']}"></option>
-                                                    </th:block> 
+                                                    </th:block>
                                                 </select>
 
                                                 <select name="" id="">
                                                     <th:block th:each="jobTitle : ${jobTitleList}">
                                                         <option th:value="${jobTitle['code']}" th:text="${jobTitle['codeName']}"></option>
-                                                    </th:block> 
+                                                    </th:block>
                                                 </select>
                                             </label>
                                         </td>
@@ -69,7 +72,7 @@
                                                 <select name="" id="" class="" style="margin: 0 8px 0 28px">
                                                     <th:block th:each="jobStatus : ${jobStatusList}">
                                                         <option th:value="${jobStatus['code']}" th:text="${jobStatus['codeName']}"></option>
-                                                    </th:block> 
+                                                    </th:block>
                                                 </select>
                                             </label>
                                             <label for="before_date"
@@ -104,7 +107,7 @@
                                                 <select name="" id="">
                                                     <th:block th:each="hireType : ${hireTypeList}">
                                                         <option th:value="${hireType['code']}" th:text="${hireType['codeName']}"></option>
-                                                    </th:block> 
+                                                    </th:block>
                                                 </select>
                                             </label>
                                         </td>
@@ -115,7 +118,7 @@
                                             <select name="" id="" style="margin-right: 8px">
                                                 <th:block th:each="calendarType : ${calendarTypeList}">
                                                     <option th:value="${calendarType['code']}" th:text="${calendarType['codeName']}"></option>
-                                                </th:block> 
+                                                </th:block>
                                             </select>
                                             <label for="birth"
                                                 ><input
@@ -166,7 +169,7 @@
                                                 <select name="" class="">
                                                     <th:block th:each="payGiveType : ${payGiveTypeList}">
                                                         <option th:value="${payGiveType['code']}" th:text="${payGiveType['codeName']}"></option>
-                                                    </th:block> 
+                                                    </th:block>
                                                 </select>
                                             </label>
                                             <label for="">
@@ -186,7 +189,7 @@
                                                 <select name="" id="">
                                                     <th:block th:each="marriedType : ${marriedTypeList}">
                                                         <option th:value="${marriedType['code']}" th:text="${marriedType['codeName']}"></option>
-                                                    </th:block> 
+                                                    </th:block>
                                                 </select>
                                             </label>
                                             <label for="">
