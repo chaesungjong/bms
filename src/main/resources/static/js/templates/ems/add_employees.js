@@ -3,11 +3,13 @@
  */
 $(document).ready(function () {
 
-    $('.profile').change(function () {
+    // 이미지 업로드 
+    $('.file-input').change(function () {
         readURL(this);
     });
 
-    $('.bank_box, .name_box').keyup(function (event) {
+    // 한글이 필수로 들어가야할 때 사용
+    $('.bank_box, .name_box').keyup(function () {
         regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
         v = $(this).val();
         if (regexp.test(v)) {
@@ -15,28 +17,90 @@ $(document).ready(function () {
             $(this).val(v.replace(regexp, ''));
         }
     });
+
+    //등록 하기 버튼 클릭 시 호출 
+    $('#registration').click(function () {
+        //유효성 검사
+        if (validate()) {
+            var form = $('#addEmpForm')[0];
+            var formData = new FormData(form);
+            $.ajax({
+                type: 'post',
+                url: '/ems/Registration.do',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.retVal == '0') {
+                        alert('직원 등록이 완료되었습니다.');
+                        location.href = '/employees';
+                    } else if(data.retVal == '-3') {
+                        alert('동일한 아이디가 있습니다. ');
+                    } else {
+                        alert('직원 등록에 실패했습니다. 관리자에게 문의하세요.');
+                    }
+                }
+            });
+        }
+    });
     
 });
-// 첨부파일 이미지 띄우기
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#profile_preview').attr('src', e.target.result);
-            $('.upload').css({ display: 'none' });
-        };
 
-        reader.readAsDataURL(input.files[0]);
+/**
+ * 직원 등록 유효성 검사
+ * @returns {Boolean}
+ */
+function validate() {
+    let form = document.getElementById('addEmpForm');
+    let inputs = form.querySelectorAll('input[required], select[required]');
+    let allFilled = true;
+
+    for (let input of inputs) {
+        if (!input.value.trim()) {
+            allFilled = false;
+            input.focus();
+            alert(input.placeholder + "를(을) 입력해주세요.");
+            break; // exit the loop if a required field is empty
+        }
     }
+
+    if(!allFilled) return false;
+
+    if( $('#pwd').val() != $('#pwdCheck').val() ) {
+        alert("비밀번호가 일치하지 않습니다.");
+        allFilled = false;
+    }
+
+
+
+    return allFilled;
 }
+
+    // 첨부파일 이미지 띄우기
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            const previewId = input.id;
+
+            reader.onload = function (e) {
+                $('#' + previewId).attr('src', e.target.result);
+                uploadFile(input.files[0], function (data) {
+                    //$('#' + previewId).attr('src', data);
+                    $('#' + previewId).attr('value', data);
+                });
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
 const realUpload = document.querySelector('.real_upload');
 const upload = document.querySelector('.upload');
 
 upload.addEventListener('click', () => realUpload.click());
 
-// 부서 선택시 팀 동적변경
+/* 팀 카테고리 선택시 팀 선택 옵션 변경
 function categoryChange(e) {
     var team_a = ['1팀', '2팀'];
     var team_b = ['1팀', '2팀', '3팀', '4팀'];
@@ -55,7 +119,7 @@ function categoryChange(e) {
         opt.innerHTML = d[x];
         target.appendChild(opt);
     }
-}
+}*/
 
 
 // 날짜
@@ -105,16 +169,15 @@ function sample6_execDaumPostcode() {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('sample6_postcode').value = data.zonecode;
-            document.getElementById('sample6_address').value = addr;
+            document.getElementById('post').value = data.zonecode;
+            document.getElementById('addr').value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementById('sample6_detailAddress').focus();
+            document.getElementById('addrDesc').focus();
         },
     }).open();
 }
 
 // input file 커스텀
-
 const fileTarget = $('.add_emp_file input');
 
 fileTarget.on('change', function () {

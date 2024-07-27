@@ -28,4 +28,51 @@
     }
   </select>
   <!-- 회원정보 관리 프로시저 End -->
+  
+  <!-- 회원정보 관리 프로시저 Start -->
+  <select id="memRegistModify" resultType="java.util.HashMap" statementType="CALLABLE">
+    { #{retVal, mode=OUT , jdbcType=INTEGER} = call [dbo].[memRegistModify](
+        #{gubun},
+        #{userid},
+        #{pwd},
+        #{name},
+        #{nameEng},
+        #{hpno},
+        #{hpnoDepart},
+        #{email},
+        #{emailDepart},
+        #{birthday},
+        #{calendarType},
+        #{gender},
+        #{addr},
+        #{addrDesc},
+        #{post},
+        #{departCode},
+        #{teamCode},
+        #{jobPosition},
+        #{jobTitle},
+        #{hireType},
+        #{jobStartDate},
+        #{jobEndDate},
+        #{jobStatus},
+        #{payGiveType},
+        #{bankName},
+        #{bankAccount},
+        #{marriedType},
+        #{juminNo},
+        #{boardUseYN},
+        #{memo},
+        #{imgBankbook},
+        #{imgFamilyRL},
+        #{imgProfile},
+        #{imgEtc},
+        #{grade},
+        #{state},
+        #{siteKey},
+        #{ip}
+        )
+    }
+  </select>
+  <!-- 회원정보 관리 프로시저 End -->
+
 </mapper>

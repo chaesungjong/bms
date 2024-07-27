@@ -87,28 +87,5 @@ public class LoginController {
         loginoutMap.put("result", "success");
         return ResponseEntity.ok(loginoutMap);
     }
-
-    /*
-     * 회원가입을 시도한다.
-     * @param userId
-     * @param password
-     * @param username
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @return ModelAndView
-     */
-    @RequestMapping(value="/registerProcess.do", method = { RequestMethod.POST, RequestMethod.GET })
-    public ModelAndView register( @RequestParam("userId") String userID,  @RequestParam("password") String password, @RequestParam("username") String username, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,@RequestParam("email") String email ) {
-       
-        HashMap<String, Object> user = userService.register(userID, SHA256Util.hashWithSHA256(password), username, firstName, lastName, email);
-        ModelAndView modelAndView = new ModelAndView();
-        
-        modelAndView.setViewName("mmb/login");
-        if (user != null)  modelAndView.addObject("user", user);
-        else modelAndView.addObject("error", "Invalid username or password");
-        
-        return modelAndView; // ModelAndView 객체를 반환
-    }
     
 }

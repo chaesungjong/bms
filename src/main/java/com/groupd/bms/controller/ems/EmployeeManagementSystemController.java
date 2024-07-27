@@ -1,18 +1,30 @@
 package com.groupd.bms.controller.ems;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.groupd.bms.controller.BaseController;
 import com.groupd.bms.service.EnterpriseService;
+import com.groupd.bms.service.UserService;
+import com.google.cloud.storage.Storage;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 
 /**
  * EmployeeManagementSystemController
@@ -21,6 +33,19 @@ import java.util.Map;
 @Controller
 @RequestMapping("ems")
 public class EmployeeManagementSystemController extends BaseController{
+
+    private final Storage storage;
+
+    public EmployeeManagementSystemController(Storage storage) {
+        this.storage = storage;
+    }
+
+    
+    @Autowired
+    private UserService userService;
+
+    @Value("${gcs.bucket.name}")
+    private String bucketName;
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeManagementSystemController.class);
 
@@ -34,6 +59,7 @@ public class EmployeeManagementSystemController extends BaseController{
     public String handleSinglePath(@PathVariable("path") String path) {
         return "ems/" + path;
     }
+
     /*
      * 사원 기본정보 화면 페이지 
      * 
@@ -78,6 +104,68 @@ public class EmployeeManagementSystemController extends BaseController{
         model.addAttribute("marriedTypeList", marriedTypeList);
 
         return "ems/add_employees" ;
+    }
+
+
+    /*
+     * 사원 등록 처리
+     * 
+     */
+    @SuppressWarnings("unused")
+    @RequestMapping(value = "/Registration.do", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<?> Registration( HttpServletRequest request, @RequestParam("imgBankbook") MultipartFile imgBankbook, @RequestParam("imgFamilyRL") MultipartFile imgFamilyRL,
+    @RequestParam("imgProfile") MultipartFile imgProfile, @RequestParam("imgEtc") MultipartFile imgEtc) {
+        
+
+        HashMap<String, Object> RegistrationMap = setRequest(request);
+        RegistrationMap.put("gubun", "MEM_JOIN");
+
+        String imgBankbookUrl = "";
+        String imgFamilyRLUrl = "";
+        String imgProfileUrl = "";
+        String imgEtcUrl  = "";
+
+        if(imgBankbook != null && !imgBankbook.isEmpty()) {
+            imgBankbookUrl = UUID.randomUUID().toString();
+            RegistrationMap.put("imgBankbook", imgBankbookUrl);
+        }
+
+
+        if(imgFamilyRL != null && !imgFamilyRL.isEmpty()) {
+            imgFamilyRLUrl = UUID.randomUUID().toString();
+            RegistrationMap.put("imgFamilyRL", imgFamilyRLUrl);
+        }
+
+
+        if(imgProfile != null && !imgProfile.isEmpty()) {
+            imgProfileUrl = UUID.randomUUID().toString();
+            RegistrationMap.put("imgProfile", imgProfileUrl);
+        }
+
+
+        if(imgEtc != null && !imgEtc.isEmpty()) {
+            imgEtcUrl = UUID.randomUUID().toString();
+            RegistrationMap.put("imgEtc", imgEtcUrl);
+        }
+        
+        userService.memRegistModify(RegistrationMap);
+
+        if(RegistrationMap.get("retVal") != null) {
+            String retVal = RegistrationMap.get("retVal").toString();
+
+            if("0".equals(retVal)) {
+                uploadFileToGCS(imgBankbook, imgBankbookUrl);
+                uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
+                uploadFileToGCS(imgProfile, imgProfileUrl);
+                uploadFileToGCS(imgEtc, imgEtcUrl);
+                return ResponseEntity.ok(RegistrationMap);
+            }
+            
+            return ResponseEntity.ok(RegistrationMap);
+        }
+        
+     return ResponseEntity.status(500).build();
+
     }
 
 }

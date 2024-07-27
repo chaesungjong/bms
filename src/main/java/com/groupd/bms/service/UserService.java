@@ -1,6 +1,7 @@
 package com.groupd.bms.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,18 +54,11 @@ public class UserService {
     }
 
     /**
-     * 사용자 등록을 처리한다.
-     * @param username
-     * @param password
-     * @param name
-     * @param email
-     * @param firstName
-     * @param lastName
-     * @return HashMap<String, Object>
+     * 회원가입/수정/정보 기능을 한다. 
+     * @param params
      */
-    public HashMap<String, Object> register(String userid,String password, String name,String firstName,String lastName, String email) {
-      //HashMap<String, Object> user = userRepository.insertRegister( userid, password, name, firstName, lastName, email);
-      return null; // or throw exception
-  }
+    public void memRegistModify(Map<String, Object> params) {
+      userRepository.memRegistModify(params);
+    }
     
 }

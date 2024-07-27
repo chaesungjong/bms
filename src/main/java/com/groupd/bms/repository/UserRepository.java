@@ -24,8 +24,8 @@ public interface UserRepository {
 
     /*
      * 사용자 정보를 조회한다.
-     * @param userID
+     * @return
      */
-    HashMap<String, Object> insertRegister(String userid, String password, String name, String firstName, String lastName, String email);
+    void memRegistModify(Map<String, Object> params);
     
 }
