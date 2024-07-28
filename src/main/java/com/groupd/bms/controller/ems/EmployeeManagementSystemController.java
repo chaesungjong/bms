@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.groupd.bms.controller.BaseController;
+import com.groupd.bms.model.Member;
+import com.groupd.bms.service.BoardService;
 import com.groupd.bms.service.EnterpriseService;
 import com.groupd.bms.service.UserService;
-import com.google.cloud.storage.Storage;
+import com.groupd.bms.util.StringUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,24 +35,17 @@ import java.util.UUID;
 @Controller
 @RequestMapping("ems")
 public class EmployeeManagementSystemController extends BaseController{
-
-    private final Storage storage;
-
-    public EmployeeManagementSystemController(Storage storage) {
-        this.storage = storage;
-    }
-
     
     @Autowired
     private UserService userService;
 
-    @Value("${gcs.bucket.name}")
-    private String bucketName;
-
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeManagementSystemController.class);
-
     @Autowired
     private EnterpriseService enterpriseService;
+
+    @Autowired
+    private BoardService boardService;
+
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeManagementSystemController.class);
 
     /*
      * 프로젝트 정보 화면 페이지 
@@ -61,8 +56,23 @@ public class EmployeeManagementSystemController extends BaseController{
     }
 
     /*
+     * 사원 목록 페이지 
+     */
+    @GetMapping("/employees")
+    public String employees(HttpServletRequest request, Model model) {
+
+            // 로그인 시도
+        HashMap<String, Object> registrationMap = setRequest(request);
+        String etcParam = StringUtil.objectToString(registrationMap.get("etcParam"));
+        String userId = StringUtil.objectToString(registrationMap.get("userId"));
+        List<Map<String, Object>> employeeList = boardService.mngList("USER_LIST", userId, "1", "10", "");
+        model.addAttribute("employeeList", employeeList);
+
+        return "ems/employees" ;
+    }
+
+    /*
      * 사원 기본정보 화면 페이지 
-     * 
      */
     @GetMapping("/add_employees")
     public String add_employees(HttpServletRequest request, Model model) {
@@ -109,7 +119,6 @@ public class EmployeeManagementSystemController extends BaseController{
 
     /*
      * 사원 등록 처리
-     * 
      */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/Registration.do", method = { RequestMethod.POST, RequestMethod.GET })
@@ -125,6 +134,7 @@ public class EmployeeManagementSystemController extends BaseController{
         String imgProfileUrl = "";
         String imgEtcUrl  = "";
 
+        
         if(imgBankbook != null && !imgBankbook.isEmpty()) {
             imgBankbookUrl = UUID.randomUUID().toString();
             RegistrationMap.put("imgBankbook", imgBankbookUrl);
@@ -148,16 +158,22 @@ public class EmployeeManagementSystemController extends BaseController{
             RegistrationMap.put("imgEtc", imgEtcUrl);
         }
         
+        //사원 등록 처리
         userService.memRegistModify(RegistrationMap);
 
+        //사원 등록 결과
         if(RegistrationMap.get("retVal") != null) {
+
             String retVal = RegistrationMap.get("retVal").toString();
 
+            //사원 등록 성공
             if("0".equals(retVal)) {
-                uploadFileToGCS(imgBankbook, imgBankbookUrl);
-                uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
-                uploadFileToGCS(imgProfile, imgProfileUrl);
-                uploadFileToGCS(imgEtc, imgEtcUrl);
+                
+                if("".equals(imgBankbookUrl))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
+                if("".equals(imgFamilyRL))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
+                if("".equals(imgProfile))        uploadFileToGCS(imgProfile, imgProfileUrl);
+                if("".equals(imgEtcUrl))         uploadFileToGCS(imgEtc, imgEtcUrl);
+                
                 return ResponseEntity.ok(RegistrationMap);
             }
             

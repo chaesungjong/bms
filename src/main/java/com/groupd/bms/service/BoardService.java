@@ -36,6 +36,21 @@ public class BoardService {
     }
 
     /**
+     * 게시판 목록 가져오기 
+     * @return
+     */
+    public List<Map<String, Object>> mngList(String gubun,String userID, String pageno, String pagesize, String etcParam) {
+        HashMap<String, Object> boardMap = new HashMap<>();
+        boardMap.put("gubun", gubun);
+        boardMap.put("userid", userID);
+        boardMap.put("PageNo", pageno);
+        boardMap.put("PageSize", pagesize);
+        boardMap.put("gubun", gubun);
+        boardMap.put("etcParam", etcParam);
+        return boardRepository.mngList(boardMap);
+    }
+
+    /**
      * 게시판 등록/수정 하기
      * @return
      */

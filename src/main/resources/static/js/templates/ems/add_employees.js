@@ -18,6 +18,15 @@ $(document).ready(function () {
         }
     });
 
+    if($('#jobStatus').val() == "WORK"){
+        $('#jobEndDateLabel').hide();
+        $('#jobEndDatesmall').hide();
+    }else if($('#jobStatus').val() == "LEAVE"){
+
+    }else if($('#jobStatus').val() == "RETIRE"){
+
+    }
+
     //등록 하기 버튼 클릭 시 호출 
     $('#registration').click(function () {
         //유효성 검사
@@ -121,14 +130,6 @@ function categoryChange(e) {
     }
 }*/
 
-
-// 날짜
-window.onload = function () {
-    today = new Date();
-    today = today.toISOString().slice(0, 10);
-    bir = document.getElementById('today_date');
-    bir.value = today;
-};
 
 // 우편번호
 function sample6_execDaumPostcode() {

@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.groupd.bms.model.Member;
 import com.groupd.bms.util.Util;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -38,7 +40,7 @@ public class BaseController {
         Member member = (Member) request.getSession().getAttribute("member");
 
         if(member != null){
-            requestMap.put("member", member);
+            requestMap.put("userId", member.getUserid());
         }
 
         requestMap.put("ip", Util.getUserIP(request));
@@ -54,6 +56,7 @@ public class BaseController {
     protected void uploadFileToGCS(MultipartFile file, String fileName) {
          
         try {
+
             BlobId blobId = BlobId.of(bucketName, fileName);
             BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
                     .setContentType(file.getContentType())
@@ -61,17 +64,51 @@ public class BaseController {
     
             // 파일 데이터 확인
             byte[] fileBytes = file.getBytes();
-            //logger.info("Uploading file: " + fileName + " with content type: " + file.getContentType() + " and size: " + fileBytes.length);
-    
             // 파일 업로드
             storage.create(blobInfo, fileBytes);
-    
-            // 파일의 URL 생성
-            //result =  String.format("https://storage.googleapis.com/%s/%s", bucketName, fileName);
+
         }catch (Exception e) {
             e.printStackTrace();
         }
         
+    }
+
+        /**
+     * GCS에서 파일 다운로드
+     * @param fileName 다운로드할 파일 이름
+     * @return 파일 데이터
+     */
+    protected byte[] downloadFileFromGCS(String fileName) {
+        try {
+
+            BlobId blobId = BlobId.of(bucketName, fileName);
+            Blob     blob = storage.get(blobId);
+
+            if (blob != null && blob.exists()) return blob.getContent();
+            else  throw new FileNotFoundException("File not found: " + fileName);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * GCS에서 파일 삭제
+     * @param fileName 삭제할 파일 이름
+     */
+    protected void deleteFileFromGCS(String fileName) {
+        try {
+
+            BlobId blobId = BlobId.of(bucketName, fileName);
+            boolean deleted = storage.delete(blobId);
+
+            if (!deleted) throw new FileNotFoundException("File not found or couldn't be deleted: " + fileName);
+            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
