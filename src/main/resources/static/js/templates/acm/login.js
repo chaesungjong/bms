@@ -33,9 +33,10 @@ $(document).ready(function () {
 
         // 자동 로그인 체크박스 검사
         if ($('#autoLogin').is(':checked')) {
-            document.cookie = "autoLogin=true; path=/;";
-            document.cookie = "userId=" + username + "; path=/;";
-            document.cookie = "password=" + password + "; path=/;";
+            // 예제 사용법
+            setCookie("autoLogin", "true", 365);
+            setCookie("userId", username, 365);
+            setCookie("password", password, 365);
         } else {
             document.cookie = "autoLogin=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";

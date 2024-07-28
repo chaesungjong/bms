@@ -157,3 +157,10 @@ function getTodayDate() {
   const day = ('0' + today.getDate()).slice(-2); // 날짜가 한 자리 수일 때 0을 앞에 붙임
   return `${year}-${month}-${day}`;
 }
+
+function setCookie(key, value, days) {
+  var date = new Date();
+  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+  var expires = "; expires=" + date.toUTCString();
+  document.cookie = key + "=" + (value || "") + expires + "; path=/";
+}
