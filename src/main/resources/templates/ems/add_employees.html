@@ -21,16 +21,32 @@
                                         <td rowspan="2" class="add_emp_title">
                                             <div class="profile_box">
                                                 <img src="#" alt="" id="profile_preview" />
-                                                <input type="file" class="real_upload profile" accept="image/*"  multiple />
+                                                <input type="file" class="real_upload profile" accept="image/*" multiple />
                                                 <div class="upload"></div>
                                             </div>
                                         </td>
                                         <td colspan="3">
-                                            <label for="">성명<input type="text" name="name" id="name" class="name_box" placeholder="성명" required/></label>
-                                            <label for="">영문명<input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명" required/></label>
-                                            <label for="">아이디<input type="text" name="userid" id="userid" class="id_box" placeholder="아이디" required/></label>
-                                            <label for="">비밀번호<input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" required/></label>
-                                            <label for="">비밀번호 확인<input type="password" name="pwdCheck" id="pwdCheck" class="pwr_box" placeholder="비밀번호 확인" required/></label>
+                                            <label for=""
+                                                >성명<input type="text" name="name" id="name" class="name_box" placeholder="성명" required
+                                            /></label>
+                                            <label for=""
+                                                >영문명<input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명"
+                                            /></label>
+                                            <label for=""
+                                                >아이디<input type="text" name="userid" id="userid" class="id_box" placeholder="아이디" required
+                                            /></label>
+                                            <label for=""
+                                                >비밀번호<input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" required
+                                            /></label>
+                                            <label for=""
+                                                >비밀번호 확인<input
+                                                    type="password"
+                                                    name="pwdCheck"
+                                                    id="pwdCheck"
+                                                    class="pwr_box"
+                                                    placeholder="비밀번호 확인"
+                                                    required
+                                            /></label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -83,7 +99,7 @@
                                                     class="info_date"
                                                     size="11"
                                                     maxlength="10"
-                                                    placeholder="입사일" 
+                                                    placeholder="입사일"
                                                     required
                                             /></label>
                                             <small id="jobEndDatesmall">~</small>
@@ -96,8 +112,7 @@
                                                     class="info_date"
                                                     size="11"
                                                     maxlength="10"
-                                                    placeholder="퇴사일" 
-                                                    required
+                                                    placeholder="퇴사일"
                                             /></label>
 
                                             <input type="text" value="" readonly size="16" style="margin-left: 8px" />
@@ -131,39 +146,51 @@
                                                     id="birthday"
                                                     class="birth_date"
                                                     size="11"
-                                                    maxlength="10" 
-                                                    placeholder="생년월일" 
-                                                    required
-                                                    />
+                                                    maxlength="10"
+                                                    placeholder="생년월일"
+                                                    required />
                                             </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="add_emp_title">이메일</td>
                                         <td>
-                                            <input type="email" value="sueunlee@group-d.co.kr" size="34" id="email" name="email" placeholder="이메일" required/>
+                                            <input
+                                                type="email"
+                                                value="sueunlee@group-d.co.kr"
+                                                size="34"
+                                                id="email"
+                                                name="email"
+                                                placeholder="이메일"
+                                                required />
                                         </td>
                                         <td class="add_emp_title">부서 이메일</td>
                                         <td>
-                                            <input type="email" value="design1@group-d.co.kr" size="34" id="emailDepart" name="emailDepart" placeholder="부서 메일" required/>
+                                            <input
+                                                type="email"
+                                                value="design1@group-d.co.kr"
+                                                size="34"
+                                                id="emailDepart"
+                                                name="emailDepart"
+                                                placeholder="부서 메일" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="add_emp_title">휴대폰 번호</td>
                                         <td>
-                                            <input type="tel" value="" size="34" id="hpno" name="hpno" placeholder="휴대폰 번호" required/>
+                                            <input type="tel" value="" size="34" id="hpno" name="hpno" placeholder="휴대폰 번호" required />
                                         </td>
                                         <td class="add_emp_title">업무폰 번호</td>
                                         <td>
-                                            <input type="tel" value="" size="34" id="hpnoDepart" name="hpnoDepart" placeholder="업무폰 번호" required/>
+                                            <input type="tel" value="" size="34" id="hpnoDepart" name="hpnoDepart" placeholder="업무폰 번호" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="add_emp_title">주소</td>
                                         <td colspan="3" class="post_wrap">
-                                            <input type="text" placeholder="우편번호" id="post" name="post" required/>
+                                            <input type="text" placeholder="우편번호" id="post" name="post" required />
                                             <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색" />
-                                            <input type="text" id="addr" name="addr" placeholder="주소" required/><br />
+                                            <input type="text" id="addr" name="addr" placeholder="주소" required /><br />
                                             <input type="text" id="addrDesc" name="addrDesc" placeholder="상세주소" required />
                                         </td>
                                     </tr>
@@ -180,11 +207,11 @@
                                             </label>
                                             <label for="">
                                                 <span class="sub_span">은행</span>
-                                                <input type="text" class="bank_box" id="bankName" name="bankName" placeholder="은행명" required/>
+                                                <input type="text" class="bank_box" id="bankName" name="bankName" placeholder="은행명" required />
                                             </label>
                                             <label for="">
                                                 <span class="sub_span">계좌번호</span>
-                                                <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호" required/>
+                                                <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호" required />
                                             </label>
                                         </td>
                                     </tr>
@@ -200,7 +227,7 @@
                                             </label>
                                             <label for="">
                                                 <span class="sub_span">주민번호</span>
-                                                <input type="text" id="juminNo" name="juminNo" placeholder="업무폰 번호" required/>
+                                                <input type="text" id="juminNo" name="juminNo" placeholder="주민번호" required />
                                             </label>
                                         </td>
                                     </tr>
@@ -208,7 +235,7 @@
                                         <td colspan="3" class="radio_wrap">
                                             <span> 게시판 사용<br />가능 여부 </span>
                                             <label> <input type="radio" name="boardUseYN" value="Y" checked />사용가능 </label>
-                                            <label> <input type="radio" name="board" value="N"/>사용중지 </label>
+                                            <label> <input type="radio" name="board" value="N" />사용중지 </label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -228,45 +255,11 @@
                             <h3>사원 관련 서류</h3>
                             <table cellspacing="0">
                                 <tbody>
-                                    <!-- <tr>
-                                    <td class="add_emp_title">
-                                        통장사본
-                                    </td>
-                                    <td>
-                                        <div class="file_preview_box">
-                                            <img src="#" alt="" class="file_preview1">
-                                        </div>
-                                        <input type="file" name="emp_file1[]" class="emp_file1" />
-                                    </td>
-                                    <td class="add_emp_title">가족관계증명서</td>
-                                    <td>
-                                        <div class="file_preview_box">
-                                            <img src="#" alt="" class="file_preview2">
-                                        </div>
-                                        <input type="file" name="emp_file2[]" class="emp_file2" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="add_emp_title">사원 프로필 사진</td>
-                                    <td>
-                                        <div class="file_preview_box">
-                                            <img src="#" alt="" class="file_preview3">
-                                        </div>
-                                        <input type="file" name="emp_file3[]" class="emp_file3 profile" />
-                                    </td>
-                                    <td class="add_emp_title">이외 자료</td>
-                                    <td>
-                                        <div class="file_preview_box">
-                                            <img src="#" alt="" class="file_preview4">
-                                        </div>
-                                        <input type="file" name="emp_file4[]" class="emp_file4" />
-                                    </td>
-                                </tr> -->
                                     <tr class="add_bm_file01">
                                         <td class="add_emp_title">통장사본</td>
                                         <td class="add_bm_con">
                                             <div>
-                                                <input type="file" name="imgBankbook" id="imgBankbook"  />
+                                                <input type="file" name="imgBankbook" id="imgBankbook" />
                                                 <label class="bm_file_btn" for="imgBankbook">파일선택</label>
                                                 <span class="bm_file_text">선택된 파일이 없습니다.</span>
                                             </div>
@@ -274,7 +267,7 @@
                                         <td class="add_emp_title">가족관계증명서</td>
                                         <td class="add_bm_con">
                                             <div>
-                                                <input type="file" name="imgFamilyRL" id="imgFamilyRL"  />
+                                                <input type="file" name="imgFamilyRL" id="imgFamilyRL" />
                                                 <label class="bm_file_btn" for="imgFamilyRL">파일선택</label>
                                                 <span class="bm_file_text">선택된 파일이 없습니다.</span>
                                             </div>
@@ -292,7 +285,7 @@
                                         <td class="add_emp_title">이외 자료</td>
                                         <td class="add_bm_con">
                                             <div>
-                                                <input type="file" name="imgEtc" id="imgEtc"  />
+                                                <input type="file" name="imgEtc" id="imgEtc" />
                                                 <label class="bm_file_btn" for="imgEtc">파일선택</label>
                                                 <span class="bm_file_text">선택된 파일이 없습니다.</span>
                                             </div>
