@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.cloud.storage.Blob;
-import com.google.cloud.storage.BlobId;
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
+// import com.google.cloud.storage.Blob;
+// import com.google.cloud.storage.BlobId;
+// import com.google.cloud.storage.BlobInfo;
+// import com.google.cloud.storage.Storage;
 import com.groupd.bms.model.Member;
 import com.groupd.bms.util.Util;
 
@@ -22,8 +22,8 @@ public class BaseController {
     @Value("${gcs.bucket.name}")
     private String bucketName;
 
-    @Autowired
-    private Storage storage;
+    // @Autowired
+    // private Storage storage;
 
     /**
      * setRequest 요청 받은 파라미터를 HashMap으로 변환
@@ -57,15 +57,15 @@ public class BaseController {
          
         try {
 
-            BlobId blobId = BlobId.of(bucketName, fileName);
-            BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
-                    .setContentType(file.getContentType())
-                    .build();
+            // BlobId blobId = BlobId.of(bucketName, fileName);
+            // BlobInfo blobInfo = BlobInfo.newBuilder(blobId)
+            //         .setContentType(file.getContentType())
+            //         .build();
     
-            // 파일 데이터 확인
-            byte[] fileBytes = file.getBytes();
-            // 파일 업로드
-            storage.create(blobInfo, fileBytes);
+            // // 파일 데이터 확인
+            // byte[] fileBytes = file.getBytes();
+            // // 파일 업로드
+            // storage.create(blobInfo, fileBytes);
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -81,11 +81,12 @@ public class BaseController {
     protected byte[] downloadFileFromGCS(String fileName) {
         try {
 
-            BlobId blobId = BlobId.of(bucketName, fileName);
-            Blob     blob = storage.get(blobId);
+            // BlobId blobId = BlobId.of(bucketName, fileName);
+            // Blob     blob = storage.get(blobId);
 
-            if (blob != null && blob.exists()) return blob.getContent();
-            else  throw new FileNotFoundException("File not found: " + fileName);
+            // if (blob != null && blob.exists()) return blob.getContent();
+            // else  throw new FileNotFoundException("File not found: " + fileName);
+            return null;
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,10 +101,10 @@ public class BaseController {
     protected void deleteFileFromGCS(String fileName) {
         try {
 
-            BlobId blobId = BlobId.of(bucketName, fileName);
-            boolean deleted = storage.delete(blobId);
+            // BlobId blobId = BlobId.of(bucketName, fileName);
+            // boolean deleted = storage.delete(blobId);
 
-            if (!deleted) throw new FileNotFoundException("File not found or couldn't be deleted: " + fileName);
+            // if (!deleted) throw new FileNotFoundException("File not found or couldn't be deleted: " + fileName);
             
 
         } catch (Exception e) {
