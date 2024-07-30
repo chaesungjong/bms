@@ -11,19 +11,6 @@ $(document).ready(function () {
 
     const fileTarget = $('.add_bm_file input');
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const radioButtons = document.querySelectorAll('input[type="radio"]');
-
-        radioButtons.forEach((radio) => {
-            radio.addEventListener('click', function (e) {
-                if (this.previousChecked) {
-                    this.checked = false;
-                }
-                this.previousChecked = this.checked;
-            });
-        });
-    });
-
     fileTarget.on('change', function () {
         var files = $(this)[0].files;
         var fileArr = [];
@@ -68,6 +55,19 @@ $(document).ready(function () {
                 }
             );
         }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+    radioButtons.forEach((radio) => {
+        radio.addEventListener('click', function (e) {
+            if (this.previousChecked) {
+                this.checked = false;
+            }
+            this.previousChecked = this.checked;
+        });
     });
 });
 
