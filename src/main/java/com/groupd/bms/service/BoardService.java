@@ -39,15 +39,43 @@ public class BoardService {
      * 게시판 목록 가져오기 
      * @return
      */
-    public List<Map<String, Object>> mngList(String gubun,String userID, String pageno, String pagesize, String etcParam) {
+    public List<Map<String, Object>> mngList(String gubun,String userID, String pageno, String pagesize,String Sdate,String Edate,String searchGubun, String searchVal, String etcParam) {
         HashMap<String, Object> boardMap = new HashMap<>();
         boardMap.put("gubun", gubun);
         boardMap.put("userid", userID);
         boardMap.put("PageNo", pageno);
+        boardMap.put("Sdate", Sdate);
+        boardMap.put("Edate", Edate);
         boardMap.put("PageSize", pagesize);
+        boardMap.put("searchGubun", searchGubun);
+        boardMap.put("searchVal", searchVal);
         boardMap.put("gubun", gubun);
         boardMap.put("etcParam", etcParam);
         return boardRepository.mngList(boardMap);
+    }
+
+    /**
+     * 게시판 목록 가져오기 
+     * @return
+     */
+    public Map<String, Object> mng(String gubun,String userID, String pageno, String pagesize,String Sdate,String Edate,String searchGubun, String searchVal, String etcParam) {
+        HashMap<String, Object> boardMap = new HashMap<>();
+        boardMap.put("gubun", gubun);
+        boardMap.put("userid", userID);
+        boardMap.put("PageNo", pageno);
+        boardMap.put("Sdate", Sdate);
+        boardMap.put("Edate", Edate);
+        boardMap.put("PageSize", pagesize);
+        boardMap.put("searchGubun", searchGubun);
+        boardMap.put("searchVal", searchVal);
+        boardMap.put("gubun", gubun);
+        boardMap.put("etcParam", etcParam);
+
+        List<Map<String, Object>> mng = boardRepository.mngList(boardMap);
+
+        if(mng.size() > 0) return mng.get(0);
+        else return new HashMap<String, Object>();
+        
     }
 
     /**

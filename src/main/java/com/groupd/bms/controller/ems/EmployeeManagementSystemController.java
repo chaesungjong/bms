@@ -55,21 +55,95 @@ public class EmployeeManagementSystemController extends BaseController{
         return "ems/" + path;
     }
 
-    /*
-     * 사원 목록 페이지 
+        /*
+     * 사원정보 리스트 가져오기 
      */
-    @GetMapping("/employees")
-    public String employees(HttpServletRequest request, Model model) {
+    @RequestMapping(value = "/employee_list", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<?> employeeList( HttpServletRequest request) {
 
-            // 로그인 시도
         HashMap<String, Object> registrationMap = setRequest(request);
-        String etcParam = StringUtil.objectToString(registrationMap.get("etcParam"));
-        String userId = StringUtil.objectToString(registrationMap.get("userId"));
-        List<Map<String, Object>> employeeList = boardService.mngList("USER_LIST", userId, "1", "10", "");
-        model.addAttribute("employeeList", employeeList);
+        HashMap<String, Object> resMap = new HashMap<String, Object>();
 
-        return "ems/employees" ;
-    }
+        String startDate  = StringUtil.objectToString(registrationMap.get("fr_date"));                  //시작일
+        String EndDate    = StringUtil.objectToString(registrationMap.get("to_date"));                  //종료일
+        String searchType = StringUtil.objectToString(registrationMap.get("searchType"));               //검색타입     
+        String search     = StringUtil.objectToString(registrationMap.get("search"));                   //검색어 
+        String userId     = StringUtil.objectToString(registrationMap.get("userId"));                   //사용자ID
+
+
+        // DataTables 파라미터 가져오기
+        // DataTables 파라미터 가져오기
+        int draw = Integer.parseInt(request.getParameter("draw"));
+        int start = Integer.parseInt(request.getParameter("start"));
+        int length = Integer.parseInt(request.getParameter("length"));
+
+        // 페이지 번호 계산
+        int page = start / length + 1;
+        // 전체 레코드 수 가져오기
+        int totalRecords = Integer.parseInt(setPagination(boardService.mng("USER_LIST_CNT", userId, String.valueOf(page), String.valueOf(length), startDate, EndDate, searchType, search, "")));
+        // 데이터 가져오기
+        List<Map<String, Object>> employeeList = boardService.mngList("USER_LIST", userId, String.valueOf(page), String.valueOf(length), startDate, EndDate, searchType, search, "");
+
+        resMap.put("draw", draw);
+        resMap.put("recordsTotal", totalRecords);
+        resMap.put("data", employeeList);
+
+        return ResponseEntity.ok(resMap);
+    }   
+
+    /*
+     * 사원정보 상세 페이지
+     */
+    @RequestMapping(value = "/employee_detail", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<?> employeeDetail( HttpServletRequest request) {
+
+        HashMap<String, Object> requestMap = setRequest(request);
+        HashMap<String, Object> memInfoMap = userService.memInfo(requestMap);
+
+        if(memInfoMap != null && memInfoMap.size() > 0) {
+            
+            String depart_total_info = StringUtil.objectToString(memInfoMap.get("departCode") + " "  + memInfoMap.get("teamCode") + " / " + memInfoMap.get("jobPosition")  + " " + memInfoMap.get("jobTitle"));
+            String jobStartDate = StringUtil.objectToString(memInfoMap.get("jobStartDate")) + " (" + memInfoMap.get("jobStatus") + ")";
+            String jobStatus = StringUtil.objectToString(memInfoMap.get("jobStatus"));
+            String jobDate = "";
+
+            if("퇴사".equals(jobStatus)) {
+                jobDate = StringUtil.getPeriod(StringUtil.objectToString(memInfoMap.get("jobStartDate")) , jobDate);
+            }else{
+                jobDate = StringUtil.getPeriod(StringUtil.objectToString(memInfoMap.get("jobStartDate")) , StringUtil.today().replaceAll("-", ""));
+            }
+
+            String birthday = StringUtil.objectToString(memInfoMap.get("birthday"));
+            String Account = StringUtil.objectToString(memInfoMap.get("payGiveType") + " / " + memInfoMap.get("bankAccount"));
+            
+            HashMap<String, Object> resMap = new  HashMap<String, Object>();
+            resMap.put("retVal", "0");                                        // 성공
+            resMap.put("userName", memInfoMap.get("name"));                     // 사용자명
+            resMap.put("departName", memInfoMap.get("departCode"));             // 부서명
+            resMap.put("jobTitle", memInfoMap.get("jobTitle"));                 // 직책
+            resMap.put("depart_total_info", depart_total_info);                     // 부서 / 팀 / 직위 / 직책
+            resMap.put("jobStartDate", jobStartDate);                               // 입사일
+            resMap.put("jobDate", jobDate);                                         // 근무기간
+            resMap.put("hireType", memInfoMap.get("hireType"));                 // 채용구분
+            resMap.put("jobTitle", memInfoMap.get("jobTitle"));                 // 직책
+            resMap.put("birthday", birthday);                                       // 생년월일
+            resMap.put("email", memInfoMap.get("email"));                       // 이메일
+            resMap.put("emaemailDepartil", memInfoMap.get("emailDepart"));      // 부서 이메일
+            resMap.put("hpno", memInfoMap.get("hpno"));                         // 전화 번호
+            resMap.put("hpnoDepart", memInfoMap.get("hpnoDepart"));             // 부서 전화 번호
+            resMap.put("addr", memInfoMap.get("addr"));                         // 주소
+            resMap.put("Account", Account);                                         // 계좌번호
+            resMap.put("marriedType", memInfoMap.get("marriedType") );          // 가족관계
+            resMap.put("juminNo", memInfoMap.get("juminNo") );                  // 주민번호
+            resMap.put("boardUseYN", memInfoMap.get("boardUseYN") );            // 게시판 사용 가능
+            resMap.put("memo", memInfoMap.get("memo") );                        // 메모
+
+            return ResponseEntity.ok(resMap);
+            
+        }
+        
+        return ResponseEntity.status(500).build();
+    }    
 
     /*
      * 사원 기본정보 화면 페이지 
@@ -116,14 +190,12 @@ public class EmployeeManagementSystemController extends BaseController{
         return "ems/add_employees" ;
     }
 
-
     /*
      * 사원 등록 처리
      */
     @SuppressWarnings("unused")
     @RequestMapping(value = "/Registration.do", method = { RequestMethod.POST, RequestMethod.GET })
-    public ResponseEntity<?> Registration( HttpServletRequest request, @RequestParam("imgBankbook") MultipartFile imgBankbook, @RequestParam("imgFamilyRL") MultipartFile imgFamilyRL,
-    @RequestParam("imgProfile") MultipartFile imgProfile, @RequestParam("imgEtc") MultipartFile imgEtc) {
+    public ResponseEntity<?> Registration( HttpServletRequest request, @RequestParam("imgBankbook") MultipartFile imgBankbook, @RequestParam("imgFamilyRL") MultipartFile imgFamilyRL, @RequestParam("imgProfile") MultipartFile imgProfile, @RequestParam("imgEtc") MultipartFile imgEtc) {
         
 
         HashMap<String, Object> RegistrationMap = setRequest(request);

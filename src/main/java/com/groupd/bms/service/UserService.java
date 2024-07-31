@@ -60,5 +60,14 @@ public class UserService {
     public void memRegistModify(Map<String, Object> params) {
       userRepository.memRegistModify(params);
     }
+
+    /**
+     * 회원 정보를 가져온다.
+     * @param params
+     */
+    public HashMap<String, Object> memInfo(Map<String, Object> params) {
+      params.put("gubun", "MEM_USERINFO");
+      return userRepository.memInfo(params);
+    }
     
 }

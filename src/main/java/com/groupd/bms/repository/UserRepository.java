@@ -27,5 +27,11 @@ public interface UserRepository {
      * @return
      */
     void memRegistModify(Map<String, Object> params);
+
+    /*
+     * 사용자 정보를 조회한다.
+     * @return
+     */
+    HashMap<String, Object> memInfo(Map<String, Object> params);
     
 }

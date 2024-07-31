@@ -75,4 +75,54 @@ public class StringUtil {
             return obj.toString();
         }
     }
+
+    /**
+     * 문자열을 날짜로 변환
+     * yyy-MM-dd 형식
+     * @param str
+     * @return String
+     */
+    public static String dataformat(String str) {
+
+        if (str.length() == 4) 
+            str = str.substring(0, 4);
+        else if (str.length() == 6) 
+            str = str.substring(0, 4) + "-" + str.substring(4, 6);
+        else if (str.length() == 8) 
+            str = str.substring(0, 4) + "-" + str.substring(4, 6) + "-" + str.substring(6, 8);
+        
+        return str;
+    }
+
+    /*
+     * 오늘 날짜 구하기
+     * yyyy-MM-dd 형식
+     */
+    public static String today() {
+        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = new java.util.Date();
+        return format.format(date);
+    }
+
+    /*
+     * 시작일 부터 종료일 까지 몇년 몇개월인지 계산
+     * yyyy-MM-dd 형식
+     * @param start
+     * @param end
+     */
+    public static String getPeriod(String start, String end) {
+        String period = "";
+        int sYear = Integer.parseInt(start.substring(0, 4));
+        int sMonth = Integer.parseInt(start.substring(5, 7));
+        int eYear = Integer.parseInt(end.substring(0, 4));
+        int eMonth = Integer.parseInt(end.substring(5, 7));
+        int year = eYear - sYear;
+        int month = eMonth - sMonth;
+        if (month < 0) {
+            year--;
+            month = 12 + month;
+        }
+        period = year + "년 " + month + "개월";
+        return period;
+    }
 }
