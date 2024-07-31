@@ -399,7 +399,7 @@
     padding: 3px 4px;
     display: flex;
 }
-.design_board_type > span {
+.design_board_type > a {
     font-size: 18px;
     font-weight: 500;
     color: #999;
@@ -409,11 +409,11 @@
     cursor: pointer;
     border-radius: 999px;
 }
-.design_board_type > span.active {
+.design_board_type > a.active {
     background-color: #4446a9;
     color: #fff;
 }
-.design_board_type > span > span {
+.design_board_type > a > span {
     margin-left: 10px;
 }
 .ds_board_top_left {
