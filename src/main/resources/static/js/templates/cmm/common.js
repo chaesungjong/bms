@@ -158,9 +158,79 @@ function getTodayDate() {
   return `${year}-${month}-${day}`;
 }
 
+function calculateDuration(startDate, endDate) {
+  // Convert the input strings to Date objects if they are strings
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
+
+  // Calculate the difference in months
+  let totalMonths = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+  totalMonths += endDate.getMonth() - startDate.getMonth();
+
+  // Calculate years and remaining months
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  return { years, months };
+}
+
 function setCookie(key, value, days) {
   var date = new Date();
   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
   var expires = "; expires=" + date.toUTCString();
   document.cookie = key + "=" + (value || "") + expires + "; path=/";
+}
+
+function formatRRN(input) {
+  
+  var value = "";
+  try{
+    value = input.val().replace(/\D/g, ''); // 숫자가 아닌 모든 문자 제거
+  }catch(e){
+    value = input.value.replace(/\D/g, ''); // 숫자가 아닌 모든 문자 제거
+  }
+  const formattedValue = value.replace(/(\d{6})(\d{1,7})?/, '$1-$2');
+
+  input.value = formattedValue.slice(0, 14); // 최대 길이를 14로 제한
+
+  // // 유효성 검사
+  // if (isValidRRN(formattedValue)) {
+  //     input.classList.remove('error');
+  //     input.classList.add('success');
+  //     document.getElementById('error-message').style.display = 'none';
+  // } else {
+  //     input.classList.add('error');
+  //     input.classList.remove('success');
+  //     document.getElementById('error-message').style.display = 'inline';
+  // }
+}
+
+function isValidRRN(rrn) {
+  // 기본적인 형식 검사
+  const regex = /^\d{6}-\d{7}$/;
+  if (!regex.test(rrn)) {
+      return false;
+  }
+
+  // 추가적인 논리 검사는 여기서 할 수 있음 (예: 유효한 날짜인지 확인)
+  const [front, back] = rrn.split('-');
+  const year = parseInt(front.substring(0, 2), 10);
+  const month = parseInt(front.substring(2, 4), 10);
+  const day = parseInt(front.substring(4, 6), 10);
+
+  if (month < 1 || month > 12) {
+      return false;
+  }
+  
+  if (day < 1 || day > 31) {
+      return false;
+  }
+
+  // 월별 날짜 수 검증
+  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  if (day > daysInMonth[month - 1]) {
+      return false;
+  }
+
+  return true;
 }

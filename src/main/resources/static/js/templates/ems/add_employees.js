@@ -22,6 +22,9 @@ $(document).ready(function () {
         $('#jobEndDateLabel').hide();
         $('#jobEndDatesmall').hide();
     }else if($('#jobStatus').val() == "LEAVE"){
+        
+        $('#jobEndDateLabel').show();
+        $('#jobEndDatesmall').show();
 
     }else if($('#jobStatus').val() == "RETIRE"){
 
@@ -52,7 +55,84 @@ $(document).ready(function () {
             });
         }
     });
+
     
+      $('#jobStatus').change(function() {
+        
+        var selectedJobStatus = $(this).val();
+
+        $('#Period').val();
+        switch(selectedJobStatus) {
+            case "WORK": {
+                $('#jobEndDateLabel').hide();
+                $('#jobEndDatesmall').hide();
+                if($('#jobStartDate').val()!=""){
+                    const duration = calculateDuration( $('#jobStartDate').val(), getTodayDate());
+                    $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
+                }
+            }
+                break;
+            case "LEAVE":{
+                $('#jobEndDateLabel').hide();
+                $('#jobEndDatesmall').hide();
+                if($('#jobStartDate').val()!=""){
+                    const duration = calculateDuration( $('#jobStartDate').val(), getTodayDate());
+                    $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
+                }
+            }
+                break;
+            case "RETIRE":{
+                $('#jobEndDateLabel').show();
+                $('#jobEndDatesmall').show();
+                if($('#jobStartDate').val()!="" && $('#jobEndDate').val()!=""){
+                    const duration = calculateDuration( $('#jobStartDate').val(), $('#jobEndDate').val());
+                    $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
+                }
+            }
+                break; 
+            default: 
+                break;
+        }
+
+    });
+
+    $('#jobStartDate').change(function() {
+        
+        var jobStartDate = $(this).val();
+
+        const duration = calculateDuration(jobStartDate, getTodayDate());
+        $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
+
+    });
+
+    $('#jobEndDate').change(function() {
+        
+        var jobEndDate = $(this).val();
+
+        const duration = calculateDuration( $('#jobStartDate').val(), jobEndDate);
+        $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
+
+    });
+
+    $('#juminNo').on('input', function() {
+        // this는 현재 이벤트가 발생한 요소를 가리킴
+        formatRRN( $('#juminNo'));
+    });
+
+    // if($('#jobStartDate').val != ""){
+    //     $('#jobStartDate').val(formatDate($('#jobStartDate').val()));
+    // }
+
+    // if($('#jobEndDate').val != ""){
+    //     $('#jobEndDate').val(formatDate($('#jobEndDate').val()));
+    // }
+
+
+    // if($('#birthday').val != ""){
+    //     $('#birthday').val(formatDate($('#birthday').val()));
+    // }
+    // 초기 입력값에 대해 형식 적용 및 유효성 검사
+    formatRRN($('#juminNo'));
 });
 
 
@@ -86,23 +166,23 @@ function validate() {
     return allFilled;
 }
 
-    // 첨부파일 이미지 띄우기
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            const previewId = input.id;
+// 첨부파일 이미지 띄우기
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        const previewId = input.id;
 
-            reader.onload = function (e) {
-                $('#' + previewId).attr('src', e.target.result);
-                uploadFile(input.files[0], function (data) {
-                    //$('#' + previewId).attr('src', data);
-                    $('#' + previewId).attr('value', data);
-                });
-            };
+        reader.onload = function (e) {
+            $('#' + previewId).attr('src', e.target.result);
+            uploadFile(input.files[0], function (data) {
+                //$('#' + previewId).attr('src', data);
+                $('#' + previewId).attr('value', data);
+            });
+        };
 
-            reader.readAsDataURL(input.files[0]);
-        }
+        reader.readAsDataURL(input.files[0]);
     }
+}
 
 const realUpload = document.querySelector('.real_upload');
 const upload = document.querySelector('.upload');

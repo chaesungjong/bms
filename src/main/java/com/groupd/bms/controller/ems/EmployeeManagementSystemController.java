@@ -150,6 +150,17 @@ public class EmployeeManagementSystemController extends BaseController{
      */
     @GetMapping("/add_employees")
     public String add_employees(HttpServletRequest request, Model model) {
+        
+        HashMap<String, Object> requestMap = setRequest(request);
+        HashMap<String, Object> memInfoMap = userService.memInfo(requestMap);
+
+        if(memInfoMap != null && memInfoMap.size() > 0) {
+            memInfoMap.put("jobStartDate", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobStartDate"))));
+            memInfoMap.put("jobEndDate", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobEndDate"))));
+            memInfoMap.put("birthday", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("birthday"))));
+            model.addAttribute("memInfo", memInfoMap);
+            model.addAttribute("corrections", "Y");
+        }
 
         //서명 리스트 불러오기
         List<Map<String, Object>> departNameList = enterpriseService.codeMgtViewSiteState("LIST", "departName", "","");

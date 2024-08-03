@@ -89,6 +89,7 @@ $(document).ready(function () {
 
     $('.member_info_close').click(function () {
         $('.member_info_wrap').addClass('out');
+        $('.member_info_wrap#member_info01').addClass('out');
         $('body, html').removeClass('modal-active');
     });
     
@@ -104,6 +105,7 @@ $(document).ready(function () {
 
         ajaxRequest("/ems/employee_detail", data, "POST", function (response) {
             if (response.retVal == 0) {
+                
                 $('#userName').text(response.userName);
                 $('#departName').text(response.departName);
                 $('#depart_total_info').text(response.depart_total_info);
@@ -121,9 +123,12 @@ $(document).ready(function () {
                 $('#juminNo').text(response.juminNo);
                 $('#boardUseYN').text(response.boardUseYN);
                 $('#memo').text(response.memo);
-                var userBtn = 'member_info01';
+                $('#infoUrl').attr('href', "/ems/add_employees?userid=" + userId);
+                
+                $('.member_info_wrap').removeClass('out');
+                $('.member_info_wrap#member_info01').removeClass('out');
                 $('.member_info_wrap').removeClass('on');
-                $('.member_info_wrap#' + userBtn).addClass('on');
+                $('.member_info_wrap#member_info01').addClass('on');
                 $('body, html').addClass('modal-active');
             } else {
                 alert("다시 시도해 주세요.");
@@ -133,3 +138,4 @@ $(document).ready(function () {
         });
     });
 });
+
