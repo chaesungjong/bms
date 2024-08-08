@@ -22,7 +22,10 @@ $(document).ready(function () {
             { "data": "teamCode" },
             { "data": "birthday" },
             { "data": "email" },
-            { "data": "jobPosition" },
+            {
+                "data": "memo",
+                "defaultContent": ""  // 기본값 설정
+            },
             { "data": "userid", "visible": false } // 히든 컬럼 추가
         ],
         "language": {
@@ -109,10 +112,10 @@ $(document).ready(function () {
                 $('#userName').text(response.userName);
                 $('#departName').text(response.departName);
                 $('#depart_total_info').text(response.depart_total_info);
-                $('#jobStartDate').text(response.jobStartDate);
-                $('#jobDate').text(response.jobDate);
+                $('#jobStartDate').text(formatDate(response.jobStartDate));
+                $('#jobDate').text(formatDate(response.jobDate));
                 $('#hireType').text(response.hireType);
-                $('#birthday').text(response.birthday);
+                $('#birthday').text(formatDate(response.birthday));
                 $('#email').text(response.email);
                 $('#emailDepart').text(response.emailDepart);
                 $('#hpno').text(response.hpno);
@@ -124,6 +127,7 @@ $(document).ready(function () {
                 $('#boardUseYN').text(response.boardUseYN);
                 $('#memo').text(response.memo);
                 $('#infoUrl').attr('href', "/ems/add_employees?userid=" + userId);
+                $('#img').attr('src', response.imgProfile);
                 
                 $('.member_info_wrap').removeClass('out');
                 $('.member_info_wrap#member_info01').removeClass('out');

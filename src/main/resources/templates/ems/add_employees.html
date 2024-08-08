@@ -21,7 +21,10 @@
                                     <tr>
                                         <td rowspan="2" class="add_emp_title">
                                             <div class="profile_box">
-                                                <img src="#" alt="" id="profile_preview" />
+                                                <!-- memInfo가 null이 아닐 때 -->
+                                                <img th:if="${memInfo != null && memInfo['imgProfile'] != null}" th:src="@{${memInfo['imgProfile']}}" alt="Profile Image" id="profile_preview" />
+                                                <!-- memInfo가 null일 때 기본 이미지 사용 -->
+                                                <img th:unless="${memInfo != null && memInfo['imgProfile'] != null}" src="" alt="Profile Image" id="profile_preview" />
                                                 <input type="file" class="real_upload profile" accept="image/*" multiple />
                                                 <div class="upload"></div>
                                             </div>
@@ -200,8 +203,10 @@
                                                 <input type="text" class="bank_box" id="bankName" name="bankName" placeholder="은행명" th:value="${memInfo?.bankName}"  required />
                                             </label>
                                             <label for="">
-                                                <span class="sub_span">계좌번호</span>
-                                                <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호" th:value="${memInfo?.bankAccount}" required />
+                                                <span class="sub_span">계좌번호</span>    
+                                                <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호" 
+                                                th:value="${memInfo != null && memInfo['bankAccount'] != null ? memInfo['bankAccount'] : ''}" required />
+                                     
                                             </label>
                                         </td>
                                     </tr>
@@ -232,11 +237,11 @@
                                         <td class="add_emp_title">메모</td>
                                         <td colspan="3" style="padding: 18px 22px">
                                             <textarea
-                                                name="memo"
-                                                id="memo"
-                                                th:value="${memInfo?.memo}"
-                                                class="pre"
-                                                placeholder="입사 00시기 팀장 진급 현재 직무 홈페이지 위주건 진행"></textarea>
+                                            name="memo"
+                                            id="memo"
+                                            class="pre"
+                                            placeholder="입사 00시기 팀장 진급 현재 직무 홈페이지 위주건 진행"
+                                            th:text="${memInfo?.memo}"></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -250,17 +255,17 @@
                                         <td class="add_emp_title">통장사본</td>
                                         <td class="add_bm_con">
                                             <div>
-                                                <input type="file" name="imgBankbook" id="imgBankbook" />
+                                                <input type="file" name="imgBankbook" id="imgBankbook" th:value="${memInfo?.imgBankbook}" /> 
                                                 <label class="bm_file_btn" for="imgBankbook">파일선택</label>
-                                                <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                                <span class="bm_file_text" id="memInfoImgBankbookMessage">선택된 파일이 없습니다.</span>
                                             </div>
                                         </td>
                                         <td class="add_emp_title">가족관계증명서</td>
                                         <td class="add_bm_con">
                                             <div>
-                                                <input type="file" name="imgFamilyRL" id="imgFamilyRL" />
+                                                <input type="file" name="imgFamilyRL" id="imgFamilyRL" th:value="${memInfo?.imgFamilyRL}"/>
                                                 <label class="bm_file_btn" for="imgFamilyRL">파일선택</label>
-                                                <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                                <span class="bm_file_text" id="imgFamilyRLMessage">선택된 파일이 없습니다.</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -268,17 +273,17 @@
                                         <td class="add_emp_title">사원 프로필 사진</td>
                                         <td class="add_bm_con">
                                             <div>
-                                                <input type="file" name="imgProfile" id="imgProfile" />
+                                                <input type="file" name="imgProfile" id="imgProfile" th:value="${memInfo?.imgProfile}"/>
                                                 <label class="bm_file_btn" for="imgProfile">파일선택</label>
-                                                <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                                <span class="bm_file_text" id="imgProfileMessage">선택된 파일이 없습니다.</span>
                                             </div>
                                         </td>
                                         <td class="add_emp_title">이외 자료</td>
                                         <td class="add_bm_con">
                                             <div>
-                                                <input type="file" name="imgEtc" id="imgEtc" />
+                                                <input type="file" name="imgEtc" id="imgEtc" th:value="${memInfo?.imgEtc}"/>
                                                 <label class="bm_file_btn" for="imgEtc">파일선택</label>
-                                                <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                                <span class="bm_file_text" id="imgEtcMessage">선택된 파일이 없습니다.</span>
                                             </div>
                                         </td>
                                     </tr>

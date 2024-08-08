@@ -133,7 +133,60 @@ $(document).ready(function () {
     // }
     // 초기 입력값에 대해 형식 적용 및 유효성 검사
     formatRRN($('#juminNo'));
+    calculateDuration();
 });
+
+function calculateDuration(){
+
+    // 초기 상태 설정
+    if (checkFileInput('#imgBankbook')) {
+        $('#memInfoImgBankbookMessage').show();
+    } else {
+        $('#memInfoImgBankbookMessage').hide();
+    }
+
+    // 초기 상태 설정
+    if (checkFileInput('#imgFamilyRL')) {
+        $('#imgFamilyRLMessage').show();
+    } else {
+        $('#imgFamilyRLMessage').hide();
+    }
+
+
+    // 초기 상태 설정
+    if (checkFileInput('#imgProfile')) {
+        $('#imgProfileMessage').show();
+    } else {
+        $('#imgProfileMessage').hide();
+    }
+
+
+    // 초기 상태 설정
+    if (checkFileInput('#imgEtc')) {
+        $('#imgEtcMessage').text(imgEtc).show();
+    } else {
+        $('#imgEtcMessage').hide();
+    }
+    
+}
+
+// 데이터가 있는지 없는지 체크하는 함수
+function checkFileInput(id) {
+    const fileInput = $(id);
+    if (fileInput[0].files.length > 0) {
+        // 파일 입력 요소에 파일이 선택된 경우
+        return true;
+    }else {
+        // 둘 다 없는 경우
+        return false;
+    }
+}
+
+
+// 파일 이름 추출 함수
+function getFileName(url) {
+    return url.substring(url.lastIndexOf('/') + 1);
+}
 
 
 /**

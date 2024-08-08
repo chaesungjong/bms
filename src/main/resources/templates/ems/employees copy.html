@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+    <!-- 사원 목록 CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/ems/employees.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="emp_wrap">
+                <h2>사원 목록</h2>
+                <div class="emp_board">
+                    <form th:action="@{/ems/employees}" method="get" class="emp_board_top" id="searchForm">
+                        <div class="emp_board_date">
+                            <label for="fr_date">
+                                <input type="text" name="fr_date" th:value="${fr_date}" id="fr_date" class="frm_input" size="11" maxlength="10" />
+                                <img src="/img/bm_board_date.svg" alt="처음날짜"/>
+                            </label>
+                            <span>~</span>
+                            <label for="to_date">
+                                <input type="text" name="to_date" th:value="${to_date}" id="to_date" class="frm_input" size="11" maxlength="10" />
+                                <img src="/img/bm_board_date.svg" alt="마지막날짜"/>
+                            </label>
+                        </div>
+                        <div class="emp_board_search">
+                            <select name="searchType" id="searchType" class="search_sort" th:value="${searchType}">
+                                <option value="selName" th:selected="${searchType == 'selName'}">성명</option>
+                                <option value="selMemo" th:selected="${searchType == 'selMemo'}">비고</option>
+                            </select>
+                            <label for="sch_word">
+                                <input type="text" name="search" size="20" th:value="${search}" id="sch_word" class="frm_input" />
+                                <input type="submit" value="검색" class="sch_btn" />
+                            </label>
+                        </div>
+                        <div class="emp_board_btn">
+                            <button type="button" class="emp_board_refrash"><img src="/img/bm_board_refrash.svg" alt="새로고침" /></button>
+                            <a href="#" class="emp_board_mybtn">My</a>
+                        </div>
+                        <a href="/ems/add_employees" class="emp_reg">사원등록</a>
+                    </form>
+                    <table class="emp_board_table" cellspacing="0">
+                        <thead class="emp_board_th">
+                            <tr>
+                                <th>입사일</th>
+                                <th>사원명</th>
+                                <th>직급</th>
+                                <th>부서</th>
+                                <th>생년월일</th>
+                                <th>이메일</th>
+                                <th>비고</th>
+                            </tr>
+                        </thead>
+                        <tbody class="emp_board_td">
+                            <th:block th:each="employee : ${employeeList}">
+                                <tr th:id="'employee_' + ${employee['userid']}" th:data-user-id="${employee['userid']}">
+                                    <td class="emp_wr_wdate" th:text="${employee['jobStartDate']}"></td>
+                                    <td class="emp_wr_name" th:text="${employee['name']}"></td>
+                                    <td class="emp_wr_grade" th:text="${employee['departCode']}"></td>
+                                    <td class="emp_wr_team"><span class="board_category cat_dg" th:text="${employee['MANAGE_T']}"></span></td>
+                                    <td class="emp_wr_bday" th:text="${employee['birthday']}"></td>
+                                    <td class="emp_wr_email" th:text="${employee['email']}"></td>
+                                    <td class="emp_wr_etc" th:text="${employee['jobPosition']}"></td>
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
+                    <nav class="pg_wrap">
+                        <span class="pg">
+                            <a href="#" th:classappend="${pageno == 1} ? 'pg_page pg_start disabled' : 'pg_page pg_start'" th:data-page="1" onclick="goToPage(event)">처음</a>
+                            <a href="#" th:classappend="${pageno == 1} ? 'pg_page pg_prev disabled' : 'pg_page pg_prev'" th:data-page="${pageno == 1 ? 1 : (pageno - 1)}" onclick="goToPage(event)">이전</a>
+                            
+                            <th:block th:each="pageNum : ${#numbers.sequence(1, total)}">
+                                <th:block th:if="${pageno == pageNum}">
+                                    <strong class="pg_current" th:text="${pageNum}"></strong>
+                                </th:block>
+                                <th:block th:if="${pageno != pageNum}">
+                                    <a href="#" th:classappend="${pageno == pageNum} ? 'pg_page pg_current' : 'pg_page'" th:text="${pageNum}" th:data-page="${pageNum}" onclick="goToPage(event)"></a>
+                                </th:block>
+                            </th:block>
+
+                            <a href="#" th:classappend="${pageno == total} ? 'pg_page pg_next disabled' : 'pg_page pg_next'" th:data-page="${pageno == total ? total : (pageno + 1)}" onclick="goToPage(event)">다음</a>
+                            <a href="#" th:classappend="${pageno == total} ? 'pg_page pg_end disabled' : 'pg_page pg_end'" th:data-page="${total}" onclick="goToPage(event)">맨끝</a>
+                        </span>
+                    </nav>
+                </div>
+            </div>
+            <div class="member_info_wrap" id="member_info01">
+                <div class="member_info_bg">
+                    <div class="member_info_window">
+                        <div class="member_info_top">
+                            <h2>사원 기본정보</h2>
+                            <span class="member_info_close"><img src="/img/member_info_close.svg" alt="닫기" /></span>
+                        </div>
+                        <div class="member_info_section">
+                            <div class="member_info_s01">
+                                <div class="member_info_img">
+                                    <img src="/img/member_info_img.jpg" alt="임시이미지" />
+                                </div>
+                                <div class="member_info_right">
+                                    <div class="member_info_name">
+                                        <h3 id="name">이수은<span class="member_info_grade" id="jobPosition">과장</span></h3>
+                                        <span class="member_info_team cat_dg" id="depart">디자인</span>
+                                    </div>
+                                    <ul class="member_info_list01">
+                                        <li class="member_info_emp">
+                                            <div class="member_info_title"><h5>부서 / 팀 / 직위 / 직책</h5></div>
+                                            <div class="member_info_con"><p id="depart_total_info">디자인 1팀 / 과장 (팀장)</p></div>
+                                        </li>
+                                        <li class="member_info_sdate">
+                                            <div class="member_info_title"><h5>입사일</h5></div>
+                                            <div class="member_info_con">
+                                                <p id="jobStartDate">2024-04-20 (재직 중)</p>
+                                                <span class="member_info_service" id="days_of_service">2년 2개월 근속</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="member_info_s02">
+                                <ul class="member_info_list02">
+                                    <li class="member_info_type">
+                                        <div class="member_info_title"><h5>채용구분</h5></div>
+                                        <div class="member_info_con" id="hireType"><p>경력</p></div>
+                                    </li>
+                                    <li class="member_info_bday">
+                                        <div class="member_info_title"><h5>생년월일</h5></div>
+                                        <div class="member_info_con" id="birthday"><p>1996-11-22 (양력)</p></div>
+                                    </li>
+                                    <li class="member_info_mail">
+                                        <div class="member_info_title"><h5>이메일</h5></div>
+                                        <div class="member_info_con" id="email"><p>sueunlee@group-d.co.kr</p></div>
+                                    </li>
+                                    <li class="member_info_tmail">
+                                        <div class="member_info_title"><h5>부서 이메일</h5></div>
+                                        <div class="member_info_con" id="emailDepart"><p>design1@group-d.co.kr</p></div>
+                                    </li>
+                                    <li class="member_info_phone">
+                                        <div class="member_info_title"><h5>휴대폰 번호</h5></div>
+                                        <div class="member_info_con" id="hpno"><p>010-5550-6640</p></div>
+                                    </li>
+                                    <li class="member_info_cphone">
+                                        <div class="member_info_title"><h5>업무폰 번호</h5></div>
+                                        <div class="member_info_con" id="hpnoDepart"><p>010-1111-1111</p></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="member_info_s03">
+                                <h4>개인정보</h4>
+                                <ul class="member_info_list03">
+                                    <li class="member_info_address">
+                                        <div class="member_info_title"><h5>주소</h5></div>
+                                        <div class="member_info_con" id="addr"><p>서울특별시 신림동 441-28 안양바른플러스치과</p></div>
+                                    </li>
+                                    <li class="member_info_acc">
+                                        <div class="member_info_title"><h5>급여 지급 방법</h5></div>
+                                        <div class="member_info_con"><p id="Account">계좌 / 신한은행 (000000 - 0000000)</p></div>
+                                    </li>
+                                    <li class="member_info_fam">
+                                        <div class="member_info_title"><h5>가족사항</h5></div>
+                                        <div class="member_info_con"><p id="marriedType">미혼</p></div>
+                                    </li>
+                                    <li class="member_info_idn">
+                                        <div class="member_info_title"><h5>주민번호</h5></div>
+                                        <div class="member_info_con"><p id="juminNo">961122 - ******0</p></div>
+                                    </li>
+                                    <li class="member_info_auth">
+                                        <div class="member_info_title"><h5>게시판 사용 가능</h5></div>
+                                        <div class="member_info_con"><p id="boardUseYN">사용 가능</p></div>
+                                    </li>
+                                    <li class="member_info_memo">
+                                        <div class="member_info_title"><h5>메모</h5></div>
+                                        <div class="member_info_con"><p id="memo">입사 00시기 팀장 진급 / 현재 직무 홈페이지 위주건 진행</p></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="member_info_s04">
+                                <h4>사원 관련 서류</h4>
+                                <ul class="member_info_list04">
+                                    <li class="member_info_accimg">
+                                        <div class="member_info_title"><h5>통장 사본</h5></div>
+                                        <div class="member_info_con">
+                                            <a href=""><img src="/img/jpg.png" alt="jpg" id="imgBankbook"/>통장사본.pdf</a>
+                                        </div>
+                                    </li>
+                                    <li class="member_info_famimg">
+                                        <div class="member_info_title"><h5>가족관계증명서</h5></div>
+                                        <div class="member_info_con">
+                                            <a href=""><img src="/img/jpg.png" alt="jpg" id="imgFamilyRL"/>가족관계증명서.pdf</a>
+                                        </div>
+                                    </li>
+                                    <li class="member_info_profile">
+                                        <div class="member_info_title"><h5>사원 프로필 사진</h5></div>
+                                        <div class="member_info_con">
+                                            <a href=""><img src="/img/jpg.png" alt="jpg" id="imgFamilyRL"/>사원 프로필 사진.jpg</a>
+                                        </div>
+                                    </li>
+                                    <li class="member_info_etcfile">
+                                        <div class="member_info_title"><h5>이외 자료</h5></div>
+                                        <div class="member_info_con">
+                                            <a href="" id="imgEtc">&nbsp;</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="member_info_btn_wrap">
+                                <a href="" class="member_info_btn">정보수정</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 사원 목록 Javascript -->
+        <th:block layout:fragment="customJS">
+            <script src="/js/templates/ems/employees.js"></script>
+        </th:block>
+    </body>
+</html>

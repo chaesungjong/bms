@@ -1,9 +1,11 @@
 package com.groupd.bms.controller.index;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
+import com.groupd.bms.controller.BaseController;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
@@ -11,11 +13,16 @@ import jakarta.servlet.http.HttpServletRequest;
  * 시작 페이지를 보여주기 위한 컨트롤러
  */
 @Controller
-public class IndexController {
+public class IndexController extends BaseController {
 
     @GetMapping("/")
     public String index(Model model) {
         return "redirect:/dsb/main"; 
+    }
+
+	@GetMapping("/proxy/{fileName}")
+    public ResponseEntity<byte[]> proxyFile(@PathVariable("fileName") String fileName) {
+		return ResponseEntity.ok().body(downloadFileFromGCS(fileName));
     }
 
     /**
@@ -30,5 +37,7 @@ public class IndexController {
 		}
 		return clientIP;
 	}
+
+
     
 }

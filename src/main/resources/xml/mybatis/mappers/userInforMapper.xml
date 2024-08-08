@@ -76,7 +76,7 @@
   <!-- 회원정보 관리 프로시저 End -->
 
   <!-- 회원정보 가져오기 Start -->
-  <select id="memInfo" resultType="java.util.HashMap" statementType="CALLABLE">
+  <select id="memRegistModifyHashMap" resultType="java.util.HashMap" statementType="CALLABLE">
     { call [dbo].[memRegistModify](
         #{gubun},
         #{userid},

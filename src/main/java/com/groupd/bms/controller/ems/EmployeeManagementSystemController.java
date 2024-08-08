@@ -1,7 +1,6 @@
 package com.groupd.bms.controller.ems;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.groupd.bms.controller.BaseController;
-import com.groupd.bms.model.Member;
 import com.groupd.bms.service.BoardService;
 import com.groupd.bms.service.EnterpriseService;
 import com.groupd.bms.service.UserService;
+import com.groupd.bms.util.SHA256Util;
 import com.groupd.bms.util.StringUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.servlet.http.HttpServletRequest;
@@ -98,7 +95,7 @@ public class EmployeeManagementSystemController extends BaseController{
     public ResponseEntity<?> employeeDetail( HttpServletRequest request) {
 
         HashMap<String, Object> requestMap = setRequest(request);
-        HashMap<String, Object> memInfoMap = userService.memInfo(requestMap);
+        HashMap<String, Object> memInfoMap = userService.memRegistModifyHashMap(requestMap);
 
         if(memInfoMap != null && memInfoMap.size() > 0) {
             
@@ -137,6 +134,7 @@ public class EmployeeManagementSystemController extends BaseController{
             resMap.put("juminNo", memInfoMap.get("juminNo") );                  // 주민번호
             resMap.put("boardUseYN", memInfoMap.get("boardUseYN") );            // 게시판 사용 가능
             resMap.put("memo", memInfoMap.get("memo") );                        // 메모
+            resMap.put("imgProfile", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "/img/member_info_img.jpg" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgProfile"))); // 프로필 이미지
 
             return ResponseEntity.ok(resMap);
             
@@ -152,15 +150,23 @@ public class EmployeeManagementSystemController extends BaseController{
     public String add_employees(HttpServletRequest request, Model model) {
         
         HashMap<String, Object> requestMap = setRequest(request);
-        HashMap<String, Object> memInfoMap = userService.memInfo(requestMap);
+        HashMap<String, Object> memInfoMap = userService.memRegistModifyHashMap(requestMap);
 
         if(memInfoMap != null && memInfoMap.size() > 0) {
+        
             memInfoMap.put("jobStartDate", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobStartDate"))));
             memInfoMap.put("jobEndDate", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobEndDate"))));
             memInfoMap.put("birthday", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("birthday"))));
+            memInfoMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgBankbook")));
+            memInfoMap.put("imgFamilyRL", "".equals(StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgFamilyRL")));
+            memInfoMap.put("imgProfile", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgProfile")));
+            memInfoMap.put("imgEtc", "".equals(StringUtil.objectToString(memInfoMap.get("imgEtc"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgEtc")));
+        
             model.addAttribute("memInfo", memInfoMap);
             model.addAttribute("corrections", "Y");
+        
         }
+
 
         //서명 리스트 불러오기
         List<Map<String, Object>> departNameList = enterpriseService.codeMgtViewSiteState("LIST", "departName", "","");
@@ -210,12 +216,21 @@ public class EmployeeManagementSystemController extends BaseController{
         
 
         HashMap<String, Object> RegistrationMap = setRequest(request);
-        RegistrationMap.put("gubun", "MEM_JOIN");
+
+        if("Y".equals(StringUtil.objectToString(RegistrationMap.get("corrections")))) 
+            RegistrationMap.put("gubun", "MEM_MODIFY"); 
+        else 
+            RegistrationMap.put("gubun", "MEM_JOIN");
 
         String imgBankbookUrl = "";
         String imgFamilyRLUrl = "";
         String imgProfileUrl = "";
         String imgEtcUrl  = "";
+
+        RegistrationMap.put("pwd", StringUtil.objectToString(RegistrationMap.get("pwd")));
+        RegistrationMap.put("birthday",StringUtil.objectToString(RegistrationMap.get("birthday")).replaceAll("-", "") );
+        RegistrationMap.put("jobStartDate",StringUtil.objectToString(RegistrationMap.get("jobStartDate")).replaceAll("-", ""));
+        RegistrationMap.put("jobEndDate",StringUtil.objectToString(RegistrationMap.get("jobEndDate")).replaceAll("-", ""));
 
         
         if(imgBankbook != null && !imgBankbook.isEmpty()) {
@@ -252,10 +267,10 @@ public class EmployeeManagementSystemController extends BaseController{
             //사원 등록 성공
             if("0".equals(retVal)) {
                 
-                if("".equals(imgBankbookUrl))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
-                if("".equals(imgFamilyRL))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
-                if("".equals(imgProfile))        uploadFileToGCS(imgProfile, imgProfileUrl);
-                if("".equals(imgEtcUrl))         uploadFileToGCS(imgEtc, imgEtcUrl);
+                if(!"".equals(imgBankbookUrl))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
+                if(!"".equals(imgFamilyRL))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
+                if(!"".equals(imgProfile))        uploadFileToGCS(imgProfile, imgProfileUrl);
+                if(!"".equals(imgEtcUrl))         uploadFileToGCS(imgEtc, imgEtcUrl);
                 
                 return ResponseEntity.ok(RegistrationMap);
             }
