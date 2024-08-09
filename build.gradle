@@ -20,6 +20,9 @@ configurations {
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -31,7 +34,7 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.1.0'
     implementation 'org.json:json:20211205'
     implementation 'org.springframework.boot:spring-boot-starter-logging'
-    implementation 'com.google.cloud:google-cloud-storage:2.8.1'
+    implementation name: 'google-cloud-storage-2.8.1'
 
 
     compileOnly 'org.projectlombok:lombok'
