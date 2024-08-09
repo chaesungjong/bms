@@ -267,10 +267,10 @@ public class EmployeeManagementSystemController extends BaseController{
             //사원 등록 성공
             if("0".equals(retVal)) {
                 
-                if(!"".equals(imgBankbookUrl))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
-                if(!"".equals(imgFamilyRL))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
-                if(!"".equals(imgProfile))        uploadFileToGCS(imgProfile, imgProfileUrl);
-                if(!"".equals(imgEtcUrl))         uploadFileToGCS(imgEtc, imgEtcUrl);
+                // if(!"".equals(imgBankbookUrl))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
+                // if(!"".equals(imgFamilyRL))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
+                // if(!"".equals(imgProfile))        uploadFileToGCS(imgProfile, imgProfileUrl);
+                // if(!"".equals(imgEtcUrl))         uploadFileToGCS(imgEtc, imgEtcUrl);
                 
                 return ResponseEntity.ok(RegistrationMap);
             }

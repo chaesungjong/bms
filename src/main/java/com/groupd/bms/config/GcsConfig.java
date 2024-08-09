@@ -24,11 +24,11 @@ public class GcsConfig {
         this.resourceLoader = resourceLoader;
     }
 
-    @Bean
-    public Storage storage() throws IOException {
-        Resource gcsCredentials = resourceLoader.getResource(gcsCredentialsLocation);
-        InputStream credentialsStream = gcsCredentials.getInputStream();
-        GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream);
-        return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
-    }
+    // @Bean
+    // public Storage storage() throws IOException {
+    //     Resource gcsCredentials = resourceLoader.getResource(gcsCredentialsLocation);
+    //     InputStream credentialsStream = gcsCredentials.getInputStream();
+    //     GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream);
+    //     return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+    // }
 }
