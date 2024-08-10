@@ -100,7 +100,10 @@ $(document).ready(function () {
     // 직원 상세 페이지 팝업 띄우기
     $('body').on('click', 'tr', function() {
         var userId = $(this).data('user-id');
-        console.log('User ID:', userId);
+
+        if(userId == undefined) {
+            return;
+        }
 
         var data = {
             userid: userId
@@ -128,6 +131,10 @@ $(document).ready(function () {
                 $('#memo').text(response.memo);
                 $('#infoUrl').attr('href', "/ems/add_employees?userid=" + userId);
                 $('#img').attr('src', response.imgProfile);
+                $('#imgBankbookValue').attr('value', response.imgBankbook);
+                $('#imgFamilyRLValue').attr('value', response.imgFamilyRL);
+                $('#imgProfileValue').attr('value', response.imgProfile);
+                $('#imgEtcValue').attr('value', response.imgEtc);
                 
                 $('.member_info_wrap').removeClass('out');
                 $('.member_info_wrap#member_info01').removeClass('out');
@@ -141,5 +148,24 @@ $(document).ready(function () {
             alert('현재 기능 개발 준비중 입니다.');
         });
     });
+    
 });
 
+function downloadFile(id) {
+    // 클릭된 a 태그의 href 속성 값을 가져옴
+    var fileUrl = $('#' + id+'Value').attr('value');
+
+    // 임시 a 태그 생성
+    var $tempLink = $('<a>');
+    $tempLink.attr('href', fileUrl);
+    
+    // 파일 다운로드 설정
+    $tempLink.attr('download', fileUrl.substring(fileUrl.lastIndexOf('/') + 1));
+
+    // 페이지에 추가 후 클릭하여 다운로드 실행
+    $('body').append($tempLink);
+    $tempLink[0].click();
+
+    // 임시로 만든 링크 제거
+    $tempLink.remove();
+}

@@ -22,8 +22,7 @@ public class IndexController extends BaseController {
 
 	@GetMapping("/proxy/{fileName}")
     public ResponseEntity<byte[]> proxyFile(@PathVariable("fileName") String fileName) {
-		return ResponseEntity.ok().body(null);
-		//return ResponseEntity.ok().body(downloadFileFromGCS(fileName));
+		return ResponseEntity.ok().body(downloadFileFromGCS(fileName));
     }
 
     /**

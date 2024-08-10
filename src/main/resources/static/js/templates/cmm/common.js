@@ -181,6 +181,10 @@ function setCookie(key, value, days) {
   document.cookie = key + "=" + (value || "") + expires + "; path=/";
 }
 
+/**
+ * 주민등록번호 형식으로 변환
+ * @param {*} input 
+ */
 function formatRRN(input) {
   
   var value = "";
@@ -192,17 +196,6 @@ function formatRRN(input) {
   const formattedValue = value.replace(/(\d{6})(\d{1,7})?/, '$1-$2');
 
   input.value = formattedValue.slice(0, 14); // 최대 길이를 14로 제한
-
-  // // 유효성 검사
-  // if (isValidRRN(formattedValue)) {
-  //     input.classList.remove('error');
-  //     input.classList.add('success');
-  //     document.getElementById('error-message').style.display = 'none';
-  // } else {
-  //     input.classList.add('error');
-  //     input.classList.remove('success');
-  //     document.getElementById('error-message').style.display = 'inline';
-  // }
 }
 
 function isValidRRN(rrn) {

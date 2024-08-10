@@ -13,13 +13,11 @@
                     <form class="emp_board_top" id="searchForm">
                         <div class="emp_board_date">
                             <label for="fr_date">
-                                <input type="text" name="fr_date" th:value="${fr_date}" id="fr_date" class="frm_input" size="11" maxlength="10" />
-                                <img src="/img/bm_board_date.svg" alt="처음날짜"/>
+                                <input type="date" name="fr_date" th:value="${fr_date}" id="fr_date" class="frm_input" size="11" maxlength="10" />
                             </label>
                             <span>~</span>
                             <label for="to_date">
-                                <input type="text" name="to_date" th:value="${to_date}" id="to_date" class="frm_input" size="11" maxlength="10" />
-                                <img src="/img/bm_board_date.svg" alt="마지막날짜"/>
+                                <input type="date" name="to_date" th:value="${to_date}" id="to_date" class="frm_input" size="11" maxlength="10" />
                             </label>
                         </div>
                         <div class="emp_board_search">
@@ -29,16 +27,13 @@
                             </select>
                             <label for="sch_word">
                                 <input type="text" name="search" size="20" th:value="${search}" id="sch_word" class="frm_input" />
-                                <input type="buttn" value="검색" class="sch_btn" id="searchButton"/>
+                                <input type="button" value="검색" class="sch_btn" id="searchButton"/>
                             </label>
                         </div>
-                        <div class="emp_board_btn">
-                            <button type="button" class="emp_board_refrash"><img src="/img/bm_board_refrash.svg" alt="새로고침" /></button>
-                            <a href="#" class="emp_board_mybtn">My</a>
-                        </div>
+                        <div class="emp_board_btn"></div>
                         <a href="/ems/add_employees" class="emp_reg">사원등록</a>
                     </form>
-                    <table id="employeeTable"  class="emp_board_table" cellspacing="0">
+                    <table id="employeeTable" class="emp_board_table" cellspacing="0">
                         <thead class="emp_board_th">
                             <tr>
                                 <th>입사일</th>
@@ -50,14 +45,14 @@
                                 <th>비고</th>
                             </tr>
                         </thead>
-                        <tbody class="emp_board_td">
-                        </tbody>
+                        <tbody class="emp_board_td"></tbody>
                     </table>
                     <nav class="pg_wrap">
                         <span class="pg" id="customPagination"></span>
                     </nav>
                 </div>
             </div>
+
             <div class="member_info_wrap" id="member_info01">
                 <div class="member_info_bg">
                     <div class="member_info_window">
@@ -68,23 +63,23 @@
                         <div class="member_info_section">
                             <div class="member_info_s01">
                                 <div class="member_info_img">
-                                    <img id="img" src="/img/member_info_img.jpg" alt="임시이미지" />
+                                    <img id="img" src="" alt="임시이미지" />
                                 </div>
                                 <div class="member_info_right">
                                     <div class="member_info_name">
-                                        <h3 id="userName">이수은<span class="member_info_grade" id="jobTitle">과장</span></h3>
-                                        <span class="member_info_team cat_dg" id="departName">디자인</span>
+                                        <h3 id="userName"><span class="member_info_grade" id="jobTitle"></span></h3>
+                                        <span class="member_info_team cat_dg" id="departName"></span>
                                     </div>
                                     <ul class="member_info_list01">
                                         <li class="member_info_emp">
                                             <div class="member_info_title"><h5>부서 / 팀 / 직위 / 직책</h5></div>
-                                            <div class="member_info_con"><p id="depart_total_info">디자인 1팀 / 과장 (팀장)</p></div>
+                                            <div class="member_info_con"><p id="depart_total_info"></p></div>
                                         </li>
                                         <li class="member_info_sdate">
                                             <div class="member_info_title"><h5>입사일</h5></div>
                                             <div class="member_info_con">
                                                 <p id="jobStartDate">2024-04-20 (재직 중)</p>
-                                                <span class="member_info_service" id="jobDate">2년 2개월 근속</span>
+                                                <span class="member_info_service" id="jobDate"></span>
                                             </div>
                                         </li>
                                     </ul>
@@ -94,27 +89,27 @@
                                 <ul class="member_info_list02">
                                     <li class="member_info_type">
                                         <div class="member_info_title"><h5>채용구분</h5></div>
-                                        <div class="member_info_con" id="hireType"><p>경력</p></div>
+                                        <div class="member_info_con"><p id="hireType"></p></div>
                                     </li>
                                     <li class="member_info_bday">
                                         <div class="member_info_title"><h5>생년월일</h5></div>
-                                        <div class="member_info_con" id="birthday"><p>1996-11-22 (양력)</p></div>
+                                        <div class="member_info_con"><p id="birthday"></p></div>
                                     </li>
                                     <li class="member_info_mail">
                                         <div class="member_info_title"><h5>이메일</h5></div>
-                                        <div class="member_info_con" id="email"><p>sueunlee@group-d.co.kr</p></div>
+                                        <div class="member_info_con"><p id="email"></p></div>
                                     </li>
                                     <li class="member_info_tmail">
                                         <div class="member_info_title"><h5>부서 이메일</h5></div>
-                                        <div class="member_info_con" id="emailDepart"><p>design1@group-d.co.kr</p></div>
+                                        <div class="member_info_con"><p id="emailDepart"></p></div>
                                     </li>
                                     <li class="member_info_phone">
                                         <div class="member_info_title"><h5>휴대폰 번호</h5></div>
-                                        <div class="member_info_con" id="hpno"><p>010-5550-6640</p></div>
+                                        <div class="member_info_con"><p id="hpno"></p></div>
                                     </li>
                                     <li class="member_info_cphone">
                                         <div class="member_info_title"><h5>업무폰 번호</h5></div>
-                                        <div class="member_info_con" id="hpnoDepart"><p>010-1111-1111</p></div>
+                                        <div class="member_info_con"><p id="hpnoDepart"></p></div>
                                     </li>
                                 </ul>
                             </div>
@@ -123,27 +118,27 @@
                                 <ul class="member_info_list03">
                                     <li class="member_info_address">
                                         <div class="member_info_title"><h5>주소</h5></div>
-                                        <div class="member_info_con" id="addr"><p>서울특별시 신림동 441-28 안양바른플러스치과</p></div>
+                                        <div class="member_info_con"><p id="addr"></p></div>
                                     </li>
                                     <li class="member_info_acc">
                                         <div class="member_info_title"><h5>급여 지급 방법</h5></div>
-                                        <div class="member_info_con"><p id="Account">계좌 / 신한은행 (000000 - 0000000)</p></div>
+                                        <div class="member_info_con"><p id="Account"></p></div>
                                     </li>
                                     <li class="member_info_fam">
                                         <div class="member_info_title"><h5>가족사항</h5></div>
-                                        <div class="member_info_con"><p id="marriedType">미혼</p></div>
+                                        <div class="member_info_con"><p id="marriedType"></p></div>
                                     </li>
                                     <li class="member_info_idn">
                                         <div class="member_info_title"><h5>주민번호</h5></div>
-                                        <div class="member_info_con"><p id="juminNo">961122 - ******0</p></div>
+                                        <div class="member_info_con"><p id="juminNo"></p></div>
                                     </li>
                                     <li class="member_info_auth">
                                         <div class="member_info_title"><h5>게시판 사용 가능</h5></div>
-                                        <div class="member_info_con"><p id="boardUseYN">사용 가능</p></div>
+                                        <div class="member_info_con"><p id="boardUseYN"></p></div>
                                     </li>
                                     <li class="member_info_memo">
                                         <div class="member_info_title"><h5>메모</h5></div>
-                                        <div class="member_info_con"><p id="memo">입사 00시기 팀장 진급 / 현재 직무 홈페이지 위주건 진행</p></div>
+                                        <div class="member_info_con"><p id="memo"></p></div>
                                     </li>
                                 </ul>
                             </div>
@@ -153,25 +148,37 @@
                                     <li class="member_info_accimg">
                                         <div class="member_info_title"><h5>통장 사본</h5></div>
                                         <div class="member_info_con">
-                                            <a href=""><img src="/img/jpg.png" alt="jpg" id="imgBankbook"/>통장사본.pdf</a>
+                                            <a href="javascript:void(0);" id="imgBankbook" onclick="downloadFile('imgBankbook')">
+                                                <img src="/img/jpg.png" alt="jpg" />통장사본
+                                            </a>
+                                            <input type="hidden" id="imgBankbookValue" value="" />
                                         </div>
                                     </li>
                                     <li class="member_info_famimg">
                                         <div class="member_info_title"><h5>가족관계증명서</h5></div>
                                         <div class="member_info_con">
-                                            <a href=""><img src="/img/jpg.png" alt="jpg" id="imgFamilyRL"/>가족관계증명서.pdf</a>
+                                            <a href="javascript:void(0);" id="imgFamilyRL" onclick="downloadFile('imgFamilyRL')">
+                                                <img src="/img/jpg.png" alt="jpg" />가족관계증명서
+                                            </a>
+                                            <input type="hidden" id="imgFamilyRLValue" value="" />
                                         </div>
                                     </li>
                                     <li class="member_info_profile">
                                         <div class="member_info_title"><h5>사원 프로필 사진</h5></div>
                                         <div class="member_info_con">
-                                            <a href=""><img src="/img/jpg.png" alt="jpg" id="imgFamilyRL"/>사원 프로필 사진.jpg</a>
+                                            <a href="javascript:void(0);" id="imgProfile" onclick="downloadFile('imgProfile')">
+                                                <img src="/img/jpg.png" alt="jpg" />사원 프로필 사진
+                                            </a>
+                                            <input type="hidden" id="imgProfileValue" value="" />
                                         </div>
                                     </li>
                                     <li class="member_info_etcfile">
                                         <div class="member_info_title"><h5>이외 자료</h5></div>
                                         <div class="member_info_con">
-                                            <a href="" id="imgEtc">&nbsp;</a>
+                                            <a href="javascript:void(0);" id="imgEtc" onclick="downloadFile('imgEtc')">
+                                                <img src="/img/jpg.png" alt="jpg" />이외 자료
+                                            </a>
+                                            <input type="hidden" id="imgEtcValue" value="" />
                                         </div>
                                     </li>
                                 </ul>

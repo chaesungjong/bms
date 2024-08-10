@@ -135,6 +135,9 @@ public class EmployeeManagementSystemController extends BaseController{
             resMap.put("boardUseYN", memInfoMap.get("boardUseYN") );            // 게시판 사용 가능
             resMap.put("memo", memInfoMap.get("memo") );                        // 메모
             resMap.put("imgProfile", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "/img/member_info_img.jpg" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgProfile"))); // 프로필 이미지
+            resMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgBankbook"))); //은행 계좌
+            resMap.put("imgFamilyRL", "".equals(StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))); // 프로필 이미지
+            resMap.put("imgEtc", "".equals(StringUtil.objectToString(memInfoMap.get("imgEtc"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgEtc"))); // 프로필 이미지
 
             return ResponseEntity.ok(resMap);
             
@@ -157,9 +160,17 @@ public class EmployeeManagementSystemController extends BaseController{
             memInfoMap.put("jobStartDate", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobStartDate"))));
             memInfoMap.put("jobEndDate", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobEndDate"))));
             memInfoMap.put("birthday", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("birthday"))));
-            memInfoMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgBankbook")));
+
+            memInfoMap.put("imgBankbookFileName", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : StringUtil.objectToString(memInfoMap.get("imgBankbook")));
+            memInfoMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" +StringUtil.objectToString(memInfoMap.get("imgBankbook")));
+            
+            memInfoMap.put("imgFamilyRLFileName", "".equals(StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))) ?  "" :  StringUtil.objectToString(memInfoMap.get("imgFamilyRL")));
             memInfoMap.put("imgFamilyRL", "".equals(StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgFamilyRL")));
+
+            memInfoMap.put("imgProfileFileName", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "" : StringUtil.objectToString(memInfoMap.get("imgProfile")));
             memInfoMap.put("imgProfile", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgProfile")));
+
+            memInfoMap.put("imgEtcFimeName", "".equals(StringUtil.objectToString(memInfoMap.get("imgEtc"))) ?  "" :StringUtil.objectToString(memInfoMap.get("imgEtc")));
             memInfoMap.put("imgEtc", "".equals(StringUtil.objectToString(memInfoMap.get("imgEtc"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgEtc")));
         
             model.addAttribute("memInfo", memInfoMap);
@@ -232,28 +243,46 @@ public class EmployeeManagementSystemController extends BaseController{
         RegistrationMap.put("jobStartDate",StringUtil.objectToString(RegistrationMap.get("jobStartDate")).replaceAll("-", ""));
         RegistrationMap.put("jobEndDate",StringUtil.objectToString(RegistrationMap.get("jobEndDate")).replaceAll("-", ""));
 
+        String imgBankbookFileName = StringUtil.objectToString(RegistrationMap.get("imgBankbookFileName"));
+        String imgFamilyRLFileName = StringUtil.objectToString(RegistrationMap.get("imgFamilyRLFileName"));
+        String imgProfileFileName = StringUtil.objectToString(RegistrationMap.get("imgProfileFileName"));
+        String imgEtcFimeName = StringUtil.objectToString(RegistrationMap.get("imgEtcFimeName"));
+
+
         
-        if(imgBankbook != null && !imgBankbook.isEmpty()) {
-            imgBankbookUrl = UUID.randomUUID().toString();
+        if(imgBankbook != null && !imgBankbook.isEmpty())  {
+            imgBankbookUrl = setFileName(imgBankbook,UUID.randomUUID().toString());
             RegistrationMap.put("imgBankbook", imgBankbookUrl);
+            imgBankbookFileName = "";
+        }else if(!"".equals(imgBankbookFileName)){
+            RegistrationMap.put("imgBankbook", imgBankbookFileName);
         }
 
 
         if(imgFamilyRL != null && !imgFamilyRL.isEmpty()) {
-            imgFamilyRLUrl = UUID.randomUUID().toString();
+            imgFamilyRLUrl = setFileName(imgFamilyRL,UUID.randomUUID().toString());
             RegistrationMap.put("imgFamilyRL", imgFamilyRLUrl);
+            imgFamilyRLFileName = "";
+        }else if(!"".equals(imgFamilyRLFileName)){
+            RegistrationMap.put("imgFamilyRL", imgFamilyRLFileName);
         }
 
 
         if(imgProfile != null && !imgProfile.isEmpty()) {
-            imgProfileUrl = UUID.randomUUID().toString();
+            imgProfileUrl = setFileName(imgProfile,UUID.randomUUID().toString());
             RegistrationMap.put("imgProfile", imgProfileUrl);
+            imgProfileFileName = "";
+        }else if(!"".equals(imgProfileFileName)){
+            RegistrationMap.put("imgProfile", imgProfileFileName);
         }
 
 
         if(imgEtc != null && !imgEtc.isEmpty()) {
-            imgEtcUrl = UUID.randomUUID().toString();
+            imgEtcUrl = setFileName(imgEtc,UUID.randomUUID().toString());
             RegistrationMap.put("imgEtc", imgEtcUrl);
+            imgEtcFimeName = "";
+        }else if(!"".equals(imgEtcFimeName)){
+            RegistrationMap.put("imgEtc", imgEtcFimeName);
         }
         
         //사원 등록 처리
@@ -267,10 +296,10 @@ public class EmployeeManagementSystemController extends BaseController{
             //사원 등록 성공
             if("0".equals(retVal)) {
                 
-                // if(!"".equals(imgBankbookUrl))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
-                // if(!"".equals(imgFamilyRL))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
-                // if(!"".equals(imgProfile))        uploadFileToGCS(imgProfile, imgProfileUrl);
-                // if(!"".equals(imgEtcUrl))         uploadFileToGCS(imgEtc, imgEtcUrl);
+                 if(!"".equals(imgBankbookUrl) && "".equals(imgBankbookFileName))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
+                 if(!"".equals(imgFamilyRL) && "".equals(imgFamilyRLFileName))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
+                 if(!"".equals(imgProfile)&& "".equals(imgProfileFileName))          uploadFileToGCS(imgProfile, imgProfileUrl);
+                 if(!"".equals(imgEtcUrl)&& "".equals(imgEtcFimeName))               uploadFileToGCS(imgEtc, imgEtcUrl);
                 
                 return ResponseEntity.ok(RegistrationMap);
             }
