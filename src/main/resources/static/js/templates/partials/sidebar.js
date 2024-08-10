@@ -15,14 +15,13 @@ $(document).ready(function () {
         var url = $(this).attr('href');
         loadContent(url);
     });
+
+    // 내 정보 버튼 클릭 시 호출
     $('.user_info_btn').click(function () {
-        var userBtn = $(this).attr('id');
-        $('.member_info_wrap').removeClass('on');
-        $('.member_info_wrap').removeClass('out');
-        $('.member_info_wrap#' + userBtn).addClass('on');
-        $('body, html').addClass('modal-active');
+        showProfile($("#userid").val());
     });
 
+    //프로필 상세 정보 삭제 시 
     $('.member_info_close').click(function () {
         $('.member_info_wrap').addClass('out');
         $('body, html').removeClass('modal-active');
@@ -54,3 +53,72 @@ $(document).ready(function () {
     targetMenuItem.trigger('click');
 
 });
+
+
+function showProfile(userID) {
+
+    var data = {
+        userid: userID
+    };
+
+    ajaxRequest("/ems/employee_detail", data, "POST", function (response) {
+
+        if (response.retVal == 0) {
+            
+            $('#userNameView').text(response.userName);
+            $('#departNameView').text(response.departName);
+            $('#depart_total_infoView').text(response.depart_total_info);
+            $('#jobStartDateView').text(response.jobStartDate);
+            $('#jobDateView').text(response.jobDate);
+            $('#hireTypeView').text(response.hireType);
+            $('#birthdayView').text(response.birthday);
+            $('#emailView').text(response.email);
+            $('#emailDepartView').text(response.emailDepart);
+            $('#hpnoView').text(response.hpno);
+            $('#hpnoDepartView').text(response.hpnoDepart);
+            $('#addrView').text(response.addr);
+            $('#AccountView').text(response.Account);
+            $('#marriedTypeView').text(response.marriedType);
+            $('#juminNoView').text(response.juminNo);
+            $('#boardUseYNView').text(response.boardUseYN);
+            $('#memoView').text(response.memo);
+            $('#infoUrl').attr('href', "/ems/add_employees?userid=" + userID);
+            $('#imgView').attr('src', response.imgProfile);
+            $('#imgBankbookValue').attr('value', response.imgBankbook);
+            $('#imgFamilyRLValue').attr('value', response.imgFamilyRL);
+            $('#imgProfileValue').attr('value', response.imgProfile);
+            $('#imgEtcValue').attr('value', response.imgEtc);
+
+            $('.member_info_wrap').removeClass('on');
+            $('.member_info_wrap').removeClass('out');
+            $('.member_info_wrap').addClass('on');
+            $('body, html').addClass('modal-active');
+
+
+        } else {
+            alert("다시 시도해 주세요.");
+        }
+    }, function () {
+        alert('현재 기능 개발 준비중 입니다.');
+    });
+
+}
+
+function downloadFile(id) {
+    // 클릭된 a 태그의 href 속성 값을 가져옴
+    var fileUrl = $('#' + id+'Value').attr('value');
+
+    // 임시 a 태그 생성
+    var $tempLink = $('<a>');
+    $tempLink.attr('href', fileUrl);
+    
+    // 파일 다운로드 설정
+    $tempLink.attr('download', fileUrl.substring(fileUrl.lastIndexOf('/') + 1));
+
+    // 페이지에 추가 후 클릭하여 다운로드 실행
+    $('body').append($tempLink);
+    $tempLink[0].click();
+
+    // 임시로 만든 링크 제거
+    $tempLink.remove();
+}

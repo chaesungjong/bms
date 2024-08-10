@@ -89,64 +89,12 @@ $(document).ready(function () {
 
         $('#customPagination').html(paginationHtml);
     }
-
-    $('.member_info_close').click(function () {
-        $('.member_info_wrap').addClass('out');
-        $('.member_info_wrap#member_info01').addClass('out');
-        $('body, html').removeClass('modal-active');
-    });
     
 
     // 직원 상세 페이지 팝업 띄우기
     $('body').on('click', 'tr', function() {
         var userId = $(this).data('user-id');
-
-        if(userId == undefined) {
-            return;
-        }
-
-        var data = {
-            userid: userId
-        };
-
-        ajaxRequest("/ems/employee_detail", data, "POST", function (response) {
-            if (response.retVal == 0) {
-                
-                $('#userName').text(response.userName);
-                $('#departName').text(response.departName);
-                $('#depart_total_info').text(response.depart_total_info);
-                $('#jobStartDate').text(formatDate(response.jobStartDate));
-                $('#jobDate').text(formatDate(response.jobDate));
-                $('#hireType').text(response.hireType);
-                $('#birthday').text(formatDate(response.birthday));
-                $('#email').text(response.email);
-                $('#emailDepart').text(response.emailDepart);
-                $('#hpno').text(response.hpno);
-                $('#hpnoDepart').text(response.hpnoDepart);
-                $('#addr').text(response.addr);
-                $('#Account').text(response.Account);
-                $('#marriedType').text(response.marriedType);
-                $('#juminNo').text(response.juminNo);
-                $('#boardUseYN').text(response.boardUseYN);
-                $('#memo').text(response.memo);
-                $('#infoUrl').attr('href', "/ems/add_employees?userid=" + userId);
-                $('#img').attr('src', response.imgProfile);
-                $('#imgBankbookValue').attr('value', response.imgBankbook);
-                $('#imgFamilyRLValue').attr('value', response.imgFamilyRL);
-                $('#imgProfileValue').attr('value', response.imgProfile);
-                $('#imgEtcValue').attr('value', response.imgEtc);
-                
-                $('.member_info_wrap').removeClass('out');
-                $('.member_info_wrap#member_info01').removeClass('out');
-                $('.member_info_wrap').removeClass('on');
-                $('.member_info_wrap#member_info01').addClass('on');
-                $('body, html').addClass('modal-active');
-            } else {
-                alert("다시 시도해 주세요.");
-            }
-        }, function () {
-            alert('현재 기능 개발 준비중 입니다.');
-        });
+        showProfile(userId);
     });
     
 });

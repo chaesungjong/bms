@@ -100,7 +100,7 @@ public class EmployeeManagementSystemController extends BaseController{
         if(memInfoMap != null && memInfoMap.size() > 0) {
             
             String depart_total_info = StringUtil.objectToString(memInfoMap.get("departCode") + " "  + memInfoMap.get("teamCode") + " / " + memInfoMap.get("jobPosition")  + " " + memInfoMap.get("jobTitle"));
-            String jobStartDate = StringUtil.objectToString(memInfoMap.get("jobStartDate")) + " (" + memInfoMap.get("jobStatus") + ")";
+            String jobStartDate = StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobStartDate"))) + " (" + memInfoMap.get("jobStatus") + ")";
             String jobStatus = StringUtil.objectToString(memInfoMap.get("jobStatus"));
             String jobDate = "";
 
@@ -110,7 +110,9 @@ public class EmployeeManagementSystemController extends BaseController{
                 jobDate = StringUtil.getPeriod(StringUtil.objectToString(memInfoMap.get("jobStartDate")) , StringUtil.today().replaceAll("-", ""));
             }
 
-            String birthday = StringUtil.objectToString(memInfoMap.get("birthday"));
+            String boardUseYN = "Y".equals(StringUtil.objectToString(memInfoMap.get("boardUseYN"))) ? "가능" : "불가능";
+
+            String birthday = StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("birthday")));
             String Account = StringUtil.objectToString(memInfoMap.get("payGiveType") + " / " + memInfoMap.get("bankAccount"));
             
             HashMap<String, Object> resMap = new  HashMap<String, Object>();
@@ -125,14 +127,14 @@ public class EmployeeManagementSystemController extends BaseController{
             resMap.put("jobTitle", memInfoMap.get("jobTitle"));                 // 직책
             resMap.put("birthday", birthday);                                       // 생년월일
             resMap.put("email", memInfoMap.get("email"));                       // 이메일
-            resMap.put("emaemailDepartil", memInfoMap.get("emailDepart"));      // 부서 이메일
+            resMap.put("emailDepart", memInfoMap.get("emailDepart"));           // 부서 이메일
             resMap.put("hpno", memInfoMap.get("hpno"));                         // 전화 번호
             resMap.put("hpnoDepart", memInfoMap.get("hpnoDepart"));             // 부서 전화 번호
             resMap.put("addr", memInfoMap.get("addr"));                         // 주소
             resMap.put("Account", Account);                                         // 계좌번호
             resMap.put("marriedType", memInfoMap.get("marriedType") );          // 가족관계
             resMap.put("juminNo", memInfoMap.get("juminNo") );                  // 주민번호
-            resMap.put("boardUseYN", memInfoMap.get("boardUseYN") );            // 게시판 사용 가능
+            resMap.put("boardUseYN", boardUseYN );                                  // 게시판 사용 가능
             resMap.put("memo", memInfoMap.get("memo") );                        // 메모
             resMap.put("imgProfile", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "/img/member_info_img.jpg" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgProfile"))); // 프로필 이미지
             resMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgBankbook"))); //은행 계좌
@@ -238,7 +240,7 @@ public class EmployeeManagementSystemController extends BaseController{
         String imgProfileUrl = "";
         String imgEtcUrl  = "";
 
-        RegistrationMap.put("pwd", StringUtil.objectToString(RegistrationMap.get("pwd")));
+        RegistrationMap.put("pwd", SHA256Util.hashWithSHA256(StringUtil.objectToString(RegistrationMap.get("pwd"))));
         RegistrationMap.put("birthday",StringUtil.objectToString(RegistrationMap.get("birthday")).replaceAll("-", "") );
         RegistrationMap.put("jobStartDate",StringUtil.objectToString(RegistrationMap.get("jobStartDate")).replaceAll("-", ""));
         RegistrationMap.put("jobEndDate",StringUtil.objectToString(RegistrationMap.get("jobEndDate")).replaceAll("-", ""));

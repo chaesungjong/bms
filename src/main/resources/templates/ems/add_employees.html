@@ -46,11 +46,11 @@
                                                 <input type="text" name="userid" id="userid" class="id_box"
                                                        placeholder="아이디" th:value="${memInfo?.userid}" required />
                                             </label>
-                                            <label for="pwd">비밀번호
+                                            <label for="pwd" th:if="${corrections != 'Y'}">비밀번호
                                                 <input type="password" name="pwd" id="pwd" class="pw_box"
                                                        placeholder="비밀번호" th:value="${memInfo?.pwd}" required />
                                             </label>
-                                            <label for="pwdCheck">비밀번호 확인
+                                            <label for="pwdCheck" th:if="${corrections != 'Y'}">비밀번호 확인
                                                 <input type="password" name="pwdCheck" id="pwdCheck" class="pwr_box"
                                                        placeholder="비밀번호 확인" th:value="${memInfo?.pwd}" required />
                                             </label>

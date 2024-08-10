@@ -67,7 +67,7 @@ function areDatesEqual(date1, date2) {
 function formatDate(dateInput) {
 
     // 입력 값이 8자리인 경우에만 변환 시도
-    if (dateInput === 8) {
+    if (dateInput.length === 8) {
         const formattedDate = value.substring(0, 4) + '-' + value.substring(4, 6) + '-' + value.substring(6, 8);
         dateInput.value = formattedDate;
     }

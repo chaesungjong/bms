@@ -198,6 +198,42 @@ function formatRRN(input) {
   input.value = formattedValue.slice(0, 14); // 최대 길이를 14로 제한
 }
 
+/**
+ * 전화번호 형식으로 변환
+ * @param {*} input 
+ */
+function formatNumber(input) {
+  var value = "";
+  try {
+    value = input.val().replace(/\D/g, ''); // 숫자가 아닌 모든 문자 제거
+  } catch(e) {
+    value = input.value.replace(/\D/g, ''); // 숫자가 아닌 모든 문자 제거
+  }
+
+  let formattedValue;
+
+  if (value.length === 11) {
+    // 휴대폰 번호 형식 (예: 010-1234-5678)
+    formattedValue = value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+  } else if (value.length === 10 && value.startsWith("02")) {
+    // 서울 집 전화번호 형식 (예: 02-123-4567)
+    formattedValue = value.replace(/(\d{2})(\d{3,4})(\d{4})/, '$1-$2-$3');
+  } else if (value.length === 10) {
+    // 그 외 집 전화번호 형식 (예: 031-123-4567)
+    formattedValue = value.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3');
+  } else if (value.length === 9 && value.startsWith("02")) {
+    // 서울 집 전화번호 형식 (구형식, 예: 02-123-4567)
+    formattedValue = value.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+  } else {
+    // 기타 번호는 그대로 반환
+    formattedValue = value;
+  }
+
+  input.val(formattedValue.slice(0, 13)); // 최대 길이를 13로 제한 (전화번호 형식에 맞게)
+}
+
+
+
 function isValidRRN(rrn) {
   // 기본적인 형식 검사
   const regex = /^\d{6}-\d{7}$/;

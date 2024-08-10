@@ -13,6 +13,7 @@
                         <div class="sidebar_user_left">
                             <span class="sidebar_user_name" th:text="${member.name}"></span>
                             <span class="sidebar_user_grade" th:text="${member.codeName}"></span>
+                            <input type="hidden" id="userid" th:value="${member.userid}" />
                         </div>
                         <div class="sidebar_user_right">
                             <a href="#" class="user_info_btn" id="member_info"><img src="/img/sidebar_user_right01.svg" alt="회원정보" /></a>
@@ -103,23 +104,23 @@
                     <div class="member_info_section">
                         <div class="member_info_s01">
                             <div class="member_info_img">
-                                <img src="/img/member_info_img.jpg" alt="임시이미지" />
+                                <img id="imgView" src="" alt="임시이미지" />
                             </div>
                             <div class="member_info_right">
                                 <div class="member_info_name">
-                                    <h3>이수은<span class="member_info_grade">과장</span></h3>
+                                    <h3 id="userNameView"><span class="member_info_grade" id="jobTitleView"></span></h3>
                                     <span class="member_info_team cat_dg">디자인</span>
                                 </div>
                                 <ul class="member_info_list01">
                                     <li class="member_info_emp">
                                         <div class="member_info_title"><h5>부서 / 팀 / 직위 / 직책</h5></div>
-                                        <div class="member_info_con"><p>디자인 1팀 / 과장 (팀장)</p></div>
+                                        <div class="member_info_con"><p id="depart_total_infoView"></p></div>
                                     </li>
                                     <li class="member_info_sdate">
                                         <div class="member_info_title"><h5>입사일</h5></div>
                                         <div class="member_info_con">
-                                            <p>2024-04-20 (재직 중)</p>
-                                            <span class="member_info_service">2년 2개월 근속</span>
+                                                <p id="jobStartDateView"></p>
+                                                <span class="member_info_service" id="jobDateView"></span>
                                         </div>
                                     </li>
                                 </ul>
@@ -129,27 +130,27 @@
                             <ul class="member_info_list02">
                                 <li class="member_info_type">
                                     <div class="member_info_title"><h5>채용구분</h5></div>
-                                    <div class="member_info_con"><p>경력</p></div>
+                                    <div class="member_info_con"><p id="hireTypeView"></p></div>
                                 </li>
                                 <li class="member_info_bday">
                                     <div class="member_info_title"><h5>생년월일</h5></div>
-                                    <div class="member_info_con"><p>1996-11-22 (양력)</p></div>
+                                    <div class="member_info_con"><p id="birthdayView"></p></div>
                                 </li>
                                 <li class="member_info_mail">
                                     <div class="member_info_title"><h5>이메일</h5></div>
-                                    <div class="member_info_con"><p>sueunlee@group-d.co.kr</p></div>
+                                    <div class="member_info_con"><p id="emailView"></p></div>
                                 </li>
                                 <li class="member_info_tmail">
                                     <div class="member_info_title"><h5>부서 이메일</h5></div>
-                                    <div class="member_info_con"><p>design1@group-d.co.kr</p></div>
+                                    <div class="member_info_con"><p id="emailDepartView"></p></div>
                                 </li>
                                 <li class="member_info_phone">
                                     <div class="member_info_title"><h5>휴대폰 번호</h5></div>
-                                    <div class="member_info_con"><p>010-5550-6640</p></div>
+                                    <div class="member_info_con"><p id="hpnoView"></p></div>
                                 </li>
                                 <li class="member_info_cphone">
                                     <div class="member_info_title"><h5>업무폰 번호</h5></div>
-                                    <div class="member_info_con"><p>010-1111-1111</p></div>
+                                    <div class="member_info_con"><p id="hpnoDepartView"></p></div>
                                 </li>
                             </ul>
                         </div>
@@ -158,27 +159,27 @@
                             <ul class="member_info_list03">
                                 <li class="member_info_address">
                                     <div class="member_info_title"><h5>주소</h5></div>
-                                    <div class="member_info_con"><p>서울특별시 신림동 441-28 안양바른플러스치과</p></div>
+                                    <div class="member_info_con"><p id="addrView"></p></div>
                                 </li>
                                 <li class="member_info_acc">
                                     <div class="member_info_title"><h5>급여 지급 방법</h5></div>
-                                    <div class="member_info_con"><p>계좌 / 신한은행 (000000 - 0000000)</p></div>
+                                    <div class="member_info_con"><p id="AccountView"></p></div>
                                 </li>
                                 <li class="member_info_fam">
                                     <div class="member_info_title"><h5>가족사항</h5></div>
-                                    <div class="member_info_con"><p>미혼</p></div>
+                                    <div class="member_info_con"><p id="marriedTypeView"></p></div>
                                 </li>
                                 <li class="member_info_idn">
                                     <div class="member_info_title"><h5>주민번호</h5></div>
-                                    <div class="member_info_con"><p>961122 - ******0</p></div>
+                                    <div class="member_info_con"><p id="juminNoView"></p></div>
                                 </li>
                                 <li class="member_info_auth">
                                     <div class="member_info_title"><h5>게시판 사용 가능</h5></div>
-                                    <div class="member_info_con"><p>사용 가능</p></div>
+                                    <div class="member_info_con"><p id="boardUseYNView"></p></div>
                                 </li>
                                 <li class="member_info_memo">
                                     <div class="member_info_title"><h5>메모</h5></div>
-                                    <div class="member_info_con"><p>입사 00시기 팀장 진급 / 현재 직무 홈페이지 위주건 진행</p></div>
+                                    <div class="member_info_con"><p id="memoView"></p></div>
                                 </li>
                             </ul>
                         </div>
@@ -188,31 +189,43 @@
                                 <li class="member_info_accimg">
                                     <div class="member_info_title"><h5>통장 사본</h5></div>
                                     <div class="member_info_con">
-                                        <a href="#"><img src="/img/jpg.png" alt="jpg" />통장사본.pdf</a>
+                                        <a href="javascript:void(0);" id="imgBankbookView" onclick="downloadFile('imgBankbook')">
+                                            <img src="/img/jpg.png" alt="jpg" />통장사본
+                                        </a>
+                                        <input type="hidden" id="imgBankbookValue" value="" />
                                     </div>
                                 </li>
                                 <li class="member_info_famimg">
                                     <div class="member_info_title"><h5>가족관계증명서</h5></div>
                                     <div class="member_info_con">
-                                        <a href="#"><img src="/img/jpg.png" alt="jpg" />가족관계증명서.pdf</a>
+                                        <a href="javascript:void(0);" id="imgFamilyRLView" onclick="downloadFile('imgFamilyRL')">
+                                            <img src="/img/jpg.png" alt="jpg" />가족관계증명서
+                                        </a>
+                                        <input type="hidden" id="imgFamilyRLValue" value="" />
                                     </div>
                                 </li>
                                 <li class="member_info_profile">
                                     <div class="member_info_title"><h5>사원 프로필 사진</h5></div>
                                     <div class="member_info_con">
-                                        <a href="#"><img src="/img/jpg.png" alt="jpg" />사원 프로필 사진.jpg</a>
+                                        <a href="javascript:void(0);" id="imgProfileView" onclick="downloadFile('imgProfile')">
+                                            <img src="/img/jpg.png" alt="jpg" />사원 프로필 사진
+                                        </a>
+                                        <input type="hidden" id="imgProfileValue" value="" />
                                     </div>
                                 </li>
                                 <li class="member_info_etcfile">
                                     <div class="member_info_title"><h5>이외 자료</h5></div>
                                     <div class="member_info_con">
-                                        <a href="#">&nbsp;</a>
+                                        <a href="javascript:void(0);" id="imgEtcView" onclick="downloadFile('imgEtc')">
+                                            <img src="/img/jpg.png" alt="jpg" />이외 자료
+                                        </a>
+                                        <input type="hidden" id="imgEtcValue" value="" />
                                     </div>
                                 </li>
                             </ul>
                         </div>
                         <div class="member_info_btn_wrap">
-                            <a href="#" class="member_info_btn">정보수정</a>
+                            <a href="#"  id="infoUrl" class="member_info_btn">정보수정</a>
                         </div>
                     </div>
                 </div>

@@ -18,14 +18,6 @@ $(document).ready(function () {
         }
     });
 
-    if ($('#jobStatus').val() === "WORK") {
-        $('#jobEndDateLabel').hide();
-        $('#jobEndDatesmall').hide();
-    } else if ($('#jobStatus').val() === "LEAVE") {
-        $('#jobEndDateLabel').show();
-        $('#jobEndDatesmall').show();
-    }
-
     // 등록 하기 버튼 클릭 시 호출 
     $('#registration').click(function () {
         // 유효성 검사
@@ -52,24 +44,38 @@ $(document).ready(function () {
         }
     });
 
+    //직업 상태 선택 시 호출
     $('#jobStatus').change(function () {
         jobStatusChange(this);
     });
 
+    // 입사일 선택 시 호출
     $('#jobStartDate').change(function () {
         var jobStartDate = $(this).val();
         const duration = calculateDuration(jobStartDate, getTodayDate());
         $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
     });
 
+    // 퇴사일 선택 시 호출
     $('#jobEndDate').change(function () {
         var jobEndDate = $(this).val();
         const duration = calculateDuration($('#jobStartDate').val(), jobEndDate);
         $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
     });
 
+    // 휴대폰 번호 입력 시
     $('#juminNo').on('input', function () {
         formatRRN($('#juminNo'));
+    });
+
+    //업무폰 입력시 
+    $('#hpno').on('input', function () {
+        formatNumber($('#hpno'));
+    });
+
+    //업무폰 입력시 
+    $('#hpnoDepart').on('input', function () {
+        formatNumber($('#hpnoDepart'));
     });
 
     calculateDuration();
@@ -95,35 +101,6 @@ function init() {
 
     // 주민등록번호 형식 변환
     formatRRN($('#juminNo'));
-
-    // 통장 사본 파일 첨부 여부 확인
-    if (checkFileInput('#imgBankbook')) {
-        $('#memInfoImgBankbookMessage').show();
-    } else {
-        $('#memInfoImgBankbookMessage').hide();
-    }
-
-    // 가족관계증명서 파일 첨부 여부 확인
-    if (checkFileInput('#imgFamilyRL')) {
-        $('#imgFamilyRLMessage').show();
-    } else {
-        $('#imgFamilyRLMessage').hide();
-    }
-
-    // 사원 프로필 사진 파일 첨부 여부 확인
-    if (checkFileInput('#imgProfile')) {
-        $('#imgProfileMessage').show();
-    } else {
-        $('#imgProfileMessage').hide();
-    }
-
-    // 이외 자료 파일 첨부 여부 확인
-    if (checkFileInput('#imgEtc')) {
-        $('#imgEtcMessage').text(imgEtc).show();
-    } else {
-        $('#imgEtcMessage').hide();
-    }
-
     jobStatusChange('#jobStatus');
 }
 
@@ -225,6 +202,7 @@ function readURL(input) {
         reader.onload = function (e) {
             $('#profile_preview').attr('src', e.target.result);
             uploadFile(input.files[0], function (data) {
+                $('.profile_box').removeClass('profile_box');
                 $('#profile_preview').attr('value', data);
             });
         };
