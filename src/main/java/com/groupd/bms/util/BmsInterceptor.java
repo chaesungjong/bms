@@ -73,7 +73,7 @@ public class BmsInterceptor implements HandlerInterceptor {
                         }
 
                         // 비밀번호 쿠키가 있는지 확인
-                        if(request.getCookies()[i].getName().equals("pw")){
+                        if(request.getCookies()[i].getName().equals("password")){
                             password = request.getCookies()[i].getValue();
                         }
                         
@@ -88,8 +88,11 @@ public class BmsInterceptor implements HandlerInterceptor {
                         // 로그인 성공 시 세션에 회원 정보를 저장
                         if (loginResultMap != null && loginResultMap.get("retVal").equals("0") && loginResultMap.get("member") != null){
 
+                            Member member = (Member) loginResultMap.get("member");
+                            request.getSession().setAttribute("member", member);
+                            response.sendRedirect("/dsb/main");
                             setMember(request);
-                            return true; 
+                            return false; 
 
                         }
                     }
@@ -101,10 +104,12 @@ public class BmsInterceptor implements HandlerInterceptor {
 
              setMember(request);
 
-         }else{
+        }else if("/error".equals(request.getRequestURI())){
+            // 에러 페이지는 세션 체크를 하지 않음
+            return true;
+        }else{
             // 로그인이 되어있지 않은 상태
             if (request.getSession().getAttribute("member") != null) {
-                
                 setMember(request);
                 response.sendRedirect("/dsb/main");
                 return false; // 현재 요청을 중지하고 메인 페이지로 리다이렉트
@@ -167,5 +172,4 @@ public class BmsInterceptor implements HandlerInterceptor {
         Member member = (Member) request.getSession().getAttribute("member");
         request.setAttribute("member", member);
     }
-
 }
