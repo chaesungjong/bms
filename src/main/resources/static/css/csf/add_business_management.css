@@ -98,6 +98,22 @@
     border: 1px solid #ddd;
     background-color: #ebebeb;
 }
+.bm_post_wrap {
+    display: inline-block;
+    margin-right: 56px;
+}
+.add_bm_post label {
+    margin-right: 20px;
+}
+.add_bm_post input[type='radio'] {
+    margin-right: 4px;
+}
+.bm_post_review {
+    width: 42px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #ebebeb;
+}
 .add_bm_post button {
     margin: 0px;
     padding: 0px;
@@ -105,13 +121,17 @@
     display: contents;
     cursor: pointer;
 }
-.add_bm_post input {
+.add_bm_post input[type='number'],
+.add_bm_post input[type='text'] {
     margin: 0px 4px;
     width: 48px;
     line-height: 40px;
     border-radius: 4px;
     border: 1px solid #ddd;
     text-align: center;
+}
+.add_bm_post input[type='number'] {
+    line-height: initial;
 }
 .bm_homepage_url {
     margin-left: 8px;

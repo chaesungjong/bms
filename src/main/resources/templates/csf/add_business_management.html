@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 업체 관리  CSS -->
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/csf/add_business_management.css" />
@@ -49,38 +45,34 @@
                                     <tr class="add_bm_type">
                                         <td class="add_bm_title">거래 내용</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_type1"><input type="radio" name="" id="bm_type1" value="블로그" />블로그</label>
-                                            <label for="bm_type2"><input type="radio" name="" id="bm_type2" value="홈페이지" />홈페이지</label>
-                                            <label for="bm_type3"><input type="radio" name="" id="bm_type3" value="브랜딩 영상" />브랜딩 영상</label>
-                                            <label for="bm_type4"
-                                                ><input type="radio" name="" id="bm_type4" value="리뷰" />리뷰 (월
-                                                <input type="number" class="bm_type_review" value="0" /> 건)</label
-                                            >
-                                            <label for="bm_type5"><input type="radio" name="" id="bm_type5" value="인스타" />인스타</label>
-                                            <label for="bm_type6"><input type="radio" name="" id="bm_type6" value="유튜브" />유튜브</label>
-                                            <label for="bm_type7"><input type="radio" name="" id="bm_type7" value="맘카페" />맘카페</label>
+                                            <label for="bm_type1"><input type="radio" name="" id="bm_type1" value="홈페이지" />홈페이지</label>
+                                            <label for="bm_type2"><input type="radio" name="" id="bm_type2" value="블로그" />블로그</label>
+                                            <label for="bm_type3"><input type="radio" name="" id="bm_type3" value="리뷰" />리뷰 (월 <input type="number" class="bm_type_review" value="0" /> 건)</label>
+                                            <label for="bm_type4"><input type="radio" name="" id="bm_type4" value="브랜딩 영상" />브랜딩 영상</label>
+                                            <label for="bm_type5"><input type="radio" name="" id="bm_type5" value="유튜브" />유튜브 본편/숏츠 (월 <input type="number" class="bm_type_review" value="0" /> 건)</label>
+                                            <label for="bm_type6"><input type="radio" name="" id="bm_type6" value="맘카페" />맘카페</label>
+                                            <label for="bm_type7"><input type="radio" name="" id="bm_type7" value="인스타" />인스타</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_post">
                                         <td class="add_bm_title">블로그 포스팅</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <button class="countdown" id="blogDown" type="button"><img src="/img/countdown.svg" alt="다운" /></button>
-                                            <input type="text" class="bm_post" id="cntBlogPos" value="0" maxlength="5" />
-                                            <button class="countup" id="blogUp" type="button"><img src="/img/countup.svg" alt="업" /></button>
+                                            <div class="bm_post_wrap">
+                                                <button class="countdown" id="blogDown" type="button"><img src="/img/countdown.svg" alt="다운" /></button>
+                                                <input type="text" class="bm_post" id="cntBlogPos" value="0" maxlength="5" />
+                                                <button class="countup" id="blogUp" type="button"><img src="/img/countup.svg" alt="업" /></button>
+                                            </div>
+                                            <label for="bm_post1"><input type="radio" name="" id="bm_post1" value="임상" />임상 (월 <input type="number" class="bm_post_review" value="0" /> 건)</label>
+                                            <label for="bm_post2"><input type="radio" name="" id="bm_post2" value="홍보" />홍보 (월 <input type="number" class="bm_post_review" value="0" /> 건)</label>
+                                            <label for="bm_post3"><input type="radio" name="" id="bm_post3" value="관리" />관리 (월 <input type="number" class="bm_post_review" value="0" /> 건)</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_homepage">
                                         <td class="add_bm_title">홈페이지</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_homepage_url"
-                                                >도메인<input type="text" class="bm_homepage_url" id="bm_homepage_url" placeholder="https://abc.com"
-                                            /></label>
-                                            <label for="bm_domein_date"
-                                                >도메인 만료일<input type="date" name="" id="bm_domein_date" class="bm_domein_date"
-                                            /></label>
-                                            <label for="bm_hosting_date"
-                                                >호스팅 만료일<input type="date" name="" id="bm_hosting_date" class="bm_hosting_date"
-                                            /></label>
+                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url" id="bm_homepage_url" placeholder="https://abc.com" /></label>
+                                            <label for="bm_domein_date">도메인 만료일<input type="date" name="" id="bm_domein_date" class="bm_domein_date" /></label>
+                                            <label for="bm_hosting_date">호스팅 만료일<input type="date" name="" id="bm_hosting_date" class="bm_hosting_date" /></label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_pic">
@@ -111,8 +103,7 @@
                                                 <option value="계약 중단">계약 중단</option>
                                                 <option value="계약 종료">계약 종료</option>
                                             </select>
-                                            <input type="date" name="" id="bm_cdate_s" class="bm_cdate_s" /><span>~</span
-                                            ><input type="date" name="" id="bm_cdate_e" class="bm_cdate_e" />
+                                            <input type="date" name="" id="bm_cdate_s" class="bm_cdate_s" /><span>~</span><input type="date" name="" id="bm_cdate_e" class="bm_cdate_e" />
                                         </td>
                                     </tr>
                                     <tr class="add_bm_service02">
@@ -121,37 +112,15 @@
                                             <div class="add_bm_plan_wrap">
                                                 <div class="add_bm_plan01">
                                                     <span>블로그/디자인</span>
-                                                    <label for="bm_plan01"
-                                                        ><input type="radio" name="" id="bm_plan01" class="bm_plan01" value="Basic" />Basic</label
-                                                    >
-                                                    <label for="bm_plan02"
-                                                        ><input
-                                                            type="radio"
-                                                            name=""
-                                                            id="bm_plan02"
-                                                            class="bm_plan02"
-                                                            value="Standard" />Standard</label
-                                                    >
-                                                    <label for="bm_plan03"
-                                                        ><input type="radio" name="" id="bm_plan03" class="bm_plan03" value="Premium" />Premium</label
-                                                    >
+                                                    <label for="bm_plan01"><input type="radio" name="" id="bm_plan01" class="bm_plan01" value="Basic" />Basic</label>
+                                                    <label for="bm_plan02"><input type="radio" name="" id="bm_plan02" class="bm_plan02" value="Standard" />Standard</label>
+                                                    <label for="bm_plan03"><input type="radio" name="" id="bm_plan03" class="bm_plan03" value="Premium" />Premium</label>
                                                 </div>
                                                 <div class="add_bm_plan02">
                                                     <span>영상</span>
-                                                    <label for="bm_plan04"
-                                                        ><input type="radio" name="" id="bm_plan04" class="bm_plan04" value="Basic" />Basic</label
-                                                    >
-                                                    <label for="bm_plan05"
-                                                        ><input
-                                                            type="radio"
-                                                            name=""
-                                                            id="bm_plan05"
-                                                            class="bm_plan05"
-                                                            value="Standard" />Standard</label
-                                                    >
-                                                    <label for="bm_plan06"
-                                                        ><input type="radio" name="" id="bm_plan06" class="bm_plan06" value="Premium" />Premium</label
-                                                    >
+                                                    <label for="bm_plan04"><input type="radio" name="" id="bm_plan04" class="bm_plan04" value="Basic" />Basic</label>
+                                                    <label for="bm_plan05"><input type="radio" name="" id="bm_plan05" class="bm_plan05" value="Standard" />Standard</label>
+                                                    <label for="bm_plan06"><input type="radio" name="" id="bm_plan06" class="bm_plan06" value="Premium" />Premium</label>
                                                 </div>
                                             </div>
                                         </td>
@@ -162,12 +131,8 @@
                                                 >고객게시판<br />
                                                 사용가능 여부</span
                                             >
-                                            <label for="bm_auth01"
-                                                ><input type="radio" name="" id="bm_auth01" class="bm_auth01" value="사용가능" />사용가능</label
-                                            >
-                                            <label for="bm_auth02"
-                                                ><input type="radio" name="" id="bm_auth02" class="bm_auth02" value="사용중지" />사용중지</label
-                                            >
+                                            <label for="bm_auth01"><input type="radio" name="" id="bm_auth01" class="bm_auth01" value="사용가능" />사용가능</label>
+                                            <label for="bm_auth02"><input type="radio" name="" id="bm_auth02" class="bm_auth02" value="사용중지" />사용중지</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_memo">
@@ -343,9 +308,7 @@
                                         <td class="add_bm_title">성명</td>
                                         <td class="add_bm_con">
                                             <label for="bm_hname"
-                                                ><input type="text" class="bm_hname" id="bm_hname" placeholder="홍길동" /><button
-                                                    class="bm_hname_plus"
-                                                    type="button">
+                                                ><input type="text" class="bm_hname" id="bm_hname" placeholder="홍길동" /><button class="bm_hname_plus" type="button">
                                                     <img src="/img/main_plus.svg" alt="플러스" /></button
                                             ></label>
                                         </td>
@@ -369,12 +332,7 @@
                                     <tr class="add_bm_hmemo">
                                         <td class="add_bm_title">메모</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <textarea
-                                                name=""
-                                                id="bm_hmemo"
-                                                class="bm_hmemo pre"
-                                                placeholder="업체측 특이사항 및 요청사항"
-                                                rows="3"></textarea>
+                                            <textarea name="" id="bm_hmemo" class="bm_hmemo pre" placeholder="업체측 특이사항 및 요청사항" rows="3"></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
