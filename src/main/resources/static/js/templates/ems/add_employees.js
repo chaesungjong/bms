@@ -2,8 +2,7 @@
  * ems/add_employees.html 연동 스크립트 영역
  */
 $(document).ready(function () {
-
-    // 이미지 업로드 
+    // 이미지 업로드
     $('#imgProfile').change(function () {
         readURL(this);
     });
@@ -18,7 +17,7 @@ $(document).ready(function () {
         }
     });
 
-    // 등록 하기 버튼 클릭 시 호출 
+    // 등록 하기 버튼 클릭 시 호출
     $('#registration').click(function () {
         // 유효성 검사
         if (validate()) {
@@ -39,7 +38,7 @@ $(document).ready(function () {
                     } else {
                         alert('직원 등록에 실패했습니다. 관리자에게 문의하세요.');
                     }
-                }
+                },
             });
         }
     });
@@ -68,12 +67,12 @@ $(document).ready(function () {
         formatRRN($('#juminNo'));
     });
 
-    //업무폰 입력시 
+    //업무폰 입력시
     $('#hpno').on('input', function () {
         formatNumber($('#hpno'));
     });
 
-    //업무폰 입력시 
+    //업무폰 입력시
     $('#hpnoDepart').on('input', function () {
         formatNumber($('#hpnoDepart'));
     });
@@ -84,16 +83,16 @@ $(document).ready(function () {
 
 // 화면 최초 로딩 시 실행
 function init() {
-    // 입사일에 따라 상태 값 변경 
-    if ($('#jobStatus').val() === "WORK") {
+    // 입사일에 따라 상태 값 변경
+    if ($('#jobStatus').val() === 'WORK') {
         // 입사일 상태가 "근무"인 경우 퇴사일 입력란 숨김
         $('#jobEndDateLabel').hide();
         $('#jobEndDatesmall').hide();
-    } else if ($('#jobStatus').val() === "LEAVE") {
+    } else if ($('#jobStatus').val() === 'LEAVE') {
         // 입사일 상태가 "휴일"인 경우 퇴사일 입력란 표시
         $('#jobEndDateLabel').hide();
         $('#jobEndDatesmall').hide();
-    } else if ($('#jobStatus').val() === "RETIRE") {
+    } else if ($('#jobStatus').val() === 'RETIRE') {
         // 입사일 상태가 "퇴사"인 경우 퇴사일 입력란 표시
         $('#jobEndDateLabel').show();
         $('#jobEndDatesmall').show();
@@ -106,38 +105,38 @@ function init() {
 
 /**
  * 입사일 선택에 따라 근무기간 계산
- * @param {*} value 
+ * @param {*} value
  */
 function jobStatusChange(value) {
     var selectedJobStatus = $(value).val();
 
     switch (selectedJobStatus) {
-        case "WORK":
+        case 'WORK':
             $('#jobEndDateLabel').hide();
             $('#jobEndDatesmall').hide();
-            if ($('#jobStartDate').val() != "") {
+            if ($('#jobStartDate').val() != '') {
                 const duration = calculateDuration($('#jobStartDate').val(), getTodayDate());
                 $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
             }
             break;
 
-        case "LEAVE":
+        case 'LEAVE':
             $('#jobEndDateLabel').hide();
             $('#jobEndDatesmall').hide();
-            if ($('#jobStartDate').val() != "") {
+            if ($('#jobStartDate').val() != '') {
                 const duration = calculateDuration($('#jobStartDate').val(), getTodayDate());
                 $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
             }
             break;
 
-        case "RETIRE":
+        case 'RETIRE':
             $('#jobEndDateLabel').show();
             $('#jobEndDatesmall').show();
-            if ($('#jobStartDate').val() != "" && $('#jobEndDate').val() != "") {
+            if ($('#jobStartDate').val() != '' && $('#jobEndDate').val() != '') {
                 const duration = calculateDuration($('#jobStartDate').val(), $('#jobEndDate').val());
                 $('#Period').val(`${duration.years} 년 ${duration.months} 개월`);
             }
-            if ($('#jobEndDate').val() == "" || $('#jobEndDate').val() == null) {
+            if ($('#jobEndDate').val() == '' || $('#jobEndDate').val() == null) {
                 $('#jobEndDate').val(getTodayDate());
             }
             break;
@@ -148,8 +147,8 @@ function jobStatusChange(value) {
 }
 
 /**
- * 파일이 있는지 없는지 체크 
- * @param {*} id 
+ * 파일이 있는지 없는지 체크
+ * @param {*} id
  * @returns {Boolean}
  */
 function checkFileInput(id) {
@@ -159,7 +158,7 @@ function checkFileInput(id) {
 
 /**
  * 파일 이름 추출 함수
- * @param {String} url 
+ * @param {String} url
  * @returns {String} 파일 이름
  */
 function getFileName(url) {
@@ -179,7 +178,7 @@ function validate() {
         if (!input.value.trim()) {
             allFilled = false;
             input.focus();
-            alert(input.placeholder + "를(을) 입력해주세요.");
+            alert(input.placeholder + '를(을) 입력해주세요.');
             break; // 필수 필드가 비어있는 경우 루프 종료
         }
     }
@@ -187,7 +186,7 @@ function validate() {
     if (!allFilled) return false;
 
     if ($('#pwd').val() != $('#pwdCheck').val()) {
-        alert("비밀번호가 일치하지 않습니다.");
+        alert('비밀번호가 일치하지 않습니다.');
         allFilled = false;
     }
 
@@ -255,4 +254,22 @@ fileTarget.on('change', function () {
 
     var fileList = fileArr.join('<br>');
     $(this).siblings('.bm_file_text').html(fileList);
+});
+
+// 비밀번호 변경 모달
+$('.pwd_modify').click(function () {
+    var caseBtn = $(this).attr('id');
+    $('.modal-container').removeClass('on');
+    $('.modal-container').removeClass('out');
+    $('.modal-container#' + caseBtn).addClass('on');
+    $('body, html').addClass('modal-active');
+});
+$('.pwd_modify_close').click(function () {
+    $('.modal-container').addClass('out');
+    $('body, html').removeClass('modal-active');
+});
+
+// 비밀번호 view
+$('.btnView').click(function () {
+    $(this).toggleClass('on');
 });
