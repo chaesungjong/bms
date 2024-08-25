@@ -83,11 +83,31 @@ function showProfile(userID) {
             $('#boardUseYNView').text(response.boardUseYN);
             $('#memoView').text(response.memo);
             $('#infoUrl').attr('href', "/ems/add_employees?userid=" + userID);
-            $('#imgView').attr('src', response.imgProfile);
-            $('#imgBankbookValue').attr('value', response.imgBankbook);
-            $('#imgFamilyRLValue').attr('value', response.imgFamilyRL);
-            $('#imgProfileValue').attr('value', response.imgProfile);
-            $('#imgEtcValue').attr('value', response.imgEtc);
+
+            if(response.imgProfile == null || response.imgProfile == '')
+                $('#imgView').hide();
+            else
+                $('#imgView').attr('src', response.imgProfile);
+            
+            if(response.imgBankbook == null || response.imgBankbook == '')
+                $('#imgBankbookView').hide();
+            else
+                $('#imgBankbookView').attr('src', response.imgBankbook);
+
+            if(response.imgFamilyRL == null || response.imgFamilyRL == '')
+                $('#imgFamilyRLView').hide();
+            else
+                $('#imgFamilyRLView').attr('src', response.imgFamilyRL);
+            
+            if(response.imgEtc == null || response.imgEtc == '')
+                $('#imgEtcView').hide();
+            else
+                $('#imgEtcView').attr('src', response.imgEtc);
+
+            if(response.imgProfile == null || response.imgProfile == '')
+                $('#imgProfileView').hide();
+            else
+                $('#imgProfileView').attr('value', response.imgProfile);
 
             $('.member_info_wrap').removeClass('on');
             $('.member_info_wrap').removeClass('out');

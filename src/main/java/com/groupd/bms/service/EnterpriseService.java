@@ -34,11 +34,12 @@ public class EnterpriseService {
         enterpriseRepository.siteInfoModify(requestHashMap);
 
         String retVal = StringUtil.objectToString(requestHashMap.get("retVal"));
+                                 
 
         if ("0".equals(retVal)) {
             // 성공
             String sitekey = StringUtil.objectToString(requestHashMap.get("retSiteKey"));
-            String userid = (String) requestHashMap.get("userid");
+            String userid = (String) requestHashMap.get("userId");
             JSONObject jsonObject = (JSONObject) requestHashMap.get("sns");
             // 필요한 정보 출력
             jsonObject.keys().forEachRemaining(key -> {

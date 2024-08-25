@@ -22,7 +22,7 @@
             #{grade},
             #{departCode},
             #{state},
-            #{siteCode},
+            #{siteKey, jdbcType=INTEGER},  -- siteKey 값을 정수형으로 전달
             #{ip}
         )
     }

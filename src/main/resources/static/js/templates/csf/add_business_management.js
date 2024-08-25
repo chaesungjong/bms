@@ -24,39 +24,59 @@ $(document).ready(function () {
 
     // 등록 하기 버튼
     $('#Registration').click(function () {
-        let form = document.getElementById('frmSubmit');
-        let inputs = form.querySelectorAll('input[required], select[required]');
-        let allFilled = true;
 
-        for (let input of inputs) {
-            if (!input.value.trim()) {
-                allFilled = false;
-                alert(input.placeholder + ' 를 입력해주세요.');
-                break; // exit the loop if a required field is empty
-            }
-        }
+        if(validate()){
+            var form = $('#frmSubmit')[0];
+            var formData = new FormData(form);
+            $.ajax({
+                type: 'post',
+                url: '/csf/Registration.do',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
 
-        const formData = new FormData(form);
-        const jsonObject = Object.fromEntries(formData.entries());
-
-        console.log(jsonObject);
-
-        if (allFilled) {
-            // ajaxRequest 함수를 사용하여 로그인 처리
-            ajaxRequest(
-                '/csf/Registration.do',
-                jsonObject,
-                'POST',
-                function (response) {
-                    alert(response.retMsg);
-                },
-                function () {
-                    alert('현재 기능 개발 준비중 입니다.');
+                    if (data.retVal == '0') {
+                        alert('등록되었습니다.');
+                        location.href = '/csf/business_management';
+                    } else {
+                        alert('등록에 실패했습니다.');
+                    }
+                }, error: function (request, status, error) {
+                    console.log('code: ' + request.status + '\n' + 'message: ' + request.responseText + '\n' + 'error: ' + error);
                 }
-            );
+            });
         }
+
     });
+
+    setSnsInformation() ;
 });
+
+function setSnsInformation() {
+
+    const snsListData = JSON.parse($('#snsList').val()); 
+
+    if(snsListData != null && snsListData != '') {
+        
+        try{
+
+             // 각 SNS 타입에 대한 input 필드에 값 할당
+            snsListData.forEach(sns => {
+                const snsType = sns.snsType;
+                
+                document.getElementById(snsType + 'siteDomain').value = sns.domain;
+                document.getElementById(snsType + 'id').value = sns.id;
+                document.getElementById(snsType + 'pw').value = sns.pwd;
+                
+            });
+
+        }catch(e) {
+            console.log(e);
+        }
+    }
+
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     const radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -101,3 +121,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
         cntBlogPos.value = Math.max(currentValue - 1, 0); // Prevent negative values
     });
 });
+
+/**
+ * 업체 등록 유효성 검사
+ * @returns {Boolean}
+ */
+function validate() {
+    let form = document.getElementById('frmSubmit');
+    let inputs = form.querySelectorAll('input[required], select[required]');
+    let allFilled = true;
+
+    for (let input of inputs) {
+        if (!input.value.trim()) {
+            allFilled = false;
+            input.focus();
+            alert(input.placeholder + "를(을) 입력해주세요.");
+            break; // 필수 필드가 비어있는 경우 루프 종료
+        }
+    }
+    
+    return allFilled;
+}

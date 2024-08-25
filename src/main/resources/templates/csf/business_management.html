@@ -10,41 +10,35 @@
     </th:block>
 
     <body>
+        <input type="hidden" id="snsList" name="snsList" th:value="${snsList ?: ''}" />
         <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
             <div class="bm_wrap">
                 <h2>업체 관리</h2>
                 <div class="bm_board">
                     <form action="" class="bm_board_top">
                         <div class="bm_board_date">
-                            <label for="fr_date"
-                                ><input type="text" name="fr_date" value="2024-07-15" id="fr_date" class="frm_input" size="11" maxlength="10" /><img
-                                    src="/img/bm_board_date.svg"
-                                    alt="처음날짜"
-                            /></label>
+                            <label for="fr_date">
+                                <input type="date" name="fr_date" th:value="${fr_date}" id="fr_date" class="frm_input" size="11" maxlength="10" />
+                            </label>
                             <span>~</span>
-                            <label for="to_date"
-                                ><input type="text" name="to_date" value="2024-07-15" id="to_date" class="frm_input" size="11" maxlength="10" /><img
-                                    src="/img/bm_board_date.svg"
-                                    alt="마지막날짜"
-                            /></label>
+                            <label for="to_date" >
+                                <input type="date" name="to_date" th:value="${to_date}" id="to_date" class="frm_input" size="11" maxlength="10" />
+                            </label>
                         </div>
                         <div class="bm_board_search">
-                            <select name="sfl" id="sch_sort" class="search_sort">
-                                <option value="bm_bn">업체명</option>
-                                <option value="bm_wn">작성자</option>
+                            <select name="searchType" id="searchType" class="search_sort" th:value="${searchType}">
+                                <option value="selRegSiteName" th:selected="${searchType == 'selRegSiteName'}">업체명</option>
+                                <option value="selRegUserName" th:selected="${searchType == 'selRegUserName'}">작성자</option>
                             </select>
-                            <label for="sch_word"
-                                ><input type="text" name="stx" size="20" value="" id="sch_word" class="frm_input" />
-                                <input type="submit" value="검색" class="sch_btn"
-                            /></label>
+                            <label for="sch_word">
+                                <input type="text" name="search" size="20" th:value="${search}" id="sch_word" class="frm_input" />
+                                <input type="button" value="검색" class="sch_btn" id="searchButton"/>
+                            </label>
                         </div>
-                        <div class="bm_board_btn">
-                            <button class="bm_board_refrash"><img src="/img/bm_board_refrash.svg" alt="새로고침" /></button>
-                            <a href="#" class="bm_board_mybtn">My</a>
-                        </div>
+                        <div class="bm_board_btn"></div>
                         <a href="/csf/add_business_management" class="bm_reg">업체등록</a>
                     </form>
-                    <table class="bm_board_table" cellspacing="0">
+                    <table id="employeeTable" class="bm_board_table" cellspacing="0">
                         <thead class="bm_board_th">
                             <tr>
                                 <th>날짜</th>
@@ -57,79 +51,10 @@
                             </tr>
                         </thead>
                         <tbody class="bm_board_td">
-                            <tr>
-                                <td class="bm_wr_wdate"><span class="list_today">오늘</span>17:52</td>
-                                <td class="bm_wr_bname"><a href="#" class="bm_info" id="bm_info01">안양바른플러스치과</a></td>
-                                <td class="bm_wr_name">박세용 원장</td>
-                                <td class="bm_wr_state"><span class="bm_state_nm">보통</span></td>
-                                <td class="bm_wr_contract"><span class="bm_cont_ing">계약중</span></td>
-                                <td class="bm_wr_cdate">2023.03.01 ~2023.07.01</td>
-                                <td class="bm_wr_etc">신규개원</td>
-                            </tr>
-                            <tr>
-                                <td class="bm_wr_wdate"><span class="list_today">오늘</span>17:52</td>
-                                <td class="bm_wr_bname"><a href="#" class="bm_info" id="bm_info01">안양바른플러스치과</a></td>
-                                <td class="bm_wr_name">박세용 원장</td>
-                                <td class="bm_wr_state"><span class="bm_state_nm">보통</span></td>
-                                <td class="bm_wr_contract"><span class="bm_cont_ing">계약중</span></td>
-                                <td class="bm_wr_cdate">2023.03.01 ~2023.07.01</td>
-                                <td class="bm_wr_etc">신규개원</td>
-                            </tr>
-                            <tr>
-                                <td class="bm_wr_wdate"><span class="list_today">오늘</span>17:52</td>
-                                <td class="bm_wr_bname"><a href="#" class="bm_info" id="bm_info01">안양바른플러스치과</a></td>
-                                <td class="bm_wr_name">박세용 원장</td>
-                                <td class="bm_wr_state"><span class="bm_state_nm">보통</span></td>
-                                <td class="bm_wr_contract"><span class="bm_cont_ing">계약중</span></td>
-                                <td class="bm_wr_cdate">2023.03.01 ~2023.07.01</td>
-                                <td class="bm_wr_etc">신규개원</td>
-                            </tr>
-                            <tr>
-                                <td class="bm_wr_wdate"><span class="list_today">오늘</span>17:52</td>
-                                <td class="bm_wr_bname"><a href="#" class="bm_info" id="bm_info01">안양바른플러스치과</a></td>
-                                <td class="bm_wr_name">박세용 원장</td>
-                                <td class="bm_wr_state"><span class="bm_state_nm">보통</span></td>
-                                <td class="bm_wr_contract"><span class="bm_cont_ing">계약중</span></td>
-                                <td class="bm_wr_cdate">2023.03.01 ~2023.07.01</td>
-                                <td class="bm_wr_etc">신규개원</td>
-                            </tr>
-                            <tr>
-                                <td class="bm_wr_wdate"><span class="list_today">오늘</span>17:52</td>
-                                <td class="bm_wr_bname"><a href="#" class="bm_info" id="bm_info01">안양바른플러스치과</a></td>
-                                <td class="bm_wr_name">박세용 원장</td>
-                                <td class="bm_wr_state"><span class="bm_state_nm">보통</span></td>
-                                <td class="bm_wr_contract"><span class="bm_cont_ing">계약중</span></td>
-                                <td class="bm_wr_cdate">2023.03.01 ~2023.07.01</td>
-                                <td class="bm_wr_etc">신규개원</td>
-                            </tr>
-                            <tr>
-                                <td class="bm_wr_wdate"><span class="list_today">오늘</span>17:52</td>
-                                <td class="bm_wr_bname"><a href="#" class="bm_info" id="bm_info01">안양바른플러스치과</a></td>
-                                <td class="bm_wr_name">박세용 원장</td>
-                                <td class="bm_wr_state"><span class="bm_state_nm">보통</span></td>
-                                <td class="bm_wr_contract"><span class="bm_cont_ing">계약중</span></td>
-                                <td class="bm_wr_cdate">2023.03.01 ~2023.07.01</td>
-                                <td class="bm_wr_etc">신규개원</td>
-                            </tr>
                         </tbody>
                     </table>
                     <nav class="pg_wrap">
-                        <span class="pg">
-                            <a href="#" class="pg_page pg_start">처음</a>
-                            <a href="#" class="pg_page pg_prev">이전</a>
-                            <strong class="pg_current">1</strong>
-                            <a href="#" class="pg_page">2</a>
-                            <a href="#" class="pg_page">3</a>
-                            <a href="#" class="pg_page">4</a>
-                            <a href="#" class="pg_page">5</a>
-                            <a href="#" class="pg_page">6</a>
-                            <a href="#" class="pg_page">7</a>
-                            <a href="#" class="pg_page">8</a>
-                            <a href="#" class="pg_page">9</a>
-                            <a href="#" class="pg_page">10</a>
-                            <a href="#" class="pg_page pg_next">다음</a>
-                            <a href="#" class="pg_page pg_end">맨끝</a>
-                        </span>
+                        <span class="pg" id="customPagination"></span>
                     </nav>
                 </div>
             </div>
@@ -143,52 +68,52 @@
                         <div class="bm_info_section">
                             <div class="bm_info_s01">
                                 <h3>
-                                    <span class="bm_info_bname">서울스마트치과</span>
+                                    <span class="bm_info_bname" id="siteName"></span>
                                     <div class="bm_info_state_box">
-                                        <span class="bm_info_state01">보통</span>
-                                        <span class="bm_info_state02">상</span>
+                                        <span class="bm_info_state01" id="strSiteStateLevel">보통</span>
                                     </div>
                                 </h3>
                                 <ul class="bm_info_list01">
                                     <li class="bm_info_cdate">
                                         <div class="bm_info_title"><h5>계약 기간</h5></div>
                                         <div class="bm_info_con">
-                                            <p><span class="bm_info_cdate_s">2024.05.02</span> ~ <span class="bm_info_cdate_e">2024.05.02</span></p>
-                                            <span class="bm_info_cont">계약중</span>
+                                            <p><span class="bm_info_cdate_s" id="contractSdate"></span> ~ <span class="bm_info_cdate_e" id="contractEdate"></span></p>
+                                            <span class="bm_info_cont" id="strContractState"></span>
                                         </div>
                                     </li>
                                     <li class="bm_info_etc">
                                         <div class="bm_info_title"><h5>비고</h5></div>
-                                        <div class="bm_info_con"><p>기개원</p></div>
+                                        <div class="bm_info_con"><p id="strSiteOpenState"></p></div>
                                     </li>
                                     <li class="bm_info_type">
                                         <div class="bm_info_title"><h5>거래 내용</h5></div>
                                         <div class="bm_info_con">
                                             <p>
-                                                <span class="bm_info_type1">블로그</span> / <span class="bm_info_type2">홈페이지</span> / <span
+                                                <span class="bm_info_type1" id="transaction"></span>
+                                                <!-- <span class="bm_info_type1">블로그</span> / <span class="bm_info_type2">홈페이지</span> / <span
                                                     class="bm_info_type3"
                                                     >브랜딩 영상</span
-                                                > / <span class="bm_info_type4">유튜브 ( 본편 <span class="bm_info_type4_1">1</span> / 숏츠 <span class="bm_info_type4_2">2</span> )</span>
+                                                > / <span class="bm_info_type4">유튜브 ( 본편 <span class="bm_info_type4_1">1</span> / 숏츠 <span class="bm_info_type4_2">2</span> )</span> -->
                                             </p>
                                         </div>
                                     </li>
-                                    <li class="bm_info_post">
+                                    <!-- <li class="bm_info_post">
                                         <div class="bm_info_title"><h5>블로그 포스팅</h5></div>
                                         <div class="bm_info_con">
                                             <span class="post_total">6 (임상 <span class="post_i">2</span> / 홍보 <span class="post_m">2</span> / 관리 <span class="post_a">2</span>)</span>
                                         </div>
-                                    </li>
+                                    </li> -->
                                     <li class="bm_info_homepage">
                                         <div class="bm_info_title"><h5>홈페이지</h5></div>
-                                        <div class="bm_info_con"><p>https://www.naver.com</p></div>
+                                        <div class="bm_info_con"><p id="siteURL"></p></div>
                                     </li>
                                     <li class="bm_info_domein_date">
                                         <div class="bm_info_title"><h5>도메인 만료</h5></div>
-                                        <div class="bm_info_con"><p>2024.04.02</p></div>
+                                        <div class="bm_info_con"><p id="siteDomainExpdt"></p></div>
                                     </li>
                                     <li class="bm_info_hosting_date">
                                         <div class="bm_info_title"><h5>호스팅 만료</h5></div>
-                                        <div class="bm_info_con"><p>2024.04.02</p></div>
+                                        <div class="bm_info_con"><p id="siteHostingExpdt"></p></div>
                                     </li>
                                     <li class="bm_info_pic">
                                         <div class="bm_info_title"><h5>담당자 정보</h5></div>
@@ -196,17 +121,14 @@
                                     </li>
                                     <li class="bm_info_address">
                                         <div class="bm_info_title"><h5>주소</h5></div>
-                                        <div class="bm_info_con"><p>서울특별시 신림동 441-28 안양바른플러스치과</p></div>
+                                        <div class="bm_info_con"><p id="adress"></p></div>
                                     </li>
                                     <li class="bm_info_memo">
                                         <div class="bm_info_title">
                                             <h5>특이사항 <span>(메모)</span></h5>
                                         </div>
                                         <div class="bm_info_con">
-                                            <p>
-                                                디자인 : 진중하고, 어두운 색감 선호 (수정 다수)<br />
-                                                영상 : 수정 다수<br />블로그 : 업로드 시 더블체크 요청
-                                            </p>
+                                            <p id="memo"></p>
                                         </div>
                                     </li>
                                 </ul>
@@ -217,92 +139,93 @@
                                     <li class="bm_info_acc01">
                                         <div class="bm_info_title"><h5>카페24</h5></div>
                                         <div class="bm_info_con">
-                                            <p>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="CAFE24siteDomain"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="CAFE24id"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="CAFE24pw"></span>
                                             </p>
                                         </div>
                                     </li>
                                     <li class="bm_info_acc02">
                                         <div class="bm_info_title"><h5>FTP정보</h5></div>
                                         <div class="bm_info_con">
-                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm">www.naver.com</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="FTPsiteDomain"></span>
                                                 <div class="bm_info_line"></div>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="FTPid"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="FTPpw"></span>
                                             </p>
                                         </div>
                                     </li>
-                                    <li class="bm_info_acc03">
+                                    <!-- <li class="bm_info_acc03">
                                         <div class="bm_info_title"><h5>홈페이지 관리자 정보</h5></div>
                                         <div class="bm_info_con">
-                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm">www.naver.com</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_BL2OGsiteDomain"></span>
                                                 <div class="bm_info_line"></div>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_BLO2Gid"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_BLOG2pw"></span>
                                             </p>
                                         </div>
-                                    </li>
+                                    </li> -->
                                     <li class="bm_info_acc04">
                                         <div class="bm_info_title"><h5>네이버 블로그</h5></div>
                                         <div class="bm_info_con">
-                                            <p>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_BLOGsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_BLOGid"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_BLOGpw"></span>
                                             </p>
                                         </div>
                                     </li>
                                     <li class="bm_info_acc05">
                                         <div class="bm_info_title"><h5>네이버 블로그2</h5></div>
                                         <div class="bm_info_con">
-                                            <p>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_BLOG2siteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_BLOG2id"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_BLOG2pw"></span>
                                             </p>
                                         </div>
                                     </li>
                                     <li class="bm_info_acc06">
                                         <div class="bm_info_title"><h5>플레이스</h5></div>
                                         <div class="bm_info_con">
-                                            <p>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_PLACEsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_PLACEid"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_PLACEpw"></span>
                                             </p>
                                         </div>
                                     </li>
                                     <li class="bm_info_acc07">
                                         <div class="bm_info_title"><h5>네이버 광고</h5></div>
                                         <div class="bm_info_con">
-                                            <p>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_ADsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_ADid"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_ADpw"></span>
                                             </p>
                                         </div>
                                     </li>
                                     <li class="bm_info_acc08">
                                         <div class="bm_info_title"><h5>카카오 비즈니스</h5></div>
                                         <div class="bm_info_con">
-                                            <p>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="KAKAO_BIZsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="KAKAO_BIZid"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="KAKAO_BIZpw"></span>
                                             </p>
                                         </div>
                                     </li>
                                     <li class="bm_info_acc09">
                                         <div class="bm_info_title"><h5>인스타그램</h5></div>
                                         <div class="bm_info_con">
-                                            <p>
-                                                ID :&nbsp;<span class="bm_info_acc01_id">groupd</span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="INSTAGRAMsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="INSTAGRAMid"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw">rmfnqel1!</span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="INSTAGRAMpw"></span>
                                             </p>
                                         </div>
                                     </li>
@@ -314,7 +237,7 @@
                                     <li class="bm_info_host">
                                         <div class="bm_info_hname">
                                             <div class="bm_info_title"><h5>성명</h5></div>
-                                            <div class="bm_info_con"><p>홍길동</p></div>
+                                            <div class="bm_info_con"><p id="ceoName"></p></div>
                                         </div>
                                         <div class="bm_info_hdate">
                                             <div class="bm_info_title"><h5>생년월일</h5></div>
@@ -324,12 +247,12 @@
                                     <li class="bm_info_hphone">
                                         <div class="bm_info_title"><h5>연락처</h5></div>
                                         <div class="bm_info_con">
-                                            <p>010-1234-5678</p>
+                                            <p id="managerPhone"></p>
                                         </div>
                                     </li>
                                     <li class="bm_info_hmail">
                                         <div class="bm_info_title"><h5>이메일</h5></div>
-                                        <div class="bm_info_con"><p>dksdidqkfms@naver.com</p></div>
+                                        <div class="bm_info_con"><p id="managerEmail"></p></div>
                                     </li>
                                 </ul>
                             </div>
@@ -339,57 +262,57 @@
                                     <li class="bm_info_file01">
                                         <div class="bm_info_title"><h5>사업자등록증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />사업자등록증.pdf</a>
+                                            <a href="#" id="imgBusinessRegNo" onclick="downloadFile('imgBusinessRegNo')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file02">
                                         <div class="bm_info_title"><h5>개설필증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />개설필증.pdf</a>
+                                            <a href="#" id="imgOpenCertificate" onclick="downloadFile('imgOpenCertificate')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file03">
                                         <div class="bm_info_title"><h5>의사 면허증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />의사면허증.jpg</a>
+                                            <a href="#" id="imgDoctorLicense" onclick="downloadFile('imgDoctorLicense')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file04">
                                         <div class="bm_info_title"><h5>전문의 자격증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />전문의 자격증.jpg</a>
+                                            <a href="#" id="imgSpecialistLicense" onclick="downloadFile('imgSpecialistLicense')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file05">
                                         <div class="bm_info_title"><h5>학위증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />학위증.jpg</a>
+                                            <a href="#" id="imgDegreeCertificate" onclick="downloadFile('imgDegreeCertificate')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file06">
                                         <div class="bm_info_title"><h5>이외 자료</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />마크 사용 승인 신청서.jpg</a>
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />의료인 개설 현황.jpg</a>
+                                            <a href="#" id="imgEtcFiles" onclick="downloadFile('imgEtcFiles')" ></a>
+                                            <a href="#" id="imgEtc" onclick="downloadFile('imgEtc')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file07">
                                         <div class="bm_info_title"><h5>디자인 활용 자료</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />로고.ai</a>
+                                            <a href="#"></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file08">
                                         <div class="bm_info_title"><h5>이외 이미지</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />프로필 임시 사진.jpg</a>
-                                            <a href="#"><img src="/img/jpg.png" alt="jpg" />기존 인테리어 사진.jpg</a>
+                                            <a href="#"></a>
+                                            <a href="#"></a>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                             <div class="bm_info_btn_wrap">
-                                <a href="#" class="bm_info_btn">정보수정</a>
+                                <a href="#" class="bm_info_btn" id="Registration" >정보수정</a>
                             </div>
                         </div>
                     </div>

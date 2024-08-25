@@ -24,6 +24,10 @@
                                                 <!-- memInfo가 null일 때 기본 이미지 사용 -->
                                                 <img th:unless="${memInfo != null && memInfo['imgProfile'] != null}" src="" alt="" id="profile_preview" />
                                                 <div th:classappend="${memInfo != null && memInfo['imgProfile'] != null} ? '' : 'upload'"></div>
+                                                <img th:if="${memInfo != null && memInfo['imgProfile'] != null}" th:src="@{${memInfo['imgProfile']}}" alt="" id="profile_preview" />
+                                                <!-- memInfo가 null일 때 기본 이미지 사용 -->
+                                                <img th:unless="${memInfo != null && memInfo['imgProfile'] != null}" src="" alt="" id="profile_preview" />
+                                                <div th:classappend="${memInfo != null && memInfo['imgProfile'] != null} ? 'upload' : ''"></div>
                                             </div>
                                         </td>
                                         <td colspan="3">
@@ -253,6 +257,7 @@
                                             <div>
                                                 <input type="file" name="imgEtc" id="imgEtc" th:value="${memInfo?.imgEtc}" />
                                                 <input type="hidden" name="imgEtcFimeName" id="imgEtcFimeName" th:value="${memInfo?.imgEtcFimeName}" />
+                                                <input type="file" name="imgEtc" id="imgEtc"th:value="${memInfo?.imgEtc}" />
                                                 <label class="bm_file_btn" for="imgEtc">파일선택</label>
                                                 <span class="bm_file_text" th:text="${memInfo?.imgEtcFimeName}"> 선택된 파일이 없습니다. </span>
                                             </div>

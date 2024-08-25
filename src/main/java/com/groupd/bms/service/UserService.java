@@ -44,6 +44,7 @@ public class UserService {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("gubun", "MEM_USERINFO");
         hashMap.put("userid", memberLogin.getUserid());
+        hashMap.put("ip", memberLogin.getIp());
         result.put("member", MapperUtil.mapToMember(userRepository.memUserInfo(hashMap)));
       }
       

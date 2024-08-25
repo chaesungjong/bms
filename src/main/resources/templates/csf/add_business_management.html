@@ -7,51 +7,66 @@
 
     <body>
         <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <input type="hidden" id="snsList" name="snsList" th:value="${snsList ?: ''}" />
             <div class="add_bm_wrap">
                 <h2>업체 기본정보</h2>
                 <div class="add_bm_board">
-                    <form action="">
+                    <form id="frmSubmit">
+                        <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" />
+                        <input type="hidden" id="siteKey" name="siteKey" th:value="${siteInfo?.siteKey}" />
                         <div class="add_bm_info">
-                            <h3><input type="text" placeholder="치과명" class="bm_bname" /></h3>
+                            <h3><input type="text" placeholder="치과명" class="bm_bname" id="siteName" name="siteName" th:value="${siteInfo?.siteName}"/></h3>
                             <table cellspacing="0">
                                 <tbody>
                                     <tr class="add_bm_code">
                                         <td class="add_bm_title">업체코드</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" value="202405-01000" disabled class="bm_code" />
+                                            <input type="text" th:value="${siteInfo?.siteCode}" class="bm_code" name="siteCode" id="siteCode" />
                                             <p><img src="/img/info.svg" alt="" /><span>YYYYMM-00</span>000</p>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_state">
                                         <td class="add_bm_title">업체 상태</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <select name="" id="" class="bm_state01">
-                                                <option value="보통">보통</option>
-                                                <option value="불안">불안</option>
-                                                <option value="위험">위험</option>
+                                            <select name="siteState" id="siteState" class="bm_state01" required>
+                                                <th:block th:each="siteState : ${siteStateList}">
+                                                    <option th:value="${siteState['code']}"
+                                                            th:text="${siteState['codeName']}"
+                                                            th:selected="${siteState.codeName == siteInfo?.siteState}" >
+                                                    </option>
+                                                </th:block>
                                             </select>
-                                            <select name="" id="" class="bm_state02">
-                                                <option value="하">하</option>
-                                                <option value="중">중</option>
-                                                <option value="상">상</option>
+                                            <select name="siteStateLevel" id="siteStateLevel" class="bm_state02">
+                                                <th:block th:each="siteStateLevel : ${siteStateLevelList}">
+                                                    <option th:value="${siteStateLevel['code']}"
+                                                            th:text="${siteStateLevel['codeName']}"
+                                                            th:selected="${siteStateLevel['code'] == 'MEDIUM' 
+                                                                         or siteStateLevel.codeName == siteInfo?.siteStateLevel}"> 
+                                                    </option>
+                                                </th:block>
                                             </select>
-                                            <select name="" id="" class="bm_state03">
-                                                <option value="개원 전">개원 전</option>
-                                                <option value="기 개원">기 개원</option>
-                                                <option value="폐업">폐업</option>
+                                            <select name="siteOpenState" id="siteOpenState" class="bm_state03">
+                                                <th:block th:each="siteOpenState : ${siteOpenStateList}">
+                                                    <option th:value="${siteOpenState['code']}"
+                                                            th:text="${siteOpenState['codeName']}"
+                                                            th:selected="${siteOpenState.codeName == siteInfo?.siteOpenState}" >
+                                                    </option>
+                                                </th:block>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_type">
                                         <td class="add_bm_title">거래 내용</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_type1"><input type="radio" name="" id="bm_type1" value="홈페이지" />홈페이지</label>
-                                            <label for="bm_type2"><input type="radio" name="" id="bm_type2" value="블로그" />블로그</label>
-                                            <label for="bm_type3"><input type="radio" name="" id="bm_type3" value="리뷰" />리뷰 (월 <input type="number" class="bm_type_review" value="0" /> 건)</label>
-                                            <label for="bm_type4"><input type="radio" name="" id="bm_type4" value="브랜딩 영상" />브랜딩 영상</label>
-                                            <label for="bm_type5"><input type="radio" name="" id="bm_type5" value="유튜브" />유튜브 본편/숏츠 (월 <input type="number" class="bm_type_review" value="0" /> 건)</label>
-                                            <label for="bm_type6"><input type="radio" name="" id="bm_type6" value="맘카페" />맘카페</label>
-                                            <label for="bm_type7"><input type="radio" name="" id="bm_type7" value="인스타" />인스타</label>
+                                            <label for="bm_type1"><input type="radio" name="blogYN" id="blogYN" th:value="'Y'" th:checked="${siteInfo?.blogYN == 'Y'}" />블로그</label>
+                                            <label for="bm_type2"><input type="radio" name="homepageYN" id="homepageYN" th:value="'Y'" th:checked="${siteInfo?.homepageYN == 'Y'}" />홈페이지</label>
+                                            <label for="bm_type3"><input type="radio" name="blandvideoYN" id="blandvideoYN" th:value="'Y'" th:checked="${siteInfo?.blandvideoYN == 'Y'}" />브랜딩 영상</label>
+                                            <label for="bm_type4"><input type="radio" name="reviewYN" id="reviewYN" th:value="'Y'" th:checked="${siteInfo?.reviewYN == 'Y'}" /> 리뷰 (월
+                                                <input type="number" class="bm_type_review" value="0" /> 건)
+                                            </label>
+                                            <label for="bm_type5"><input type="radio" name="instagramYN" id="instagramYN" th:value="'Y'" th:checked="${siteInfo?.instagramYN == 'Y'}" />인스타</label>
+                                            <label for="bm_type5"><input type="radio" name="youtubeYN" id="youtubeYN" th:value="'Y'" th:checked="${siteInfo?.youtubeYN == 'Y'}" />유튜브</label>
+                                            <label for="bm_type5"><input type="radio" name="momcafeYN" id="momcafeYN" th:value="'Y'" th:checked="${siteInfo?.momcafeYN == 'Y'}" />맘카페</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_post">
@@ -59,7 +74,7 @@
                                         <td colspan="3" class="add_bm_con">
                                             <div class="bm_post_wrap">
                                                 <button class="countdown" id="blogDown" type="button"><img src="/img/countdown.svg" alt="다운" /></button>
-                                                <input type="text" class="bm_post" id="cntBlogPos" value="0" maxlength="5" />
+                                                <input type="text" class="bm_post" id="cntBlogPos" name="cntBlogPos" value="0" maxlength="5" />
                                                 <button class="countup" id="blogUp" type="button"><img src="/img/countup.svg" alt="업" /></button>
                                             </div>
                                             <label for="bm_post1"><input type="radio" name="" id="bm_post1" value="임상" />임상 (월 <input type="number" class="bm_post_review" value="0" /> 건)</label>
@@ -70,40 +85,44 @@
                                     <tr class="add_bm_homepage">
                                         <td class="add_bm_title">홈페이지</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url" id="bm_homepage_url" placeholder="https://abc.com" /></label>
-                                            <label for="bm_domein_date">도메인 만료일<input type="date" name="" id="bm_domein_date" class="bm_domein_date" /></label>
-                                            <label for="bm_hosting_date">호스팅 만료일<input type="date" name="" id="bm_hosting_date" class="bm_hosting_date" /></label>
+                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url" id="siteURL" name="siteURL" th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" required/></label>
+                                            <label for="bm_domein_date">도메인 만료일<input type="date" name="siteDomainExpdt" id="siteDomainExpdt" class="bm_domein_date" th:value="${siteInfo?.siteDomainExpdt != null ? siteInfo.siteDomainExpdt : ''}"  required/></label>
+                                            <label for="bm_hosting_date">호스팅 만료일<input type="date" name="siteHostingExpdt" id="siteHostingExpdt" class="bm_hosting_date" th:value="${siteInfo?.siteHostingExpdt != null ? siteInfo.siteHostingExpdt : ''}" required/></label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_pic">
                                         <td class="add_bm_title">담당자</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_pic"
-                                                ><input type="text" class="bm_pic" id="bm_pic" /><button class="bm_pic_plus" type="button">
-                                                    <img src="/img/main_plus.svg" alt="플러스" /></button
-                                            ></label>
+                                            <label for="bm_pic">
+                                                <input type="text" class="bm_pic" id="bm_pic" />
+                                                <button class="bm_pic_plus" type="button" required><img src="/img/main_plus.svg" alt="플러스" /></button>
+                                            </label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_address">
                                         <td class="add_bm_title">주소</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" id="bm_postcode" placeholder="우편번호" disabled />
+                                            <input type="text" id="postNo" name="postNo" placeholder="우편번호"  th:value="${siteInfo?.postNo != null ? siteInfo.postNo : ''}"/>
                                             <input type="button" class="bm_address_search" onclick="bm_execDaumPostcode()" value="우편번호 검색" />
-                                            <input type="text" id="bm_address" placeholder="주소" disabled /><br />
-                                            <input type="text" id="bm_detailAddress" placeholder="나머지 상세주소" />
+                                            <input type="text" id="address"  name="address" placeholder="주소" th:value="${siteInfo?.address != null ? siteInfo.address : ''}" /><br />
+                                            <input type="text" id="addressDesc" name="addressDesc" th:value="${siteInfo?.addressDesc != null ? siteInfo.addressDesc : ''}" placeholder="나머지 상세주소" />
                                         </td>
                                     </tr>
                                     <tr class="add_bm_service01">
                                         <td rowspan="3" class="add_bm_title">서비스 구분</td>
                                         <td colspan="3" class="add_bm_con">
                                             <span>계약 기간</span>
-                                            <select name="" id="" class="bm_cont">
-                                                <option value="계약 전">계약 전</option>
-                                                <option value="계약 중">계약 중</option>
-                                                <option value="계약 중단">계약 중단</option>
-                                                <option value="계약 종료">계약 종료</option>
+                                            <select name="contractState" id="contractState" class="bm_cont" required>
+                                                <th:block th:each="contractState : ${contractStateList}">
+                                                    <option th:value="${contractState['code']}"
+                                                            th:text="${contractState['codeName']}"
+                                                            th:selected="${contractState.codeName == siteInfo?.contractState}" >
+                                                    </option>
+                                                </th:block>
                                             </select>
-                                            <input type="date" name="" id="bm_cdate_s" class="bm_cdate_s" /><span>~</span><input type="date" name="" id="bm_cdate_e" class="bm_cdate_e" />
+                                            <input type="date" name="contractSdate" id="contractSdate" th:value="${siteInfo?.contractSdate != null ? siteInfo.contractSdate : ''}" class="bm_cdate_s" required/>
+                                            <span>~</span>
+                                            <input type="date" name="contractEdate" id="contractEdate" th:value="${siteInfo?.contractEdate != null ? siteInfo.contractEdate : ''}" class="bm_cdate_e" required/>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_service02">
@@ -112,15 +131,33 @@
                                             <div class="add_bm_plan_wrap">
                                                 <div class="add_bm_plan01">
                                                     <span>블로그/디자인</span>
-                                                    <label for="bm_plan01"><input type="radio" name="" id="bm_plan01" class="bm_plan01" value="Basic" />Basic</label>
-                                                    <label for="bm_plan02"><input type="radio" name="" id="bm_plan02" class="bm_plan02" value="Standard" />Standard</label>
-                                                    <label for="bm_plan03"><input type="radio" name="" id="bm_plan03" class="bm_plan03" value="Premium" />Premium</label>
+                                                    <th:block th:each="plan : ${contractPlans}">
+                                                        <label th:for="${plan['code']} + 'video'">
+                                                            <input type="radio" 
+                                                                   th:id="${plan['code']} + 'video'" 
+                                                                   th:name="contractPlans" 
+                                                                   th:value="${plan['code']}" 
+                                                                   th:text="${plan['codeName']}"
+                                                                   th:class="'bm_plan' + ${plan['code']}" 
+                                                                   th:checked="${plan['codeName'] == siteInfo?.strContractPlanPDesign}" 
+                                                                   required/>
+                                                        </label>
+                                                    </th:block> 
                                                 </div>
                                                 <div class="add_bm_plan02">
                                                     <span>영상</span>
-                                                    <label for="bm_plan04"><input type="radio" name="" id="bm_plan04" class="bm_plan04" value="Basic" />Basic</label>
-                                                    <label for="bm_plan05"><input type="radio" name="" id="bm_plan05" class="bm_plan05" value="Standard" />Standard</label>
-                                                    <label for="bm_plan06"><input type="radio" name="" id="bm_plan06" class="bm_plan06" value="Premium" />Premium</label>
+                                                    <th:block th:each="plan : ${contractPlanVideo}">
+                                                        <label th:for="${plan['code']} + 'video'"> 
+                                                            <input type="radio" 
+                                                                   th:id="${plan['code']} + 'video'" 
+                                                                   th:name="contractPlanVideo" 
+                                                                   th:value="${plan['code']}" 
+                                                                   th:text="${plan['codeName']}"
+                                                                   th:class="'bm_plan' + ${plan['code']}" 
+                                                                   th:checked="${plan['codeName'] == siteInfo?.strContractPlanVideo}" 
+                                                                   required/>
+                                                        </label>
+                                                    </th:block>    
                                                 </div>
                                             </div>
                                         </td>
@@ -131,21 +168,22 @@
                                                 >고객게시판<br />
                                                 사용가능 여부</span
                                             >
-                                            <label for="bm_auth01"><input type="radio" name="" id="bm_auth01" class="bm_auth01" value="사용가능" />사용가능</label>
-                                            <label for="bm_auth02"><input type="radio" name="" id="bm_auth02" class="bm_auth02" value="사용중지" />사용중지</label>
+                                            <label for="bm_auth01"><input type="radio" name="boardUseYN" id="boardUseY" class="bm_auth01" value="Y" th:checked="${siteInfo?.boardUseYN == 'Y'}" />사용가능</label>
+                                            <label for="bm_auth02"><input type="radio" name="boardUseYN" id="boardUseN" class="bm_auth02" value="N" th:checked="${siteInfo?.boardUseYN == 'N'}" />사용중지</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_memo">
                                         <td class="add_bm_title">메모</td>
                                         <td colspan="3" class="add_bm_con">
                                             <textarea
-                                                name=""
-                                                id="bm_memo"
+                                                name="memo"
+                                                id="memo"
                                                 class="bm_memo pre"
+                                                th:text="${siteInfo?.memo}"
                                                 placeholder="특이사항 및 주의할점 메모 (00원장 친구 / 오타 예민)
-                                            디자인 :  진중하고 어두운 색감 선호 (수정 다수)
-                                            영상 : 수정 다수"
-                                                rows="3"></textarea>
+                                                            디자인 :  진중하고 어두운 색감 선호 (수정 다수)
+                                                            영상 : 수정 다수"
+                                                rows="3" required></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -154,149 +192,32 @@
                         <div class="add_bm_acc">
                             <h3>
                                 업체 계정 정보
-                                <div class="bm_acc_count">
+                               <!-- <div class="bm_acc_count">
                                     <button class="bm_acc_countdown" type="button"><img src="/img/countdown.svg" alt="다운" /></button>
                                     <button class="bm_acc_countup" type="button"><img src="/img/countup.svg" alt="업" /></button>
-                                </div>
+                                </div> -->
                             </h3>
                             <table cellspacing="0">
                                 <tbody>
-                                    <tr class="bm_acc01">
-                                        <td class="add_bm_title">FTP 정보</td>
-                                        <td colspan="3" class="add_bm_con">
-                                            <label for="">
-                                                <span>도메인</span>
-                                                <input type="text" class="bm_acc01_dm" placeholder="https://abc.com" />
-                                            </label>
-                                            <label for="">
-                                                <span>ID</span>
-                                                <input type="text" class="bm_acc01_id" placeholder="아이디" />
-                                            </label>
-                                            <label for="">
-                                                <span>PW</span>
-                                                <input type="text" class="bm_acc01_pw" placeholder="비밀번호" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr class="bm_acc02">
-                                        <td class="add_bm_title">네이버 블로그</td>
-                                        <td colspan="3" class="add_bm_con">
-                                            <label for="">
-                                                <span>도메인</span>
-                                                <input type="text" class="bm_acc01_dm" placeholder="https://abc.com" />
-                                            </label>
-                                            <label for="">
-                                                <span>ID</span>
-                                                <input type="text" class="bm_acc01_id" placeholder="아이디" />
-                                            </label>
-                                            <label for="">
-                                                <span>PW</span>
-                                                <input type="text" class="bm_acc01_pw" placeholder="비밀번호" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr class="bm_acc03">
-                                        <td class="add_bm_title">네이버 블로그2</td>
-                                        <td colspan="3" class="add_bm_con">
-                                            <label for="">
-                                                <span>도메인</span>
-                                                <input type="text" class="bm_acc01_dm" placeholder="https://abc.com" />
-                                            </label>
-                                            <label for="">
-                                                <span>ID</span>
-                                                <input type="text" class="bm_acc01_id" placeholder="아이디" />
-                                            </label>
-                                            <label for="">
-                                                <span>PW</span>
-                                                <input type="text" class="bm_acc01_pw" placeholder="비밀번호" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr class="bm_acc04">
-                                        <td class="add_bm_title">플레이스</td>
-                                        <td colspan="3" class="add_bm_con">
-                                            <label for="">
-                                                <span>도메인</span>
-                                                <input type="text" class="bm_acc01_dm" placeholder="https://abc.com" />
-                                            </label>
-                                            <label for="">
-                                                <span>ID</span>
-                                                <input type="text" class="bm_acc01_id" placeholder="아이디" />
-                                            </label>
-                                            <label for="">
-                                                <span>PW</span>
-                                                <input type="text" class="bm_acc01_pw" placeholder="비밀번호" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr class="bm_acc05">
-                                        <td class="add_bm_title">네이버 광고</td>
-                                        <td colspan="3" class="add_bm_con">
-                                            <label for="">
-                                                <span>도메인</span>
-                                                <input type="text" class="bm_acc01_dm" placeholder="https://abc.com" />
-                                            </label>
-                                            <label for="">
-                                                <span>ID</span>
-                                                <input type="text" class="bm_acc01_id" placeholder="아이디" />
-                                            </label>
-                                            <label for="">
-                                                <span>PW</span>
-                                                <input type="text" class="bm_acc01_pw" placeholder="비밀번호" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr class="bm_acc06">
-                                        <td class="add_bm_title">카카오 비즈니스</td>
-                                        <td colspan="3" class="add_bm_con">
-                                            <label for="">
-                                                <span>도메인</span>
-                                                <input type="text" class="bm_acc01_dm" placeholder="https://abc.com" />
-                                            </label>
-                                            <label for="">
-                                                <span>ID</span>
-                                                <input type="text" class="bm_acc01_id" placeholder="아이디" />
-                                            </label>
-                                            <label for="">
-                                                <span>PW</span>
-                                                <input type="text" class="bm_acc01_pw" placeholder="비밀번호" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr class="bm_acc07">
-                                        <td class="add_bm_title">인스타그램</td>
-                                        <td colspan="3" class="add_bm_con">
-                                            <label for="">
-                                                <span>도메인</span>
-                                                <input type="text" class="bm_acc01_dm" placeholder="https://abc.com" />
-                                            </label>
-                                            <label for="">
-                                                <span>ID</span>
-                                                <input type="text" class="bm_acc01_id" placeholder="아이디" />
-                                            </label>
-                                            <label for="">
-                                                <span>PW</span>
-                                                <input type="text" class="bm_acc01_pw" placeholder="비밀번호" />
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    <tr class="bm_acc08">
-                                        <td class="add_bm_title">카페24</td>
-                                        <td colspan="3" class="add_bm_con">
-                                            <label for="">
-                                                <span>도메인</span>
-                                                <input type="text" class="bm_acc01_dm" placeholder="https://abc.com" />
-                                            </label>
-                                            <label for="">
-                                                <span>ID</span>
-                                                <input type="text" class="bm_acc01_id" placeholder="아이디" />
-                                            </label>
-                                            <label for="">
-                                                <span>PW</span>
-                                                <input type="text" class="bm_acc01_pw" placeholder="비밀번호" />
-                                            </label>
-                                        </td>
-                                    </tr>
+                                    <th:block th:each="sns : ${snsTypeList}">
+                                        <tr class="bm_acc01">
+                                            <td class="add_bm_title" th:text="${sns['codeName']}"></td>
+                                            <td colspan="3" class="add_bm_con">
+                                                <label for="">
+                                                    <span>도메인</span>
+                                                    <input type="text" class="bm_acc01_dm" th:id="${sns.code} + 'siteDomain'" th:name="${sns.code} + 'siteDomain'" placeholder="https://abc.com" required />
+                                                </label>
+                                                <label for="">
+                                                    <span>ID</span>
+                                                    <input type="text" class="bm_acc01_id" th:id="${sns.code} + 'id'" th:name="${sns.code} + 'id'" placeholder="아이디" required />
+                                                </label>
+                                                <label for="">
+                                                    <span>PW</span>
+                                                    <input type="text" class="bm_acc01_pw" th:id="${sns.code} + 'pw'" th:name="${sns.code} + 'pw'" placeholder="비밀번호" required/>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </th:block> 
                                 </tbody>
                             </table>
                         </div>
@@ -308,31 +229,38 @@
                                         <td class="add_bm_title">성명</td>
                                         <td class="add_bm_con">
                                             <label for="bm_hname"
-                                                ><input type="text" class="bm_hname" id="bm_hname" placeholder="홍길동" /><button class="bm_hname_plus" type="button">
+                                                ><input type="text" class="bm_hname" id="ceoName" name="ceoName" placeholder="홍길동" th:value="${siteInfo?.ceoName != null ? siteInfo.ceoName : ''}" required/><button
+                                                    class="bm_hname_plus"
+                                                    type="button">
                                                     <img src="/img/main_plus.svg" alt="플러스" /></button
                                             ></label>
                                         </td>
                                         <td class="add_bm_title">대표자 생년월일</td>
                                         <td class="add_bm_con">
-                                            <input type="text" class="bm_hdate" id="bm_hdate" placeholder="1999.12.12" />
+                                            <input type="text" class="bm_hdate"  placeholder="1999.12.12" id="managerName" name="managerName" th:value="${siteInfo?.managerName != null ? siteInfo.managerName : ''}" required/>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hphone">
                                         <td class="add_bm_title">연락처</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" class="bm_hphone" id="bm_hphone" placeholder="010-1234-5678" />
+                                            <input type="text" class="bm_hphone" placeholder="010-1234-5678" id="siteTelno" name="siteTelno" th:value="${siteInfo?.managerPhone != null ? siteInfo.managerPhone : ''}" required/>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hmail">
                                         <td class="add_bm_title">이메일</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" class="bm_hmail" id="bm_hmail" placeholder="abc@def.com" />
+                                            <input type="text" class="bm_hmail"  placeholder="abc@def.com" id="managerEmail" name="managerEmail" th:value="${siteInfo?.managerEmail != null ? siteInfo.managerEmail : ''}" required/>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hmemo">
                                         <td class="add_bm_title">메모</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <textarea name="" id="bm_hmemo" class="bm_hmemo pre" placeholder="업체측 특이사항 및 요청사항" rows="3"></textarea>
+                                            <textarea
+                                                name=""
+                                                id="bm_hmemo"
+                                                class="bm_hmemo pre"
+                                                placeholder="업체측 특이사항 및 요청사항"
+                                                rows="3" required></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -345,64 +273,64 @@
                                     <tr class="add_bm_file01">
                                         <td class="add_bm_title">사업자등록증</td>
                                         <td class="add_bm_con">
-                                            <input type="file" name="" id="bm_file01" multiple />
-                                            <label class="bm_file_btn" for="bm_file01">파일선택</label>
-                                            <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            <input type="file" name="imgBusinessRegNo" id="imgBusinessRegNo" multiple />
+                                            <label class="bm_file_btn" for="imgBusinessRegNo">파일선택</label>
+                                            <span class="bm_file_text" id="imgBusinessRegNoText" th:text="${siteInfo?.imgBusinessRegNoText}">선택된 파일이 없습니다.</span>
                                         </td>
                                         <td class="add_bm_title">개설필증</td>
                                         <td class="add_bm_con">
-                                            <input type="file" name="" id="bm_file02" multiple />
-                                            <label class="bm_file_btn" for="bm_file02">파일선택</label>
-                                            <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            <input type="file" name="imgDoctorLicense" id="imgDoctorLicense" multiple />
+                                            <label class="bm_file_btn" for="imgDoctorLicense">파일선택</label>
+                                            <span class="bm_file_text" id="imgDoctorLicenseText" th:text="${siteInfo?.imgDoctorLicenseText}">선택된 파일이 없습니다.</span>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_file02">
                                         <td class="add_bm_title">의사 면허증</td>
                                         <td class="add_bm_con">
-                                            <input type="file" name="" id="bm_file03" multiple />
-                                            <label class="bm_file_btn" for="bm_file03">파일선택</label>
-                                            <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            <input type="file" name="imgDegreeCertificate" id="imgDegreeCertificate" multiple />
+                                            <label class="bm_file_btn" for="imgDegreeCertificate">파일선택</label>
+                                            <span class="bm_file_text" id="imgDegreeCertificateText" th:text="${siteInfo?.imgDegreeCertificateText}">선택된 파일이 없습니다.</span>
                                         </td>
                                         <td class="add_bm_title">전문의 자격증</td>
                                         <td class="add_bm_con">
-                                            <input type="file" name="" id="bm_file04" multiple />
-                                            <label class="bm_file_btn" for="bm_file04">파일선택</label>
-                                            <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            <input type="file" name="imgDesignAssets" id="imgDesignAssets" multiple />
+                                            <label class="bm_file_btn" for="imgDesignAssets">파일선택</label>
+                                            <span class="bm_file_text" id="imgDesignAssetsText" th:text="${siteInfo?.imgDesignAssetsText}">선택된 파일이 없습니다.</span>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_file03">
                                         <td class="add_bm_title">학위증</td>
                                         <td class="add_bm_con">
-                                            <input type="file" name="" id="bm_file05" multiple />
-                                            <label class="bm_file_btn" for="bm_file05">파일선택</label>
-                                            <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            <input type="file" name="imgOpenCertificate" id="imgOpenCertificate" multiple />
+                                            <label class="bm_file_btn" for="imgOpenCertificate">파일선택</label>
+                                            <span class="bm_file_text" id="imgOpenCertificateText" th:text="${siteInfo?.imgOpenCertificateText}">선택된 파일이 없습니다.</span>
                                         </td>
                                         <td class="add_bm_title">이외 자료</td>
                                         <td class="add_bm_con">
-                                            <input type="file" name="" id="bm_file06" multiple />
-                                            <label class="bm_file_btn" for="bm_file06">파일선택</label>
-                                            <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            <input type="file" name="imgSpecialistLicense" id="imgSpecialistLicense" multiple />
+                                            <label class="bm_file_btn" for="imgSpecialistLicense">파일선택</label>
+                                            <span class="bm_file_text" id="imgSpecialistLicenseText" th:text="${siteInfo?.imgSpecialistLicenseText}">선택된 파일이 없습니다.</span>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_file04">
                                         <td class="add_bm_title">디자인 활용 자료</td>
                                         <td class="add_bm_con">
-                                            <input type="file" name="" id="bm_file07" multiple />
-                                            <label class="bm_file_btn" for="bm_file07">파일선택</label>
-                                            <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            <input type="file" name="imgEtcFiles" id="imgEtcFiles" multiple />
+                                            <label class="bm_file_btn" for="imgEtcFiles">파일선택</label>
+                                            <span class="bm_file_text" id="imgEtcFilesText" th:text="${siteInfo?.imgEtcFilesText}">선택된 파일이 없습니다.</span>
                                         </td>
                                         <td class="add_bm_title">이외 이미지</td>
                                         <td class="add_bm_con">
-                                            <input type="file" name="" id="bm_file08" multiple />
-                                            <label class="bm_file_btn" for="bm_file08">파일선택</label>
-                                            <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                            <input type="file" name="imgEtc" id="imgEtc" multiple />
+                                            <label class="bm_file_btn" for="imgEtc">파일선택</label>
+                                            <span class="bm_file_text" id="imgEtcText" th:text="${siteInfo?.imgEtcText}">선택된 파일이 없습니다.</span>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="add_bm_btn_wrap">
-                            <input type="button" value="저장" class="add_bm_btn" />
+                            <input type="button" value="저장" id="Registration" name="Registration" class="add_bm_btn" />
                         </div>
                     </form>
                 </div>
