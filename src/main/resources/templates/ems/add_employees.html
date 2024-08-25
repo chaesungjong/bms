@@ -27,7 +27,7 @@
                                                 <img th:if="${memInfo != null && memInfo['imgProfile'] != null}" th:src="@{${memInfo['imgProfile']}}" alt="" id="profile_preview" />
                                                 <!-- memInfo가 null일 때 기본 이미지 사용 -->
                                                 <img th:unless="${memInfo != null && memInfo['imgProfile'] != null}" src="" alt="" id="profile_preview" />
-                                                <div th:classappend="${memInfo != null && memInfo['imgProfile'] != null} ? 'upload' : ''"></div>
+                                                <div th:classappend="${memInfo != null && memInfo['imgProfile'] != null} ? '' : 'upload'"></div>
                                             </div>
                                         </td>
                                         <td colspan="3">
@@ -158,9 +158,9 @@
                                     <tr>
                                         <td class="add_emp_title">주소</td>
                                         <td colspan="3" class="post_wrap">
-                                            <input type="text" id="post" name="post" placeholder="우편번호" th:value="${memInfo?.post}" required disabled />
+                                            <input type="text" id="post" name="post" placeholder="우편번호" th:value="${memInfo?.post}" required  />
                                             <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색" />
-                                            <input type="text" id="addr" name="addr" placeholder="주소" th:value="${memInfo?.addr}" required disabled /><br />
+                                            <input type="text" id="addr" name="addr" placeholder="주소" th:value="${memInfo?.addr}" required  /><br />
                                             <input type="text" id="addrDesc" name="addrDesc" placeholder="상세주소" th:value="${memInfo?.addrDesc}" required />
                                         </td>
                                     </tr>
