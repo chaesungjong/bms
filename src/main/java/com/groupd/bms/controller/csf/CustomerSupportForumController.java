@@ -355,14 +355,14 @@ public class CustomerSupportForumController extends BaseController{
         if("0".equals(retVal)) {
 
             // 파일 업로드
-            if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) uploadFileToGCS(imgBusinessRegNo, imgBusinessRegNo.getOriginalFilename());
-            if(imgDoctorLicense != null && !imgDoctorLicense.isEmpty()) uploadFileToGCS(imgDoctorLicense, imgDoctorLicense.getOriginalFilename());
-            if(imgDegreeCertificate != null && !imgDegreeCertificate.isEmpty()) uploadFileToGCS(imgDegreeCertificate, imgDegreeCertificate.getOriginalFilename());
-            if(imgDesignAssets != null && !imgDesignAssets.isEmpty()) uploadFileToGCS(imgDesignAssets, imgDesignAssets.getOriginalFilename());
-            if(imgOpenCertificate != null && !imgOpenCertificate.isEmpty()) uploadFileToGCS(imgOpenCertificate, imgOpenCertificate.getOriginalFilename());
-            if(imgSpecialistLicense != null && !imgSpecialistLicense.isEmpty()) uploadFileToGCS(imgSpecialistLicense, imgSpecialistLicense.getOriginalFilename());
-            if(imgEtcFiles != null && !imgEtcFiles.isEmpty()) uploadFileToGCS(imgEtcFiles, imgEtcFiles.getOriginalFilename());
-            if(imgEtc != null && !imgEtc.isEmpty()) uploadFileToGCS(imgEtc, imgEtc.getOriginalFilename());
+            // if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) uploadFileToGCS(imgBusinessRegNo, imgBusinessRegNo.getOriginalFilename());
+            // if(imgDoctorLicense != null && !imgDoctorLicense.isEmpty()) uploadFileToGCS(imgDoctorLicense, imgDoctorLicense.getOriginalFilename());
+            // if(imgDegreeCertificate != null && !imgDegreeCertificate.isEmpty()) uploadFileToGCS(imgDegreeCertificate, imgDegreeCertificate.getOriginalFilename());
+            // if(imgDesignAssets != null && !imgDesignAssets.isEmpty()) uploadFileToGCS(imgDesignAssets, imgDesignAssets.getOriginalFilename());
+            // if(imgOpenCertificate != null && !imgOpenCertificate.isEmpty()) uploadFileToGCS(imgOpenCertificate, imgOpenCertificate.getOriginalFilename());
+            // if(imgSpecialistLicense != null && !imgSpecialistLicense.isEmpty()) uploadFileToGCS(imgSpecialistLicense, imgSpecialistLicense.getOriginalFilename());
+            // if(imgEtcFiles != null && !imgEtcFiles.isEmpty()) uploadFileToGCS(imgEtcFiles, imgEtcFiles.getOriginalFilename());
+            // if(imgEtc != null && !imgEtc.isEmpty()) uploadFileToGCS(imgEtc, imgEtc.getOriginalFilename());
 
         }
 

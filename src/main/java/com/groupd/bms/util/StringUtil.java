@@ -24,6 +24,18 @@ public class StringUtil {
     }
 
     /**
+     * Object가 null인지 확인
+     * @param str
+     * @return
+     */
+    public static boolean isNull(Object obj) {
+        if(obj == null) {
+            return true;
+        } else {
+            return false;
+        }
+
+    /**
      * 문자열을 정수로 변환
      * @param str
      * @return Integer

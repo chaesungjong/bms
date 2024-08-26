@@ -240,6 +240,7 @@ public class EmployeeManagementSystemController extends BaseController{
         String imgProfileUrl = "";
         String imgEtcUrl  = "";
 
+
         RegistrationMap.put("pwd", SHA256Util.hashWithSHA256(StringUtil.objectToString(RegistrationMap.get("pwd"))));
         RegistrationMap.put("birthday",StringUtil.objectToString(RegistrationMap.get("birthday")).replaceAll("-", "") );
         RegistrationMap.put("jobStartDate",StringUtil.objectToString(RegistrationMap.get("jobStartDate")).replaceAll("-", ""));
@@ -298,10 +299,10 @@ public class EmployeeManagementSystemController extends BaseController{
             //사원 등록 성공
             if("0".equals(retVal)) {
                 
-                if(!"".equals(imgBankbookUrl) && "".equals(imgBankbookFileName))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
-                if(!"".equals(imgFamilyRL) && "".equals(imgFamilyRLFileName))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
-                if(!"".equals(imgProfile)&& "".equals(imgProfileFileName))          uploadFileToGCS(imgProfile, imgProfileUrl);
-                if(!"".equals(imgEtcUrl)&& "".equals(imgEtcFimeName))               uploadFileToGCS(imgEtc, imgEtcUrl);
+                // if(!"".equals(imgBankbookUrl) && "".equals(imgBankbookFileName))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
+                // if(!"".equals(imgFamilyRL) && "".equals(imgFamilyRLFileName))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
+                // if(!"".equals(imgProfile)&& "".equals(imgProfileFileName))          uploadFileToGCS(imgProfile, imgProfileUrl);
+                // if(!"".equals(imgEtcUrl)&& "".equals(imgEtcFimeName))               uploadFileToGCS(imgEtc, imgEtcUrl);
                 
                 return ResponseEntity.ok(RegistrationMap);
             }
