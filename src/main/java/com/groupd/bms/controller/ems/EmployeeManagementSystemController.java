@@ -240,8 +240,11 @@ public class EmployeeManagementSystemController extends BaseController{
         String imgProfileUrl = "";
         String imgEtcUrl  = "";
 
+        //비밀번호 암호화
+        if(!"".equals(StringUtil.objectToString(RegistrationMap.get("pwd")))){
+            RegistrationMap.put("pwd", SHA256Util.hashWithSHA256(StringUtil.objectToString(RegistrationMap.get("pwd"))));
+        }
 
-        RegistrationMap.put("pwd", SHA256Util.hashWithSHA256(StringUtil.objectToString(RegistrationMap.get("pwd"))));
         RegistrationMap.put("birthday",StringUtil.objectToString(RegistrationMap.get("birthday")).replaceAll("-", "") );
         RegistrationMap.put("jobStartDate",StringUtil.objectToString(RegistrationMap.get("jobStartDate")).replaceAll("-", ""));
         RegistrationMap.put("jobEndDate",StringUtil.objectToString(RegistrationMap.get("jobEndDate")).replaceAll("-", ""));
