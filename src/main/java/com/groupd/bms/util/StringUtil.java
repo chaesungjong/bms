@@ -34,6 +34,7 @@ public class StringUtil {
         } else {
             return false;
         }
+    }
 
     /**
      * 문자열을 정수로 변환
