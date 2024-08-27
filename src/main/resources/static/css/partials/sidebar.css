@@ -414,3 +414,7 @@ body.modal-active {
     font-weight: 500;
     padding: 0px 12px;
 }
+#imgView {
+    max-width: 121px;
+    object-fit: cover;
+}
