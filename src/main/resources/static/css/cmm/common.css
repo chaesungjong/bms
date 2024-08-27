@@ -87,6 +87,10 @@ address {
 }
 
 /* CSS to hide default DataTables pagination and info */
-.dataTables_info, .dataTables_paginate {
+.dataTables_info,
+.dataTables_paginate {
     display: none;
+}
+.main_view {
+    width: 83%;
 }

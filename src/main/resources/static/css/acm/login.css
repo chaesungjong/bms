@@ -122,6 +122,9 @@ html {
     color: #555;
 }
 @media screen and (max-width: 1600px) {
+    .login_wrap {
+        width: 420px;
+    }
     .login_wrap h1 {
         font-size: 24px;
         margin-top: 20px;
@@ -135,6 +138,7 @@ html {
     }
     .login_wrap .login_text input {
         font-size: 16px;
+        width: 70%;
     }
     .login_check {
         font-size: 16px;

@@ -265,3 +265,15 @@
 .cat_fn {
     color: #ed7926;
 }
+@media screen and (max-width: 1600px) {
+    .emp_wrap {
+        padding: 20px;
+    }
+    .emp_wrap > h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .emp_board_date > label {
+        width: 150px;
+    }
+}

@@ -758,3 +758,141 @@
     margin: 4px 0px;
     width: max-content;
 }
+@media screen and (max-width: 1600px) {
+    .main {
+        padding: 20px;
+        /* flex-wrap: wrap; */
+    }
+    .main_content_top {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+    .main_commute_left {
+        align-items: center;
+    }
+    .main_commute {
+        padding-left: 16px;
+    }
+    .main_commute h3 {
+        width: 108px;
+    }
+    .main_notice {
+        margin: 20px auto;
+    }
+    .main_content_right {
+        max-width: 800px;
+    }
+    .main_content_info {
+        max-width: 800px;
+    }
+    .main_board {
+        max-width: 800px;
+    }
+    .main_right_side {
+        margin-left: 15px;
+    }
+    .main_board_category > span {
+        line-height: 25px;
+        padding: 0px 8px;
+        margin-right: 5px;
+        font-size: 12px;
+    }
+    .main_board_state > span {
+        width: 50px;
+        font-size: 14px;
+        line-height: 26px;
+    }
+    .main_board_category {
+        margin-left: 15px;
+    }
+    .main_board_wrtime {
+        width: 10%;
+        font-size: 14px;
+    }
+    .main_board_new {
+        font-size: 14px;
+        line-height: 20px;
+        width: 30px;
+    }
+    .main_board_wrcp {
+        width: 15%;
+        font-size: 14px;
+    }
+    .main_board_wrname {
+        width: 10%;
+        font-size: 14px;
+    }
+    .main_board_box {
+        width: 11%;
+    }
+    .main_board_subject {
+        font-size: 14px;
+    }
+    .main_board_wkname {
+        width: 10%;
+        line-height: 45px;
+        font-size: 14px;
+    }
+    .main_board_wrcategory {
+        padding: 0px 10px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .main_board_wrstate {
+        width: 50px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .main_board_comment {
+        font-size: 14px;
+        line-height: 20px;
+        margin-left: 5px;
+    }
+    .main_board_con {
+        width: 90%;
+        justify-content: space-around;
+    }
+    .category_select span {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .state_select span {
+        width: 50px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .category_count {
+        width: 19px;
+        height: 19px;
+        font-size: 10px;
+    }
+    .main_side_alert {
+        padding: 10px 10px;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+    .main_side_request {
+        padding: 10px 10px;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+    .main_side_os > a {
+        padding: 10px 10px;
+        font-size: 14px;
+    }
+    .main_side_break > a {
+        padding: 10px 10px;
+        font-size: 14px;
+    }
+    .main_side_calender > a {
+        padding: 10px 10px;
+        font-size: 14px;
+    }
+    .main_side_org {
+        padding: 10px 10px;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+}

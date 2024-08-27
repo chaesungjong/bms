@@ -499,3 +499,34 @@ body.modal-active {
 .pwd_modify_con02 {
     margin: 46px 0px;
 }
+@media screen and (max-width: 1600px) {
+    .add_emp_wrap {
+        padding: 20px;
+    }
+    .add_emp_wrap > h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .add_emp_wrap table tr td {
+        padding: 15px 15px;
+    }
+    .name_box,
+    .name_en_box,
+    .id_box,
+    .pw_box,
+    .pwr_box {
+        width: 13%;
+        margin-left: 4.5px;
+        margin-right: 10px;
+    }
+    .add_emp_title {
+        min-width: 120px;
+    }
+    #post {
+        width: 85px;
+    }
+    .add_emp_wrap table tr td span.sub_span {
+        width: 58px;
+        margin: 0 0px 0 5px;
+    }
+}

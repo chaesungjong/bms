@@ -418,3 +418,44 @@ body.modal-active {
     max-width: 121px;
     object-fit: cover;
 }
+@media screen and (max-width: 1600px) {
+    .sidebar_top {
+        padding: 25px 15px 15px;
+    }
+    .sidebar_user {
+        margin-top: 25px;
+    }
+    .sidebar_user_info {
+        padding: 5px 10px;
+    }
+    .sidebar_user_right {
+        display: flex;
+    }
+    .sidebar_user_grade {
+        margin-left: 0px;
+    }
+    .sidebar_user_left > span {
+        font-size: 16px;
+    }
+    .sidebar_user_menu > a {
+        padding: 10px 0px;
+        font-size: 11px;
+    }
+    .sidebar_bot {
+        padding: 0px 15px 20px;
+    }
+    .side_menu > li > a {
+        padding: 0px 10px;
+        font-size: 16px;
+        line-height: 40px;
+    }
+    .side_sub_menu {
+        padding: 15px 20px;
+    }
+    .side_sub_menu a {
+        font-size: 14px;
+    }
+    .side_sub_menu li {
+        margin-bottom: 5px;
+    }
+}

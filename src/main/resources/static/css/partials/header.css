@@ -443,3 +443,8 @@
 .hd_ext_info_btn > a.hd_ext_info_btn02 {
     background-color: #e24545;
 }
+@media screen and (max-width: 1600px) {
+    .hd_wrap {
+        padding: 20px;
+    }
+}

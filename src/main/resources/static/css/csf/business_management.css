@@ -510,3 +510,28 @@ body.modal-active {
     font-weight: 500;
     padding: 0px 12px;
 }
+
+@media screen and (max-width: 1600px) {
+    .bm_board_date > label {
+        width: 150px;
+    }
+    .bm_wrap > h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .bm_wrap {
+        padding: 20px;
+    }
+    .bm_board_th {
+        line-height: 35px;
+        font-size: 14px;
+    }
+    .bm_board_td {
+        line-height: 45px;
+        font-size: 14px;
+    }
+    .bm_board_search select {
+        font-size: 16px;
+        width: 150px;
+    }
+}

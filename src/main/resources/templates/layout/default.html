@@ -19,7 +19,7 @@
             <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
                 <div th:replace="/partials/sidebar :: sidebar"></div>
             </th:block>
-            <div style="width: 100%">
+            <div class="main_view">
                 <!-- 공통헤더 영역 -->
                 <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
                     <div th:replace="/partials/header :: header"></div>

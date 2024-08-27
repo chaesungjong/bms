@@ -1,8 +1,4 @@
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <aside th:fragment="sidebar" class="sidebar">
         <!-- Sidebar -->
         <div class="sidebar_wrap">
@@ -22,9 +18,7 @@
                     </div>
                     <div class="sidebar_user_menu">
                         <a href="/pif/design_work" class="sidebar_user_menu01"><img src="/img/sidebar_user_menu01.svg" alt="부서 업무" />부서 업무</a>
-                        <a href="/pif/design_portfolio" class="sidebar_user_menu02"
-                            ><img src="/img/sidebar_user_menu02.svg" alt="포트폴리오" />포트폴리오</a
-                        >
+                        <a href="/pif/design_portfolio" class="sidebar_user_menu02"><img src="/img/sidebar_user_menu02.svg" alt="포트폴리오" />포트폴리오</a>
                         <a href="#" class="sidebar_user_menu03"><img src="/img/sidebar_user_menu03.svg" alt="업무일지" />업무일지</a>
                     </div>
                 </div>
@@ -73,7 +67,7 @@
                             <li><a href="/inb/electronic_board">전자 게시판</a></li>
                             <li><a href="/inb/departmental_board">부서 게시판</a></li>
                             <li><a href="/inb/department_training_materials">부서 교육자료</a></li>
-                            <li><a href="/inb/client_meeting_history">거래처/히스토리미팅 히스토리</a></li>
+                            <li><a href="/inb/client_meeting_history">거래처 히스토리 / 미팅 히스토리</a></li>
                         </ul>
                     </li>
                     <li class="side_menu07">
@@ -119,8 +113,8 @@
                                     <li class="member_info_sdate">
                                         <div class="member_info_title"><h5>입사일</h5></div>
                                         <div class="member_info_con">
-                                                <p id="jobStartDateView"></p>
-                                                <span class="member_info_service" id="jobDateView"></span>
+                                            <p id="jobStartDateView"></p>
+                                            <span class="member_info_service" id="jobDateView"></span>
                                         </div>
                                     </li>
                                 </ul>
@@ -189,43 +183,35 @@
                                 <li class="member_info_accimg">
                                     <div class="member_info_title"><h5>통장 사본</h5></div>
                                     <div class="member_info_con">
-                                        <a href="javascript:void(0);" id="imgBankbookView" onclick="downloadFile('imgBankbook')">
-                                            <img src="/img/jpg.png" alt="jpg" />통장사본
-                                        </a>
+                                        <a href="javascript:void(0);" id="imgBankbookView" onclick="downloadFile('imgBankbook')"> <img src="/img/jpg.png" alt="jpg" />통장사본 </a>
                                         <input type="hidden" id="imgBankbookValue" value="" />
                                     </div>
                                 </li>
                                 <li class="member_info_famimg">
                                     <div class="member_info_title"><h5>가족관계증명서</h5></div>
                                     <div class="member_info_con">
-                                        <a href="javascript:void(0);" id="imgFamilyRLView" onclick="downloadFile('imgFamilyRL')">
-                                            <img src="/img/jpg.png" alt="jpg" />가족관계증명서
-                                        </a>
+                                        <a href="javascript:void(0);" id="imgFamilyRLView" onclick="downloadFile('imgFamilyRL')"> <img src="/img/jpg.png" alt="jpg" />가족관계증명서 </a>
                                         <input type="hidden" id="imgFamilyRLValue" value="" />
                                     </div>
                                 </li>
                                 <li class="member_info_profile">
                                     <div class="member_info_title"><h5>사원 프로필 사진</h5></div>
                                     <div class="member_info_con">
-                                        <a href="javascript:void(0);" id="imgProfileView" onclick="downloadFile('imgProfile')">
-                                            <img src="/img/jpg.png" alt="jpg" />사원 프로필 사진
-                                        </a>
+                                        <a href="javascript:void(0);" id="imgProfileView" onclick="downloadFile('imgProfile')"> <img src="/img/jpg.png" alt="jpg" />사원 프로필 사진 </a>
                                         <input type="hidden" id="imgProfileValue" value="" />
                                     </div>
                                 </li>
                                 <li class="member_info_etcfile">
                                     <div class="member_info_title"><h5>이외 자료</h5></div>
                                     <div class="member_info_con">
-                                        <a href="javascript:void(0);" id="imgEtcView" onclick="downloadFile('imgEtc')">
-                                            <img src="/img/jpg.png" alt="jpg" />이외 자료
-                                        </a>
+                                        <a href="javascript:void(0);" id="imgEtcView" onclick="downloadFile('imgEtc')"> <img src="/img/jpg.png" alt="jpg" />이외 자료 </a>
                                         <input type="hidden" id="imgEtcValue" value="" />
                                     </div>
                                 </li>
                             </ul>
                         </div>
                         <div class="member_info_btn_wrap">
-                            <a href="#"  id="infoUrl" class="member_info_btn">정보수정</a>
+                            <a href="#" id="infoUrl" class="member_info_btn">정보수정</a>
                         </div>
                     </div>
                 </div>
