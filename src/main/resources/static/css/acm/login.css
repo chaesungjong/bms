@@ -121,3 +121,40 @@ html {
     font-weight: 400;
     color: #555;
 }
+@media screen and (max-width: 1600px) {
+    .login_wrap h1 {
+        font-size: 24px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    .login_inner {
+        padding: 30px 20px 0px;
+    }
+    .login_wrap .login_text > span {
+        width: 60px;
+    }
+    .login_wrap .login_text input {
+        font-size: 16px;
+    }
+    .login_check {
+        font-size: 16px;
+    }
+    #loginBtn {
+        font-size: 24px;
+        line-height: 45px;
+        margin: 0px 0px 20px;
+    }
+    .login_inner > p {
+        font-size: 16px;
+    }
+    .login_info address {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    .login_info span {
+        font-size: 18px;
+    }
+    .login_info {
+        padding: 18px 0px 15px;
+    }
+}
