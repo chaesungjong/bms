@@ -274,6 +274,12 @@
         margin-bottom: 15px;
     }
     .emp_board_date > label {
-        width: 150px;
+        width: 42%;
+    }
+    .emp_board_search select {
+        width: 30%;
+    }
+    .emp_board_search label {
+        width: 60%;
     }
 }

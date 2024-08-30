@@ -513,7 +513,7 @@ body.modal-active {
 
 @media screen and (max-width: 1600px) {
     .bm_board_date > label {
-        width: 150px;
+        width: 42%;
     }
     .bm_wrap > h2 {
         font-size: 24px;
@@ -532,6 +532,9 @@ body.modal-active {
     }
     .bm_board_search select {
         font-size: 16px;
-        width: 150px;
+        width: 30%;
+    }
+    .bm_board_search label {
+        width: 60%;
     }
 }

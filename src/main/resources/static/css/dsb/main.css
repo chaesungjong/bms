@@ -781,15 +781,6 @@
     .main_notice {
         margin: 20px auto;
     }
-    .main_content_right {
-        max-width: 800px;
-    }
-    .main_content_info {
-        max-width: 800px;
-    }
-    .main_board {
-        max-width: 800px;
-    }
     .main_right_side {
         margin-left: 15px;
     }
@@ -894,5 +885,15 @@
         padding: 10px 10px;
         margin-bottom: 15px;
         font-size: 14px;
+    }
+    .main_commute_btn > a {
+        width: 170px;
+        font-size: 18px;
+    }
+    .main_commute_btn {
+        max-width: 350px;
+    }
+    .main_content_right {
+        max-width: initial;
     }
 }

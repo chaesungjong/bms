@@ -460,3 +460,21 @@
     margin: 4px 0px;
     width: max-content;
 }
+@media screen and (max-width: 1600px) {
+    .mt_wrap {
+        padding: 20px;
+    }
+    .mt_wrap > h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .mt_board_date > label {
+        width: 42%;
+    }
+    .mt_board_search select {
+        width: 30%;
+    }
+    .mt_board_search label {
+        width: 60%;
+    }
+}
