@@ -77,43 +77,11 @@ public class CustomerSupportForumController extends BaseController{
 
             if (siteInfoMap != null && siteInfoMap.size() > 0) {
     
-                siteInfoMap.put("siteKey", StringUtil.objectToString(siteInfoMap.get("siteKey")));
-                siteInfoMap.put("siteCode", StringUtil.objectToString(siteInfoMap.get("siteCode")));
-                siteInfoMap.put("siteName", StringUtil.objectToString(siteInfoMap.get("siteName")));
-                siteInfoMap.put("siteState", StringUtil.objectToString(siteInfoMap.get("strSiteState")));
-                siteInfoMap.put("siteStateLevel", StringUtil.objectToString(siteInfoMap.get("strSiteStateLevel")));
-                siteInfoMap.put("siteOpenState", StringUtil.objectToString(siteInfoMap.get("strSiteOpenState")));
-                siteInfoMap.put("blogYN", StringUtil.objectToString(siteInfoMap.get("blogYN")));
-                siteInfoMap.put("homepageYN", StringUtil.objectToString(siteInfoMap.get("homepageYN")));
-                siteInfoMap.put("blandvideoYN", StringUtil.objectToString(siteInfoMap.get("blandvideoYN")));
-                siteInfoMap.put("reviewYN", StringUtil.objectToString(siteInfoMap.get("reviewYN")));
-                siteInfoMap.put("instagramYN", StringUtil.objectToString(siteInfoMap.get("instagramYN")));
-                siteInfoMap.put("youtubeYN", StringUtil.objectToString(siteInfoMap.get("youtubeYN")));
-                siteInfoMap.put("momcafeYN", StringUtil.objectToString(siteInfoMap.get("momcafeYN")));
-                siteInfoMap.put("cntBlogPos", StringUtil.objectToString(siteInfoMap.get("cntBlogPos")));
-                siteInfoMap.put("siteURL", StringUtil.objectToString(siteInfoMap.get("siteURL")));
                 
                 siteInfoMap.put("siteDomainExpdt", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("siteDomainExpdt"))));
                 siteInfoMap.put("siteHostingExpdt", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("siteHostingExpdt"))));
-                
-                siteInfoMap.put("address", StringUtil.objectToString(siteInfoMap.get("address")));
-                siteInfoMap.put("addressDesc", StringUtil.objectToString(siteInfoMap.get("addressDesc")));
-                siteInfoMap.put("postNo", StringUtil.objectToString(siteInfoMap.get("postNo")));
-                
                 siteInfoMap.put("contractSdate", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("contractSdate"))));
                 siteInfoMap.put("contractEdate", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("contractEdate"))));
-                
-                siteInfoMap.put("contractState", StringUtil.objectToString(siteInfoMap.get("strContractState")));
-                siteInfoMap.put("contractPlanPDesign", StringUtil.objectToString(siteInfoMap.get("strContractPlanPDesign")));
-                siteInfoMap.put("contractPlanVideo", StringUtil.objectToString(siteInfoMap.get("strContractPlanVideo")));
-                siteInfoMap.put("boardUseYN", StringUtil.objectToString(siteInfoMap.get("boardUseYN")));
-                siteInfoMap.put("memo", StringUtil.objectToString(siteInfoMap.get("memo")));
-                siteInfoMap.put("siteClass", StringUtil.objectToString(siteInfoMap.get("strSiteClass")));
-                siteInfoMap.put("ceoName", StringUtil.objectToString(siteInfoMap.get("ceoName")));
-                siteInfoMap.put("siteTelno", StringUtil.objectToString(siteInfoMap.get("siteTelno")));
-                siteInfoMap.put("managerName", StringUtil.objectToString(siteInfoMap.get("managerName")));
-                siteInfoMap.put("managerPhone", StringUtil.objectToString(siteInfoMap.get("managerPhone")));
-                siteInfoMap.put("managerEmail", StringUtil.objectToString(siteInfoMap.get("managerEmail")));
                 
                 siteInfoMap.put("imgBusinessRegNoText", StringUtil.objectToString(siteInfoMap.get("imgBusinessRegNo")));
                 siteInfoMap.put("imgDoctorLicenseText", StringUtil.objectToString(siteInfoMap.get("imgDoctorLicense")));
@@ -247,13 +215,13 @@ public class CustomerSupportForumController extends BaseController{
             String snsListJson ="";
 
             String adress       = StringUtil.objectToString(siteInfoMap.get("address")) + " " + StringUtil.objectToString(siteInfoMap.get("addressDesc"));               // 주소
-            String transaction   = "Y".equals(StringUtil.objectToString(siteInfoMap.get("blogYN"))) ? "블로그" : "";  
-                   transaction   = "Y".equals(StringUtil.objectToString(siteInfoMap.get("homepageYN"))) ? " / 홈페이지" : "";  
-                   transaction   = "Y".equals(StringUtil.objectToString(siteInfoMap.get("reviewYN"))) ? " / 블랜딩 영상" : "";  
-                   transaction   = "Y".equals(StringUtil.objectToString(siteInfoMap.get("instagramYN"))) ? " / 인스타그램" : "";  
-                   transaction   = "Y".equals(StringUtil.objectToString(siteInfoMap.get("youtubeYN"))) ? " / 유튜브" : "";  
-                   transaction   = "Y".equals(StringUtil.objectToString(siteInfoMap.get("momcafeYN"))) ? " / 맘카페" : "";  
-                   transaction   = !"".equals(StringUtil.objectToString(siteInfoMap.get("cntBlogPos"))) ? " / 블로그 건 수(" + StringUtil.objectToString(siteInfoMap.get("cntBlogPos")) + ")건" : ""; //거래내용
+            String transaction = "Y".equals(StringUtil.objectToString(siteInfoMap.get("blogYN"))) ? "블로그" : ""; 
+                   transaction += "Y".equals(StringUtil.objectToString(siteInfoMap.get("homepageYN"))) ? " / 홈페이지" : ""; 
+                   transaction += "Y".equals(StringUtil.objectToString(siteInfoMap.get("reviewYN"))) ? " / 블랜딩 영상" : ""; 
+                   transaction += "Y".equals(StringUtil.objectToString(siteInfoMap.get("instagramYN"))) ? " / 인스타그램" : ""; 
+                   transaction += "Y".equals(StringUtil.objectToString(siteInfoMap.get("youtubeYN"))) ? " / 유튜브" : ""; 
+                   transaction += "Y".equals(StringUtil.objectToString(siteInfoMap.get("momcafeYN"))) ? " / 맘카페" : ""; 
+                   transaction += !"".equals(StringUtil.objectToString(siteInfoMap.get("cntBlogPos"))) ? " / 블로그 건 수(" + StringUtil.objectToString(siteInfoMap.get("cntBlogPos")) + ")건" : ""; //거래내용
             
             siteInfoMap.put("transaction", transaction);                // 거래내용
             siteInfoMap.put("adress", adress);                          // 주소
@@ -355,14 +323,14 @@ public class CustomerSupportForumController extends BaseController{
         if("0".equals(retVal)) {
 
             // 파일 업로드
-            // if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) uploadFileToGCS(imgBusinessRegNo, imgBusinessRegNo.getOriginalFilename());
-            // if(imgDoctorLicense != null && !imgDoctorLicense.isEmpty()) uploadFileToGCS(imgDoctorLicense, imgDoctorLicense.getOriginalFilename());
-            // if(imgDegreeCertificate != null && !imgDegreeCertificate.isEmpty()) uploadFileToGCS(imgDegreeCertificate, imgDegreeCertificate.getOriginalFilename());
-            // if(imgDesignAssets != null && !imgDesignAssets.isEmpty()) uploadFileToGCS(imgDesignAssets, imgDesignAssets.getOriginalFilename());
-            // if(imgOpenCertificate != null && !imgOpenCertificate.isEmpty()) uploadFileToGCS(imgOpenCertificate, imgOpenCertificate.getOriginalFilename());
-            // if(imgSpecialistLicense != null && !imgSpecialistLicense.isEmpty()) uploadFileToGCS(imgSpecialistLicense, imgSpecialistLicense.getOriginalFilename());
-            // if(imgEtcFiles != null && !imgEtcFiles.isEmpty()) uploadFileToGCS(imgEtcFiles, imgEtcFiles.getOriginalFilename());
-            // if(imgEtc != null && !imgEtc.isEmpty()) uploadFileToGCS(imgEtc, imgEtc.getOriginalFilename());
+            if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) uploadFileToGCS(imgBusinessRegNo, imgBusinessRegNo.getOriginalFilename());
+            if(imgDoctorLicense != null && !imgDoctorLicense.isEmpty()) uploadFileToGCS(imgDoctorLicense, imgDoctorLicense.getOriginalFilename());
+            if(imgDegreeCertificate != null && !imgDegreeCertificate.isEmpty()) uploadFileToGCS(imgDegreeCertificate, imgDegreeCertificate.getOriginalFilename());
+            if(imgDesignAssets != null && !imgDesignAssets.isEmpty()) uploadFileToGCS(imgDesignAssets, imgDesignAssets.getOriginalFilename());
+            if(imgOpenCertificate != null && !imgOpenCertificate.isEmpty()) uploadFileToGCS(imgOpenCertificate, imgOpenCertificate.getOriginalFilename());
+            if(imgSpecialistLicense != null && !imgSpecialistLicense.isEmpty()) uploadFileToGCS(imgSpecialistLicense, imgSpecialistLicense.getOriginalFilename());
+            if(imgEtcFiles != null && !imgEtcFiles.isEmpty()) uploadFileToGCS(imgEtcFiles, imgEtcFiles.getOriginalFilename());
+            if(imgEtc != null && !imgEtc.isEmpty()) uploadFileToGCS(imgEtc, imgEtc.getOriginalFilename());
 
         }
 

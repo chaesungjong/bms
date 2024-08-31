@@ -68,7 +68,7 @@ function formatDate(dateInput) {
 
     // 입력 값이 8자리인 경우에만 변환 시도
     if (dateInput.length === 8) {
-        const formattedDate = value.substring(0, 4) + '-' + value.substring(4, 6) + '-' + value.substring(6, 8);
-        dateInput.value = formattedDate;
+        const formattedDate = dateInput.substring(0, 4) + '-' + dateInput.substring(4, 6) + '-' + dateInput.substring(6, 8);
+        return formattedDate;
     }
 }

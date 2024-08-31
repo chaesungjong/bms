@@ -117,25 +117,35 @@ public class StringUtil {
         return format.format(date);
     }
 
-    /*
-     * 시작일 부터 종료일 까지 몇년 몇개월인지 계산
-     * yyyy-MM-dd 형식
-     * @param start
-     * @param end
+    /**
+     * 시작일부터 종료일까지 몇 년 몇 개월인지 계산합니다.
+     *
+     * @param start yyyyMMdd 형식의 시작일 문자열
+     * @param end   yyyyMMdd 형식의 종료일 문자열
+     * @return "년 개월" 형식의 기간 문자열
      */
     public static String getPeriod(String start, String end) {
-        String period = "";
+        // yyyyMMdd 형식에서 년, 월 정보 추출
         int sYear = Integer.parseInt(start.substring(0, 4));
-        int sMonth = Integer.parseInt(start.substring(5, 7));
+        int sMonth = Integer.parseInt(start.substring(4, 6));
         int eYear = Integer.parseInt(end.substring(0, 4));
-        int eMonth = Integer.parseInt(end.substring(5, 7));
+        int eMonth = Integer.parseInt(end.substring(4, 6));
+
         int year = eYear - sYear;
         int month = eMonth - sMonth;
+
         if (month < 0) {
             year--;
-            month = 12 + month;
+            month += 12;
         }
-        period = year + "년 " + month + "개월";
+
+        // month가 12를 초과하는 경우 처리
+        year += month / 12;
+        month = month % 12;
+
+        // 문자열 포맷팅
+        String period = String.format("%d년 %d개월", year, month);
         return period;
     }
+
 }

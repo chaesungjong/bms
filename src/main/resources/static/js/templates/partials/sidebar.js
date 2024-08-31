@@ -37,6 +37,26 @@ $(document).ready(function () {
         });
     });
 
+    $('#infoUrl').on('click', function(event) {
+        event.preventDefault(); 
+    
+        var userID = $(this).attr('data-img');
+
+        var form = $('<form>', {
+            method: 'POST',
+            action: '/ems/add_employees'
+        });
+
+        form.append($('<input>', {
+            type: 'hidden',
+            name: 'userid',
+            value: userID
+        }));
+
+        $('body').append(form);
+        form.submit();
+    });
+
     // 현재 URL 가져오기
     var currentUrl = window.location.pathname; 
 
@@ -82,32 +102,35 @@ function showProfile(userID) {
             $('#juminNoView').text(response.juminNo);
             $('#boardUseYNView').text(response.boardUseYN);
             $('#memoView').text(response.memo);
-            $('#infoUrl').attr('href', "/ems/add_employees?userid=" + userID);
+            $('#departName').text(response.departName);
+            $('#infoUrl').attr('data-img', userID);
 
             if(response.imgProfile == null || response.imgProfile == '')
                 $('#imgView').hide();
-            else
+            else{
+                $('#imgView').show();
                 $('#imgView').attr('src', response.imgProfile);
+            }
             
             if(response.imgBankbook == null || response.imgBankbook == '')
                 $('#imgBankbookView').hide();
             else
-                $('#imgBankbookView').attr('src', response.imgBankbook);
+                $('#imgBankbookView').attr('data-img', response.imgBankbook);
 
             if(response.imgFamilyRL == null || response.imgFamilyRL == '')
                 $('#imgFamilyRLView').hide();
             else
-                $('#imgFamilyRLView').attr('src', response.imgFamilyRL);
+                $('#imgFamilyRLView').attr('data-img', response.imgFamilyRL);
             
             if(response.imgEtc == null || response.imgEtc == '')
                 $('#imgEtcView').hide();
             else
-                $('#imgEtcView').attr('src', response.imgEtc);
+                $('#imgEtcView').attr('data-img', response.imgEtc);
 
             if(response.imgProfile == null || response.imgProfile == '')
                 $('#imgProfileView').hide();
             else
-                $('#imgProfileView').attr('value', response.imgProfile);
+                $('#imgProfileView').attr('data-img', response.imgProfile);
 
             $('.member_info_wrap').removeClass('on');
             $('.member_info_wrap').removeClass('out');
@@ -124,9 +147,13 @@ function showProfile(userID) {
 
 }
 
+/**
+ * 파일 다운로드 함수
+ * @param {*} id 
+ */
 function downloadFile(id) {
     // 클릭된 a 태그의 href 속성 값을 가져옴
-    var fileUrl = $('#' + id+'Value').attr('value');
+    var fileUrl = $('#' + id).attr('data-img');
 
     // 임시 a 태그 생성
     var $tempLink = $('<a>');

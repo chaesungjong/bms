@@ -26,18 +26,18 @@ public class EnterpriseService {
 
     /**
      * 업체 정보를 등록/수정한다.
-     * 
      * @param requestHashMap
      */
     public void enterpriseInsert(HashMap<String, Object> requestHashMap) {
 
+        //업체 등록 및 수정
         enterpriseRepository.siteInfoModify(requestHashMap);
 
         String retVal = StringUtil.objectToString(requestHashMap.get("retVal"));
-                                 
-
+        
+        // 성공
         if ("0".equals(retVal)) {
-            // 성공
+            
             String sitekey = StringUtil.objectToString(requestHashMap.get("retSiteKey"));
             String userid = (String) requestHashMap.get("userId");
             JSONObject jsonObject = (JSONObject) requestHashMap.get("sns");
@@ -46,20 +46,27 @@ public class EnterpriseService {
 
                 JSONObject snsObject = jsonObject.getJSONObject(key);
                 String siteDomain = snsObject.optString(key + "siteDomain");
-                String id = snsObject.optString(key + "id");
-                String pw = snsObject.optString(key + "pw");
+                String id  = snsObject.optString(key + "id");
+                String pw  = snsObject.optString(key + "pw");
+                String seq = StringUtil.objectToString(snsObject.optString(key + "seq"));
 
                 HashMap<String, Object> siteSnsInfoMap = new HashMap<>();
                 siteSnsInfoMap.put("svrGubun", "siteSnsInfo");
-                siteSnsInfoMap.put("gubun", "REGIST");
+
+                if("".equals(seq)) {
+                    siteSnsInfoMap.put("gubun", "REGIST");
+                }else{
+                    siteSnsInfoMap.put("gubun", "MODIFY");
+                }
+
                 siteSnsInfoMap.put("loginUserid", userid);
-                siteSnsInfoMap.put("loginUserip", "testIp");
+                siteSnsInfoMap.put("loginUserip", requestHashMap.get("ip"));
                 siteSnsInfoMap.put("i_param1", sitekey);
                 siteSnsInfoMap.put("i_param2", key);
                 siteSnsInfoMap.put("i_param3", siteDomain);
                 siteSnsInfoMap.put("i_param4", id);
                 siteSnsInfoMap.put("i_param5", pw);
-                siteSnsInfoMap.put("i_param6", "");
+                siteSnsInfoMap.put("i_param6", seq);
                 siteSnsInfoMap.put("i_param7", "");
                 siteSnsInfoMap.put("i_param8", "");
                 siteSnsInfoMap.put("i_param9", "");

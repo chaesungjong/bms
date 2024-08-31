@@ -3,11 +3,16 @@
  */
 
 $(document).ready(function () {
-    $('#siteDomainExpdt').val(getTodayDate());
-    $('#siteHostingExpdt').val(getTodayDate());
 
-    $('#contractSdate').val(getTodayDate());
-    $('#contractEdate').val(getTodayDate());
+    // $('#siteDomainExpdt').val(getTodayDate());
+    // $('#siteHostingExpdt').val(getTodayDate());
+
+    // $('#contractSdate').val(getTodayDate());
+    // $('#contractEdate').val(getTodayDate());
+
+    if($('#corrections').val() == 'Y') {
+        $('#siteCode_tr').show();
+    }
 
     const fileTarget = $('.add_bm_file input');
 
@@ -63,11 +68,12 @@ function setSnsInformation() {
 
              // 각 SNS 타입에 대한 input 필드에 값 할당
             snsListData.forEach(sns => {
+
                 const snsType = sns.snsType;
-                
-                document.getElementById(snsType + 'siteDomain').value = sns.domain;
-                document.getElementById(snsType + 'id').value = sns.id;
-                document.getElementById(snsType + 'pw').value = sns.pwd;
+                if(sns.domain != null || sns.domain != '') document.getElementById(snsType + 'siteDomain').value = sns.domain;
+                if(sns.id != null || sns.id != '')         document.getElementById(snsType + 'id').value = sns.id;
+                if(sns.pwd != null || sns.pwd != '')       document.getElementById(snsType + 'pw').value = sns.pwd;
+                if(sns.seq != null || sns.seq != '')       document.getElementById(snsType + 'seq').value = sns.seq;
                 
             });
 

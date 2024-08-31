@@ -19,6 +19,7 @@ import com.groupd.bms.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.servlet.http.HttpServletRequest;
+import com.groupd.bms.model.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,11 +62,11 @@ public class EmployeeManagementSystemController extends BaseController{
         HashMap<String, Object> registrationMap = setRequest(request);
         HashMap<String, Object> resMap = new HashMap<String, Object>();
 
-        String startDate  = StringUtil.objectToString(registrationMap.get("fr_date"));                  //시작일
-        String EndDate    = StringUtil.objectToString(registrationMap.get("to_date"));                  //종료일
-        String searchType = StringUtil.objectToString(registrationMap.get("searchType"));               //검색타입     
-        String search     = StringUtil.objectToString(registrationMap.get("search"));                   //검색어 
-        String userId     = StringUtil.objectToString(registrationMap.get("userId"));                   //사용자ID
+        String startDate  = StringUtil.dataformat(StringUtil.objectToString(registrationMap.get("fr_date")));               //시작일
+        String EndDate    = StringUtil.dataformat(StringUtil.objectToString(registrationMap.get("to_date"))); ;             //종료일
+        String searchType = StringUtil.objectToString(registrationMap.get("searchType"));                                   //검색타입     
+        String search     = StringUtil.objectToString(registrationMap.get("search"));                                       //검색어 
+        String userId     = StringUtil.objectToString(registrationMap.get("userId"));                                       //사용자ID
 
 
         // DataTables 파라미터 가져오기
@@ -99,13 +100,13 @@ public class EmployeeManagementSystemController extends BaseController{
 
         if(memInfoMap != null && memInfoMap.size() > 0) {
             
-            String depart_total_info = StringUtil.objectToString(memInfoMap.get("departCode") + " "  + memInfoMap.get("teamCode") + " / " + memInfoMap.get("jobPosition")  + " " + memInfoMap.get("jobTitle"));
+            String depart_total_info = StringUtil.objectToString(memInfoMap.get("departCode") + " / "  + memInfoMap.get("teamCode") + " / " + memInfoMap.get("jobPosition")  + " / " + memInfoMap.get("jobTitle"));
             String jobStartDate = StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobStartDate"))) + " (" + memInfoMap.get("jobStatus") + ")";
             String jobStatus = StringUtil.objectToString(memInfoMap.get("jobStatus"));
             String jobDate = "";
 
             if("퇴사".equals(jobStatus)) {
-                jobDate = StringUtil.getPeriod(StringUtil.objectToString(memInfoMap.get("jobStartDate")) , jobDate);
+                jobDate = StringUtil.getPeriod(StringUtil.objectToString(memInfoMap.get("jobStartDate")) , StringUtil.objectToString(memInfoMap.get("jobEndDate")));
             }else{
                 jobDate = StringUtil.getPeriod(StringUtil.objectToString(memInfoMap.get("jobStartDate")) , StringUtil.today().replaceAll("-", ""));
             }
@@ -116,30 +117,30 @@ public class EmployeeManagementSystemController extends BaseController{
             String Account = StringUtil.objectToString(memInfoMap.get("payGiveType") + " / " + memInfoMap.get("bankAccount"));
             
             HashMap<String, Object> resMap = new  HashMap<String, Object>();
-            resMap.put("retVal", "0");                                        // 성공
-            resMap.put("userName", memInfoMap.get("name"));                     // 사용자명
-            resMap.put("departName", memInfoMap.get("departCode"));             // 부서명
-            resMap.put("jobTitle", memInfoMap.get("jobTitle"));                 // 직책
-            resMap.put("depart_total_info", depart_total_info);                     // 부서 / 팀 / 직위 / 직책
-            resMap.put("jobStartDate", jobStartDate);                               // 입사일
-            resMap.put("jobDate", jobDate);                                         // 근무기간
-            resMap.put("hireType", memInfoMap.get("hireType"));                 // 채용구분
-            resMap.put("jobTitle", memInfoMap.get("jobTitle"));                 // 직책
-            resMap.put("birthday", birthday);                                       // 생년월일
-            resMap.put("email", memInfoMap.get("email"));                       // 이메일
-            resMap.put("emailDepart", memInfoMap.get("emailDepart"));           // 부서 이메일
-            resMap.put("hpno", memInfoMap.get("hpno"));                         // 전화 번호
-            resMap.put("hpnoDepart", memInfoMap.get("hpnoDepart"));             // 부서 전화 번호
-            resMap.put("addr", memInfoMap.get("addr"));                         // 주소
-            resMap.put("Account", Account);                                         // 계좌번호
-            resMap.put("marriedType", memInfoMap.get("marriedType") );          // 가족관계
-            resMap.put("juminNo", memInfoMap.get("juminNo") );                  // 주민번호
-            resMap.put("boardUseYN", boardUseYN );                                  // 게시판 사용 가능
-            resMap.put("memo", memInfoMap.get("memo") );                        // 메모
-            resMap.put("imgProfile", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgProfile"))); // 프로필 이미지
-            resMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgBankbook"))); //은행 계좌
-            resMap.put("imgFamilyRL", "".equals(StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))); // 프로필 이미지
-            resMap.put("imgEtc", "".equals(StringUtil.objectToString(memInfoMap.get("imgEtc"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgEtc"))); // 프로필 이미지
+            resMap.put("retVal", "0");                                                                                                                                                              // 성공
+            resMap.put("userName", memInfoMap.get("name"));                                                                                                                                           // 사용자명
+            resMap.put("departName", memInfoMap.get("departCode"));                                                                                                                                   // 부서명
+            resMap.put("jobTitle", memInfoMap.get("jobTitle"));                                                                                                                                       // 직책
+            resMap.put("depart_total_info", depart_total_info);                                                                                                                                           // 부서 / 팀 / 직위 / 직책
+            resMap.put("jobStartDate", jobStartDate);                                                                                                                                                     // 입사일
+            resMap.put("jobDate", jobDate);                                                                                                                                                               // 근무기간
+            resMap.put("hireType", memInfoMap.get("hireType"));                                                                                                                                       // 채용구분
+            resMap.put("jobTitle", memInfoMap.get("jobTitle"));;                                                                                                                                      // 직책
+            resMap.put("birthday", birthday);           ;                                                                                                                                                 // 생년월일
+            resMap.put("email", memInfoMap.get("email"));                                                                                                                                             // 이메일
+            resMap.put("emailDepart", memInfoMap.get("emailDepart"));                                                                                                                                 // 부서 이메일
+            resMap.put("hpno", memInfoMap.get("hpno"));                                                                                                                                               // 전화 번호
+            resMap.put("hpnoDepart", memInfoMap.get("hpnoDepart"));                                                                                                                                   // 부서 전화 번호
+            resMap.put("addr", memInfoMap.get("addr"));                                                                                                                                               // 주소
+            resMap.put("Account", Account);                                                                                                                                                               // 계좌번호
+            resMap.put("marriedType", memInfoMap.get("marriedType") );                                                                                                                                // 가족관계
+            resMap.put("juminNo", memInfoMap.get("juminNo") );                                                                                                                                        // 주민번호
+            resMap.put("boardUseYN", boardUseYN );                                                                                                                                                        // 게시판 사용 가능
+            resMap.put("memo", memInfoMap.get("memo") );                                                                                                                                              // 메모
+            resMap.put("imgProfile", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgProfile")));             // 프로필 이미지
+            resMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgBankbook")));          //은행 계좌
+            resMap.put("imgFamilyRL", "".equals(StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgFamilyRL")));          // 프로필 이미지
+            resMap.put("imgEtc", "".equals(StringUtil.objectToString(memInfoMap.get("imgEtc"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgEtc")));                         // 프로필 이미지
 
             return ResponseEntity.ok(resMap);
             
@@ -152,6 +153,7 @@ public class EmployeeManagementSystemController extends BaseController{
      * 사원 기본정보 화면 페이지 
      */
     @GetMapping("/add_employees")
+    @RequestMapping(value = "/add_employees", method = { RequestMethod.POST})
     public String add_employees(HttpServletRequest request, Model model) {
         
         HashMap<String, Object> requestMap = setRequest(request);
@@ -177,6 +179,13 @@ public class EmployeeManagementSystemController extends BaseController{
         
             model.addAttribute("memInfo", memInfoMap);
             model.addAttribute("corrections", "Y");
+
+            String userId = StringUtil.objectToString(requestMap.get("userId"));
+            String emsIDString = StringUtil.objectToString(requestMap.get("userid"));
+
+            if(userId.equals(emsIDString) && !"".equals(emsIDString)) {
+                model.addAttribute("pwdChange", "Y");
+            }
         
         }
 
@@ -224,7 +233,7 @@ public class EmployeeManagementSystemController extends BaseController{
      * 사원 등록 처리
      */
     @SuppressWarnings("unused")
-    @RequestMapping(value = "/Registration.do", method = { RequestMethod.POST, RequestMethod.GET })
+    @RequestMapping(value = "/Registration.do", method = { RequestMethod.POST})
     public ResponseEntity<?> Registration( HttpServletRequest request, @RequestParam("imgBankbook") MultipartFile imgBankbook, @RequestParam("imgFamilyRL") MultipartFile imgFamilyRL, @RequestParam("imgProfile") MultipartFile imgProfile, @RequestParam("imgEtc") MultipartFile imgEtc) {
         
 
@@ -302,10 +311,10 @@ public class EmployeeManagementSystemController extends BaseController{
             //사원 등록 성공
             if("0".equals(retVal)) {
                 
-                // if(!"".equals(imgBankbookUrl) && "".equals(imgBankbookFileName))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
-                // if(!"".equals(imgFamilyRL) && "".equals(imgFamilyRLFileName))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
-                // if(!"".equals(imgProfile)&& "".equals(imgProfileFileName))          uploadFileToGCS(imgProfile, imgProfileUrl);
-                // if(!"".equals(imgEtcUrl)&& "".equals(imgEtcFimeName))               uploadFileToGCS(imgEtc, imgEtcUrl);
+                if(!"".equals(imgBankbookUrl) && "".equals(imgBankbookFileName))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
+                if(!"".equals(imgFamilyRL) && "".equals(imgFamilyRLFileName))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
+                if(!"".equals(imgProfile)&& "".equals(imgProfileFileName))          uploadFileToGCS(imgProfile, imgProfileUrl);
+                if(!"".equals(imgEtcUrl)&& "".equals(imgEtcFimeName))               uploadFileToGCS(imgEtc, imgEtcUrl);
                 
                 return ResponseEntity.ok(RegistrationMap);
             }
@@ -315,6 +324,42 @@ public class EmployeeManagementSystemController extends BaseController{
         
      return ResponseEntity.status(500).build();
 
+    }
+
+    /* 
+     * 사원 비밀번호 변경 하기 
+     */
+    @RequestMapping(value = "/pwdChange.do", method = { RequestMethod.POST})
+    public ResponseEntity<?> pwdChange( HttpServletRequest request ) {
+
+        HashMap<String, Object> inputnMap = setRequest(request);
+        HashMap<String, Object> resnMap = new HashMap<String, Object>();
+
+        Member member = (Member) request.getSession().getAttribute("member");
+
+        String userPwd =  StringUtil.objectToString(member.getPwd());
+        String inputPwd = SHA256Util.hashWithSHA256(StringUtil.objectToString(inputnMap.get("now_pwd")));
+
+        //현재 비밀번호가 일치하지 않을 경우
+        if(!userPwd.equals(inputPwd)){
+
+            resnMap.put("retVal", "1");
+            resnMap.put("retMsg", "현재 비밀번호가 일치하지 않습니다.");
+            return ResponseEntity.ok(resnMap);
+        }
+
+        //비밀번호 변경 처리
+        String pwdNew = SHA256Util.hashWithSHA256(StringUtil.objectToString(inputnMap.get("new_pwd")));
+
+        inputnMap.put("pwdNew", pwdNew);
+        inputnMap.put("pwd", userPwd);
+        inputnMap.put("gubun", "PWD_MODIFY");
+        inputnMap.put("userid", member.getUserid());
+        
+        //비밀번호 변경 처리 
+        userService.memRegistModify(inputnMap);
+
+        return ResponseEntity.ok(inputnMap);
     }
 
 }

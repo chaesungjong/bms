@@ -16,11 +16,20 @@ $(document).ready(function () {
             }
         },
         "columns": [
-            { "data": "jobStartDate" },
+            { "data": null, 
+                "className": "bm_wr_wdate",
+                "render": function(data, type, row) {
+                  return formatDate(row.jobStartDate);
+              } },
             { "data": "name" },
             { "data": "departCode" },
             { "data": "teamCode" },
-            { "data": "birthday" },
+            { "data": null, 
+                "className": "bm_wr_wdate",
+                "render": function(data, type, row) {
+                  return formatDate(row.birthday);
+                } 
+            },
             { "data": "email" },
             {
                 "data": "memo",
@@ -98,22 +107,3 @@ $(document).ready(function () {
     });
     
 });
-
-function downloadFile(id) {
-    // 클릭된 a 태그의 href 속성 값을 가져옴
-    var fileUrl = $('#' + id+'Value').attr('value');
-
-    // 임시 a 태그 생성
-    var $tempLink = $('<a>');
-    $tempLink.attr('href', fileUrl);
-    
-    // 파일 다운로드 설정
-    $tempLink.attr('download', fileUrl.substring(fileUrl.lastIndexOf('/') + 1));
-
-    // 페이지에 추가 후 클릭하여 다운로드 실행
-    $('body').append($tempLink);
-    $tempLink[0].click();
-
-    // 임시로 만든 링크 제거
-    $tempLink.remove();
-}

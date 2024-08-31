@@ -17,6 +17,25 @@ $(document).ready(function () {
         }
     });
 
+    // 비밀번호 변경 모달
+    $('.pwd_modify').click(function () {
+        var caseBtn = $(this).attr('id');
+        $('.modal-container').removeClass('on');
+        $('.modal-container').removeClass('out');
+        $('.modal-container#' + caseBtn).addClass('on');
+        $('body, html').addClass('modal-active');
+    });
+    $('.pwd_modify_close').click(function () {
+        $('.modal-container').addClass('out');
+        $('body, html').removeClass('modal-active');
+    });
+
+    // 비밀번호 view
+    $('.btnView').click(function () {
+        $(this).toggleClass('on');
+    });
+
+
     // 등록 하기 버튼 클릭 시 호출
     $('#registration').click(function () {
         // 유효성 검사
@@ -77,6 +96,69 @@ $(document).ready(function () {
         formatNumber($('#hpnoDepart'));
     });
 
+    //비밀번호 변경 클릭 시
+    $('#changePwd').click(function () {
+
+        var now_pwd = $('#now_pwd').val();
+        var new_pwd = $('#new_pwd').val();
+        var new_pwd_check = $('#new_pwd_check').val();
+
+        if(now_pwd == ''){
+            alert('현재 비밀번호를 입력해주세요.');
+            return;
+        }
+
+        if(new_pwd == ''){
+            alert('새 비밀번호를 입력해주세요.');
+            return;
+        }
+
+        if(new_pwd_check == ''){
+            alert('새 비밀번호 확인을 입력해주세요.');
+            return;
+        }
+
+        if(new_pwd != new_pwd_check){
+            alert('새 비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        var password = {    
+            'now_pwd' : now_pwd,
+            'new_pwd' : new_pwd
+        };
+
+        // ajaxRequest 함수를 사용하여 로그인 처리
+        ajaxRequest("/ems/pwdChange.do", password, "POST", function (response) {
+            if (response.retVal == '0') {
+                alert('비밀번호 변경이 완료되었습니다.');
+            }else if (response.retVal == '1') {
+                alert('현재 비밀번호가 일치하지 않습니다.');
+            } else {
+                alert('비밀번호 변경이 실패 하였습니다. ');
+            }
+        }, function () {
+            alert('현재 기능 개발 준비중 입니다.');
+        });
+
+    });
+
+    
+    // input file 커스텀
+    const fileTarget = $('.add_emp_file input');
+
+    fileTarget.on('change', function () {
+        var files = $(this)[0].files;
+        var fileArr = [];
+        for (var i = 0; i < files.length; i++) {
+            fileArr.push(files[i].name);
+        }
+
+        var fileList = fileArr.join('<br>');
+        $(this).siblings('.bm_file_text').html(fileList);
+    });
+
+
     calculateDuration();
     init();
 });
@@ -101,6 +183,27 @@ function init() {
     // 주민등록번호 형식 변환
     formatRRN($('#juminNo'));
     jobStatusChange('#jobStatus');
+
+
+    // departCode 변경 이벤트 처리
+    $("#departCode").change(function() {
+        var selectedDepartCode = $(this).val();
+
+        // teamCode 옵션 모두 숨김
+        $("#teamCode option").hide();
+    
+        // 선택된 departCode에 해당하는 _T 값을 가진 옵션만 표시 (숫자 포함 가능)
+        var visibleOptions = $("#teamCode option[value^='" + selectedDepartCode + "_T']").show();
+    
+        // 표시된 옵션 중 첫 번째 옵션 선택
+        if (visibleOptions.length > 0) {
+            visibleOptions.first().prop("selected", true);
+        }
+    });
+
+    // 초기 로딩 시에도 teamCode 옵션 설정
+    $("#departCode").trigger("change");
+    
 }
 
 /**
@@ -241,35 +344,3 @@ function sample6_execDaumPostcode() {
         },
     }).open();
 }
-
-// input file 커스텀
-const fileTarget = $('.add_emp_file input');
-
-fileTarget.on('change', function () {
-    var files = $(this)[0].files;
-    var fileArr = [];
-    for (var i = 0; i < files.length; i++) {
-        fileArr.push(files[i].name);
-    }
-
-    var fileList = fileArr.join('<br>');
-    $(this).siblings('.bm_file_text').html(fileList);
-});
-
-// 비밀번호 변경 모달
-$('.pwd_modify').click(function () {
-    var caseBtn = $(this).attr('id');
-    $('.modal-container').removeClass('on');
-    $('.modal-container').removeClass('out');
-    $('.modal-container#' + caseBtn).addClass('on');
-    $('body, html').addClass('modal-active');
-});
-$('.pwd_modify_close').click(function () {
-    $('.modal-container').addClass('out');
-    $('body, html').removeClass('modal-active');
-});
-
-// 비밀번호 view
-$('.btnView').click(function () {
-    $(this).toggleClass('on');
-});

@@ -7,34 +7,15 @@
     { #{retVal, mode=OUT, jdbcType=INTEGER} = call [dbo].[memLoginProc](#{userid}, #{userpw}, #{ip}, #{sysGubun},  #{errMsg, mode=OUT, jdbcType=VARCHAR}) }
   </select>
   <!-- 로그인 시도 프로시저 End -->
-
-  <!-- 회원정보 관리 프로시저 Start -->
-  <select id="memUserInfo" resultType="java.util.HashMap"  statementType="CALLABLE">
-        { call [dbo].[memJoinModify](
-            #{gubun},
-            #{userid},
-            #{pwd},
-            #{name},
-            #{hpno},
-            #{email},
-            #{birthday},
-            #{gender},
-            #{grade},
-            #{departCode},
-            #{state},
-            #{siteKey, jdbcType=INTEGER},  -- siteKey 값을 정수형으로 전달
-            #{ip}
-        )
-    }
-  </select>
-  <!-- 회원정보 관리 프로시저 End -->
   
   <!-- 회원정보 관리 프로시저 Start -->
   <select id="memRegistModify" resultType="java.util.HashMap" statementType="CALLABLE">
     { #{retVal, mode=OUT , jdbcType=INTEGER} = call [dbo].[memRegistModify](
         #{gubun},
+        #{loginUserid},
         #{userid},
         #{pwd},
+        #{pwdNew},
         #{name},
         #{nameEng},
         #{hpno},
@@ -79,8 +60,10 @@
   <select id="memRegistModifyHashMap" resultType="java.util.HashMap" statementType="CALLABLE">
     { call [dbo].[memRegistModify](
         #{gubun},
+        #{loginUserid},
         #{userid},
         #{pwd},
+        #{pwdNew},
         #{name},
         #{nameEng},
         #{hpno},
@@ -116,7 +99,7 @@
         #{state},
         #{siteKey},
         #{ip}
-        )
+      )
     }
   </select>
   <!-- 회원정보 가져오기 프로시저 End -->

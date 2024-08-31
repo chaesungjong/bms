@@ -18,10 +18,10 @@
                             <h3><input type="text" placeholder="치과명" class="bm_bname" id="siteName" name="siteName" th:value="${siteInfo?.siteName}"/></h3>
                             <table cellspacing="0">
                                 <tbody>
-                                    <tr class="add_bm_code">
+                                    <tr class="add_bm_code" id="siteCode_tr" style="display: none;">
                                         <td class="add_bm_title">업체코드</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" th:value="${siteInfo?.siteCode}" class="bm_code" name="siteCode" id="siteCode" />
+                                            <input type="text" th:value="${siteInfo?.siteCode}" class="bm_code" name="siteCode" id="siteCode" readonly/>
                                             <p><img src="/img/info.svg" alt="" /><span>YYYYMM-00</span>000</p>
                                         </td>
                                     </tr>
@@ -58,15 +58,15 @@
                                     <tr class="add_bm_type">
                                         <td class="add_bm_title">거래 내용</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_type1"><input type="radio" name="blogYN" id="blogYN" th:value="'Y'" th:checked="${siteInfo?.blogYN == 'Y'}" />블로그</label>
-                                            <label for="bm_type2"><input type="radio" name="homepageYN" id="homepageYN" th:value="'Y'" th:checked="${siteInfo?.homepageYN == 'Y'}" />홈페이지</label>
-                                            <label for="bm_type3"><input type="radio" name="blandvideoYN" id="blandvideoYN" th:value="'Y'" th:checked="${siteInfo?.blandvideoYN == 'Y'}" />브랜딩 영상</label>
-                                            <label for="bm_type4"><input type="radio" name="reviewYN" id="reviewYN" th:value="'Y'" th:checked="${siteInfo?.reviewYN == 'Y'}" /> 리뷰 (월
-                                                <input type="number" class="bm_type_review" value="0" /> 건)
+                                            <label for="bm_type1"><input type="radio" name="blogYN"         id="blogYN"         th:value="'Y'" th:checked="${siteInfo?.blogYN == 'Y'}" />블로그</label>
+                                            <label for="bm_type2"><input type="radio" name="homepageYN"     id="homepageYN"     th:value="'Y'" th:checked="${siteInfo?.homepageYN == 'Y'}" />홈페이지</label>
+                                            <label for="bm_type3"><input type="radio" name="blandvideoYN"   id="blandvideoYN"   th:value="'Y'" th:checked="${siteInfo?.blandvideoYN == 'Y'}" />브랜딩 영상</label>
+                                            <label for="bm_type4"><input type="radio" name="reviewYN"       id="reviewYN"       th:value="'Y'" th:checked="${siteInfo?.reviewYN == 'Y'}" /> 리뷰 (월
+                                                <input type="number" id="reviewMCnt" name="reviewMCnt" class="bm_type_review"   th:value="${siteInfo?.reviewMCnt != null ? siteInfo.reviewMCnt : '0'}" />건)
                                             </label>
-                                            <label for="bm_type5"><input type="radio" name="instagramYN" id="instagramYN" th:value="'Y'" th:checked="${siteInfo?.instagramYN == 'Y'}" />인스타</label>
-                                            <label for="bm_type5"><input type="radio" name="youtubeYN" id="youtubeYN" th:value="'Y'" th:checked="${siteInfo?.youtubeYN == 'Y'}" />유튜브</label>
-                                            <label for="bm_type5"><input type="radio" name="momcafeYN" id="momcafeYN" th:value="'Y'" th:checked="${siteInfo?.momcafeYN == 'Y'}" />맘카페</label>
+                                            <label for="bm_type5"><input type="radio" name="instagramYN"    id="instagramYN"    th:value="'Y'" th:checked="${siteInfo?.instagramYN == 'Y'}" />인스타</label>
+                                            <label for="bm_type5"><input type="radio" name="youtubeYN"      id="youtubeYN"      th:value="'Y'" th:checked="${siteInfo?.youtubeYN == 'Y'}" />유튜브</label>
+                                            <label for="bm_type5"><input type="radio" name="momcafeYN"      id="momcafeYN"      th:value="'Y'" th:checked="${siteInfo?.momcafeYN == 'Y'}" />맘카페</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_post">
@@ -74,20 +74,20 @@
                                         <td colspan="3" class="add_bm_con">
                                             <div class="bm_post_wrap">
                                                 <button class="countdown" id="blogDown" type="button"><img src="/img/countdown.svg" alt="다운" /></button>
-                                                <input type="text" class="bm_post" id="cntBlogPos" name="cntBlogPos" value="0" maxlength="5" />
+                                                <input type="text" class="bm_post" id="cntBlogPos" name="cntBlogPos" th:value="${siteInfo?.cntBlogPos != null ? siteInfo.cntBlogPos : '0'}"  maxlength="5" />
                                                 <button class="countup" id="blogUp" type="button"><img src="/img/countup.svg" alt="업" /></button>
                                             </div>
-                                            <label for="bm_post1"><input type="radio" name="" id="bm_post1" value="임상" />임상 (월 <input type="number" class="bm_post_review" value="0" /> 건)</label>
-                                            <label for="bm_post2"><input type="radio" name="" id="bm_post2" value="홍보" />홍보 (월 <input type="number" class="bm_post_review" value="0" /> 건)</label>
-                                            <label for="bm_post3"><input type="radio" name="" id="bm_post3" value="관리" />관리 (월 <input type="number" class="bm_post_review" value="0" /> 건)</label>
+                                            <label for="bm_post1"><input type="radio" name="blogPostClinicYN" id="blogPostClinicYN" th:value="'Y'" th:checked="${siteInfo?.blogPostClinicYN == 'Y'}"/>임상 (월 <input type="number" class="bm_post_review" id="blogPostClinicMCnt" name="blogPostClinicMCnt" th:value="${siteInfo?.blogPostClinicMCnt != null ? siteInfo.blogPostClinicMCnt : '0'}" /> 건)</label>
+                                            <label for="bm_post2"><input type="radio" name="blogPostPromoYN" id="blogPostPromoYN" value="Y"  th:checked="${siteInfo?.blogPostPromoYN == 'Y'}"/>홍보 (월 <input type="number" class="bm_post_review" id="blogPostPromoMCnt" name="blogPostPromoMCnt" th:value="${siteInfo?.blogPostPromoMCnt != null ? siteInfo.blogPostPromoMCnt : '0'}" /> 건)</label>
+                                            <label for="bm_post3"><input type="radio" name="blogPostMgtYN" id="blogPostMgtYN" value="Y"   th:checked="${siteInfo?.blogPostMgtYN == 'Y'}"/>관리 (월 <input type="number" class="bm_post_review"  id="blogPostMgMCnt" name="blogPostMgMCnt" th:value="${siteInfo?.blogPostMgMCnt != null ? siteInfo.blogPostMgMCnt : '0'}"/> 건)</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_homepage">
                                         <td class="add_bm_title">홈페이지</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url" id="siteURL" name="siteURL" th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" required/></label>
-                                            <label for="bm_domein_date">도메인 만료일<input type="date" name="siteDomainExpdt" id="siteDomainExpdt" class="bm_domein_date" th:value="${siteInfo?.siteDomainExpdt != null ? siteInfo.siteDomainExpdt : ''}"  required/></label>
-                                            <label for="bm_hosting_date">호스팅 만료일<input type="date" name="siteHostingExpdt" id="siteHostingExpdt" class="bm_hosting_date" th:value="${siteInfo?.siteHostingExpdt != null ? siteInfo.siteHostingExpdt : ''}" required/></label>
+                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url"          name="siteURL"          id="siteURL"         th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" required/></label>
+                                            <label for="bm_domein_date">도메인 만료일<input type="date" class="bm_domein_date"      name="siteDomainExpdt"  id="siteDomainExpdt"  th:value="${siteInfo?.siteDomainExpdt != null ? siteInfo.siteDomainExpdt : ''}"  required/></label>
+                                            <label for="bm_hosting_date">호스팅 만료일<input type="date" class="bm_hosting_date"    name="siteHostingExpdt" id="siteHostingExpdt" th:value="${siteInfo?.siteHostingExpdt != null ? siteInfo.siteHostingExpdt : ''}" required/></label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_pic">
@@ -102,9 +102,9 @@
                                     <tr class="add_bm_address">
                                         <td class="add_bm_title">주소</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" id="postNo" name="postNo" placeholder="우편번호"  th:value="${siteInfo?.postNo != null ? siteInfo.postNo : ''}"/>
+                                            <input type="text" id="postNo" name="postNo" placeholder="우편번호"  th:value="${siteInfo?.postNo != null ? siteInfo.postNo : ''}" readonly/>
                                             <input type="button" class="bm_address_search" onclick="bm_execDaumPostcode()" value="우편번호 검색" />
-                                            <input type="text" id="address"  name="address" placeholder="주소" th:value="${siteInfo?.address != null ? siteInfo.address : ''}" /><br />
+                                            <input type="text" id="address"  name="address" placeholder="주소" th:value="${siteInfo?.address != null ? siteInfo.address : ''}"  readonly/><br />
                                             <input type="text" id="addressDesc" name="addressDesc" th:value="${siteInfo?.addressDesc != null ? siteInfo.addressDesc : ''}" placeholder="나머지 상세주소" />
                                         </td>
                                     </tr>
@@ -135,7 +135,7 @@
                                                         <label th:for="${plan['code']} + 'video'">
                                                             <input type="radio" 
                                                                    th:id="${plan['code']} + 'video'" 
-                                                                   th:name="contractPlans" 
+                                                                   th:name="contractPlanPDesign" 
                                                                    th:value="${plan['code']}" 
                                                                    th:text="${plan['codeName']}"
                                                                    th:class="'bm_plan' + ${plan['code']}" 
@@ -203,6 +203,7 @@
                                         <tr class="bm_acc01">
                                             <td class="add_bm_title" th:text="${sns['codeName']}"></td>
                                             <td colspan="3" class="add_bm_con">
+                                                <input type="hidden" th:id="${sns.code} + 'seq'" th:name="${sns.code} + 'seq'"  />
                                                 <label for="">
                                                     <span>도메인</span>
                                                     <input type="text" class="bm_acc01_dm" th:id="${sns.code} + 'siteDomain'" th:name="${sns.code} + 'siteDomain'" placeholder="https://abc.com" required />
@@ -237,13 +238,13 @@
                                         </td>
                                         <td class="add_bm_title">대표자 생년월일</td>
                                         <td class="add_bm_con">
-                                            <input type="text" class="bm_hdate"  placeholder="1999.12.12" id="managerName" name="managerName" th:value="${siteInfo?.managerName != null ? siteInfo.managerName : ''}" required/>
+                                            <input type="text" class="bm_hdate"  placeholder="1999.12.12" id="ceoBirthDay" name="ceoBirthDay" th:value="${siteInfo?.ceoBirthDay != null ? siteInfo.ceoBirthDay : ''}" required/>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hphone">
                                         <td class="add_bm_title">연락처</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" class="bm_hphone" placeholder="010-1234-5678" id="siteTelno" name="siteTelno" th:value="${siteInfo?.managerPhone != null ? siteInfo.managerPhone : ''}" required/>
+                                            <input type="text" class="bm_hphone" placeholder="010-1234-5678" id="managerPhone" name="managerPhone" th:value="${siteInfo?.managerPhone != null ? siteInfo.managerPhone : ''}" required/>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hmail">
@@ -256,8 +257,9 @@
                                         <td class="add_bm_title">메모</td>
                                         <td colspan="3" class="add_bm_con">
                                             <textarea
-                                                name=""
-                                                id="bm_hmemo"
+                                                name="managerMemo"
+                                                id="managerMemo"
+                                                th:text="${siteInfo?.managerMemo != null ? siteInfo.managerMemo : ''}"
                                                 class="bm_hmemo pre"
                                                 placeholder="업체측 특이사항 및 요청사항"
                                                 rows="3" required></textarea>
