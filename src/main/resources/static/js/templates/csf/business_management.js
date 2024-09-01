@@ -42,6 +42,61 @@ $(document).ready(function () {
         showProfile(searchVal);
     });
 
+    $('#Registration').on('click', function(event) {
+        event.preventDefault(); 
+    
+        var siteKey = $(this).attr('data-img');
+
+        var form = $('<form>', {
+            method: 'POST',
+            action: '/csf/add_business_management'
+        });
+
+        form.append($('<input>', {
+            type: 'hidden',
+            name: 'searchVal',
+            value: siteKey
+        }));
+
+        $('body').append(form);
+        form.submit();
+    });
+
+    $('#Registration').on('click', function(event) {
+        event.preventDefault(); 
+    
+        var siteKey = $(this).attr('data-img');
+
+        var form = $('<form>', {
+            method: 'POST',
+            action: '/csf/add_business_management'
+        });
+
+        form.append($('<input>', {
+            type: 'hidden',
+            name: 'searchVal',
+            value: siteKey
+        }));
+
+        $('body').append(form);
+        form.submit();
+    });
+
+    // 업체 등록 버튼 클릭 이벤트
+    $('#add_business_management').on('click', function(event) {
+        event.preventDefault(); 
+    
+
+        var form = $('<form>', {
+            method: 'POST',
+            action: '/csf/add_business_management'
+        });
+
+        $('body').append(form);
+        form.submit();
+    });
+
+
     //회사 정보 가져오기
     setDataTable();
     
@@ -188,23 +243,33 @@ function showProfile(searchval) {
             $('#ceoName').text(response.ceoName);
             $('#managerPhone').text(formatPhoneNumber(response.managerPhone));
             $('#managerEmail').text(response.managerEmail);
+            $('#contactInformation').text(response.contactInformation);
 
             $('#imgBusinessRegNo').text(response.imgBusinessRegNo);
             $('#imgBusinessRegNo').attr('data-img', getProxy(response.imgBusinessRegNo));
+
             $('#imgOpenCertificate').text(response.imgOpenCertificate);
             $('#imgOpenCertificate').attr('data-img', getProxy(response.imgOpenCertificate));
+
             $('#imgDoctorLicense').text(response.imgDoctorLicense);
             $('#imgDoctorLicense').attr('data-img', getProxy(response.imgDoctorLicense));
+
             $('#imgSpecialistLicense').text(response.imgSpecialistLicense);
             $('#imgSpecialistLicense').attr('data-img', getProxy(response.imgSpecialistLicense));
+
             $('#imgDegreeCertificate').text(response.imgDegreeCertificate);
             $('#imgDegreeCertificate').attr('data-img', getProxy(response.imgDegreeCertificate));
+
+            $('#imgDesignAssets').text(response.imgDesignAssets);
+            $('#imgDesignAssets').attr('data-img', getProxy(response.imgDesignAssets));
+
             $('#imgEtcFiles').text(response.imgEtcFiles);
             $('#imgEtcFiles').attr('data-img', getProxy(response.imgEtcFiles));
+
             $('#imgEtc').text(response.imgEtc);
             $('#imgEtc').attr('data-img', getProxy(response.imgEtc));
 
-            $('#Registration').attr('href', "/csf/add_business_management?searchVal=" + response.siteKey);
+            $('#Registration').attr('data-img', response.siteKey);
 
             
             setSnsInformation(response.snsList);
@@ -251,4 +316,3 @@ function setSnsInformation(snsList) {
     }
 
 }
-

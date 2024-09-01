@@ -11,13 +11,13 @@
                 <h2>사원 기본정보</h2>
                 <div class="add_emp_board">
                     <form action="" id="addEmpForm">
-                        <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" value="" />
+                        <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" />
 
                         <div class="add_emp_info">
                             <table cellspacing="0">
                                 <tbody>
                                     <tr>
-                                        <td rowspan="2" class="add_emp_title">
+                                        <td rowspan="2" class="add_emp_title" id="profile_box">
                                             <div class="profile_box">
                                                 <img th:if="${memInfo != null && memInfo['imgProfile'] != null}" th:src="@{${memInfo['imgProfile']}}" alt="Profile Image" id="profile_preview" />
                                                 <div th:classappend="${#strings.isEmpty(memInfo?.imgProfile) ? 'upload' : ''}"></div>

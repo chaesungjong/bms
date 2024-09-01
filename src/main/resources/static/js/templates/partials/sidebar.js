@@ -127,10 +127,8 @@ function showProfile(userID) {
             else
                 $('#imgEtcView').attr('data-img', response.imgEtc);
 
-            if(response.imgProfile == null || response.imgProfile == '')
-                $('#imgProfileView').hide();
-            else
-                $('#imgProfileView').attr('data-img', response.imgProfile);
+            if(response.imgProfile == null || response.imgProfile == '') $('#imgProfileView').hide();
+            else $('#imgProfileView').attr('data-img', response.imgProfile);
 
             $('.member_info_wrap').removeClass('on');
             $('.member_info_wrap').removeClass('out');

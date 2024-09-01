@@ -152,9 +152,15 @@ public class EmployeeManagementSystemController extends BaseController{
     /*
      * 사원 기본정보 화면 페이지 
      */
-    @GetMapping("/add_employees")
-    @RequestMapping(value = "/add_employees", method = { RequestMethod.POST})
+    @RequestMapping(value = "/add_employees", method = { RequestMethod.POST, RequestMethod.GET })
     public String add_employees(HttpServletRequest request, Model model) {
+
+        // GET 요청인지 확인
+        if ("GET".equalsIgnoreCase(request.getMethod())) {
+            // GET 요청일 경우 처리할 로직 작성
+            // 예: 다른 페이지로 리다이렉트, 에러 메시지 출력 등
+            return "redirect:/ems/employees"; 
+        }
         
         HashMap<String, Object> requestMap = setRequest(request);
         HashMap<String, Object> memInfoMap = userService.memRegistModifyHashMap(requestMap);
@@ -345,6 +351,7 @@ public class EmployeeManagementSystemController extends BaseController{
 
             resnMap.put("retVal", "1");
             resnMap.put("retMsg", "현재 비밀번호가 일치하지 않습니다.");
+            
             return ResponseEntity.ok(resnMap);
         }
 
@@ -358,6 +365,21 @@ public class EmployeeManagementSystemController extends BaseController{
         
         //비밀번호 변경 처리 
         userService.memRegistModify(inputnMap);
+
+        if(inputnMap.get("retVal") != null) {
+
+            String retVal = inputnMap.get("retVal").toString();
+
+            //비밀번호 변경 성공
+            if("0".equals(retVal)) {
+                
+                resnMap.put("retVal", "0");
+                resnMap.put("retMsg", "비밀번호가 변경되었습니다.");
+                member.setPwd(pwdNew);
+                request.getSession().setAttribute("member", member);
+            }
+            
+        }
 
         return ResponseEntity.ok(inputnMap);
     }

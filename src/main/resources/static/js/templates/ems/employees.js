@@ -59,6 +59,20 @@ $(document).ready(function () {
         }
     });
 
+    // 사원 등록 버튼 클릭 이벤트
+    $('#add_employees').on('click', function(event) {
+        event.preventDefault(); 
+    
+
+        var form = $('<form>', {
+            method: 'POST',
+            action: '/ems/add_employees'
+        });
+
+        $('body').append(form);
+        form.submit();
+    });
+
     //화면 새로 그려질 때마다 해당 함수 호출 (페이지 이동, 검색 등)
     table.on('draw', function () {
         updateCustomPagination(table.settings());
@@ -76,6 +90,14 @@ $(document).ready(function () {
             var page = $(this).data('page');
             table.page(page).draw(false);
             updateCustomPagination(table.settings());
+        }
+    });
+
+    // 이벤트 리스너 등록
+    document.addEventListener('keypress', function(event) {
+        if (event.keyCode === 13) {
+            $('#searchButton').click();
+            event.preventDefault(); 
         }
     });
 

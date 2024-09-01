@@ -38,9 +38,11 @@ public class EnterpriseService {
         // 성공
         if ("0".equals(retVal)) {
             
+            //업체 계정 정보 등록
             String sitekey = StringUtil.objectToString(requestHashMap.get("retSiteKey"));
             String userid = (String) requestHashMap.get("userId");
             JSONObject jsonObject = (JSONObject) requestHashMap.get("sns");
+
             // 필요한 정보 출력
             jsonObject.keys().forEachRemaining(key -> {
 
@@ -74,9 +76,34 @@ public class EnterpriseService {
                 enterpriseRepository.mngRegist(siteSnsInfoMap);
             });
 
-        } else {
+            // 담당자 등록 하기 
+            Map<String, String> parameterMap = requestHashMap.get("bmsMember") != null ? (Map<String, String>) requestHashMap.get("bmsMember") : null;
+            
+            if(parameterMap != null) {
 
-        }
+                // 담당자 한명씩 등록
+                for (String key : parameterMap.keySet()) {
+
+                    String seq = StringUtil.objectToString(parameterMap.get(key+"seq"));
+
+                    Map<String, Object> memberReMap = new HashMap<>();
+
+                    if("".equals(seq)) memberReMap.put("gubun", "REGIST");
+                    else memberReMap.put("gubun", "MODIFY");
+                    
+
+                    memberReMap.put("svrGubun", "siteMngUserInfo");
+                    memberReMap.put("loginUserid", userid);
+                    memberReMap.put("loginUserip", requestHashMap.get("ip"));
+                    memberReMap.put("i_param1", sitekey);
+                    memberReMap.put("i_param2", (String)parameterMap.get(key));
+                    memberReMap.put("i_param3","SITE_GD");
+                    enterpriseRepository.mngRegist(memberReMap);
+
+                }
+            }
+
+        } 
 
     }
 

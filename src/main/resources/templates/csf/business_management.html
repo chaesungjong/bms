@@ -10,7 +10,8 @@
     </th:block>
 
     <body>
-        <input type="hidden" id="snsList" name="snsList" th:value="${snsList ?: ''}" />
+        <input type="hidden" id="memberList" name="memberList" th:value="${memberList ?: ''}" />
+        <input type="hidden" id="snsList" name="snsList"       th:value="${snsList ?: ''}" />
         <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
             <div class="bm_wrap">
                 <h2>업체 관리</h2>
@@ -36,7 +37,7 @@
                             </label>
                         </div>
                         <div class="bm_board_btn"></div>
-                        <a href="/csf/add_business_management" class="bm_reg">업체등록</a>
+                        <a href="#" id="add_business_management" class="bm_reg">업체등록</a>
                     </form>
                     <table id="employeeTable" class="bm_board_table" cellspacing="0">
                         <thead class="bm_board_th">
@@ -117,7 +118,7 @@
                                     </li>
                                     <li class="bm_info_pic">
                                         <div class="bm_info_title"><h5>담당자 정보</h5></div>
-                                        <div class="bm_info_con"><p>홍길동 사원, 김철수 대리, 김수산나 주임, 김한나 과장</p></div>
+                                        <div class="bm_info_con" ><p id="contactInformation"></p></div>
                                     </li>
                                     <li class="bm_info_address">
                                         <div class="bm_info_title"><h5>주소</h5></div>
@@ -158,17 +159,17 @@
                                             </p>
                                         </div>
                                     </li>
-                                    <!-- <li class="bm_info_acc03">
+                                    <li class="bm_info_acc03">
                                         <div class="bm_info_title"><h5>홈페이지 관리자 정보</h5></div>
                                         <div class="bm_info_con">
-                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_BL2OGsiteDomain"></span>
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="HOMEPAGEsiteDomain"></span>
                                                 <div class="bm_info_line"></div>
-                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_BLO2Gid"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="HOMEPAGEid"></span>
                                                 <div class="bm_info_line"></div>
-                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_BLOG2pw"></span>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="HOMEPAGEpw"></span>
                                             </p>
                                         </div>
-                                    </li> -->
+                                    </li>
                                     <li class="bm_info_acc04">
                                         <div class="bm_info_title"><h5>네이버 블로그</h5></div>
                                         <div class="bm_info_con">
@@ -268,45 +269,43 @@
                                     <li class="bm_info_file02">
                                         <div class="bm_info_title"><h5>개설필증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#" id="imgOpenCertificate" onclick="downloadFile('imgOpenCertificate')" ></a>
+                                            <a href="#" id="imgDoctorLicense" onclick="downloadFile('imgDoctorLicense')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file03">
                                         <div class="bm_info_title"><h5>의사 면허증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#" id="imgDoctorLicense" onclick="downloadFile('imgDoctorLicense')" ></a>
+                                            <a href="#" id="imgDegreeCertificate" onclick="downloadFile('imgDegreeCertificate')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file04">
                                         <div class="bm_info_title"><h5>전문의 자격증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#" id="imgSpecialistLicense" onclick="downloadFile('imgSpecialistLicense')" ></a>
+                                            <a href="#" id="imgDesignAssets" onclick="downloadFile('imgDesignAssets')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file05">
                                         <div class="bm_info_title"><h5>학위증</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#" id="imgDegreeCertificate" onclick="downloadFile('imgDegreeCertificate')" ></a>
+                                            <a href="#" id="imgOpenCertificate" onclick="downloadFile('imgOpenCertificate')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file06">
                                         <div class="bm_info_title"><h5>이외 자료</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#" id="imgEtcFiles" onclick="downloadFile('imgEtcFiles')" ></a>
-                                            <a href="#" id="imgEtc" onclick="downloadFile('imgEtc')" ></a>
+                                            <a href="#" id="imgSpecialistLicense" onclick="downloadFile('imgSpecialistLicense')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file07">
                                         <div class="bm_info_title"><h5>디자인 활용 자료</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"></a>
+                                            <a href="#" id="imgEtcFiles" onclick="downloadFile('imgEtcFiles')" ></a>
                                         </div>
                                     </li>
                                     <li class="bm_info_file08">
                                         <div class="bm_info_title"><h5>이외 이미지</h5></div>
                                         <div class="bm_info_con">
-                                            <a href="#"></a>
-                                            <a href="#"></a>
+                                            <a href="#" id="imgEtc" onclick="downloadFile('imgEtc')" ></a>
                                         </div>
                                     </li>
                                 </ul>

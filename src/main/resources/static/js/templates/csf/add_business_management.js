@@ -4,27 +4,21 @@
 
 $(document).ready(function () {
 
-    // $('#siteDomainExpdt').val(getTodayDate());
-    // $('#siteHostingExpdt').val(getTodayDate());
+    const fileTarget = $('.add_bm_file input');
+    var counter = 1;
 
-    // $('#contractSdate').val(getTodayDate());
-    // $('#contractEdate').val(getTodayDate());
-
+    // 수정 시에는 사이트 코드 입력란을 보여준다.
     if($('#corrections').val() == 'Y') {
         $('#siteCode_tr').show();
     }
 
-    const fileTarget = $('.add_bm_file input');
+    //담당자 추가 버튼
+    $(".bm_pic_plus").click(function() {
+        counter++;
+        var newSelect = $("<select name='bmMember" + counter + "' id='bmMember" + counter + "' class='bm_pic'></select>");
+        $("#bmMember").append(newSelect); 
+        setMember('bmMember'+counter);
 
-    fileTarget.on('change', function () {
-        var files = $(this)[0].files;
-        var fileArr = [];
-        for (var i = 0; i < files.length; i++) {
-            fileArr.push(files[i].name);
-        }
-
-        var fileList = fileArr.join('<br>');
-        $(this).siblings('.bm_file_text').html(fileList);
     });
 
     // 등록 하기 버튼
@@ -42,8 +36,14 @@ $(document).ready(function () {
                 success: function (data) {
 
                     if (data.retVal == '0') {
-                        alert('등록되었습니다.');
+                        
+                        var corrections = $('#corrections').val(); // 이미지 초기화
+
+                        if (corrections != '') alert('업체 수정이 완료되었습니다.'); 
+                        else alert('업체 등록이 완료되었습니다.');
+                        
                         location.href = '/csf/business_management';
+
                     } else {
                         alert('등록에 실패했습니다.');
                     }
@@ -55,8 +55,55 @@ $(document).ready(function () {
 
     });
 
+    fileTarget.on('change', function () {
+        var files = $(this)[0].files;
+        var fileArr = [];
+        for (var i = 0; i < files.length; i++) {
+            fileArr.push(files[i].name);
+        }
+
+        var fileList = fileArr.join('<br>');
+        $(this).siblings('.bm_file_text').html(fileList);
+    }); 
+
+    
+    setMember('bmMember1');
     setSnsInformation() ;
+    setMemberList();
 });
+
+function setMemberList(){
+    
+    try{
+
+        var jsonData = $('#regMemberList').val();
+        var data = JSON.parse(jsonData);
+      
+        $.each(data.slice(0, -1), function(index, item) {
+            $(".bm_pic_plus").click();
+        });
+
+        $.each(data, function(index, item) {
+
+            var id = "bmMember" + ++index;
+            $("#" + id).val(item.userkey); 
+
+            // hidden input 태그 생성 및 속성 설정
+            var hiddenInput = $("<input>", {
+                type: "hidden",
+                id: id + "seq",
+                name: id + "seq", // 필요에 따라 name 속성 추가
+                value: item.seq
+            });
+        
+            // hidden input 태그를 원하는 위치에 추가 (예: body 태그)
+            $("form").append(hiddenInput); 
+        });
+
+    }catch(e) {
+        console.log(e);
+    }
+}
 
 function setSnsInformation() {
 
@@ -147,4 +194,24 @@ function validate() {
     }
     
     return allFilled;
+}
+
+
+function setMember(name){
+
+    try{
+
+        var jsonData = $('#memberList').val();
+        var data = JSON.parse(jsonData);
+      
+        $.each(data, function(index, item) {
+          $("#"+name).append($("<option></option>")
+            .attr("value", item.userkey)
+            .text(item.name)); 
+        });
+
+    }catch(e) {
+        console.log(e);
+    }
+
 }

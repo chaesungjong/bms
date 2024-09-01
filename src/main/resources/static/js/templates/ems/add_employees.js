@@ -18,6 +18,11 @@ $(document).ready(function () {
     });
 
     // 비밀번호 변경 모달
+    $('#profile_box').click(function () {
+        $('#imgProfile').click();
+    });
+
+    // 비밀번호 변경 모달
     $('.pwd_modify').click(function () {
         var caseBtn = $(this).attr('id');
         $('.modal-container').removeClass('on');
@@ -25,6 +30,7 @@ $(document).ready(function () {
         $('.modal-container#' + caseBtn).addClass('on');
         $('body, html').addClass('modal-active');
     });
+
     $('.pwd_modify_close').click(function () {
         $('.modal-container').addClass('out');
         $('body, html').removeClass('modal-active');
@@ -50,8 +56,14 @@ $(document).ready(function () {
                 contentType: false,
                 success: function (data) {
                     if (data.retVal == '0') {
-                        alert('직원 등록이 완료되었습니다.');
+                        
+                        var corrections = $('#corrections').val(); // 이미지 초기화
+
+                        if (corrections != '') alert('직원 수정이 완료되었습니다.'); 
+                        else alert('직원 등록이 완료되었습니다.');
+                        
                         location.href = '/ems/employees';
+
                     } else if (data.retVal == '-3') {
                         alert('동일한 아이디가 있습니다.');
                     } else {

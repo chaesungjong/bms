@@ -64,12 +64,19 @@ public class CustomerSupportForumController extends BaseController{
     /*
      * 프로젝트 정보 화면 페이지 
      */
-    @GetMapping("/add_business_management")
+    @RequestMapping(value = "/add_business_management", method = { RequestMethod.POST, RequestMethod.GET })
     public String add_business_management(HttpServletRequest request, Model model) {
 
         HashMap<String, Object> registrationMap = setRequest(request);
         String userId     = StringUtil.objectToString(registrationMap.get("userId"));                   //사용자ID
         String searchVal  = StringUtil.objectToString(registrationMap.get("searchVal"));                //검색어
+
+        // GET 요청인지 확인
+        if ("GET".equalsIgnoreCase(request.getMethod())) {
+            // GET 요청일 경우 처리할 로직 작성
+            // 예: 다른 페이지로 리다이렉트, 에러 메시지 출력 등
+            return "redirect:/csf/business_management"; 
+        }
 
         if(!"".equals(searchVal)){
 
@@ -107,12 +114,44 @@ public class CustomerSupportForumController extends BaseController{
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 }
+
+                // 데이터 가져오기
+                List<Map<String, Object>> RegMemberList = boardService.mngList("siteMngUser_List", userId, "0", "0", "", "", "", StringUtil.objectToString(siteInfoMap.get("siteKey")), "");
+
+                ObjectMapper objectMemberMapper = new ObjectMapper();
+                String regMemberListJson ="";
+
+                try {
+                    regMemberListJson = objectMemberMapper.writeValueAsString(RegMemberList);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
     
                 model.addAttribute("siteInfo", siteInfoMap);
                 model.addAttribute("snsList", snsListJson);
+                model.addAttribute("regMemberList", regMemberListJson);
                 model.addAttribute("corrections", "Y");
             }
         }
+
+        
+        /**
+         * 맴버 리스트를 가져온다. 
+         */
+        List<Map<String, Object>> memberList = boardService.mngList("USER_LIST_SIMPLE", userId, "0", "0", "", "", "", "", "");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String MemListJson ="";
+
+         try {
+
+            MemListJson = objectMapper.writeValueAsString(memberList);
+            model.addAttribute("memberList", MemListJson);
+
+        } catch (JsonProcessingException e) {
+           e.printStackTrace();
+        }
+
 
         /*
          * 업체 상태 코드를 가져온다.
@@ -214,6 +253,19 @@ public class CustomerSupportForumController extends BaseController{
             ObjectMapper objectMapper = new ObjectMapper();
             String snsListJson ="";
 
+            // 데이터 가져오기
+            List<Map<String, Object>> RegMemberList = boardService.mngList("siteMngUser_List", userId, "0", "0", "", "", "", StringUtil.objectToString(siteInfoMap.get("siteKey")), "");
+
+            String contactInformation = "";
+
+            for(int i = 0; i < RegMemberList.size(); i++) {
+                contactInformation = contactInformation + StringUtil.objectToString(RegMemberList.get(i).get("name")) + StringUtil.objectToString(RegMemberList.get(i).get("jobTitle")) ;
+
+                if(i == RegMemberList.size() - 1) break;
+                
+                contactInformation = contactInformation + ", ";
+            }
+
             String adress       = StringUtil.objectToString(siteInfoMap.get("address")) + " " + StringUtil.objectToString(siteInfoMap.get("addressDesc"));               // 주소
             String transaction = "Y".equals(StringUtil.objectToString(siteInfoMap.get("blogYN"))) ? "블로그" : ""; 
                    transaction += "Y".equals(StringUtil.objectToString(siteInfoMap.get("homepageYN"))) ? " / 홈페이지" : ""; 
@@ -225,6 +277,7 @@ public class CustomerSupportForumController extends BaseController{
             
             siteInfoMap.put("transaction", transaction);                // 거래내용
             siteInfoMap.put("adress", adress);                          // 주소
+            siteInfoMap.put("contactInformation", contactInformation);  // 연락처
 
             // SNS 정보 가져오기
             List<Map<String, Object>> snsList = boardService.mngList("siteSnsInfo_List", userId, "0", "0", "", "", "", searchVal, "");
@@ -234,6 +287,7 @@ public class CustomerSupportForumController extends BaseController{
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
+
             siteInfoMap.put("snsList", snsListJson);                     // SNS 정보
             siteInfoMap.put("retVal", "0");                       // 성공
             
@@ -269,6 +323,24 @@ public class CustomerSupportForumController extends BaseController{
         RegistrationMap.put("siteHostingExpdt", StringUtil.objectToString(RegistrationMap.get("siteHostingExpdt")).replaceAll("-", ""));
         RegistrationMap.put("contractSdate", StringUtil.objectToString(RegistrationMap.get("contractSdate")).replaceAll("-", ""));
         RegistrationMap.put("siteDomainExpdt", StringUtil.objectToString(RegistrationMap.get("siteDomainExpdt")).replaceAll("-", ""));
+
+        //맴버 리스트를 가져온다.                                     
+        Map<String, String> parameterMap = new HashMap<>();
+        int counter = 1;
+    
+        while (true) {
+            String paramName = "bmMember" + counter;
+            String paramValue = request.getParameter(paramName);
+    
+            if (paramValue == null) {
+                break; // 더 이상 파라미터가 없으면 루프 종료
+            }
+    
+            parameterMap.put(paramName, paramValue);
+            counter++;
+        }
+
+        RegistrationMap.put("bmsMember", parameterMap); // 맴버 리스트
         
         // 파일 세팅
         if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) {
@@ -311,6 +383,8 @@ public class CustomerSupportForumController extends BaseController{
         } else {
             RegistrationMap.put("gubun", "regist");
         }
+
+        
 
         List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState("LIST","snsType","", "");
         // SMS 데이터 가공

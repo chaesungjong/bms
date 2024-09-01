@@ -13,7 +13,10 @@
                 <div class="add_bm_board">
                     <form id="frmSubmit">
                         <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" />
+                        <input type="hidden" id="memberList" name="memberList" th:value="${memberList ?: ''}" />
+                        <input type="hidden" id="regMemberList" name="regMemberList" th:value="${regMemberList ?: ''}" />
                         <input type="hidden" id="siteKey" name="siteKey" th:value="${siteInfo?.siteKey}" />
+
                         <div class="add_bm_info">
                             <h3><input type="text" placeholder="치과명" class="bm_bname" id="siteName" name="siteName" th:value="${siteInfo?.siteName}"/></h3>
                             <table cellspacing="0">
@@ -32,7 +35,7 @@
                                                 <th:block th:each="siteState : ${siteStateList}">
                                                     <option th:value="${siteState['code']}"
                                                             th:text="${siteState['codeName']}"
-                                                            th:selected="${siteState.codeName == siteInfo?.siteState}" >
+                                                            th:selected="${siteState.codeName == siteInfo?.strSiteState}" >
                                                     </option>
                                                 </th:block>
                                             </select>
@@ -41,7 +44,7 @@
                                                     <option th:value="${siteStateLevel['code']}"
                                                             th:text="${siteStateLevel['codeName']}"
                                                             th:selected="${siteStateLevel['code'] == 'MEDIUM' 
-                                                                         or siteStateLevel.codeName == siteInfo?.siteStateLevel}"> 
+                                                                         or siteStateLevel.codeName == siteInfo?.strSiteStateLevel}"> 
                                                     </option>
                                                 </th:block>
                                             </select>
@@ -49,7 +52,7 @@
                                                 <th:block th:each="siteOpenState : ${siteOpenStateList}">
                                                     <option th:value="${siteOpenState['code']}"
                                                             th:text="${siteOpenState['codeName']}"
-                                                            th:selected="${siteOpenState.codeName == siteInfo?.siteOpenState}" >
+                                                            th:selected="${siteOpenState.codeName == siteInfo?.strSiteOpenState}" >
                                                     </option>
                                                 </th:block>
                                             </select>
@@ -58,15 +61,15 @@
                                     <tr class="add_bm_type">
                                         <td class="add_bm_title">거래 내용</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_type1"><input type="radio" name="blogYN"         id="blogYN"         th:value="'Y'" th:checked="${siteInfo?.blogYN == 'Y'}" />블로그</label>
-                                            <label for="bm_type2"><input type="radio" name="homepageYN"     id="homepageYN"     th:value="'Y'" th:checked="${siteInfo?.homepageYN == 'Y'}" />홈페이지</label>
-                                            <label for="bm_type3"><input type="radio" name="blandvideoYN"   id="blandvideoYN"   th:value="'Y'" th:checked="${siteInfo?.blandvideoYN == 'Y'}" />브랜딩 영상</label>
-                                            <label for="bm_type4"><input type="radio" name="reviewYN"       id="reviewYN"       th:value="'Y'" th:checked="${siteInfo?.reviewYN == 'Y'}" /> 리뷰 (월
+                                            <label for="blogYN"><input type="radio" name="blogYN"         id="blogYN"         th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blogYN') == 'Y'}" />블로그</label>
+                                            <label for="homepageYN"><input type="radio" name="homepageYN"     id="homepageYN"     th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('homepageYN') == 'Y'}" />홈페이지</label>
+                                            <label for="blandvideoYN"><input type="radio" name="blandvideoYN"   id="blandvideoYN"   th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blandvideoYN') == 'Y'}"/>브랜딩 영상</label>
+                                            <label for="reviewYN"><input type="radio" name="reviewYN"       id="reviewYN"       th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('reviewYN') == 'Y'}"/> 리뷰 (월
                                                 <input type="number" id="reviewMCnt" name="reviewMCnt" class="bm_type_review"   th:value="${siteInfo?.reviewMCnt != null ? siteInfo.reviewMCnt : '0'}" />건)
                                             </label>
-                                            <label for="bm_type5"><input type="radio" name="instagramYN"    id="instagramYN"    th:value="'Y'" th:checked="${siteInfo?.instagramYN == 'Y'}" />인스타</label>
-                                            <label for="bm_type5"><input type="radio" name="youtubeYN"      id="youtubeYN"      th:value="'Y'" th:checked="${siteInfo?.youtubeYN == 'Y'}" />유튜브</label>
-                                            <label for="bm_type5"><input type="radio" name="momcafeYN"      id="momcafeYN"      th:value="'Y'" th:checked="${siteInfo?.momcafeYN == 'Y'}" />맘카페</label>
+                                            <label for="instagramYN"><input type="radio" name="instagramYN"    id="instagramYN"    th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('instagramYN') == 'Y'}" />인스타</label>
+                                            <label for="youtubeYN"><input type="radio" name="youtubeYN"      id="youtubeYN"      th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('youtubeYN') == 'Y'}"/>유튜브</label>
+                                            <label for="momcafeYN"><input type="radio" name="momcafeYN"      id="momcafeYN"      th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('momcafeYN') == 'Y'}"/>맘카페</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_post">
@@ -77,28 +80,29 @@
                                                 <input type="text" class="bm_post" id="cntBlogPos" name="cntBlogPos" th:value="${siteInfo?.cntBlogPos != null ? siteInfo.cntBlogPos : '0'}"  maxlength="5" />
                                                 <button class="countup" id="blogUp" type="button"><img src="/img/countup.svg" alt="업" /></button>
                                             </div>
-                                            <label for="bm_post1"><input type="radio" name="blogPostClinicYN" id="blogPostClinicYN" th:value="'Y'" th:checked="${siteInfo?.blogPostClinicYN == 'Y'}"/>임상 (월 <input type="number" class="bm_post_review" id="blogPostClinicMCnt" name="blogPostClinicMCnt" th:value="${siteInfo?.blogPostClinicMCnt != null ? siteInfo.blogPostClinicMCnt : '0'}" /> 건)</label>
-                                            <label for="bm_post2"><input type="radio" name="blogPostPromoYN" id="blogPostPromoYN" value="Y"  th:checked="${siteInfo?.blogPostPromoYN == 'Y'}"/>홍보 (월 <input type="number" class="bm_post_review" id="blogPostPromoMCnt" name="blogPostPromoMCnt" th:value="${siteInfo?.blogPostPromoMCnt != null ? siteInfo.blogPostPromoMCnt : '0'}" /> 건)</label>
-                                            <label for="bm_post3"><input type="radio" name="blogPostMgtYN" id="blogPostMgtYN" value="Y"   th:checked="${siteInfo?.blogPostMgtYN == 'Y'}"/>관리 (월 <input type="number" class="bm_post_review"  id="blogPostMgMCnt" name="blogPostMgMCnt" th:value="${siteInfo?.blogPostMgMCnt != null ? siteInfo.blogPostMgMCnt : '0'}"/> 건)</label>
+                                            <label for="bm_post1"><input type="radio" name="blogPostClinicYN" id="blogPostClinicYN" th:value="'Y'"  th:checked="${siteInfo != null and siteInfo.get('blogPostClinicYN') == 'Y'}"/>임상 (월 <input type="number" class="bm_post_review" id="blogPostClinicMCnt" name="blogPostClinicMCnt" th:value="${siteInfo?.blogPostClinicMCnt != null ? siteInfo.blogPostClinicMCnt : '0'}" /> 건)</label>
+                                            <label for="bm_post2"><input type="radio" name="blogPostPromoYN" id="blogPostPromoYN" value="Y"  th:checked="${siteInfo != null and siteInfo.get('blogPostPromoYN') == 'Y'}"/>홍보 (월 <input type="number" class="bm_post_review" id="blogPostPromoMCnt" name="blogPostPromoMCnt" th:value="${siteInfo?.blogPostPromoMCnt != null ? siteInfo.blogPostPromoMCnt : '0'}" /> 건)</label>
+                                            <label for="bm_post3"><input type="radio" name="blogPostMgtYN" id="blogPostMgtYN" value="Y"   th:checked="${siteInfo != null and siteInfo.get('blogPostMgtYN') == 'Y'}"/>관리 (월 <input type="number" class="bm_post_review"  id="blogPostMgMCnt" name="blogPostMgMCnt" th:value="${siteInfo?.blogPostMgMCnt != null ? siteInfo.blogPostMgMCnt : '0'}"/> 건)</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_homepage">
                                         <td class="add_bm_title">홈페이지</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url"          name="siteURL"          id="siteURL"         th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" required/></label>
+                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url"           name="siteURL"         id="siteURL"          th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" required/></label>
                                             <label for="bm_domein_date">도메인 만료일<input type="date" class="bm_domein_date"      name="siteDomainExpdt"  id="siteDomainExpdt"  th:value="${siteInfo?.siteDomainExpdt != null ? siteInfo.siteDomainExpdt : ''}"  required/></label>
                                             <label for="bm_hosting_date">호스팅 만료일<input type="date" class="bm_hosting_date"    name="siteHostingExpdt" id="siteHostingExpdt" th:value="${siteInfo?.siteHostingExpdt != null ? siteInfo.siteHostingExpdt : ''}" required/></label>
                                         </td>
                                     </tr>
-                                    <tr class="add_bm_pic">
+                                     <tr class="add_bm_pic">
                                         <td class="add_bm_title">담당자</td>
-                                        <td colspan="3" class="add_bm_con">
+                                        <td colspan="3" class="add_bm_con" id="bmMember">
                                             <label for="bm_pic">
-                                                <input type="text" class="bm_pic" id="bm_pic" />
-                                                <button class="bm_pic_plus" type="button" required><img src="/img/main_plus.svg" alt="플러스" /></button>
+                                                <select name="bmMember1" id="bmMember1" class="bm_pic">
+                                                </select>
+                                                <button class="bm_pic_plus" type="button"><img src="/img/main_plus.svg" alt="플러스" /></button>
                                             </label>
                                         </td>
-                                    </tr>
+                                    </tr> 
                                     <tr class="add_bm_address">
                                         <td class="add_bm_title">주소</td>
                                         <td colspan="3" class="add_bm_con">
@@ -116,7 +120,7 @@
                                                 <th:block th:each="contractState : ${contractStateList}">
                                                     <option th:value="${contractState['code']}"
                                                             th:text="${contractState['codeName']}"
-                                                            th:selected="${contractState.codeName == siteInfo?.contractState}" >
+                                                            th:selected="${contractState.codeName == siteInfo?.strContractState}" >
                                                     </option>
                                                 </th:block>
                                             </select>
