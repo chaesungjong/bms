@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 세팅 양식 조회  CSS -->
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/pif/place_view.css" />
@@ -144,7 +140,7 @@
                         </div>
 
                         <div class="add_emp_btn_wrap">
-                            <input type="button" value="목록" class="add_board_btn" />
+                            <input type="button" value="목록" onclick="location.href='/pif/place_list'" class="add_board_btn" />
                             <input type="button" value="수정" class="add_board_btn" />
                             <input type="button" value="삭제" class="add_board_btn" />
                         </div>

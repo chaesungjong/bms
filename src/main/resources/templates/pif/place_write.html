@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 세팅 양식 작성  CSS -->
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/pif/place_write.css" />
@@ -80,11 +76,7 @@
                                 <div class="place_right">
                                     <div class="place_dcname_sub">
                                         <h3>
-                                            <img src="/img/place_title.svg" alt="버튼" /><input
-                                                type="text"
-                                                class="dcname"
-                                                id="dcname2"
-                                                placeholder="00000" />
+                                            <img src="/img/place_title.svg" alt="버튼" /><input type="text" class="dcname" id="dcname2" placeholder="00000" />
                                             <span>치과</span>
                                         </h3>
                                     </div>
@@ -135,16 +127,13 @@
                                 <div class="file_bottom_box">
                                     <p>총 '10'개의 파일을 첨부할수 있습니다.</p>
                                     <p>파일당 용량 제한은 '100MB' 입니다.</p>
-                                    <p>
-                                        업로드는 [jpg, gif, png, bmp, doc, ppt, pdf, xls, zip, alz, swf, flv, hwp, xlsx, pptx, docx, pps, ppsx, tif,
-                                        wmv, hwpx, jpeg, pptm, txt]파일만 가능합니다.
-                                    </p>
+                                    <p>업로드는 [jpg, gif, png, bmp, doc, ppt, pdf, xls, zip, alz, swf, flv, hwp, xlsx, pptx, docx, pps, ppsx, tif, wmv, hwpx, jpeg, pptm, txt]파일만 가능합니다.</p>
                                     <p>업로드 파일 제한 해제는 관리자에게 문의 해주세요.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="add_request_btn_wrap">
-                            <input type="button" value="목록" class="add_emp_btn" style="background-color: transparent; color: #333" />
+                            <input type="button" value="목록" onclick="location.href='/pif/place_list'" class="add_emp_btn" style="background-color: transparent; color: #333" />
                             <input type="button" value="등록하기" class="add_emp_btn" />
                         </div>
                     </form>

@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 세팅 양식  CSS -->
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/pif/place_list.css" />
@@ -26,13 +22,13 @@
                                     <button type="button"><span>플레이스</span></button>
                                 </li>
                                 <li class="setting">
-                                    <button type="button"><span>플레이스 광고</span></button>
+                                    <button type="button" onclick="location.href='/pif/blog_skin_list'"><span>블로그 스킨</span></button>
                                 </li>
                                 <li class="online">
                                     <button type="button"><span>네이버 톡톡</span></button>
                                 </li>
                                 <li class="offline">
-                                    <button type="button"><span>블로그 스킨</span></button>
+                                    <button type="button"><span>플레이스 광고</span></button>
                                 </li>
                                 <li class="offline">
                                     <button type="button"><span>당근 광고</span></button>
