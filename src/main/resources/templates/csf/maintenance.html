@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 유지보수  CSS -->
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/csf/maintenance.css" />
@@ -44,10 +40,7 @@
                                 <option value="mt_bn">업체명</option>
                                 <option value="mt_wn">작성자</option>
                             </select>
-                            <label for="sch_word"
-                                ><input type="text" name="stx" size="20" value="" id="sch_word" class="frm_input" />
-                                <input type="submit" value="검색" class="sch_btn"
-                            /></label>
+                            <label for="sch_word"><input type="text" name="stx" size="20" value="" id="sch_word" class="frm_input" /> <input type="submit" value="검색" class="sch_btn" /></label>
                         </div>
                         <div class="mt_board_btn">
                             <button class="mt_board_refrash"><img src="/img/bm_board_refrash.svg" alt="새로고침" /></button>
@@ -107,7 +100,12 @@
                                     <a href="/csf/maintenance_view">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
                                     <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
                                 </td>
-                                <td class="mt_wr_wkname">이슬</td>
+                                <td class="mt_wr_wkname">
+                                    <label for="mt_pic">
+                                        <select name="mtMember1" id="mtMember1" class="mt_pic"></select>
+                                        <button class="mt_pic_plus" type="button"><img src="/img/main_plus.svg" alt="플러스" /></button>
+                                    </label>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="mt_wr_wdate"><span class="list_today">오늘</span>17:52</td>

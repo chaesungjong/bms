@@ -214,6 +214,36 @@
     box-shadow: 1px 0 0 0 #ddd, 0 1px 0 0 #ddd, 1px 1px 0 0 #ddd, 1px 0 0 0 #ddd inset, 0 1px 0 0 #ddd inset;
 }
 
+.mt_wr_wkname label {
+    position: relative;
+}
+.mt_pic {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 9px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    width: 160px;
+}
+.mt_pic_plus {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 27px;
+    height: 27px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
 /* 페이징 */
 .pg_wrap {
     background-color: #fff;
