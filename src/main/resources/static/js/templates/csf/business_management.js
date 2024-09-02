@@ -20,6 +20,15 @@ $(document).ready(function () {
         }
     });
 
+        // 이벤트 리스너 등록
+    document.addEventListener('keypress', function(event) {
+        if (event.keyCode === 13) {
+            $('#searchButton').click();
+            event.preventDefault(); 
+        }
+    });
+
+
 
     // 회사 목록 테이블 생성
     $('.bm_info').click(function () {
