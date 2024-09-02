@@ -207,7 +207,7 @@ function setMember(name){
         $.each(data, function(index, item) {
           $("#"+name).append($("<option></option>")
             .attr("value", item.userkey)
-            .text(item.name)); 
+            .text(item.name + ' (' + item.strTeamCode + ')')); 
         });
 
     }catch(e) {

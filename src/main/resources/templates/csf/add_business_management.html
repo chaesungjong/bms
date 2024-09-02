@@ -43,8 +43,7 @@
                                                 <th:block th:each="siteStateLevel : ${siteStateLevelList}">
                                                     <option th:value="${siteStateLevel['code']}"
                                                             th:text="${siteStateLevel['codeName']}"
-                                                            th:selected="${siteStateLevel['code'] == 'MEDIUM' 
-                                                                         or siteStateLevel.codeName == siteInfo?.strSiteStateLevel}"> 
+                                                            th:selected="${siteStateLevel.codeName == siteInfo?.strSiteStateLevel}"> 
                                                     </option>
                                                 </th:block>
                                             </select>
@@ -80,15 +79,15 @@
                                                 <input type="text" class="bm_post" id="cntBlogPos" name="cntBlogPos" th:value="${siteInfo?.cntBlogPos != null ? siteInfo.cntBlogPos : '0'}"  maxlength="5" />
                                                 <button class="countup" id="blogUp" type="button"><img src="/img/countup.svg" alt="업" /></button>
                                             </div>
-                                            <label for="bm_post1"><input type="radio" name="blogPostClinicYN" id="blogPostClinicYN" th:value="'Y'"  th:checked="${siteInfo != null and siteInfo.get('blogPostClinicYN') == 'Y'}"/>임상 (월 <input type="number" class="bm_post_review" id="blogPostClinicMCnt" name="blogPostClinicMCnt" th:value="${siteInfo?.blogPostClinicMCnt != null ? siteInfo.blogPostClinicMCnt : '0'}" /> 건)</label>
-                                            <label for="bm_post2"><input type="radio" name="blogPostPromoYN" id="blogPostPromoYN" value="Y"  th:checked="${siteInfo != null and siteInfo.get('blogPostPromoYN') == 'Y'}"/>홍보 (월 <input type="number" class="bm_post_review" id="blogPostPromoMCnt" name="blogPostPromoMCnt" th:value="${siteInfo?.blogPostPromoMCnt != null ? siteInfo.blogPostPromoMCnt : '0'}" /> 건)</label>
-                                            <label for="bm_post3"><input type="radio" name="blogPostMgtYN" id="blogPostMgtYN" value="Y"   th:checked="${siteInfo != null and siteInfo.get('blogPostMgtYN') == 'Y'}"/>관리 (월 <input type="number" class="bm_post_review"  id="blogPostMgMCnt" name="blogPostMgMCnt" th:value="${siteInfo?.blogPostMgMCnt != null ? siteInfo.blogPostMgMCnt : '0'}"/> 건)</label>
+                                            <label for="blogPostClinicYN"><input type="radio" name="blogPostClinicYN" id="blogPostClinicYN" th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blogPostClinicYN') == 'Y'}"   />임상 (월 <input type="number" class="bm_post_review" id="blogPostClinicMCnt" name="blogPostClinicMCnt" th:value="${siteInfo?.blogPostClinicMCnt != null ? siteInfo.blogPostClinicMCnt : '0'}" /> 건)</label>
+                                            <label for="blogPostPromoYN"><input type="radio"  name="blogPostPromoYN"  id="blogPostPromoYN"  th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blogPostPromoYN') == 'Y'}" />홍보 (월 <input type="number" class="bm_post_review" id="blogPostPromoMCnt" name="blogPostPromoMCnt" th:value="${siteInfo?.blogPostPromoMCnt != null ? siteInfo.blogPostPromoMCnt : '0'}" /> 건)</label>
+                                            <label for="blogPostMgtYN"><input type="radio"    name="blogPostMgtYN"    id="blogPostMgtYN"    th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blogPostMgtYN') == 'Y'}" />관리 (월 <input type="number" class="bm_post_review"  id="blogPostMgMCnt" name="blogPostMgMCnt" th:value="${siteInfo?.blogPostMgMCnt != null ? siteInfo.blogPostMgMCnt : '0'}"/> 건)</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_homepage">
                                         <td class="add_bm_title">홈페이지</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url"           name="siteURL"         id="siteURL"          th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" required/></label>
+                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url"          name="siteURL"         id="siteURL"          th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" required/></label>
                                             <label for="bm_domein_date">도메인 만료일<input type="date" class="bm_domein_date"      name="siteDomainExpdt"  id="siteDomainExpdt"  th:value="${siteInfo?.siteDomainExpdt != null ? siteInfo.siteDomainExpdt : ''}"  required/></label>
                                             <label for="bm_hosting_date">호스팅 만료일<input type="date" class="bm_hosting_date"    name="siteHostingExpdt" id="siteHostingExpdt" th:value="${siteInfo?.siteHostingExpdt != null ? siteInfo.siteHostingExpdt : ''}" required/></label>
                                         </td>
@@ -136,9 +135,9 @@
                                                 <div class="add_bm_plan01">
                                                     <span>블로그/디자인</span>
                                                     <th:block th:each="plan : ${contractPlans}">
-                                                        <label th:for="${plan['code']} + 'video'">
+                                                        <label th:for="${plan['code']} + 'Design'">
                                                             <input type="radio" 
-                                                                   th:id="${plan['code']} + 'video'" 
+                                                                   th:id="${plan['code']} + 'Design'" 
                                                                    th:name="contractPlanPDesign" 
                                                                    th:value="${plan['code']}" 
                                                                    th:text="${plan['codeName']}"
@@ -172,8 +171,8 @@
                                                 >고객게시판<br />
                                                 사용가능 여부</span
                                             >
-                                            <label for="bm_auth01"><input type="radio" name="boardUseYN" id="boardUseY" class="bm_auth01" value="Y" th:checked="${siteInfo?.boardUseYN == 'Y'}" />사용가능</label>
-                                            <label for="bm_auth02"><input type="radio" name="boardUseYN" id="boardUseN" class="bm_auth02" value="N" th:checked="${siteInfo?.boardUseYN == 'N'}" />사용중지</label>
+                                            <label for="boardUseY"><input type="radio" name="boardUseYN" id="boardUseY" class="bm_auth01" value="Y" th:checked="${siteInfo?.boardUseYN == 'Y'}" />사용가능</label>
+                                            <label for="boardUseN"><input type="radio" name="boardUseYN" id="boardUseN" class="bm_auth02" value="N" th:checked="${siteInfo?.boardUseYN == 'N'}" />사용중지</label>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_memo">
@@ -233,12 +232,9 @@
                                     <tr class="add_bm_hostinfo">
                                         <td class="add_bm_title">성명</td>
                                         <td class="add_bm_con">
-                                            <label for="bm_hname"
-                                                ><input type="text" class="bm_hname" id="ceoName" name="ceoName" placeholder="홍길동" th:value="${siteInfo?.ceoName != null ? siteInfo.ceoName : ''}" required/><button
-                                                    class="bm_hname_plus"
-                                                    type="button">
-                                                    <img src="/img/main_plus.svg" alt="플러스" /></button
-                                            ></label>
+                                            <label for="bm_hname">
+                                                <input type="text" class="bm_hname" id="ceoName" name="ceoName" placeholder="홍길동" th:value="${siteInfo?.ceoName != null ? siteInfo.ceoName : ''}" required/>
+                                            </label>
                                         </td>
                                         <td class="add_bm_title">대표자 생년월일</td>
                                         <td class="add_bm_con">
