@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+    <!-- 세팅 양식 작성  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/pif/naver_talk_write.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="add_request_wrap">
+                <h2>세팅 양식</h2>
+                <div class="add_reauest_board">
+                    <form action="">
+                        <div class="add_request_info">
+                            <h3>
+                                네이버 톡톡 양식 만들기
+                                <select name="" id="">
+                                    <option value="접수">접수</option>
+                                    <option value="확인">확인</option>
+                                    <option value="진행">진행</option>
+                                    <option value="완료">완료</option>
+                                    <option value="기타">기타</option>
+                                    <option value="보류">보류</option>
+                                </select>
+                            </h3>
+                            <table cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="add_request_title">작성자</td>
+                                        <td>
+                                            <label for="">기획<input type="text" required class="name_box" placeholder="홍길동" /></label>
+                                            <label for="">디자인<input type="text" required class="name_box" placeholder="홍길동" /></label>
+                                            <div class="design_board_date">
+                                                <input type="date" name="" id="fr_date" class="fr_date" value="2024-07-15" />
+                                                <span>~</span>
+                                                <input type="date" name="" id="to_date" class="to_date" value="2024-07-15" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_request_title">제목</td>
+                                        <td>
+                                            <label for=""><input type="text" class="project_name" /></label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="write_wrap">
+                            <div class="write_box">
+                                <div class="naver_talk_box">
+                                    <div class="naver_talk_title">
+                                        <img src="/img/place_logo.svg" alt="네이버로고" />
+                                        <span>네이버 톡톡</span>
+                                    </div>
+                                    <div class="naver_talk_con">
+                                        <div class="naver_talk_con01">
+                                            <div class="profile_box">
+                                                <img src="#" alt="" class="profile_preview" />
+                                                <input type="file" class="real_upload profile" accept="image/*" required multiple />
+                                                <div class="upload"></div>
+                                            </div>
+                                            <input type="text" class="naver_talk_contents" placeholder="Text" />
+                                            <input type="text" class="naver_talk_btn" placeholder="Text" />
+                                        </div>
+                                        <div class="naver_talk_con02">
+                                            <div class="profile_box">
+                                                <img src="#" alt="" class="profile_preview" />
+                                                <input type="file" class="real_upload profile" accept="image/*" required multiple />
+                                                <div class="upload"></div>
+                                            </div>
+                                            <input type="text" class="naver_talk_contents" placeholder="Text" />
+                                            <input type="text" class="naver_talk_btn" placeholder="Text" />
+                                            <button type="button" class="naver_talk_del">삭제</button>
+                                        </div>
+                                        <button type="button" class="naver_talk_add"><img src="/img/naver_talk_add.svg" alt="추가" /></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add_request_file">
+                            <div class="add_request_title">첨부파일</div>
+                            <div class="add_bm_con">
+                                <div>
+                                    <input type="file" name="" id="bm_file01" multiple />
+                                    <label class="bm_file_btn" for="bm_file01">파일선택</label>
+                                    <span class="bm_file_text">선택된 파일이 없습니다.</span>
+                                </div>
+                                <div class="file_bottom_box">
+                                    <p>총 '10'개의 파일을 첨부할수 있습니다.</p>
+                                    <p>파일당 용량 제한은 '100MB' 입니다.</p>
+                                    <p>업로드는 [jpg, gif, png, bmp, doc, ppt, pdf, xls, zip, alz, swf, flv, hwp, xlsx, pptx, docx, pps, ppsx, tif, wmv, hwpx, jpeg, pptm, txt]파일만 가능합니다.</p>
+                                    <p>업로드 파일 제한 해제는 관리자에게 문의 해주세요.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add_request_btn_wrap">
+                            <input type="button" value="목록" onclick="location.href='/pif/naver_talk_list'" class="add_emp_btn" style="background-color: transparent; color: #333" />
+                            <input type="button" value="등록하기" class="add_emp_btn" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 세팅 양식 작성  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/pif/naver_talk_write.js"></script>
+    </th:block>
+</html>

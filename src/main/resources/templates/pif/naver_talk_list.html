@@ -2,29 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 세팅 양식  CSS -->
     <th:block layout:fragment="customCSS">
-        <link rel="stylesheet" href="/css/pif/place_list.css" />
+        <link rel="stylesheet" href="/css/pif/naver_talk_list.css" />
     </th:block>
 
     <body>
         <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
-            <div class="place_list_board_wrap">
+            <div class="naver_talk_list_board_wrap">
                 <form action="">
                     <div class="top_bar">
                         <h2>세팅 양식</h2>
                     </div>
-                    <div class="place_list_board">
-                        <div class="place_list_sub_wrap">
+                    <div class="naver_talk_list_board">
+                        <div class="naver_talk_list_sub_wrap">
                             <div class="sub_title">
-                                <h3>플레이스</h3>
+                                <h3>네이버 톡톡</h3>
                             </div>
                             <ul class="btn_wrap">
-                                <li class="homepage click_on">
+                                <li class="homepage">
                                     <button type="button" onclick="location.href='/pif/place_list'"><span>플레이스</span></button>
                                 </li>
                                 <li class="setting">
                                     <button type="button" onclick="location.href='/pif/blog_skin_list'"><span>블로그 스킨</span></button>
                                 </li>
-                                <li class="online">
+                                <li class="online click_on">
                                     <button type="button" onclick="location.href='/pif/naver_talk_list'"><span>네이버 톡톡</span></button>
                                 </li>
                                 <li class="offline">
@@ -60,10 +60,10 @@
                             </div>
                             <div class="guide_btn_wrap">
                                 <button type="button" class="guide_btn">양식 가이드</button>
-                                <button type="button" class="edit_btn" onclick="location.href='/pif/place_write'">양식 만들기</button>
+                                <button type="button" class="edit_btn" onclick="location.href='/pif/naver_talk_write'">양식 만들기</button>
                             </div>
                         </div>
-                        <div class="place_list_main_wrap">
+                        <div class="naver_talk_list_main_wrap">
                             <table cellspacing="0">
                                 <tbody>
                                     <tr>
@@ -78,7 +78,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">서울김앤장치과</a>
+                                            <a href="/pif/naver_talk_view">서울김앤장치과</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -98,7 +98,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">서울샤인치과</a>
+                                            <a href="/pif/naver_talk_view">서울샤인치과</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -118,7 +118,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">서울스마트치과</a>
+                                            <a href="/pif/naver_talk_view">서울스마트치과</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -138,7 +138,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">서울하이안치과</a>
+                                            <a href="/pif/naver_talk_view">서울하이안치과</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -158,7 +158,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">연세세브란스치과 경기광주</a>
+                                            <a href="/pif/naver_talk_view">연세세브란스치과 경기광주</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -178,7 +178,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">서울클리어치과 연신내</a>
+                                            <a href="/pif/naver_talk_view">서울클리어치과 연신내</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -198,7 +198,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">연세이로운치과</a>
+                                            <a href="/pif/naver_talk_view">연세이로운치과</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -218,7 +218,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">강남플란트치과</a>
+                                            <a href="/pif/naver_talk_view">강남플란트치과</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -238,7 +238,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">서울바른마음치과</a>
+                                            <a href="/pif/naver_talk_view">서울바른마음치과</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -258,7 +258,7 @@
                                     <tr>
                                         <td class="num_box"></td>
                                         <td class="name_box">
-                                            <a href="/pif/place_view">연세스위트치과</a>
+                                            <a href="/pif/naver_talk_view">연세스위트치과</a>
                                         </td>
                                         <td class="planner_box"></td>
                                         <td class="designer_box"></td>
@@ -302,13 +302,13 @@
                     <div class="bg"></div>
                     <div class="popup">
                         <div class="popup_head">
-                            <span>플레이스 양식 가이드</span>
+                            <span>네이버 톡톡 양식 가이드</span>
                             <button type="button" class="exit_btn">
                                 <img src="/img/Close_w.svg" alt="닫기버튼" />
                             </button>
                         </div>
                         <div class="popup_inner">
-                            <img src="/img/guide_img.png" alt="가이드" />
+                            <img src="/img/naver_talk_guide.jpg" alt="가이드" />
                         </div>
                     </div>
                 </div>
@@ -318,6 +318,6 @@
 
     <!-- 세팅 양식  Javascript -->
     <th:block layout:fragment="customJS">
-        <script src="/js/templates/pif/place_list.js"></script>
+        <script src="/js/templates/pif/naver_talk_list.js"></script>
     </th:block>
 </html>
