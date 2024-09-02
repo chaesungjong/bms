@@ -59,7 +59,7 @@ $('.show_btn').click(function () {
     $(this).siblings().toggle();
 });
 
-$('.schedule_main_wrap td.confirm_box .btn_popup input').click(function () {
+$('.btn_popup input').click(function () {
     // var btnStyle = $(this).attr("style");
     // var btnTitle = $(this).val();
 

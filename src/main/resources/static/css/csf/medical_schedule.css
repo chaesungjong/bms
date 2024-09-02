@@ -256,6 +256,7 @@ input::-webkit-search-results-decoration {
 
 .schedule_main_wrap th,
 td {
+    position: relative;
     padding: 14px;
     text-align: center;
     text-wrap: nowrap;
@@ -332,7 +333,8 @@ td {
     color: #1f25bd;
 }
 
-.schedule_main_wrap td.confirm_box input {
+.schedule_main_wrap td.confirm_box input,
+.title_state input {
     width: 72.4px;
     height: 24.75px;
     padding: 1.8px 22px;
@@ -344,7 +346,7 @@ td {
     position: relative;
 }
 
-.schedule_main_wrap td.confirm_box .btn_popup {
+.btn_popup {
     position: absolute;
     top: 90%;
     left: 50%;
@@ -359,7 +361,7 @@ td {
     display: none;
 }
 
-.schedule_main_wrap td.confirm_box .btn_popup input {
+.btn_popup input {
     display: block;
     left: 50%;
     transform: translate(-50%, 0px);
