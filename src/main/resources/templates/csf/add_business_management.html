@@ -196,10 +196,9 @@
                         <div class="add_bm_acc">
                             <h3>
                                 업체 계정 정보
-                               <!-- <div class="bm_acc_count">
-                                    <button class="bm_acc_countdown" type="button"><img src="/img/countdown.svg" alt="다운" /></button>
-                                    <button class="bm_acc_countup" type="button"><img src="/img/countup.svg" alt="업" /></button>
-                                </div> -->
+                               <div class="bm_acc_count">
+                                    <button class="bm_acc_countup" type="button"><img src="/img/countup.svg" alt="추가" /></button>
+                                </div>
                             </h3>
                             <table cellspacing="0">
                                 <tbody>
@@ -220,6 +219,7 @@
                                                     <span>PW</span>
                                                     <input type="text" class="bm_acc01_pw" th:id="${sns.code} + 'pw'" th:name="${sns.code} + 'pw'" placeholder="비밀번호" required/>
                                                 </label>
+                                                <button class="bm_acc_delete" type="button"><img src="/img/bm_acc_delete.svg" alt="삭제"></button>
                                             </td>
                                         </tr>
                                     </th:block> 
