@@ -57,3 +57,27 @@ fileTarget.on('change', function () {
     var fileList = fileArr.join('<br>');
     $(this).siblings('.bm_file_text').html(fileList);
 });
+
+function resize(textarea, event) {
+    var text = textarea.value;
+    var hiddenDiv = document.getElementById('hiddenDiv');
+    hiddenDiv.textContent = text;
+
+    var width = hiddenDiv.clientWidth;
+    var plus_height = false;
+
+    if ((width > 618 && !plus_height) || event.keyCode === 13) {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 5 + 'px';
+        textarea.style.paddingTop = '15px';
+        plus_height = true;
+    } else {
+        if (width <= 0) {
+            textarea.style.height = '40px';
+            textarea.style.paddingTop = '10px';
+        } else {
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+        plus_height = false;
+    }
+}

@@ -60,8 +60,9 @@
                                                 <input type="file" class="real_upload profile" accept="image/*" required multiple />
                                                 <div class="upload"></div>
                                             </div>
-                                            <input type="text" class="naver_talk_contents" placeholder="Text" />
-                                            <input type="text" class="naver_talk_btn" placeholder="Text" />
+                                            <textarea oninput="resize(this, event)" class="naver_talk_contents" placeholder="Text"></textarea>
+                                            <div id="hiddenDiv" style="position: absolute; visibility: hidden; height: auto; width: auto; white-space: nowrap"></div>
+                                            <input type="text" class="naver_talk_btn" placeholder="button" />
                                         </div>
                                         <div class="naver_talk_con02">
                                             <div class="profile_box">
@@ -69,8 +70,9 @@
                                                 <input type="file" class="real_upload profile" accept="image/*" required multiple />
                                                 <div class="upload"></div>
                                             </div>
-                                            <input type="text" class="naver_talk_contents" placeholder="Text" />
-                                            <input type="text" class="naver_talk_btn" placeholder="Text" />
+                                            <textarea oninput="resize(this, event)" class="naver_talk_contents" placeholder="Text"></textarea>
+                                            <div id="hiddenDiv" style="position: absolute; visibility: hidden; height: auto; width: auto; white-space: nowrap"></div>
+                                            <input type="text" class="naver_talk_btn" placeholder="button" />
                                             <button type="button" class="naver_talk_del">삭제</button>
                                         </div>
                                         <button type="button" class="naver_talk_add"><img src="/img/naver_talk_add.svg" alt="추가" /></button>
