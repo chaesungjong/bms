@@ -48,7 +48,7 @@ $(document).ready(function () {
     // 직원 상세 페이지 팝업 띄우기
     $('body').on('click', 'tr', function() {
         var searchVal = $(this).attr('data-sitekey');
-        showProfile(searchVal);
+        customerShowProfile(searchVal);
     });
 
     $('#Registration').on('click', function(event) {
@@ -227,7 +227,7 @@ function updateCustomPagination(settings) {
  * 회사 정보 상세 보기
  * @param {*} searchval 
  */
-function showProfile(searchval) {
+function customerShowProfile(searchval) {
 
     var data = {
         searchVal : searchval
