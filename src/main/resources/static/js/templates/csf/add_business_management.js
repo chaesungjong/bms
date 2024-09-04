@@ -88,6 +88,8 @@ function setMemberList(){
             var id = "bmMember" + ++index;
             $("#" + id).val(item.userkey); 
 
+            $("#" + id+" option:contains('선택해주세요')").remove();
+
             // hidden input 태그 생성 및 속성 설정
             var hiddenInput = $("<input>", {
                 type: "hidden",
@@ -107,26 +109,22 @@ function setMemberList(){
 
 function setSnsInformation() {
 
-    const snsListData = JSON.parse($('#snsList').val()); 
+    try{
+        const snsListData = JSON.parse($('#snsList').val()); 
+        if(snsListData != null && snsListData != '') {
+            // 각 SNS 타입에 대한 input 필드에 값 할당
+        snsListData.forEach(sns => {
 
-    if(snsListData != null && snsListData != '') {
-        
-        try{
-
-             // 각 SNS 타입에 대한 input 필드에 값 할당
-            snsListData.forEach(sns => {
-
-                const snsType = sns.snsType;
-                if(sns.domain != null || sns.domain != '') document.getElementById(snsType + 'siteDomain').value = sns.domain;
-                if(sns.id != null || sns.id != '')         document.getElementById(snsType + 'id').value = sns.id;
-                if(sns.pwd != null || sns.pwd != '')       document.getElementById(snsType + 'pw').value = sns.pwd;
-                if(sns.seq != null || sns.seq != '')       document.getElementById(snsType + 'seq').value = sns.seq;
-                
-            });
-
-        }catch(e) {
-            console.log(e);
-        }
+            const snsType = sns.snsType;
+            if(sns.domain != null || sns.domain != '') document.getElementById(snsType + 'siteDomain').value = sns.domain;
+            if(sns.id != null || sns.id != '')         document.getElementById(snsType + 'id').value = sns.id;
+            if(sns.pwd != null || sns.pwd != '')       document.getElementById(snsType + 'pw').value = sns.pwd;
+            if(sns.seq != null || sns.seq != '')       document.getElementById(snsType + 'seq').value = sns.seq;
+            
+        });
+    }
+    }catch(e) {
+        console.log(e);
     }
 
 }
@@ -159,6 +157,7 @@ function bm_execDaumPostcode() {
         },
     }).open();
 }
+
 document.addEventListener('DOMContentLoaded', (event) => {
     const blogUp = document.getElementById('blogUp');
     const blogDown = document.getElementById('blogDown');
@@ -203,7 +202,11 @@ function setMember(name){
 
         var jsonData = $('#memberList').val();
         var data = JSON.parse(jsonData);
-      
+
+        $("#"+name).append($("<option></option>")
+        .attr("value", "")
+        .text('이름(팀명)')); 
+
         $.each(data, function(index, item) {
           $("#"+name).append($("<option></option>")
             .attr("value", item.userkey)

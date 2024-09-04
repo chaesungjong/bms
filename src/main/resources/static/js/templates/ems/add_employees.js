@@ -2,10 +2,26 @@
  * ems/add_employees.html 연동 스크립트 영역
  */
 $(document).ready(function () {
+
     // 이미지 업로드
     $('#imgProfile').change(function () {
         readURL(this);
     });
+
+    $("#payGiveType").change(function() {
+        
+        // 변경된 텍스트 가져오기 (필요한 경우)
+        var selectedText = $(this).find("option:selected").text();
+
+        if("기타" == selectedText) {
+            $("#bankName").removeAttr("required");
+            $("#bankAccount").removeAttr("required");
+        }else{
+            $("#bankName").attr("required", "required");
+            $("#bankAccount").attr("required", "required");
+        }
+        
+      });
 
     // 한글이 필수로 들어가야할 때 사용
     $('.bank_box, .name_box').keyup(function () {

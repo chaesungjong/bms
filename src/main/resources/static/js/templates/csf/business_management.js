@@ -169,7 +169,11 @@ function setDataTable(){
                 "className": "bm_wr_cdate",
                 "render": function(data, type, row) {
                     // contractSdate와 contractEdate 데이터를 합쳐서 반환
-                    return formatDate(row.contractSdate) + " ~ " + formatDate(row.contractEdate);
+                    if(row.contractSdate == "" || row.contractEdate == "") {
+                        return '';
+                    } else {
+                        return formatDate(row.contractSdate) + " ~ " + formatDate(row.contractEdate);
+                    }
                 }
             },
             { "data": "memo", "className": "bm_wr_etc", "defaultContent": "" }  // 기본값 설정

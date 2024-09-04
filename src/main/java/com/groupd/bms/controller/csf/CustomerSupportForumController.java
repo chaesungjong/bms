@@ -332,7 +332,7 @@ public class CustomerSupportForumController extends BaseController{
             String paramName = "bmMember" + counter;
             String paramValue = request.getParameter(paramName);
     
-            if (paramValue == null) {
+            if (paramValue == null || paramValue.isEmpty()) {
                 break; // 더 이상 파라미터가 없으면 루프 종료
             }
     
