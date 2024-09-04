@@ -42,3 +42,17 @@ $(document).ready(function () {
         $(this).children('.category_select').slideToggle(100);
     });
 });
+
+// 오늘 날짜 가져오기
+var today = new Date();
+
+// 날짜 형식 지정 (예: 2024. 06. 20 (목))
+var year = today.getFullYear();
+var month = ('0' + (today.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 +1
+var date = ('0' + today.getDate()).slice(-2);
+var day = ['일', '월', '화', '수', '목', '금', '토'][today.getDay()];
+
+var formattedDate = year + '. ' + month + '. ' + date + ' (' + day + ')';
+
+// 텍스트를 #today 요소에 설정
+document.getElementById('today').textContent = formattedDate;

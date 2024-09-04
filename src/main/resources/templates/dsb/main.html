@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 데시보드 홈 CSS -->
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/dsb/main.css" />
@@ -18,16 +14,13 @@
                             <ul class="main_content_list">
                                 <li class="main_content_list01">
                                     오늘의 요청 (마감건)
-                                    <div class="main_content_list01_con">
-                                        <a href="#" class="main_content_list01_con01">4</a
-                                        ><a href="#" class="main_content_list01_con02">(<span>2</span>)</a>
-                                    </div>
+                                    <div class="main_content_list01_con"><a href="#" class="main_content_list01_con01">4</a><a href="#" class="main_content_list01_con02">(<span>2</span>)</a></div>
                                 </li>
                                 <li class="main_content_list02">결제할 문서 <a href="#" class="main_content_zero">0</a></li>
                                 <li class="main_content_list03">작성할 보고 <a href="#">2</a></li>
                             </ul>
                             <div class="main_state">
-                                <h3>2024. 06. 20 (목)</h3>
+                                <h3 id="today"></h3>
                                 <h4>일일 업무 보고 <span>(제 62회차)</span></h4>
                                 <div class="main_state_team">
                                     <p>부서</p>
