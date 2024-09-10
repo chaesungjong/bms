@@ -18,7 +18,7 @@
                         <input type="hidden" id="siteKey" name="siteKey" th:value="${siteInfo?.siteKey}" />
 
                         <div class="add_bm_info">
-                            <h3><input type="text" placeholder="치과명" class="bm_bname" id="siteName" name="siteName" th:value="${siteInfo?.siteName}" data-alert="치과명" required/></h3>
+                            <h3><input type="text" placeholder="치과명" class="bm_bname" id="siteName" name="siteName" maxlength="15" th:value="${siteInfo?.siteName}" data-alert="치과명" required/></h3>
                             <table cellspacing="0">
                                 <tbody>
                                     <tr class="add_bm_code" id="siteCode_tr" style="display: none;">
@@ -87,9 +87,9 @@
                                     <tr class="add_bm_homepage">
                                         <td class="add_bm_title">홈페이지</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url"          name="siteURL"         id="siteURL"          th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" /></label>
-                                            <label for="bm_domein_date">도메인 만료일<input type="date" class="bm_domein_date"      name="siteDomainExpdt"  id="siteDomainExpdt"  th:value="${siteInfo?.siteDomainExpdt != null ? siteInfo.siteDomainExpdt : ''}"  /></label>
-                                            <label for="bm_hosting_date">호스팅 만료일<input type="date" class="bm_hosting_date"    name="siteHostingExpdt" id="siteHostingExpdt" th:value="${siteInfo?.siteHostingExpdt != null ? siteInfo.siteHostingExpdt : ''}" /></label>
+                                            <label for="bm_homepage_url">도메인<input type="text" class="bm_homepage_url"          name="siteURL"          id="siteURL"          maxlength="50" th:value="${siteInfo?.siteURL != null ? siteInfo.siteURL : ''}" placeholder="https://abc.com" /></label>
+                                            <label for="bm_domein_date">도메인 만료일<input type="date" class="bm_domein_date"      name="siteDomainExpdt"  id="siteDomainExpdt"  maxlength="50" th:value="${siteInfo?.siteDomainExpdt != null ? siteInfo.siteDomainExpdt : ''}"  /></label>
+                                            <label for="bm_hosting_date">호스팅 만료일<input type="date" class="bm_hosting_date"    name="siteHostingExpdt" id="siteHostingExpdt" maxlength="50" th:value="${siteInfo?.siteHostingExpdt != null ? siteInfo.siteHostingExpdt : ''}" /></label>
                                         </td>
                                     </tr>
                                      <tr class="add_bm_pic">
@@ -105,10 +105,10 @@
                                     <tr class="add_bm_address">
                                         <td class="add_bm_title">주소</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" id="postNo" name="postNo" placeholder="우편번호"  th:value="${siteInfo?.postNo != null ? siteInfo.postNo : ''}" readonly/>
+                                            <input type="text" id="postNo" name="postNo" placeholder="우편번호"  maxlength="15" th:value="${siteInfo?.postNo != null ? siteInfo.postNo : ''}" readonly/>
                                             <input type="button" class="bm_address_search" onclick="bm_execDaumPostcode()" value="우편번호 검색" />
-                                            <input type="text" id="address"  name="address" placeholder="주소" th:value="${siteInfo?.address != null ? siteInfo.address : ''}"  readonly/><br />
-                                            <input type="text" id="addressDesc" name="addressDesc" th:value="${siteInfo?.addressDesc != null ? siteInfo.addressDesc : ''}" placeholder="나머지 상세주소" />
+                                            <input type="text" id="address"  name="address" placeholder="주소" maxlength="30" th:value="${siteInfo?.address != null ? siteInfo.address : ''}"  readonly/><br />
+                                            <input type="text" id="addressDesc" name="addressDesc" maxlength="30" th:value="${siteInfo?.addressDesc != null ? siteInfo.addressDesc : ''}" placeholder="나머지 상세주소" />
                                         </td>
                                     </tr>
                                     <tr class="add_bm_service01">
@@ -206,15 +206,15 @@
                                                 <input type="hidden" th:id="${sns.code} + 'seq'" th:name="${sns.code} + 'seq'"  />
                                                 <label for="">
                                                     <span>도메인</span>
-                                                    <input type="text" class="bm_acc01_dm" th:id="${sns.code} + 'siteDomain'" th:name="${sns.code} + 'siteDomain'" placeholder="https://abc.com"  />
+                                                    <input type="text" class="bm_acc01_dm" th:id="${sns.code} + 'siteDomain'" th:name="${sns.code} + 'siteDomain'" maxlength="30" placeholder="https://abc.com"  />
                                                 </label>
                                                 <label for="">
                                                     <span>ID</span>
-                                                    <input type="text" class="bm_acc01_id" th:id="${sns.code} + 'id'" th:name="${sns.code} + 'id'" placeholder="아이디"  />
+                                                    <input type="text" class="bm_acc01_id" th:id="${sns.code} + 'id'" th:name="${sns.code} + 'id'" maxlength="15" placeholder="아이디"  />
                                                 </label>
                                                 <label for="">
                                                     <span>PW</span>
-                                                    <input type="text" class="bm_acc01_pw" th:id="${sns.code} + 'pw'" th:name="${sns.code} + 'pw'" placeholder="비밀번호" />
+                                                    <input type="text" class="bm_acc01_pw" th:id="${sns.code} + 'pw'" th:name="${sns.code} + 'pw'" maxlength="15" placeholder="비밀번호" />
                                                 </label>
                                                 <button class="bm_acc_delete" type="button"><img src="/img/bm_acc_delete.svg" alt="삭제"></button>
                                             </td>
@@ -231,24 +231,24 @@
                                         <td class="add_bm_title">성명</td>
                                         <td class="add_bm_con">
                                             <label for="bm_hname">
-                                                <input type="text" class="bm_hname" id="ceoName" name="ceoName" placeholder="홍길동" th:value="${siteInfo?.ceoName != null ? siteInfo.ceoName : ''}" />
+                                                <input type="text" class="bm_hname" id="ceoName" name="ceoName" placeholder="홍길동" maxlength="8" th:value="${siteInfo?.ceoName != null ? siteInfo.ceoName : ''}" />
                                             </label>
                                         </td>
                                         <td class="add_bm_title">대표자 생년월일</td>
                                         <td class="add_bm_con">
-                                            <input type="text" class="bm_hdate"  placeholder="1999.12.12" id="ceoBirthDay" name="ceoBirthDay" th:value="${siteInfo?.ceoBirthDay != null ? siteInfo.ceoBirthDay : ''}" />
+                                            <input type="text" class="bm_hdate"  placeholder="1999.12.12" id="ceoBirthDay" name="ceoBirthDay" maxlength="10 "th:value="${siteInfo?.ceoBirthDay != null ? siteInfo.ceoBirthDay : ''}" />
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hphone">
                                         <td class="add_bm_title">연락처</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" class="bm_hphone" placeholder="010-1234-5678" id="managerPhone" name="managerPhone" th:value="${siteInfo?.managerPhone != null ? siteInfo.managerPhone : ''}" />
+                                            <input type="text" class="bm_hphone" placeholder="010-1234-5678" id="managerPhone" name="managerPhone" maxlength="15"th:value="${siteInfo?.managerPhone != null ? siteInfo.managerPhone : ''}" />
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hmail">
                                         <td class="add_bm_title">이메일</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" class="bm_hmail"  placeholder="abc@def.com" id="managerEmail" name="managerEmail" th:value="${siteInfo?.managerEmail != null ? siteInfo.managerEmail : ''}" />
+                                            <input type="text" class="bm_hmail"  placeholder="abc@def.com" id="managerEmail" name="managerEmail" maxlength="20" th:value="${siteInfo?.managerEmail != null ? siteInfo.managerEmail : ''}" />
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hmemo">
@@ -330,6 +330,7 @@
                             </table>
                         </div>
                         <div class="add_bm_btn_wrap">
+                            <input type="button" value="저장" id="Registration" name="Registration" class="add_bm_btn" />
                             <input type="button" value="저장" id="Registration" name="Registration" class="add_bm_btn" />
                         </div>
                     </form>
