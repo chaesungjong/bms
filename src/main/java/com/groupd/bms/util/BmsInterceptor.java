@@ -40,6 +40,11 @@ public class BmsInterceptor implements HandlerInterceptor {
         log.debug("==================== BEGIN ====================");
         log.debug("Request URI ===> " + request.getRequestURI());
 
+        // 로컬호스트 여부 체크
+        String host = request.getServerName();
+        request.setAttribute("isLocalhost", "localhost".equals(host));
+
+
         //디자이너 화면은 예외 처리 
         if(request.getRequestURI().contains("Designer")){
             return true;
