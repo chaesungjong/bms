@@ -11,8 +11,7 @@
                 <h2>사원 기본정보</h2>
                 <div class="add_emp_board">
                     <form action="" id="addEmpForm">
-                        <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" />
-
+                        <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" />          <!-- 수정 여부 -->
                         <div class="add_emp_info">
                             <table cellspacing="0">
                                 <tbody>
@@ -26,23 +25,23 @@
                                         <td colspan="3">
                                             <label for="name"
                                                 >성명
-                                                <input type="text" name="name" id="name" class="name_box" placeholder="성명" th:value="${memInfo?.name}" maxlength='10'required />
+                                                <input type="text" name="name" id="name" class="name_box" placeholder="성명" th:value="${memInfo?.name}" maxlength='10'required data-alert="성명" />
                                             </label>
                                             <label for="nameEng"
                                                 >영문명
-                                                <input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명" th:value="${memInfo?.nameEng}" maxlength='15'/>
+                                                <input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명" th:value="${memInfo?.nameEng}" maxlength='15' data-alert="영문명"/>
                                             </label>
                                             <label for="userid"
                                                 >아이디
-                                                <input type="text" name="userid" id="userid" class="id_box" placeholder="아이디" th:value="${memInfo?.userid}" maxlength='30' required />
+                                                <input type="text" name="userid" id="userid" class="id_box" placeholder="아이디" th:value="${memInfo?.userid}" maxlength='20' required data-alert="아이디" />
                                             </label>
                                             <label for="pwd" th:if="${corrections != 'Y'}"
                                                 >비밀번호
-                                                <input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" maxlength='30' />
+                                                <input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" maxlength='20' data-alert="비밀번호"/>
                                             </label>
                                             <label for="pwdCheck" th:if="${corrections != 'Y'}">비밀번호 확인
                                                 <input type="password" name="pwdCheck" id="pwdCheck" class="pwr_box"
-                                                placeholder="비밀번호 확인" th:value="${memInfo?.pwd}" required />
+                                                placeholder="비밀번호 확인" th:value="${memInfo?.pwd}" required data-alert="비밀번호 확인" />
                                             </label>
                                             <span class="pwd_modify" th:if="${pwdChange == 'Y'}" id="pwd_modify" >비밀번호 수정 </span>
                                         </td>
@@ -170,11 +169,11 @@
                                             </label>
                                             <label for="bankName">
                                                 <span class="sub_span">은행</span>
-                                                <input type="text" id="bankName" name="bankName" class="bank_box" placeholder="은행명" maxlength="15" th:value="${memInfo?.bankName}" required />
+                                                <input type="text" id="bankName" name="bankName" class="bank_box" placeholder="은행명" maxlength="15" th:value="${memInfo?.bankName}" required data-alert="은행명"  />
                                             </label>
                                             <label for="bankAccount">
                                                 <span class="sub_span">계좌번호</span>
-                                                <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호" maxlength="20" th:value="${memInfo?.bankAccount}" required />
+                                                <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호" maxlength="20" th:value="${memInfo?.bankAccount}" required data-alert="계좌번호" />
                                             </label>
                                         </td>
                                     </tr>

@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import com.groupd.bms.controller.BaseController;
-import com.groupd.bms.service.BoardService;
-import com.groupd.bms.service.EnterpriseService;
+import com.groupd.bms.service.CommonService;
 import com.groupd.bms.service.UserService;
 import com.groupd.bms.util.SHA256Util;
 import com.groupd.bms.util.StringUtil;
@@ -38,10 +37,7 @@ public class EmployeeManagementSystemController extends BaseController{
     private UserService userService;
 
     @Autowired
-    private EnterpriseService enterpriseService;
-
-    @Autowired
-    private BoardService boardService;
+    private CommonService commonService;
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeManagementSystemController.class);
 
@@ -50,6 +46,7 @@ public class EmployeeManagementSystemController extends BaseController{
      */
     @GetMapping("/{path}")
     public String handleSinglePath(@PathVariable("path") String path) {
+        logger.debug(" 접속 경로 : ems/" + path);
         return "ems/" + path;
     }
 
@@ -58,6 +55,7 @@ public class EmployeeManagementSystemController extends BaseController{
      */
     @RequestMapping(value = "/employee_list", method = { RequestMethod.POST, RequestMethod.GET })
     public ResponseEntity<?> employeeList( HttpServletRequest request) {
+        logger.debug("사원 리스트 가져오기 : employee_list ");
 
         HashMap<String, Object> registrationMap = setRequest(request);
         HashMap<String, Object> resMap = new HashMap<String, Object>();
@@ -70,7 +68,6 @@ public class EmployeeManagementSystemController extends BaseController{
 
 
         // DataTables 파라미터 가져오기
-        // DataTables 파라미터 가져오기
         int draw = Integer.parseInt(request.getParameter("draw"));
         int start = Integer.parseInt(request.getParameter("start"));
         int length = Integer.parseInt(request.getParameter("length"));
@@ -78,9 +75,9 @@ public class EmployeeManagementSystemController extends BaseController{
         // 페이지 번호 계산
         int page = start / length + 1;
         // 전체 레코드 수 가져오기
-        int totalRecords = Integer.parseInt(setPagination(boardService.mng("USER_LIST_CNT", userId, String.valueOf(page), String.valueOf(length), startDate, EndDate, searchType, search, "")));
+        int totalRecords = Integer.parseInt(setPagination(commonService.mng("USER_LIST_CNT", userId, String.valueOf(page), String.valueOf(length), startDate, EndDate, searchType, search, "")));
         // 데이터 가져오기
-        List<Map<String, Object>> employeeList = boardService.mngList("USER_LIST", userId, String.valueOf(page), String.valueOf(length), startDate, EndDate, searchType, search, "");
+        List<Map<String, Object>> employeeList = commonService.mngList("USER_LIST", userId, String.valueOf(page), String.valueOf(length), startDate, EndDate, searchType, search, "");
 
         resMap.put("draw", draw);
         resMap.put("recordsTotal", totalRecords);
@@ -96,7 +93,7 @@ public class EmployeeManagementSystemController extends BaseController{
     public ResponseEntity<?> employeeDetail( HttpServletRequest request) {
 
         HashMap<String, Object> requestMap = setRequest(request);
-        HashMap<String, Object> memInfoMap = userService.memRegistModifyHashMap(requestMap);
+        HashMap<String, Object> memInfoMap = userService.getUserInfo(requestMap);
 
         if(memInfoMap != null && memInfoMap.size() > 0) {
             
@@ -138,7 +135,7 @@ public class EmployeeManagementSystemController extends BaseController{
             resMap.put("boardUseYN", boardUseYN );                                                                                                                                                        // 게시판 사용 가능
             resMap.put("memo", memInfoMap.get("memo") );                                                                                                                                              // 메모
             resMap.put("imgProfile", "".equals(StringUtil.objectToString(memInfoMap.get("imgProfile"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgProfile")));             // 프로필 이미지
-            resMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgBankbook")));          //은행 계좌
+            resMap.put("imgBankbook", "".equals(StringUtil.objectToString(memInfoMap.get("imgBankbook"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgBankbook")));          // 은행 계좌
             resMap.put("imgFamilyRL", "".equals(StringUtil.objectToString(memInfoMap.get("imgFamilyRL"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgFamilyRL")));          // 프로필 이미지
             resMap.put("imgEtc", "".equals(StringUtil.objectToString(memInfoMap.get("imgEtc"))) ?  "" : "/proxy/" + StringUtil.objectToString(memInfoMap.get("imgEtc")));                         // 프로필 이미지
 
@@ -163,8 +160,9 @@ public class EmployeeManagementSystemController extends BaseController{
         }
         
         HashMap<String, Object> requestMap = setRequest(request);
-        HashMap<String, Object> memInfoMap = userService.memRegistModifyHashMap(requestMap);
+        HashMap<String, Object> memInfoMap = userService.getUserInfo(requestMap);
 
+        //유저 정보 가져오기
         if(memInfoMap != null && memInfoMap.size() > 0) {
         
             memInfoMap.put("jobStartDate", StringUtil.dataformat(StringUtil.objectToString(memInfoMap.get("jobStartDate"))));
@@ -189,47 +187,45 @@ public class EmployeeManagementSystemController extends BaseController{
             String userId = StringUtil.objectToString(requestMap.get("userId"));
             String emsIDString = StringUtil.objectToString(requestMap.get("userid"));
 
-            if(userId.equals(emsIDString) && !"".equals(emsIDString)) {
-                model.addAttribute("pwdChange", "Y");
-            }
+            if(userId.equals(emsIDString) && !"".equals(emsIDString)) model.addAttribute("pwdChange", "Y");
         
         }
 
 
         //서명 리스트 불러오기
-        List<Map<String, Object>> departNameList = enterpriseService.codeMgtViewSiteState("LIST", "departName", "","");
+        List<Map<String, Object>> departNameList = commonService.codeMgtViewList("LIST", "departName", "","");
         model.addAttribute("departNameList", departNameList);
 
         //팀명 리스트 불러오기
-        List<Map<String, Object>> teamNameList = enterpriseService.codeMgtViewSiteState("LIST", "teamName", "","");
+        List<Map<String, Object>> teamNameList = commonService.codeMgtViewList("LIST", "teamName", "","");
         model.addAttribute("teamNameList", teamNameList);
 
         //직급 리스트 불러오기
-        List<Map<String, Object>> jobPositionList = enterpriseService.codeMgtViewSiteState("LIST", "jobPosition", "","");
+        List<Map<String, Object>> jobPositionList = commonService.codeMgtViewList("LIST", "jobPosition", "","");
         model.addAttribute("jobPositionList", jobPositionList);
 
         //직책 리스트 불러오기
-        List<Map<String, Object>> jobTitleList = enterpriseService.codeMgtViewSiteState("LIST", "jobTitle", "","");
+        List<Map<String, Object>> jobTitleList = commonService.codeMgtViewList("LIST", "jobTitle", "","");
         model.addAttribute("jobTitleList", jobTitleList);
 
         //재직 상태 리스트 불러오기
-        List<Map<String, Object>> jobStatusList = enterpriseService.codeMgtViewSiteState("LIST", "jobStatus", "","");
+        List<Map<String, Object>> jobStatusList = commonService.codeMgtViewList("LIST", "jobStatus", "","");
         model.addAttribute("jobStatusList", jobStatusList);
 
         //채용구분 리스트 불러오기
-        List<Map<String, Object>> hireTypeList = enterpriseService.codeMgtViewSiteState("LIST", "hireType", "","");
+        List<Map<String, Object>> hireTypeList = commonService.codeMgtViewList("LIST", "hireType", "","");
         model.addAttribute("hireTypeList", hireTypeList);
 
         //양/음력 구분 리스트 불러오기
-        List<Map<String, Object>> calendarTypeList = enterpriseService.codeMgtViewSiteState("LIST", "calendarType", "","");
+        List<Map<String, Object>> calendarTypeList = commonService.codeMgtViewList("LIST", "calendarType", "","");
         model.addAttribute("calendarTypeList", calendarTypeList);
         
         //급여지급방법  리스트 불러오기
-        List<Map<String, Object>> payGiveTypeList = enterpriseService.codeMgtViewSiteState("LIST", "payGiveType", "","");
+        List<Map<String, Object>> payGiveTypeList = commonService.codeMgtViewList("LIST", "payGiveType", "","");
         model.addAttribute("payGiveTypeList", payGiveTypeList);
 
         //결혼여부 리스트 불러오기
-        List<Map<String, Object>> marriedTypeList = enterpriseService.codeMgtViewSiteState("LIST", "marriedType", "","");
+        List<Map<String, Object>> marriedTypeList = commonService.codeMgtViewList("LIST", "marriedType", "","");
         model.addAttribute("marriedTypeList", marriedTypeList);
 
         return "ems/add_employees" ;
@@ -238,8 +234,7 @@ public class EmployeeManagementSystemController extends BaseController{
     /*
      * 사원 등록 처리
      */
-    @SuppressWarnings("unused")
-    @RequestMapping(value = "/Registration.do", method = { RequestMethod.POST})
+    @RequestMapping(value = "/Registration.do", method = { RequestMethod.POST })
     public ResponseEntity<?> Registration( HttpServletRequest request, @RequestParam("imgBankbook") MultipartFile imgBankbook, @RequestParam("imgFamilyRL") MultipartFile imgFamilyRL, @RequestParam("imgProfile") MultipartFile imgProfile, @RequestParam("imgEtc") MultipartFile imgEtc) {
         
 
@@ -318,8 +313,8 @@ public class EmployeeManagementSystemController extends BaseController{
             if("0".equals(retVal)) {
                 
                 if(!"".equals(imgBankbookUrl) && "".equals(imgBankbookFileName))    uploadFileToGCS(imgBankbook, imgBankbookUrl);
-                if(!"".equals(imgFamilyRL) && "".equals(imgFamilyRLFileName))       uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
-                if(!"".equals(imgProfile)&& "".equals(imgProfileFileName))          uploadFileToGCS(imgProfile, imgProfileUrl);
+                if(!"".equals(imgFamilyRLUrl) && "".equals(imgFamilyRLFileName))    uploadFileToGCS(imgFamilyRL, imgFamilyRLUrl);
+                if(!"".equals(imgProfileUrl)&& "".equals(imgProfileFileName))       uploadFileToGCS(imgProfile, imgProfileUrl);
                 if(!"".equals(imgEtcUrl)&& "".equals(imgEtcFimeName))               uploadFileToGCS(imgEtc, imgEtcUrl);
                 
                 return ResponseEntity.ok(RegistrationMap);

@@ -8,9 +8,9 @@ $(document).ready(function () {
     var counter = 1;
 
     // 수정 시에는 사이트 코드 입력란을 보여준다.
-    if($('#corrections').val() == 'Y') {
+    if($('#corrections').val() == 'Y') 
         $('#siteCode_tr').show();
-    }
+    
 
     //담당자 추가 버튼
     $(".bm_pic_plus").click(function() {
@@ -55,6 +55,11 @@ $(document).ready(function () {
 
     });
 
+    // 업체 관리 리스트 페이지로 이동
+    $('#businessManagement').click(function () {
+        location.href = '/csf/business_management'; 
+    });
+
     fileTarget.on('change', function () {
         var files = $(this)[0].files;
         var fileArr = [];
@@ -70,8 +75,13 @@ $(document).ready(function () {
     setMember('bmMember1');
     setSnsInformation() ;
     setMemberList();
+
+
 });
 
+/**
+ * 회원 목록을 셋팅한다.
+ */
 function setMemberList(){
     
     try{
@@ -103,10 +113,13 @@ function setMemberList(){
         });
 
     }catch(e) {
-        console.log(e);
+        //console.log(e);
     }
 }
 
+/**
+ * SNS 정보를 조회하는 함수
+ */
 function setSnsInformation() {
 
     try{
@@ -124,24 +137,17 @@ function setSnsInformation() {
         });
     }
     }catch(e) {
-        console.log(e);
+        //console.log(e);
     }
 
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const radioButtons = document.querySelectorAll('input[type="radio"]');
 
-    radioButtons.forEach((radio) => {
-        radio.addEventListener('click', function (e) {
-            if (this.previousChecked) {
-                this.checked = false;
-            }
-            this.previousChecked = this.checked;
-        });
-    });
-});
 
+/**
+ * 다음 우편번호 API 호출
+ * @returns
+ */
 function bm_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function (data) {
@@ -157,22 +163,6 @@ function bm_execDaumPostcode() {
         },
     }).open();
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    const blogUp = document.getElementById('blogUp');
-    const blogDown = document.getElementById('blogDown');
-    const cntBlogPos = document.getElementById('cntBlogPos');
-
-    blogUp.addEventListener('click', () => {
-        let currentValue = parseInt(cntBlogPos.value, 10) || 0;
-        cntBlogPos.value = currentValue + 1;
-    });
-
-    blogDown.addEventListener('click', () => {
-        let currentValue = parseInt(cntBlogPos.value, 10) || 0;
-        cntBlogPos.value = Math.max(currentValue - 1, 0); // Prevent negative values
-    });
-});
 
 /**
  * 업체 등록 유효성 검사
@@ -195,7 +185,10 @@ function validate() {
     return allFilled;
 }
 
-
+/**
+ * 담당자 목록을 셋팅한다.
+ * @param {*} name 
+ */
 function setMember(name){
 
     try{
@@ -218,3 +211,20 @@ function setMember(name){
     }
 
 }
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const blogUp = document.getElementById('blogUp');
+    const blogDown = document.getElementById('blogDown');
+    const cntBlogPos = document.getElementById('cntBlogPos');
+
+    blogUp.addEventListener('click', () => {
+        let currentValue = parseInt(cntBlogPos.value, 10) || 0;
+        cntBlogPos.value = currentValue + 1;
+    });
+
+    blogDown.addEventListener('click', () => {
+        let currentValue = parseInt(cntBlogPos.value, 10) || 0;
+        cntBlogPos.value = Math.max(currentValue - 1, 0); // Prevent negative values
+    });
+});

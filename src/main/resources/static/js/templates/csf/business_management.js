@@ -20,61 +20,31 @@ $(document).ready(function () {
         }
     });
 
-        // 이벤트 리스너 등록
-    document.addEventListener('keypress', function(event) {
-        if (event.keyCode === 13) {
-            $('#searchButton').click();
-            event.preventDefault(); 
+    // 엔터 클릭 시, 검색 버튼 클릭 이벤트
+    $(document).on('keypress', function(event) {
+        if (event.which === 13) { 
+          $('#searchButton').click();
+          event.preventDefault(); 
         }
     });
 
-
-
-    // 회사 목록 테이블 생성
-    $('.bm_info').click(function () {
-        var userBtn = $(this).attr('id');
-        $('.bm_info_wrap').removeClass('on');
-        $('.bm_info_wrap').removeClass('out');
-        $('.bm_info_wrap#' + userBtn).addClass('on');
-        $('body, html').addClass('modal-active');
-    });
-    
-    // 회사 목록 테이블 생성
+    //프로필 상세 정보 삭제 시 
     $('.bm_info_close').click(function () {
         $('.bm_info_wrap').addClass('out');
         $('body, html').removeClass('modal-active');
     });
 
-    // 직원 상세 페이지 팝업 띄우기
+    // 회사 상세 팝업 띄우기 
     $('body').on('click', 'tr', function() {
         var searchVal = $(this).attr('data-sitekey');
         customerShowProfile(searchVal);
     });
 
+    // 이미지 클릭 시 이미지 상세 페이지로 이동
     $('#Registration').on('click', function(event) {
         event.preventDefault(); 
     
-        var siteKey = $(this).attr('data-img');
-
-        var form = $('<form>', {
-            method: 'POST',
-            action: '/csf/add_business_management'
-        });
-
-        form.append($('<input>', {
-            type: 'hidden',
-            name: 'searchVal',
-            value: siteKey
-        }));
-
-        $('body').append(form);
-        form.submit();
-    });
-
-    $('#Registration').on('click', function(event) {
-        event.preventDefault(); 
-    
-        var siteKey = $(this).attr('data-img');
+        var siteKey = $(this).attr('data-siteKey');
 
         var form = $('<form>', {
             method: 'POST',
@@ -104,7 +74,6 @@ $(document).ready(function () {
         $('body').append(form);
         form.submit();
     });
-
 
     //회사 정보 가져오기
     setDataTable();
@@ -258,31 +227,31 @@ function customerShowProfile(searchval) {
             $('#managerEmail').text(response.managerEmail);
             $('#contactInformation').text(response.contactInformation);
 
-            $('#imgBusinessRegNo').text(response.imgBusinessRegNo);
+            $('#imgBusinessRegNo').text("사업자등록증 다운로드");
             $('#imgBusinessRegNo').attr('data-img', getProxy(response.imgBusinessRegNo));
 
-            $('#imgOpenCertificate').text(response.imgOpenCertificate);
+            $('#imgOpenCertificate').text("학위증 다운로드");
             $('#imgOpenCertificate').attr('data-img', getProxy(response.imgOpenCertificate));
 
-            $('#imgDoctorLicense').text(response.imgDoctorLicense);
+            $('#imgDoctorLicense').text("개설필증 다운로드");
             $('#imgDoctorLicense').attr('data-img', getProxy(response.imgDoctorLicense));
 
-            $('#imgSpecialistLicense').text(response.imgSpecialistLicense);
+            $('#imgSpecialistLicense').text("이외 자료 다운로드");
             $('#imgSpecialistLicense').attr('data-img', getProxy(response.imgSpecialistLicense));
 
-            $('#imgDegreeCertificate').text(response.imgDegreeCertificate);
+            $('#imgDegreeCertificate').text("의사 면허증 다운로드");
             $('#imgDegreeCertificate').attr('data-img', getProxy(response.imgDegreeCertificate));
 
-            $('#imgDesignAssets').text(response.imgDesignAssets);
+            $('#imgDesignAssets').text("전문의 자격증 다운로드");
             $('#imgDesignAssets').attr('data-img', getProxy(response.imgDesignAssets));
 
-            $('#imgEtcFiles').text(response.imgEtcFiles);
+            $('#imgEtcFiles').text("디자인 활용 자료 다운로드");
             $('#imgEtcFiles').attr('data-img', getProxy(response.imgEtcFiles));
 
-            $('#imgEtc').text(response.imgEtc);
+            $('#imgEtc').text("디자인 활용 자료 다운로드");
             $('#imgEtc').attr('data-img', getProxy(response.imgEtc));
 
-            $('#Registration').attr('data-img', response.siteKey);
+            $('#Registration').attr('data-sitekey', response.siteKey);
 
             
             setSnsInformation(response.snsList);

@@ -158,6 +158,7 @@ $(document).ready(function () {
 
         // ajaxRequest 함수를 사용하여 로그인 처리
         ajaxRequest("/ems/pwdChange.do", password, "POST", function (response) {
+            $('.pwd_modify_close').click();
             if (response.retVal == '0') {
                 alert('비밀번호 변경이 완료되었습니다.');
             }else if (response.retVal == '1') {

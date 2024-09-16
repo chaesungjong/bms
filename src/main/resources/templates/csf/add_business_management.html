@@ -60,11 +60,11 @@
                                     <tr class="add_bm_type">
                                         <td class="add_bm_title">거래 내용</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <label for="blogYN"><input type="radio" name="blogYN"         id="blogYN"         th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blogYN') == 'Y'}"  />블로그</label>
-                                            <label for="homepageYN"><input type="radio" name="homepageYN"     id="homepageYN"     th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('homepageYN') == 'Y'}" />홈페이지</label>
-                                            <label for="blandvideoYN"><input type="radio" name="blandvideoYN"   id="blandvideoYN"   th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blandvideoYN') == 'Y'}"  />브랜딩 영상</label>
-                                            <label for="reviewYN"><input type="radio" name="reviewYN"       id="reviewYN"       th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('reviewYN') == 'Y'}"/> 리뷰 (월
-                                                <input type="number" id="reviewMCnt" name="reviewMCnt" class="bm_type_review"   th:value="${siteInfo?.reviewMCnt != null ? siteInfo.reviewMCnt : '0'}" />건)
+                                            <label for="blogYN"><input type="radio"         name="blogYN"         id="blogYN"         th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blogYN') == 'Y'}"  />블로그</label>
+                                            <label for="homepageYN"><input type="radio"     name="homepageYN"     id="homepageYN"     th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('homepageYN') == 'Y'}" />홈페이지</label>
+                                            <label for="blandvideoYN"><input type="radio"   name="blandvideoYN"   id="blandvideoYN"   th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('blandvideoYN') == 'Y'}"  />브랜딩 영상</label>
+                                            <label for="reviewYN"><input type="radio"       name="reviewYN"       id="reviewYN"       th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('reviewYN') == 'Y'}"/> 리뷰 (월
+                                                <input type="number" class="bm_type_review" name="reviewMCnt"     id="reviewMCnt"     th:value="${siteInfo?.reviewMCnt != null ? siteInfo.reviewMCnt : '0'}" />건)
                                             </label>
                                             <label for="instagramYN"><input type="radio" name="instagramYN"    id="instagramYN"    th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('instagramYN') == 'Y'}" />인스타</label>
                                             <label for="youtubeYN"><input type="radio" name="youtubeYN"      id="youtubeYN"      th:value="'Y'" th:checked="${siteInfo != null and siteInfo.get('youtubeYN') == 'Y'}"/>유튜브</label>
@@ -275,13 +275,13 @@
                                         <td class="add_bm_con">
                                             <input type="file" name="imgBusinessRegNo" id="imgBusinessRegNo" multiple />
                                             <label class="bm_file_btn" for="imgBusinessRegNo">파일선택</label>
-                                            <span class="bm_file_text" id="imgBusinessRegNoText" th:text="${siteInfo?.imgBusinessRegNoText}">선택된 파일이 없습니다.</span>
+                                            <span class="bm_file_text" id="imgBusinessRegNoText" th:text="${siteInfo != null ? siteInfo.get('imgBusinessRegNo') : ''}">선택된 파일이 없습니다.</span> 
                                         </td>
                                         <td class="add_bm_title">개설필증</td>
                                         <td class="add_bm_con">
                                             <input type="file" name="imgDoctorLicense" id="imgDoctorLicense" multiple />
                                             <label class="bm_file_btn" for="imgDoctorLicense">파일선택</label>
-                                            <span class="bm_file_text" id="imgDoctorLicenseText" th:text="${siteInfo?.imgDoctorLicenseText}">선택된 파일이 없습니다.</span>
+                                            <span class="bm_file_text" id="imgDoctorLicenseText" th:text="${siteInfo != null ? siteInfo.get('imgDoctorLicense') : ''}">선택된 파일이 없습니다.</span>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_file02">
@@ -289,13 +289,13 @@
                                         <td class="add_bm_con">
                                             <input type="file" name="imgDegreeCertificate" id="imgDegreeCertificate" multiple />
                                             <label class="bm_file_btn" for="imgDegreeCertificate">파일선택</label>
-                                            <span class="bm_file_text" id="imgDegreeCertificateText" th:text="${siteInfo?.imgDegreeCertificateText}">선택된 파일이 없습니다.</span>
+                                            <span class="bm_file_text" id="imgDegreeCertificateText" th:text="${siteInfo != null ? siteInfo.get('imgDegreeCertificate') : ''}">선택된 파일이 없습니다.</span> 
                                         </td>
                                         <td class="add_bm_title">전문의 자격증</td>
                                         <td class="add_bm_con">
                                             <input type="file" name="imgDesignAssets" id="imgDesignAssets" multiple />
                                             <label class="bm_file_btn" for="imgDesignAssets">파일선택</label>
-                                            <span class="bm_file_text" id="imgDesignAssetsText" th:text="${siteInfo?.imgDesignAssetsText}">선택된 파일이 없습니다.</span>
+                                            <span class="bm_file_text" id="imgDesignAssetsText" th:text="${siteInfo != null ? siteInfo.get('imgDesignAssets') : ''}">선택된 파일이 없습니다.</span>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_file03">
@@ -303,13 +303,13 @@
                                         <td class="add_bm_con">
                                             <input type="file" name="imgOpenCertificate" id="imgOpenCertificate" multiple />
                                             <label class="bm_file_btn" for="imgOpenCertificate">파일선택</label>
-                                            <span class="bm_file_text" id="imgOpenCertificateText" th:text="${siteInfo?.imgOpenCertificateText}">선택된 파일이 없습니다.</span>
+                                            <span class="bm_file_text" id="imgOpenCertificateText" th:text="${siteInfo != null ? siteInfo.get('imgOpenCertificate') : ''}">선택된 파일이 없습니다.</span>
                                         </td>
                                         <td class="add_bm_title">이외 자료</td>
                                         <td class="add_bm_con">
                                             <input type="file" name="imgSpecialistLicense" id="imgSpecialistLicense" multiple />
                                             <label class="bm_file_btn" for="imgSpecialistLicense">파일선택</label>
-                                            <span class="bm_file_text" id="imgSpecialistLicenseText" th:text="${siteInfo?.imgSpecialistLicenseText}">선택된 파일이 없습니다.</span>
+                                            <span class="bm_file_text" id="imgSpecialistLicenseText" th:text="${siteInfo != null ? siteInfo.get('imgSpecialistLicense') : ''}">선택된 파일이 없습니다.</span>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_file04">
@@ -317,13 +317,13 @@
                                         <td class="add_bm_con">
                                             <input type="file" name="imgEtcFiles" id="imgEtcFiles" multiple />
                                             <label class="bm_file_btn" for="imgEtcFiles">파일선택</label>
-                                            <span class="bm_file_text" id="imgEtcFilesText" th:text="${siteInfo?.imgEtcFilesText}">선택된 파일이 없습니다.</span>
+                                            <span class="bm_file_text" id="imgEtcFilesText" th:text="${siteInfo != null ? siteInfo.get('imgEtcFiles') : ''}">선택된 파일이 없습니다.</span>
                                         </td>
                                         <td class="add_bm_title">이외 이미지</td>
                                         <td class="add_bm_con">
                                             <input type="file" name="imgEtc" id="imgEtc" multiple />
                                             <label class="bm_file_btn" for="imgEtc">파일선택</label>
-                                            <span class="bm_file_text" id="imgEtcText" th:text="${siteInfo?.imgEtcText}">선택된 파일이 없습니다.</span>
+                                            <span class="bm_file_text" id="imgEtcText" th:text="${siteInfo != null ? siteInfo.get('imgEtc') : ''}">선택된 파일이 없습니다.</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -331,7 +331,7 @@
                         </div>
                         <div class="add_bm_btn_wrap">
                             <input type="button" value="저장" id="Registration" name="Registration" class="add_bm_btn" />
-                            <input type="button" value="저장" id="Registration" name="Registration" class="add_bm_btn" />
+                            <input type="button" value="업체 목록" id="businessManagement" name="businessManagement" class="add_bm_btn" />
                         </div>
                     </form>
                 </div>

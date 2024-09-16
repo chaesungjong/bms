@@ -3,6 +3,7 @@ package com.groupd.bms.controller.csf;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.groupd.bms.controller.BaseController;
-import com.groupd.bms.service.BoardService;
+import com.groupd.bms.service.CommonService;
 import com.groupd.bms.service.EnterpriseService;
 import com.groupd.bms.util.StringUtil;
 
@@ -38,7 +37,7 @@ public class CustomerSupportForumController extends BaseController{
     private EnterpriseService enterpriseService;
 
     @Autowired
-    private BoardService boardService;
+    private CommonService commonService;
 
     /*
      * 프로젝트 정보 화면 페이지 
@@ -62,13 +61,45 @@ public class CustomerSupportForumController extends BaseController{
     }
 
     /*
+     * 업체 리스트 가져오기 
+     */
+    @RequestMapping(value = "/customer_list", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<?> customerList( HttpServletRequest request) {
+
+        HashMap<String, Object> registrationMap = setRequest(request);
+        HashMap<String, Object> resMap = new HashMap<String, Object>();
+
+        String startDate  = StringUtil.objectToString(registrationMap.get("fr_date"));                   //시작일
+        String EndDate    = StringUtil.objectToString(registrationMap.get("to_date"));                   //종료일
+        String searchType = StringUtil.objectToString(registrationMap.get("searchType"));                //검색타입     
+        String search     = StringUtil.objectToString(registrationMap.get("search"));                    //검색어 
+        String userId     = StringUtil.objectToString(registrationMap.get("userId"));                    //사용자ID
+        int draw = Integer.parseInt(request.getParameter("draw"));                                      //페이징
+        int start = Integer.parseInt(request.getParameter("start"));                                    //시작
+        int length = Integer.parseInt(request.getParameter("length"));                                  //갯수
+
+        // 페이지 번호 계산
+        int page = start / length + 1;
+        // 전체 레코드 수 가져오기
+        int totalRecords = Integer.parseInt(setPagination(commonService.mng("SITE_LIST_CNT", userId, String.valueOf(page), String.valueOf(length), startDate.replaceAll("-", ""), EndDate.replaceAll("-", ""), searchType, search, "")));
+        // 데이터 가져오기
+        List<Map<String, Object>> employeeList = commonService.mngList("SITE_LIST", userId, String.valueOf(page), String.valueOf(length), startDate.replaceAll("-", ""), EndDate.replaceAll("-", ""), searchType, search, "");
+
+        resMap.put("draw", draw);
+        resMap.put("recordsTotal", totalRecords);
+        resMap.put("data", employeeList);
+
+        return ResponseEntity.ok(resMap);
+    }
+
+    /*
      * 프로젝트 정보 화면 페이지 
      */
     @RequestMapping(value = "/add_business_management", method = { RequestMethod.POST, RequestMethod.GET })
     public String add_business_management(HttpServletRequest request, Model model) {
 
         HashMap<String, Object> registrationMap = setRequest(request);
-        String userId     = StringUtil.objectToString(registrationMap.get("userId"));                   //사용자ID
+        String userId     = StringUtil.objectToString(registrationMap.get("userId"));                   //관리자 ID
         String searchVal  = StringUtil.objectToString(registrationMap.get("searchVal"));                //검색어
 
         // GET 요청인지 확인
@@ -78,80 +109,45 @@ public class CustomerSupportForumController extends BaseController{
             return "redirect:/csf/business_management"; 
         }
 
+        // 검색어가 있을 경우
         if(!"".equals(searchVal)){
 
-            HashMap<String, Object> siteInfoMap = (HashMap<String, Object>)boardService.mng("SITE_DETAIL", userId, "", "", "", "", "", searchVal, "");
+            // 업체 상세 데이터 가져오기
+            HashMap<String, Object> siteInfoMap = (HashMap<String, Object>) commonService.mng("SITE_DETAIL", userId, "", "", "", "", "", searchVal, "");
 
             if (siteInfoMap != null && siteInfoMap.size() > 0) {
-    
-                
+
                 siteInfoMap.put("siteDomainExpdt", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("siteDomainExpdt"))));
                 siteInfoMap.put("siteHostingExpdt", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("siteHostingExpdt"))));
                 siteInfoMap.put("contractSdate", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("contractSdate"))));
                 siteInfoMap.put("contractEdate", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("contractEdate"))));
-                
-                siteInfoMap.put("imgBusinessRegNoText", StringUtil.objectToString(siteInfoMap.get("imgBusinessRegNo")));
-                siteInfoMap.put("imgDoctorLicenseText", StringUtil.objectToString(siteInfoMap.get("imgDoctorLicense")));
-                siteInfoMap.put("imgDegreeCertificateText", StringUtil.objectToString(siteInfoMap.get("imgDegreeCertificate")));
-                siteInfoMap.put("imgDesignAssetsText", StringUtil.objectToString(siteInfoMap.get("imgDesignAssets")));
-                siteInfoMap.put("imgOpenCertificateText", StringUtil.objectToString(siteInfoMap.get("imgOpenCertificate")));
-                siteInfoMap.put("imgSpecialistLicenseText", StringUtil.objectToString(siteInfoMap.get("imgSpecialistLicense")));
-                siteInfoMap.put("imgEtcFilesText", StringUtil.objectToString(siteInfoMap.get("imgEtcFiles")));
-                siteInfoMap.put("imgEtcText", StringUtil.objectToString(siteInfoMap.get("imgEtc")));
-                
-                siteInfoMap.put("regUserkey", StringUtil.objectToString(siteInfoMap.get("regUserkey")));
-                siteInfoMap.put("regdate", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("regdate"))));
-                siteInfoMap.put("systemtime", StringUtil.dataformat(StringUtil.objectToString(siteInfoMap.get("systemtime"))));
-            
     
-                 // 데이터 가져오기
-                List<Map<String, Object>> snsList = boardService.mngList("siteSnsInfo_List", userId, "0", "0", "", "", "", StringUtil.objectToString(siteInfoMap.get("siteKey")), "");
+                // 업체 SNS계정 리스트 데이터 가져오기
+                String snsListJson ="";
+                List<Map<String, Object>> snsList = commonService.mngList("siteSnsInfo_List", userId, "0", "0", "", "", "", StringUtil.objectToString(siteInfoMap.get("siteKey")), "");
+                snsListJson = setJsonToMap(snsList);
+
+                // 업체 그룹디담당자 리스트 데이터 가져오기
+                String regMemberJson ="";
+                List<Map<String, Object>> RegMemberList = commonService.mngList("siteMngUser_List", userId, "0", "0", "", "", "", StringUtil.objectToString(siteInfoMap.get("siteKey")), "");
+                regMemberJson = setJsonToMap(RegMemberList);
     
-                 ObjectMapper objectMapper = new ObjectMapper();
-                 String snsListJson ="";
-                try {
-                     snsListJson = objectMapper.writeValueAsString(snsList);
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
-
-                // 데이터 가져오기
-                List<Map<String, Object>> RegMemberList = boardService.mngList("siteMngUser_List", userId, "0", "0", "", "", "", StringUtil.objectToString(siteInfoMap.get("siteKey")), "");
-
-                ObjectMapper objectMemberMapper = new ObjectMapper();
-                String regMemberListJson ="";
-
-                try {
-                    regMemberListJson = objectMemberMapper.writeValueAsString(RegMemberList);
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
-    
-                model.addAttribute("siteInfo", siteInfoMap);
-                model.addAttribute("snsList", snsListJson);
-                model.addAttribute("regMemberList", regMemberListJson);
-                model.addAttribute("corrections", "Y");
+                model.addAttribute("siteInfo", siteInfoMap);                    //업체 상세 데이터 가져오기
+                model.addAttribute("snsList", snsListJson);                     //업체 SNS계정 리스트 데이터 가져오기
+                model.addAttribute("regMemberList", regMemberJson);             //업체 그룹디담당자 리스트 데이터 가져오기
+                model.addAttribute("corrections", "Y");          //수정 여부
             }
+
         }
 
         
         /**
-         * 맴버 리스트를 가져온다. 
+         * 사원 목록 리스트를 가져온다. 
          */
-        List<Map<String, Object>> memberList = boardService.mngList("USER_LIST_SIMPLE", userId, "0", "0", "", "", "", "", "");
-
-        ObjectMapper objectMapper = new ObjectMapper();
         String MemListJson ="";
-
-         try {
-
-            MemListJson = objectMapper.writeValueAsString(memberList);
-            model.addAttribute("memberList", MemListJson);
-
-        } catch (JsonProcessingException e) {
-           e.printStackTrace();
-        }
-
+        List<Map<String, Object>> memberList = commonService.mngList("USER_LIST_SIMPLE", userId, "0", "0", "", "", "", "", "");
+        MemListJson = setJsonToMap(memberList);
+        model.addAttribute("memberList", MemListJson);
 
         /*
          * 업체 상태 코드를 가져온다.
@@ -197,43 +193,7 @@ public class CustomerSupportForumController extends BaseController{
 
         return "csf/add_business_management";
     }
-
-
-    /*
-     * 업체 리스트 가져오기 
-     */
-    @RequestMapping(value = "/customer_list", method = { RequestMethod.POST, RequestMethod.GET })
-    public ResponseEntity<?> customerList( HttpServletRequest request) {
-
-        HashMap<String, Object> registrationMap = setRequest(request);
-        HashMap<String, Object> resMap = new HashMap<String, Object>();
-
-        String startDate  = StringUtil.objectToString(registrationMap.get("fr_date"));                  //시작일
-        String EndDate    = StringUtil.objectToString(registrationMap.get("to_date"));                  //종료일
-        String searchType = StringUtil.objectToString(registrationMap.get("searchType"));               //검색타입     
-        String search     = StringUtil.objectToString(registrationMap.get("search"));                   //검색어 
-        String userId     = StringUtil.objectToString(registrationMap.get("userId"));                   //사용자ID
-
-
-        // DataTables 파라미터 가져오기
-        // DataTables 파라미터 가져오기
-        int draw = Integer.parseInt(request.getParameter("draw"));
-        int start = Integer.parseInt(request.getParameter("start"));
-        int length = Integer.parseInt(request.getParameter("length"));
-
-        // 페이지 번호 계산
-        int page = start / length + 1;
-        // 전체 레코드 수 가져오기
-        int totalRecords = Integer.parseInt(setPagination(boardService.mng("SITE_LIST_CNT", userId, String.valueOf(page), String.valueOf(length), startDate.replaceAll("-", ""), EndDate.replaceAll("-", ""), searchType, search, "")));
-        // 데이터 가져오기
-        List<Map<String, Object>> employeeList = boardService.mngList("SITE_LIST", userId, String.valueOf(page), String.valueOf(length), startDate, EndDate, searchType, search, "");
-
-        resMap.put("draw", draw);
-        resMap.put("recordsTotal", totalRecords);
-        resMap.put("data", employeeList);
-
-        return ResponseEntity.ok(resMap);
-    }  
+  
     
     /*
      * 거래처 상세 안내 팝업 가져오기
@@ -246,27 +206,24 @@ public class CustomerSupportForumController extends BaseController{
         String searchVal  = StringUtil.objectToString(requestMap.get("searchVal"));                //검색어
 
         // 데이터 가져오기
-        HashMap<String, Object> siteInfoMap = (HashMap<String, Object>)boardService.mng("SITE_DETAIL", userId, "", "", "", "", "", searchVal, "");
+        HashMap<String, Object> siteInfoMap = (HashMap<String, Object>)commonService.mng("SITE_DETAIL", userId, "", "", "", "", "", searchVal, "");
 
+        // 데이터가 있을 경우
         if(siteInfoMap != null && siteInfoMap.size() > 0) {
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            String snsListJson ="";
-
-            // 데이터 가져오기
-            List<Map<String, Object>> RegMemberList = boardService.mngList("siteMngUser_List", userId, "0", "0", "", "", "", StringUtil.objectToString(siteInfoMap.get("siteKey")), "");
+            // 업체 그룹디담당자 리스트
+            List<Map<String, Object>> RegMemberList = commonService.mngList("siteMngUser_List", userId, "0", "0", "", "", "", StringUtil.objectToString(siteInfoMap.get("siteKey")), "");
 
             String contactInformation = "";
 
             for(int i = 0; i < RegMemberList.size(); i++) {
-                contactInformation = contactInformation + StringUtil.objectToString(RegMemberList.get(i).get("name")) + StringUtil.objectToString(RegMemberList.get(i).get("jobTitle")) ;
 
+                contactInformation = contactInformation + StringUtil.objectToString(RegMemberList.get(i).get("name")) + StringUtil.objectToString(RegMemberList.get(i).get("jobTitle"));
                 if(i == RegMemberList.size() - 1) break;
-                
                 contactInformation = contactInformation + ", ";
             }
 
-            String adress       = StringUtil.objectToString(siteInfoMap.get("address")) + " " + StringUtil.objectToString(siteInfoMap.get("addressDesc"));               // 주소
+            String adress      = StringUtil.objectToString(siteInfoMap.get("address")) + " " + StringUtil.objectToString(siteInfoMap.get("addressDesc"));                                          // 주소
             String transaction = "Y".equals(StringUtil.objectToString(siteInfoMap.get("blogYN"))) ? "블로그" : ""; 
                    transaction += "Y".equals(StringUtil.objectToString(siteInfoMap.get("homepageYN"))) ? " / 홈페이지" : ""; 
                    transaction += "Y".equals(StringUtil.objectToString(siteInfoMap.get("reviewYN"))) ? " / 블랜딩 영상" : ""; 
@@ -278,21 +235,13 @@ public class CustomerSupportForumController extends BaseController{
             siteInfoMap.put("transaction", transaction);                // 거래내용
             siteInfoMap.put("adress", adress);                          // 주소
             siteInfoMap.put("contactInformation", contactInformation);  // 연락처
-
+            
             // SNS 정보 가져오기
-            List<Map<String, Object>> snsList = boardService.mngList("siteSnsInfo_List", userId, "0", "0", "", "", "", searchVal, "");
-
-            try {
-                snsListJson = objectMapper.writeValueAsString(snsList);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-
+            List<Map<String, Object>> snsList = commonService.mngList("siteSnsInfo_List", userId, "0", "0", "", "", "", searchVal, "");
+            String snsListJson = setJsonToMap(snsList);
             siteInfoMap.put("snsList", snsListJson);                     // SNS 정보
-            siteInfoMap.put("retVal", "0");                       // 성공
-            
-             return ResponseEntity.ok(siteInfoMap);
-            
+            siteInfoMap.put("retVal", "0");                        // 성공
+            return ResponseEntity.ok(siteInfoMap);
         }
         
         return ResponseEntity.status(500).build();
@@ -329,13 +278,13 @@ public class CustomerSupportForumController extends BaseController{
         int counter = 1;
     
         while (true) {
+
             String paramName = "bmMember" + counter;
             String paramValue = request.getParameter(paramName);
     
-            if (paramValue == null || paramValue.isEmpty()) {
+            if (paramValue == null || paramValue.isEmpty()) 
                 break; // 더 이상 파라미터가 없으면 루프 종료
-            }
-    
+            
             parameterMap.put(paramName, paramValue);
             counter++;
         }
@@ -344,67 +293,67 @@ public class CustomerSupportForumController extends BaseController{
         
         // 파일 세팅
         if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) {
-            RegistrationMap.put("imgBusinessRegNo", imgBusinessRegNo.getOriginalFilename());
+            RegistrationMap.put("imgBusinessRegNo", setFileName(imgBusinessRegNo,UUID.randomUUID().toString()));
         }
 
         if(imgDoctorLicense != null && !imgDoctorLicense.isEmpty()) {
-            RegistrationMap.put("imgDoctorLicense", imgDoctorLicense.getOriginalFilename());
+            RegistrationMap.put("imgDoctorLicense", setFileName(imgDoctorLicense,UUID.randomUUID().toString()));
         }
 
         if(imgDegreeCertificate != null && !imgDegreeCertificate.isEmpty()) {
-            RegistrationMap.put("imgDegreeCertificate", imgDegreeCertificate.getOriginalFilename());
+            RegistrationMap.put("imgDegreeCertificate", setFileName(imgDegreeCertificate,UUID.randomUUID().toString()));
         }
 
         if(imgDesignAssets != null && !imgDesignAssets.isEmpty()) {
-            RegistrationMap.put("imgDesignAssets", imgDesignAssets.getOriginalFilename());
+            RegistrationMap.put("imgDesignAssets", setFileName(imgDesignAssets,UUID.randomUUID().toString()));
         }
 
         if(imgOpenCertificate != null && !imgOpenCertificate.isEmpty()) {
-            RegistrationMap.put("imgOpenCertificate", imgOpenCertificate.getOriginalFilename());
+            RegistrationMap.put("imgOpenCertificate", setFileName(imgOpenCertificate,UUID.randomUUID().toString()));
         }
 
         if(imgSpecialistLicense != null && !imgSpecialistLicense.isEmpty()) {
-            RegistrationMap.put("imgSpecialistLicense", imgSpecialistLicense.getOriginalFilename());
+            RegistrationMap.put("imgSpecialistLicense", setFileName(imgSpecialistLicense,UUID.randomUUID().toString()));
         }
 
         if(imgEtcFiles != null && !imgEtcFiles.isEmpty()) {
-            RegistrationMap.put("imgEtcFiles", imgEtcFiles.getOriginalFilename());
+            RegistrationMap.put("imgEtcFiles", setFileName(imgEtcFiles,UUID.randomUUID().toString()));
         }
 
         if(imgEtc != null && !imgEtc.isEmpty()) {
-            RegistrationMap.put("imgEtc", imgEtc.getOriginalFilename());
+            RegistrationMap.put("imgEtc", setFileName(imgEtc,UUID.randomUUID().toString()));
         }
         
 
         String corrections = StringUtil.objectToString(RegistrationMap.get("corrections"));
 
-        if("Y".equals(corrections)) {
-            RegistrationMap.put("gubun", "modify");
-        } else {
+        if("Y".equals(corrections)) 
+            RegistrationMap.put("gubun", "modify"); 
+        else 
             RegistrationMap.put("gubun", "regist");
-        }
+        
 
         
 
         List<Map<String, Object>> snsTypeList = enterpriseService.codeMgtViewSiteState("LIST","snsType","", "");
+        
         // SMS 데이터 가공
         RegistrationMap.put("sns", getSMSData(snsTypeList, RegistrationMap));
         enterpriseService.enterpriseInsert(RegistrationMap);
 
         String retVal = StringUtil.objectToString(RegistrationMap.get("retVal"));
 
-        //업체 등록 성공
+        //업체 등록 성공 시 파일 업로드 진행
         if("0".equals(retVal)) {
-
-            // 파일 업로드
-            if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) uploadFileToGCS(imgBusinessRegNo, imgBusinessRegNo.getOriginalFilename());
-            if(imgDoctorLicense != null && !imgDoctorLicense.isEmpty()) uploadFileToGCS(imgDoctorLicense, imgDoctorLicense.getOriginalFilename());
-            if(imgDegreeCertificate != null && !imgDegreeCertificate.isEmpty()) uploadFileToGCS(imgDegreeCertificate, imgDegreeCertificate.getOriginalFilename());
-            if(imgDesignAssets != null && !imgDesignAssets.isEmpty()) uploadFileToGCS(imgDesignAssets, imgDesignAssets.getOriginalFilename());
-            if(imgOpenCertificate != null && !imgOpenCertificate.isEmpty()) uploadFileToGCS(imgOpenCertificate, imgOpenCertificate.getOriginalFilename());
-            if(imgSpecialistLicense != null && !imgSpecialistLicense.isEmpty()) uploadFileToGCS(imgSpecialistLicense, imgSpecialistLicense.getOriginalFilename());
-            if(imgEtcFiles != null && !imgEtcFiles.isEmpty()) uploadFileToGCS(imgEtcFiles, imgEtcFiles.getOriginalFilename());
-            if(imgEtc != null && !imgEtc.isEmpty()) uploadFileToGCS(imgEtc, imgEtc.getOriginalFilename());
+            
+            if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) uploadFileToGCS(imgBusinessRegNo, StringUtil.objectToString(RegistrationMap.get("imgBusinessRegNo")));
+            if(imgDoctorLicense != null && !imgDoctorLicense.isEmpty()) uploadFileToGCS(imgDoctorLicense, StringUtil.objectToString(RegistrationMap.get("imgDoctorLicense")));
+            if(imgDegreeCertificate != null && !imgDegreeCertificate.isEmpty()) uploadFileToGCS(imgDegreeCertificate, StringUtil.objectToString(RegistrationMap.get("imgDegreeCertificate")));
+            if(imgDesignAssets != null && !imgDesignAssets.isEmpty()) uploadFileToGCS(imgDesignAssets, StringUtil.objectToString(RegistrationMap.get("imgDesignAssets")));
+            if(imgOpenCertificate != null && !imgOpenCertificate.isEmpty()) uploadFileToGCS(imgOpenCertificate, StringUtil.objectToString(RegistrationMap.get("imgOpenCertificate")));
+            if(imgSpecialistLicense != null && !imgSpecialistLicense.isEmpty()) uploadFileToGCS(imgSpecialistLicense, StringUtil.objectToString(RegistrationMap.get("imgSpecialistLicense")));
+            if(imgEtcFiles != null && !imgEtcFiles.isEmpty()) uploadFileToGCS(imgEtcFiles, StringUtil.objectToString(RegistrationMap.get("imgEtcFiles")));
+            if(imgEtc != null && !imgEtc.isEmpty()) uploadFileToGCS(imgEtc, StringUtil.objectToString(RegistrationMap.get("imgEtc")));
 
         }
 
@@ -418,8 +367,7 @@ public class CustomerSupportForumController extends BaseController{
     private JSONObject getSMSData(List<Map<String, Object>> a, HashMap<String, Object> b) {
         String snsTypeListStr = a.toString();
         String registrationMapStr = b.toString();
-
-        // Convert snsTypeListStr to array of maps
+        
         snsTypeListStr = snsTypeListStr.replace("[", "").replace("]", "").replace(", ", ",");
         String[] snsTypeListArray = snsTypeListStr.split("},");
         Map<String, String> codeMap = new HashMap<>();
@@ -435,8 +383,7 @@ public class CustomerSupportForumController extends BaseController{
             }
             codeMap.put(snsTypeMap.get("code"), snsTypeMap.get("codeName"));
         }
-
-        // Convert registrationMapStr to map
+        
         registrationMapStr = registrationMapStr.replace("{", "").replace("}", "");
         String[] registrationEntries = registrationMapStr.split(",");
         Map<String, String> registrationMap = new HashMap<>();
@@ -446,8 +393,7 @@ public class CustomerSupportForumController extends BaseController{
                 registrationMap.put(keyValue[0].trim(), keyValue[1].trim()); // 공백 제거
             }
         }
-
-        // Create JSON based on codeMap
+        
         JSONObject resultJson = new JSONObject();
         for (String code : codeMap.keySet()) {
             JSONObject codeJson = new JSONObject();
@@ -458,8 +404,7 @@ public class CustomerSupportForumController extends BaseController{
             }
             resultJson.put(code, codeJson);
         }
-
-        // Print the result JSON
+        
         return resultJson;
     }
 

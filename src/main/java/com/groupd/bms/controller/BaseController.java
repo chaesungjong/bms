@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
@@ -15,6 +17,7 @@ import com.groupd.bms.util.Util;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,6 +53,25 @@ public class BaseController {
         requestMap.put("ip", Util.getUserIP(request));
 
         return requestMap;
+    }
+
+    /**
+     * Map을 JSON으로 변환
+     * @param params
+     * @return
+     */
+    protected String setJsonToMap(List<Map<String, Object>> params) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsoString ="";
+
+        try{
+            jsoString = objectMapper.writeValueAsString(params);
+        }catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return jsoString;
     }
 
     /**

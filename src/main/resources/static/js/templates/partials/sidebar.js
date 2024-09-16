@@ -40,7 +40,7 @@ $(document).ready(function () {
     $('#infoUrl').on('click', function(event) {
         event.preventDefault(); 
     
-        var userID = $(this).attr('data-img');
+        var userID = $(this).attr('data-userKey');
 
         var form = $('<form>', {
             method: 'POST',
@@ -103,7 +103,7 @@ function showProfile(userID) {
             $('#boardUseYNView').text(response.boardUseYN);
             $('#memoView').text(response.memo);
             $('#departName').text(response.departName);
-            $('#infoUrl').attr('data-img', userID);
+            $('#infoUrl').attr('data-userKey', userID);
 
             if(response.imgProfile == null || response.imgProfile == '')
                 $('#imgView').hide();

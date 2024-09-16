@@ -2,18 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.groupd.bms.repository.BoardRepository">
 
-  <!-- 게시판 관련 코드 가져오는 프로시저  Start -->
-  <select id="codeMgtViewBoardType" resultType="java.util.HashMap">
-    exec [dbo].[codeMgtView] #{gubun, jdbcType=VARCHAR}, #{codeGubun, jdbcType=VARCHAR}, #{code, jdbcType=VARCHAR}, #{codeName, jdbcType=VARCHAR}
-  </select>
-  <!-- 게시판 관련 코드 가져오는 프로시저  End -->
-
-  <!-- mngList 프로시저 호출 후 select할 수 있는 매퍼 Start -->
-  <select id="mngList" resultType="java.util.HashMap">
-    exec [dbo].[mngList] #{gubun, jdbcType=VARCHAR}, #{userid, jdbcType=VARCHAR}, #{PageNo, jdbcType=VARCHAR}, #{PageSize, jdbcType=VARCHAR}, #{Sdate, jdbcType=VARCHAR}, #{Edate, jdbcType=VARCHAR}, #{searchGubun, jdbcType=VARCHAR}, #{searchVal, jdbcType=VARCHAR}, #{searchGubun2, jdbcType=VARCHAR}, #{searchVal2, jdbcType=VARCHAR}, #{etcParam, jdbcType=VARCHAR}
-  </select>
-  <!-- mngList 프로시저 호출 후 select할 수 있는 매퍼 End -->
-
   <!-- boardRegModify 프로시저 호출 매퍼 Start -->
   <select id="boardRegModify" resultType="java.util.HashMap" statementType="CALLABLE">
     {call [dbo].[boardRegModify](  

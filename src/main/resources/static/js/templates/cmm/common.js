@@ -1,6 +1,21 @@
-window.onload = function () {
 
-};
+$(document).ready(function () {
+
+  $('input[type="radio"]').on('click', function(e) {
+
+    if (this.previousChecked) {
+      $(this).prop('checked', false);
+    }
+    this.previousChecked = this.checked;
+  });
+
+  $('input[type="radio"]').each(function() {
+      if (isNaN(this.previousChecked)) { 
+        this.previousChecked = this.checked;
+      }
+  });
+
+});
 
 /**
  * api 통신 공통 함수
@@ -11,6 +26,12 @@ window.onload = function () {
  * @param {실패 콜백} errorCallback 
  */
 function ajaxRequest(url, data, method, successCallback, errorCallback) {
+
+  if(forbiddenWordsCheck(data)){
+    alert('금지된 단어가 포함되어 있습니다.');
+    return;
+  }
+
   $.ajax({
     url: url,
     method: method || "GET", // 기본값으로 "GET" 설정
@@ -28,6 +49,11 @@ function ajaxRequest(url, data, method, successCallback, errorCallback) {
  * return false : 금칙어 없음
  **/
 function forbiddenWordsCheck(str) {
+  // str이 문자열인지 확인하고, 아니라면 문자열로 변환
+  if (typeof str !== 'string') {
+    str = str.toString(); 
+  }
+
   for (let word of forbiddenWords) {
     if (str.toLowerCase().includes(word.toLowerCase())) {
       return true;
@@ -36,7 +62,7 @@ function forbiddenWordsCheck(str) {
   return false;
 }
 
-
+// 금칙어 목록
 const forbiddenWords = [
   // 기존 금칙어
   "badword1", "badword2", "badword3",
@@ -54,10 +80,12 @@ const forbiddenWords = [
   "../", "..\\", "%2e%2e/", "%2e%2e\\"
 ];
 
+// 얼럿 화면
 function showAlert(message) {
   alert(message);
 }
 
+//로그아웃, 로그인 페이지로 이동
 function logout() {
 
     // ajaxRequest 함수를 사용하여 로그인 처리
@@ -98,57 +126,6 @@ function drop(event) {
  * 이미지 업로드 관련 함수 모음 끝
  */
 
-
-/*
- * 파일 업로드 관련 함수
- */
-function uploadFile(file,callback) {
-
-  const storage = window.storage;
-  const uploadBytes = window.uploadBytes;
-
-  if (!file) {
-      alert('파일을 선택해 주세요.');
-      return;
-  }
-  
-  const storageRef  = window.ref(storage,  file.name);
-
-  uploadBytes(storageRef, file).then((snapshot) => {
-      setfileUrlAddress(file.name,callback);
-  }).catch((error) => {
-    console.log(error);
-  });
-}
-
-function setfileUrlAddress(fileName,callback){
-    
-  const getDownloadURL = window.getDownloadURL;
-  getDownloadURL(ref(window.storage, fileName))
-  .then((url) => {
-    callback(url);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
-}
-
-/*
- * 페이지 이동 함수
- */
-function loadContent(url) {
-  $.ajax({
-      url: url,
-      success: function(result) {
-          $("#main-content").html(result);
-      },
-      error: function() {
-          alert("Failed to load content.");
-      }
-  });
-}
-
 // 현재 날짜를 구하는 함수
 function getTodayDate() {
   const today = new Date();
@@ -158,6 +135,7 @@ function getTodayDate() {
   return `${year}-${month}-${day}`;
 }
 
+// 두 날짜 사이의 차이를 계산하는 함수
 function calculateDuration(startDate, endDate) {
   // Convert the input strings to Date objects if they are strings
   startDate = new Date(startDate);
@@ -174,6 +152,7 @@ function calculateDuration(startDate, endDate) {
   return { years, months };
 }
 
+// 쿠키 설정 함수
 function setCookie(key, value, days) {
   var date = new Date();
   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -255,39 +234,7 @@ function formatPhoneNumber(input) {
   
 }
 
-
-
-
-function isValidRRN(rrn) {
-  // 기본적인 형식 검사
-  const regex = /^\d{6}-\d{7}$/;
-  if (!regex.test(rrn)) {
-      return false;
-  }
-
-  // 추가적인 논리 검사는 여기서 할 수 있음 (예: 유효한 날짜인지 확인)
-  const [front, back] = rrn.split('-');
-  const year = parseInt(front.substring(0, 2), 10);
-  const month = parseInt(front.substring(2, 4), 10);
-  const day = parseInt(front.substring(4, 6), 10);
-
-  if (month < 1 || month > 12) {
-      return false;
-  }
-  
-  if (day < 1 || day > 31) {
-      return false;
-  }
-
-  // 월별 날짜 수 검증
-  const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  if (day > daysInMonth[month - 1]) {
-      return false;
-  }
-
-  return true;
-}
-
+// 파일 다운로드 함수
 function getProxy(fileName) {
   return "/proxy/" + fileName;
 }
