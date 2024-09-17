@@ -29,9 +29,9 @@ $(document).ready(function () {
 
     $('#member_logout').click(function () {
         // ajaxRequest 함수를 사용하여 로그아웃 처리
-        ajaxRequest("/acm/logout.do", '', "POST", function (response) {
+        ajaxRequest("/admin/acm/logout.do", '', "POST", function (response) {
             // 로그인 성공 시 대시보드 페이지로 리디렉트
-            location.href = "/acm/login";
+            location.href = "/admin/acm/login";
         }, function () {
             alert('현재 기능 개발 준비중 입니다.');
         });
@@ -44,7 +44,7 @@ $(document).ready(function () {
 
         var form = $('<form>', {
             method: 'POST',
-            action: '/ems/add_employees'
+            action: '/admin/ems/add_employees'
         });
 
         form.append($('<input>', {
@@ -64,7 +64,7 @@ $(document).ready(function () {
     $('.side_menu a').removeClass('active');
 
     // URL에서 첫 번째 경로 부분 추출 (path1)
-    var path1 = currentUrl.split('/')[1]; 
+    var path1 = currentUrl.split('/')[2]; 
 
     // 해당 id를 가진 메뉴 항목 찾기
     var targetMenuItem = $('#side_' + path1);
@@ -81,7 +81,7 @@ function showProfile(userID) {
         userid: userID
     };
 
-    ajaxRequest("/ems/employee_detail", data, "POST", function (response) {
+    ajaxRequest("/admin/ems/employee_detail", data, "POST", function (response) {
 
         if (response.retVal == 0) {
             

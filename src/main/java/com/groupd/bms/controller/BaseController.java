@@ -2,7 +2,11 @@ package com.groupd.bms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -179,5 +183,28 @@ public class BaseController {
     protected String getFileUrl(String fileName) {
         return "/proxy" + fileName;
     }
+
+    @GetMapping("/")
+    public String index(Model model) {
+        return "redirect:/admin/dsb/main"; 
+    }
+
+	@GetMapping("/proxy/{fileName}")
+    public ResponseEntity<byte[]> proxyFile(@PathVariable("fileName") String fileName) {
+		return ResponseEntity.ok().body(downloadFileFromGCS(fileName));
+    }
+
+    /**
+	 * 사용자 IP 주소 반환
+	 * @param request HttpServletRequest
+	 * @return IP 주소 문자열
+	 */
+	protected String getUserIP(HttpServletRequest request) {
+		String clientIP = request.getHeader("X-Forwarded-For");
+		if (clientIP == null || clientIP.length() == 0 || "unknown".equalsIgnoreCase(clientIP)) {
+			clientIP = request.getRemoteAddr();
+		}
+		return clientIP;
+	}
 
 }

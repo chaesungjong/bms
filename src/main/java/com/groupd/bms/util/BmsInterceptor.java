@@ -95,7 +95,7 @@ public class BmsInterceptor implements HandlerInterceptor {
 
                             Member member = (Member) loginResultMap.get("member");
                             request.getSession().setAttribute("member", member);
-                            response.sendRedirect("/dsb/main");
+                            response.sendRedirect("/admin/dsb/main");
                             setMember(request);
                             return false; 
 
@@ -103,7 +103,7 @@ public class BmsInterceptor implements HandlerInterceptor {
                     }
                 }
 
-                 response.sendRedirect("/acm/login");
+                 response.sendRedirect("/admin/acm/login");
                  return false; // 현재 요청을 중지하고 로그인 페이지로 리다이렉트
              }
 
@@ -116,7 +116,7 @@ public class BmsInterceptor implements HandlerInterceptor {
             // 로그인이 되어있지 않은 상태
             if (request.getSession().getAttribute("member") != null) {
                 setMember(request);
-                response.sendRedirect("/dsb/main");
+                response.sendRedirect("/admin/dsb/main");
                 return false; // 현재 요청을 중지하고 메인 페이지로 리다이렉트
             }
 

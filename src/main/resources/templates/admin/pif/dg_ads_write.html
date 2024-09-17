@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+    <!-- 세팅 양식 작성  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/admin/pif/dg_ads_write.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="add_request_wrap">
+                <h2>세팅 양식</h2>
+                <div class="add_reauest_board">
+                    <form action="">
+                        <div class="add_request_info">
+                            <h3>
+                                당근 광고 양식 만들기
+                                <select name="" id="">
+                                    <option value="접수">접수</option>
+                                    <option value="확인">확인</option>
+                                    <option value="진행">진행</option>
+                                    <option value="완료">완료</option>
+                                    <option value="기타">기타</option>
+                                    <option value="보류">보류</option>
+                                </select>
+                            </h3>
+                            <table cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td class="add_request_title">작성자</td>
+                                        <td>
+                                            <label for="">기획<input type="text" required class="name_box" placeholder="홍길동" /></label>
+                                            <label for="">디자인<input type="text" required class="name_box" placeholder="홍길동" /></label>
+                                            <div class="design_board_date">
+                                                <input type="date" name="" id="fr_date" class="fr_date" value="2024-07-15" />
+                                                <span>~</span>
+                                                <input type="date" name="" id="to_date" class="to_date" value="2024-07-15" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_request_title">제목</td>
+                                        <td>
+                                            <label for=""><input type="text" class="project_name" /></label>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="write_wrap">
+                            <div class="write_box">
+                                <div class="dg_ads_box">
+                                    <h2>당근광고</h2>
+                                    <div class="dg_ads_con">
+                                        <div class="dg_ads_inner">
+                                            <h3>상모동 <img src="/img/dg_ads_arrow.svg" alt="화살표" /></h3>
+                                            <div class="dg_ads">
+                                                <div class="profile_box">
+                                                    <img src="#" alt="" class="profile_preview" />
+                                                    <input type="file" class="real_upload profile" accept="image/*" required multiple />
+                                                    <div class="upload"></div>
+                                                </div>
+                                                <div class="dg_ads_right">
+                                                    <input type="text" class="dg_ads_subject" placeholder="Text" />
+                                                    <p>00동 · 광고</p>
+                                                    <span>심의필 번호</span>
+                                                </div>
+                                                <img src="/img/dg_ads.svg" alt="댓글,좋아요" />
+                                            </div>
+                                            <img src="/img/dg_ads_inner.svg" alt="당근광고" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add_request_btn_wrap">
+                            <input type="button" value="목록" onclick="location.href='/pif/dg_ads_list'" class="add_emp_btn" style="background-color: transparent; color: #333" />
+                            <input type="button" value="등록하기" class="add_emp_btn" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 세팅 양식 작성  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/admin/pif/dg_ads_write.js"></script>
+    </th:block>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+    <!-- 진료 일정  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/admin/csf/medical_schedule.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="schedule_board_wrap">
+                <form action="">
+                    <div class="top_bar">
+                        <h2>진료일정 게시판</h2>
+                        <div class="input_wrap">
+                            <div class="date_wrap">
+                                <input type="date" value="2024-05-01" />
+                                <small>~</small>
+                                <input type="date" id="today_date" />
+                            </div>
+                            <div class="search_wrap">
+                                <select name="" id="">
+                                    <option value="">제목</option>
+                                    <option value="">제목+내용</option>
+                                    <option value="">내용</option>
+                                    <option value="">댓글</option>
+                                    <option value="">업체명</option>
+                                    <option value="">작성자</option>
+                                </select>
+                                <div class="search_bar">
+                                    <input type="search" />
+                                    <button type="button">
+                                        <img src="/img/search.svg" alt="" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="schedule_board">
+                        <div class="schedule_sub_wrap">
+                            <div class="btn_wrap">
+                                <button type="button" class="blog">블로그 임상 조르기</button>
+                                <button type="button" class="schedule">휴진일정 조르기</button>
+                            </div>
+                            <div class="calendar">
+                                <button type="button" class="prev">
+                                    <img src="/img/left_arrow.svg" alt="" />
+                                </button>
+                                <span>2024.05</span>
+                                <button type="button" class="next">
+                                    <img src="/img/left_arrow.svg" alt="" />
+                                </button>
+                            </div>
+                            <div class="sort_wrap">
+                                <button type="button" class="reset_btn" onClick="window.location.reload()"></button>
+                                <select name="" id="">
+                                    <option value="">업체명</option>
+                                    <option value="">지역</option>
+                                    <option value="">내용</option>
+                                    <option value="">진행상황</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="schedule_main_wrap">
+                            <table cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="check_all" />
+                                        </th>
+                                        <th>업체명</th>
+                                        <th>내용</th>
+                                        <th>특이사항</th>
+                                        <th>
+                                            지역
+                                            <button type="button">
+                                                <img src="/img/Floating.svg" alt="" />
+                                            </button>
+                                        </th>
+                                        <th class="title_state">
+                                            진행상황
+                                            <button type="button" class="show_btn">
+                                                <img src="/img/Floating.svg" alt="" />
+                                            </button>
+                                            <div class="btn_popup">
+                                                <input type="button" value="접수" style="background-color: #fff; color: #333; border: 1px solid #dddddd" />
+                                                <input type="button" value="확인" style="background-color: #3e3c3c" />
+                                                <input type="button" value="진행" style="background-color: #39aa4c" />
+                                                <input type="button" value="완료" style="background-color: #2d4bb6" />
+                                                <input type="button" value="컨펌" style="background-color: #e24545" />
+                                                <input type="button" value="팝업" style="background-color: #844a29" />
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">안양바른플러스치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">경기</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr class="red_on">
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">서울스마트치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">인천</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">바른선택치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">서울</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">서울리멤버치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">서울</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr class="blue_on">
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">서울보스톤고른이치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">경기</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr class="blue_on">
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">주안시카고치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">인천</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr class="red_on">
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">SNC시카고치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">인천</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr class="red_on">
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">리봄치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">인천</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">플러스덴치과</a></td>
+                                        <td class="con_box con_box_n"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">서울</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">서울공감치과</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">서울</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">서울클리어치과 연신내</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">서울</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ch_box"></td>
+                                        <td class="name_box"><a href="">서울클리어치과 창동</a></td>
+                                        <td class="con_box"></td>
+                                        <td class="issue_box"></td>
+                                        <td class="place_box">서울</td>
+                                        <td class="confirm_box"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <nav class="pg_wrap">
+                                <span class="pg">
+                                    <a href="#" class="pg_page pg_start">처음</a>
+                                    <a href="#" class="pg_page pg_prev">이전</a>
+                                    <strong class="pg_current">1</strong>
+                                    <a href="#" class="pg_page">2</a>
+                                    <a href="#" class="pg_page">3</a>
+                                    <a href="#" class="pg_page">4</a>
+                                    <a href="#" class="pg_page">5</a>
+                                    <a href="#" class="pg_page">6</a>
+                                    <a href="#" class="pg_page">7</a>
+                                    <a href="#" class="pg_page">8</a>
+                                    <a href="#" class="pg_page">9</a>
+                                    <a href="#" class="pg_page">10</a>
+                                    <a href="#" class="pg_page pg_next">다음</a>
+                                    <a href="#" class="pg_page pg_end">맨끝</a>
+                                </span>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- 팝업 -->
+                    <div class="popup_wrap blog_popup">
+                        <div class="bg"></div>
+                        <div class="popup">
+                            <div class="popup_inner">
+                                <div class="title">
+                                    <p>블로그 임상 조르기</p>
+                                </div>
+                                <div class="con">
+                                    <p>
+                                        안녕하세요 원장님,<br />
+                                        이번주 임상자료 <input type="number" /> 건 자료 전달 부탁드립니다 :)
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="btn_wrap">
+                                <button type="button" class="exit_btn">취소</button>
+                                <button type="button" class="enter_btn">확인</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup_wrap schedule_popup">
+                        <div class="bg"></div>
+                        <div class="popup">
+                            <div class="popup_inner">
+                                <div class="title">
+                                    <p>휴진일정 조르기</p>
+                                </div>
+                                <div class="con">
+                                    <textarea name="" id=""></textarea>
+                                </div>
+                            </div>
+                            <div class="btn_wrap">
+                                <button type="button" class="exit_btn">취소</button>
+                                <button type="button" class="enter_btn">확인</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+
+    <!-- 진료 일정  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/admin/csf/medical_schedule.js"></script>
+    </th:block>
+</html>

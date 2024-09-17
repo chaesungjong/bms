@@ -18,16 +18,16 @@
             <!-- 사이드바 영역  -->
             <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
                 <th:block th:if="${isLocalhost}">
-                    <div th:replace="/partials/sidebar :: sidebar"></div>
+                    <div th:replace="/partials/admin/sidebar_dev :: sidebar"></div>
                 </th:block>
                 <th:block th:unless="${isLocalhost}">
-                    <div th:replace="/partials/sidebar_open :: sidebar"></div>
+                    <div th:replace="/partials/admin/sidebar :: sidebar"></div>
                 </th:block>
             </th:block>
             <div class="main_view">
                 <!-- 공통헤더 영역 -->
                 <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
-                    <div th:replace="/partials/header :: header"></div>
+                    <div th:replace="/partials/admin/header :: header"></div>
                 </th:block>
                 <!-- 메인화면 영역  -->
                 <div id="main-content" layout:fragment="content"></div>

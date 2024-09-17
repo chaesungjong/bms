@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+    <!-- 사원 등록 CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/admin/ems/add_employees.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="add_emp_wrap">
+                <h2>사원 기본정보</h2>
+                <div class="add_emp_board">
+                    <form action="" id="addEmpForm">
+                        <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" />          <!-- 수정 여부 -->
+                        <div class="add_emp_info">
+                            <table cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="2" class="add_emp_title" id="profile_box">
+                                            <div class="profile_box">
+                                                <img th:if="${memInfo != null && memInfo['imgProfile'] != null}" th:src="@{${memInfo['imgProfile']}}" alt="Profile Image" id="profile_preview" />
+                                                <div th:classappend="${#strings.isEmpty(memInfo?.imgProfile) ? 'upload' : ''}"></div>
+                                            </div>
+                                        </td>
+                                        <td colspan="3">
+                                            <label for="name"
+                                                >성명
+                                                <input type="text" name="name" id="name" class="name_box" placeholder="성명" th:value="${memInfo?.name}" maxlength='10'required data-alert="성명" />
+                                            </label>
+                                            <label for="nameEng"
+                                                >영문명
+                                                <input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명" th:value="${memInfo?.nameEng}" maxlength='15' data-alert="영문명"/>
+                                            </label>
+                                            <label for="userid"
+                                                >아이디
+                                                <input type="text" name="userid" id="userid" class="id_box" placeholder="아이디" th:value="${memInfo?.userid}" maxlength='20' required data-alert="아이디" />
+                                            </label>
+                                            <label for="pwd" th:if="${corrections != 'Y'}"
+                                                >비밀번호
+                                                <input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" maxlength='20' data-alert="비밀번호"/>
+                                            </label>
+                                            <label for="pwdCheck" th:if="${corrections != 'Y'}">비밀번호 확인
+                                                <input type="password" name="pwdCheck" id="pwdCheck" class="pwr_box"
+                                                placeholder="비밀번호 확인" th:value="${memInfo?.pwd}" required data-alert="비밀번호 확인" />
+                                            </label>
+                                            <span class="pwd_modify" th:if="${pwdChange == 'Y'}" id="pwd_modify" >비밀번호 수정 </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="team_gr">
+                                            <label for="departCode"
+                                                >부서 / 팀 / 직위 / 직책
+                                                <select id="departCode" name="departCode" class="team_wrap">
+                                                    <th:block th:each="departName : ${departNameList}">
+                                                        <option th:value="${departName['code']}" th:text="${departName['codeName']}" th:selected="${departName.codeName == memInfo?.departCode}"></option>
+                                                    </th:block>
+                                                </select>
+
+                                                <select id="teamCode" name="teamCode">
+                                                    <th:block th:each="teamName : ${teamNameList}">
+                                                        <option th:value="${teamName['code']}" th:text="${teamName['codeName']}" th:selected="${teamName.codeName == memInfo?.teamCode}"></option>
+                                                    </th:block>
+                                                </select>
+
+                                                <select name="jobPosition" id="jobPosition">
+                                                    <th:block th:each="jobPosition : ${jobPositionList}">
+                                                        <option th:value="${jobPosition['code']}" th:text="${jobPosition['codeName']}" th:selected="${jobPosition.codeName == memInfo?.jobPosition}"></option>
+                                                    </th:block>
+                                                </select>
+
+                                                <select name="jobTitle" id="jobTitle">
+                                                    <th:block th:each="jobTitle : ${jobTitleList}">
+                                                        <option th:value="${jobTitle['code']}" th:text="${jobTitle['codeName']}" th:selected="${jobTitle.codeName == memInfo?.jobTitle}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">입사일</td>
+                                        <td colspan="3">
+                                            <label for="jobStatus"
+                                                >상태 및 기간
+                                                <select name="jobStatus" id="jobStatus" style="margin: 0 8px 0 28px">
+                                                    <th:block th:each="jobStatus : ${jobStatusList}">
+                                                        <option th:value="${jobStatus['code']}" th:text="${jobStatus['codeName']}" th:selected="${jobStatus.codeName == memInfo?.jobStatus}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </label>
+
+                                            <label for="jobStartDate">
+                                                <input type="date" name="jobStartDate" id="jobStartDate" class="info_date" size="11" maxlength="10" placeholder="입사일" th:value="${memInfo?.jobStartDate}" required />
+                                            </label>
+
+                                            <small id="jobEndDatesmall">~</small>
+
+                                            <label for="jobEndDate" id="jobEndDateLabel">
+                                                <input type="date" name="jobEndDate" id="jobEndDate" class="info_date" size="11" maxlength="10" placeholder="퇴사일" th:value="${memInfo?.jobEndDate}" />
+                                            </label>
+
+                                            <input type="text" value="" id="Period" size="16" style="margin-left: 8px" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">채용구분</td>
+                                        <td colspan="3">
+                                            <label for="hireType">
+                                                <select name="hireType" id="hireType">
+                                                    <th:block th:each="hireType : ${hireTypeList}">
+                                                        <option th:value="${hireType['code']}" th:text="${hireType['codeName']}" th:selected="${hireType.codeName == memInfo?.hireType}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">생년원일</td>
+                                        <td colspan="3">
+                                            <select name="calendarType" id="calendarType" style="margin-right: 8px">
+                                                <th:block th:each="calendarType : ${calendarTypeList}">
+                                                    <option th:value="${calendarType['code']}" th:text="${calendarType['codeName']}" th:selected="${calendarType.codeName == memInfo?.calendarType}"></option>
+                                                </th:block>
+                                            </select>
+
+                                            <label for="birthday">
+                                                <input type="date" name="birthday" id="birthday" class="birth_date" size="11" maxlength="10" placeholder="생년월일" th:value="${memInfo?.birthday}" required />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">이메일</td>
+                                        <td>
+                                            <input type="email" id="email" name="email" size="34" placeholder="이메일" th:value="${memInfo?.email}" maxlength="50" required />
+                                        </td>
+                                        <td class="add_emp_title">부서 이메일</td>
+                                        <td>
+                                            <input type="email" id="emailDepart" name="emailDepart" size="34" placeholder="부서 메일" th:value="${memInfo?.emailDepart}" maxlength="50"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">휴대폰 번호</td>
+                                        <td>
+                                            <input type="tel" id="hpno" name="hpno" size="34" placeholder="휴대폰 번호" th:value="${memInfo?.hpno}" maxlength="12" required />
+                                        </td>
+                                        <td class="add_emp_title">업무폰 번호</td>
+                                        <td>
+                                            <input type="tel" id="hpnoDepart" name="hpnoDepart" size="34" placeholder="업무폰 번호" maxlength="20" th:value="${memInfo?.hpnoDepart}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">주소</td>
+                                        <td colspan="3" class="post_wrap">
+                                            <input type="text" id="post" name="post" placeholder="우편번호" maxlength="10" th:value="${memInfo?.post}" required  />
+                                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색" />
+                                            <input type="text" id="addr" name="addr" placeholder="주소" th:value="${memInfo?.addr}" maxlength="50" required  /><br />
+                                            <input type="text" id="addrDesc" name="addrDesc" placeholder="상세주소" th:value="${memInfo?.addrDesc}" maxlength="50" required />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3" class="add_emp_title">개인정보</td>
+                                        <td colspan="3">
+                                            <label for="payGiveType">
+                                                <span>급여 지급 방법</span>
+                                                <select name="payGiveType" id="payGiveType">
+                                                    <th:block th:each="payGiveType : ${payGiveTypeList}">
+                                                        <option th:value="${payGiveType['code']}" th:text="${payGiveType['codeName']}" th:selected="${payGiveType.codeName == memInfo?.payGiveType}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </label>
+                                            <label for="bankName">
+                                                <span class="sub_span">은행</span>
+                                                <input type="text" id="bankName" name="bankName" class="bank_box" placeholder="은행명" maxlength="15" th:value="${memInfo?.bankName}" required data-alert="은행명"  />
+                                            </label>
+                                            <label for="bankAccount">
+                                                <span class="sub_span">계좌번호</span>
+                                                <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호" maxlength="20" th:value="${memInfo?.bankAccount}" required data-alert="계좌번호" />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <label for="marriedType">
+                                                <span>가족사항</span>
+                                                <select name="marriedType" id="marriedType">
+                                                    <th:block th:each="marriedType : ${marriedTypeList}">
+                                                        <option th:value="${marriedType['code']}" th:text="${marriedType['codeName']}" th:selected="${marriedType.codeName == memInfo?.marriedType}"></option>
+                                                    </th:block>
+                                                </select>
+                                            </label>
+                                            <label for="juminNo">
+                                                <span class="sub_span">주민번호</span>
+                                                <input type="text" id="juminNo" name="juminNo" placeholder="주민번호" th:value="${memInfo?.juminNo}" maxlength="14" oninput="formatRRN(this)" required />
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="radio_wrap">
+                                            <span>게시판 사용<br />가능 여부</span>
+                                            <label> <input type="radio" name="boardUseYN" value="Y" th:checked="${memInfo?.boardUseYN == 'Y'}" />사용가능 </label>
+                                            <label> <input type="radio" name="boardUseYN" value="N" th:checked="${memInfo?.boardUseYN == 'N'}" />사용중지 </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="add_emp_title">메모</td>
+                                        <td colspan="3" style="padding: 18px 22px">
+                                            <textarea name="memo" id="memo" class="pre" placeholder="입사 00시기 팀장 진급 현재 직무 홈페이지 위주건 진행" maxlength="50" th:text="${memInfo?.memo}"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="add_emp_file">
+                            <h3>사원 관련 서류</h3>
+                            <table cellspacing="0">
+                                <tbody>
+                                    <tr class="add_bm_file01">
+                                        <td class="add_emp_title">통장사본</td>
+                                        <td class="add_bm_con">
+                                            <div>
+                                                <input type="file" name="imgBankbook" id="imgBankbook" th:value="${memInfo?.imgBankbook}" maxlength="50" />
+                                                <input type="hidden" name="imgBankbookFileName" id="imgBankbookFileName" th:value="${memInfo?.imgBankbookFileName}" maxlength="50"/>
+                                                <label class="bm_file_btn" for="imgBankbook">파일선택</label>
+                                                <span class="bm_file_text" th:text="${memInfo?.imgBankbookFileName}"> 선택된 파일이 없습니다. </span>
+                                            </div>
+                                        </td>
+                                        <td class="add_emp_title">가족관계증명서</td>
+                                        <td class="add_bm_con">
+                                            <div>
+                                                <input type="file" name="imgFamilyRL" id="imgFamilyRL" th:value="${memInfo?.imgFamilyRL}" maxlength="50" />
+                                                <input type="hidden" name="imgFamilyRLFileName" id="imgFamilyRLFileName" th:value="${memInfo?.imgFamilyRLFileName}" maxlength="50" />
+                                                <label class="bm_file_btn" for="imgFamilyRL">파일선택</label>
+                                                <span class="bm_file_text" th:text="${memInfo?.imgFamilyRLFileName}"> 선택된 파일이 없습니다. </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="add_bm_file01">
+                                        <td class="add_emp_title">사원 프로필 사진</td>
+                                        <td class="add_bm_con">
+                                            <div>
+                                                <input type="file" name="imgProfile" id="imgProfile" th:value="${memInfo?.imgProfile}" maxlength="50"  />
+                                                <input type="hidden" name="imgProfileFileName" id="imgProfileFileName" th:value="${memInfo?.imgProfileFileName}" maxlength="50" />
+                                                <label class="bm_file_btn" for="imgProfile">파일선택</label>
+                                                <span class="bm_file_text" th:text="${memInfo?.imgProfileFileName}"> 선택된 파일이 없습니다. </span>
+                                            </div>
+                                        </td>
+                                        <td class="add_emp_title">이외 자료</td>
+                                        <td class="add_bm_con">
+                                            <div>
+                                                <input type="file" name="imgEtc" id="imgEtc" th:value="${memInfo?.imgEtc}" maxlength="50" />
+                                                <input type="hidden" name="imgEtcFimeName" id="imgEtcFimeName" th:value="${memInfo?.imgEtcFimeName}" maxlength="50" />
+                                                <input type="file" name="imgEtc" id="imgEtc"th:value="${memInfo?.imgEtc}" maxlength="50" />
+                                                <label class="bm_file_btn" for="imgEtc">파일선택</label>
+                                                <span class="bm_file_text" th:text="${memInfo?.imgEtcFimeName}"> 선택된 파일이 없습니다. </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="add_emp_btn_wrap">
+                            <input type="button" value="저장" class="add_emp_btn" id="registration" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-container" id="pwd_modify">
+                <div class="modal-background">
+                    <div class="modal">
+                        <div class="pwd_modify_wrap">
+                            <h3>
+                                비밀번호 수정 <span class="pwd_modify_close"><img src="/img/close_w.svg" alt="" /></span>
+                            </h3>
+                            <div class="pwd_modify_con">
+                                <div class="pwd_modify_con01">
+                                    <span>현재 비밀번호</span>
+                                    <div class="pw_wrap"><input type="password" name="now_pwd" id="now_pwd" class="pwd_m_box" required /><button type="button" class="btnView off" maxlength="30" ></button></div>
+                                </div>
+                                <div class="pwd_modify_con02">
+                                    <span>새 비밀번호</span>
+                                    <div class="pw_wrap"><input type="password" name="new_pwd" id="new_pwd" class="pwd_m_box" placeholder="새 비밀번호" required /><button type="button" class="btnView off" maxlength="30" ></button></div>
+                                </div>
+                                <div class="pwd_modify_con03">
+                                    <span>비밀번호 확인</span>
+                                    <div class="pw_wrap"><input type="password" name="new_pwd_check" id="new_pwd_check" class="pwd_m_box" placeholder="비밀번호 확인" required maxlength="30" /><button type="button" class="btnView off"></button></div>
+                                </div>
+                                <span class="pwd_modify_btn" id="changePwd">비밀번호 수정</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 사원 등록 Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/admin/ems/add_employees.js"></script>
+    </th:block>
+</html>

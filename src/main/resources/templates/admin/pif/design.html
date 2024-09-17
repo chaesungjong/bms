@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    <!-- 디자인  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/admin/pif/design.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="design_wrap">
+                <h2>프로젝트 정보</h2>
+                <div class="design_board">
+                    <div class="design_board_title">
+                        <h3>디자인팀</h3>
+                        <div class="design_board_type">
+                            <span class="bm_board active">거래처 요청건</span>
+                            <span class="in_board">내부 요청건</span>
+                        </div>
+                    </div>
+                    <div class="main_board_menu">
+                        <div class="main_board_state">
+                            <span class="active state_receive">접수</span>
+                            <span class="state_check">확인</span>
+                            <span class="state_progress">진행</span>
+                            <span class="state_complete">완료</span>
+                            <span class="state_other">기타</span>
+                            <span class="state_hold">보류</span>
+                        </div>
+                        <div class="design_board_category">
+                            <span class="cat_on">온라인 시안</span>
+                            <span class="cat_of">오프라인 시안</span>
+                            <span class="cat_st active">세팅 시안</span>
+                            <span class="cat_hp">홈페이지</span>
+                            <span class="cat_pb">퍼블</span>
+                        </div>
+                    </div>
+                    <form action="" class="design_board_top">
+                        <div class="design_board_date">
+                            <input type="date" name="" id="fr_date" class="fr_date" value="2024-07-15" />
+                            <span>~</span>
+                            <input type="date" name="" id="to_date" class="to_date" value="2024-07-15" />
+                        </div>
+                        <div class="design_board_search">
+                            <select name="sfl" id="sch_sort" class="search_sort">
+                                <option value="제목">제목</option>
+                                <option value="업체명">업체명</option>
+                                <option value="작성자">작성자</option>
+                            </select>
+                            <label for="sch_word"
+                                ><input type="text" name="stx" size="20" value="" id="sch_word" class="frm_input" />
+                                <input type="submit" value="검색" class="sch_btn"
+                            /></label>
+                        </div>
+                        <div class="design_board_btn">
+                            <button class="design_board_refrash"><img src="/img/bm_board_refrash.svg" alt="새로고침" /></button>
+                            <a href="#" class="design_board_mybtn">My</a>
+                        </div>
+                        <a href="/pif/design_write" class="design_reg">프로젝트 등록</a>
+                    </form>
+                    <table class="design_board_table" cellspacing="0">
+                        <thead class="design_board_th">
+                            <tr>
+                                <th>날짜</th>
+                                <th>완료 예정</th>
+                                <th>업체명</th>
+                                <th>작성자</th>
+                                <th>상태</th>
+                                <th>분류</th>
+                                <th>제목</th>
+                                <th>담당자</th>
+                            </tr>
+                        </thead>
+                        <tbody class="design_board_td">
+                            <tr>
+                                <td class="design_wr_wdate"><span class="list_today">오늘</span>17:52</td>
+                                <td class="design_wr_fday">2024.07.15</td>
+                                <td class="design_wr_cp"><a href="#">안양바른플러스치과</a></td>
+                                <td class="design_wr_name">박세용 원장</td>
+                                <td class="design_wr_state">
+                                    <span class="main_board_wrstate state_receive"
+                                        >접수
+                                        <ul class="state_select">
+                                            <li><span class="state_receive">접수</span></li>
+                                            <li><span class="state_check">확인</span></li>
+                                            <li><span class="state_progress">진행</span></li>
+                                            <li><span class="state_complete">완료</span></li>
+                                            <li><span class="state_other">기타</span></li>
+                                            <li><span class="state_hold">보류</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_category">
+                                    <span class="main_board_wrcategory cat_on"
+                                        >온라인 시안
+                                        <ul class="category_select">
+                                            <li><span class="cat_on">온라인 시안</span></li>
+                                            <li><span class="cat_of">오프라인 시안</span></li>
+                                            <li><span class="cat_st">세팅 시안</span></li>
+                                            <li><span class="cat_hp">홈페이지</span></li>
+                                            <li><span class="cat_pb">퍼블</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_subject">
+                                    <a href="">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
+                                    <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
+                                </td>
+                                <td class="design_wr_wkname">이슬</td>
+                            </tr>
+                            <tr>
+                                <td class="design_wr_wdate">2024.07.01</td>
+                                <td class="design_wr_fday">2024.07.15</td>
+                                <td class="design_wr_cp"><a href="#">서울클리어치과 하남미사</a></td>
+                                <td class="design_wr_name">임근오 원장</td>
+                                <td class="design_wr_state">
+                                    <span class="main_board_wrstate state_check"
+                                        >확인
+                                        <ul class="state_select">
+                                            <li><span class="state_receive">접수</span></li>
+                                            <li><span class="state_check">확인</span></li>
+                                            <li><span class="state_progress">진행</span></li>
+                                            <li><span class="state_complete">완료</span></li>
+                                            <li><span class="state_other">기타</span></li>
+                                            <li><span class="state_hold">보류</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_category">
+                                    <span class="main_board_wrcategory cat_of"
+                                        >오프라인 시안
+                                        <ul class="category_select">
+                                            <li><span class="cat_on">온라인 시안</span></li>
+                                            <li><span class="cat_of">오프라인 시안</span></li>
+                                            <li><span class="cat_st">세팅 시안</span></li>
+                                            <li><span class="cat_hp">홈페이지</span></li>
+                                            <li><span class="cat_pb">퍼블</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_subject">
+                                    <a href="">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
+                                    <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
+                                </td>
+                                <td class="design_wr_wkname">이슬</td>
+                            </tr>
+                            <tr>
+                                <td class="design_wr_wdate">2024.07.01</td>
+                                <td class="design_wr_fday">2024.07.15</td>
+                                <td class="design_wr_cp"><a href="#">안양바른플러스치과</a></td>
+                                <td class="design_wr_name">박세용 원장</td>
+                                <td class="design_wr_state">
+                                    <span class="main_board_wrstate state_receive"
+                                        >접수
+                                        <ul class="state_select">
+                                            <li><span class="state_receive">접수</span></li>
+                                            <li><span class="state_check">확인</span></li>
+                                            <li><span class="state_progress">진행</span></li>
+                                            <li><span class="state_complete">완료</span></li>
+                                            <li><span class="state_other">기타</span></li>
+                                            <li><span class="state_hold">보류</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_category">
+                                    <span class="main_board_wrcategory cat_hp"
+                                        >홈페이지
+                                        <ul class="category_select">
+                                            <li><span class="cat_on">온라인 시안</span></li>
+                                            <li><span class="cat_of">오프라인 시안</span></li>
+                                            <li><span class="cat_st">세팅 시안</span></li>
+                                            <li><span class="cat_hp">홈페이지</span></li>
+                                            <li><span class="cat_pb">퍼블</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_subject">
+                                    <a href="">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
+                                    <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
+                                </td>
+                                <td class="design_wr_wkname">이슬</td>
+                            </tr>
+                            <tr>
+                                <td class="design_wr_wdate"><span class="list_today">오늘</span>17:52</td>
+                                <td class="design_wr_fday">2024.07.15</td>
+                                <td class="design_wr_cp"><a href="#">안양바른플러스치과</a></td>
+                                <td class="design_wr_name">박세용 원장</td>
+                                <td class="design_wr_state">
+                                    <span class="main_board_wrstate state_check"
+                                        >확인
+                                        <ul class="state_select">
+                                            <li><span class="state_receive">접수</span></li>
+                                            <li><span class="state_check">확인</span></li>
+                                            <li><span class="state_progress">진행</span></li>
+                                            <li><span class="state_complete">완료</span></li>
+                                            <li><span class="state_other">기타</span></li>
+                                            <li><span class="state_hold">보류</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_category">
+                                    <span class="main_board_wrcategory cat_of"
+                                        >오프라인 시안
+                                        <ul class="category_select">
+                                            <li><span class="cat_on">온라인 시안</span></li>
+                                            <li><span class="cat_of">오프라인 시안</span></li>
+                                            <li><span class="cat_st">세팅 시안</span></li>
+                                            <li><span class="cat_hp">홈페이지</span></li>
+                                            <li><span class="cat_pb">퍼블</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_subject">
+                                    <a href="">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
+                                    <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
+                                </td>
+                                <td class="design_wr_wkname">이슬</td>
+                            </tr>
+                            <tr>
+                                <td class="design_wr_wdate">2024.07.01</td>
+                                <td class="design_wr_fday">2024.07.15</td>
+                                <td class="design_wr_cp"><a href="#">안양바른플러스치과</a></td>
+                                <td class="design_wr_name">박세용 원장</td>
+                                <td class="design_wr_state">
+                                    <span class="main_board_wrstate state_progress"
+                                        >진행
+                                        <ul class="state_select">
+                                            <li><span class="state_receive">접수</span></li>
+                                            <li><span class="state_check">확인</span></li>
+                                            <li><span class="state_progress">진행</span></li>
+                                            <li><span class="state_complete">완료</span></li>
+                                            <li><span class="state_other">기타</span></li>
+                                            <li><span class="state_hold">보류</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_category">
+                                    <span class="main_board_wrcategory cat_of"
+                                        >오프라인 시안
+                                        <ul class="category_select">
+                                            <li><span class="cat_on">온라인 시안</span></li>
+                                            <li><span class="cat_of">오프라인 시안</span></li>
+                                            <li><span class="cat_st">세팅 시안</span></li>
+                                            <li><span class="cat_hp">홈페이지</span></li>
+                                            <li><span class="cat_pb">퍼블</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_subject">
+                                    <a href="">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
+                                    <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
+                                </td>
+                                <td class="design_wr_wkname">이슬</td>
+                            </tr>
+                            <tr>
+                                <td class="design_wr_wdate">2024.07.01</td>
+                                <td class="design_wr_fday">2024.07.15</td>
+                                <td class="design_wr_cp"><a href="#">안양바른플러스치과</a></td>
+                                <td class="design_wr_name">박세용 원장</td>
+                                <td class="design_wr_state">
+                                    <span class="main_board_wrstate state_complete"
+                                        >완료
+                                        <ul class="state_select">
+                                            <li><span class="state_receive">접수</span></li>
+                                            <li><span class="state_check">확인</span></li>
+                                            <li><span class="state_progress">진행</span></li>
+                                            <li><span class="state_complete">완료</span></li>
+                                            <li><span class="state_other">기타</span></li>
+                                            <li><span class="state_hold">보류</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_category">
+                                    <span class="main_board_wrcategory cat_st"
+                                        >세팅 시안
+                                        <ul class="category_select">
+                                            <li><span class="cat_on">온라인 시안</span></li>
+                                            <li><span class="cat_of">오프라인 시안</span></li>
+                                            <li><span class="cat_st">세팅 시안</span></li>
+                                            <li><span class="cat_hp">홈페이지</span></li>
+                                            <li><span class="cat_pb">퍼블</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_subject">
+                                    <a href="">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
+                                    <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
+                                </td>
+                                <td class="design_wr_wkname">이슬</td>
+                            </tr>
+                            <tr>
+                                <td class="design_wr_wdate">2024.07.01</td>
+                                <td class="design_wr_fday">2024.07.15</td>
+                                <td class="design_wr_cp"><a href="#">안양바른플러스치과</a></td>
+                                <td class="design_wr_name">박세용 원장</td>
+                                <td class="design_wr_state">
+                                    <span class="main_board_wrstate state_other"
+                                        >기타
+                                        <ul class="state_select">
+                                            <li><span class="state_receive">접수</span></li>
+                                            <li><span class="state_check">확인</span></li>
+                                            <li><span class="state_progress">진행</span></li>
+                                            <li><span class="state_complete">완료</span></li>
+                                            <li><span class="state_other">기타</span></li>
+                                            <li><span class="state_hold">보류</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_category">
+                                    <span class="main_board_wrcategory cat_hp"
+                                        >홈페이지
+                                        <ul class="category_select">
+                                            <li><span class="cat_on">온라인 시안</span></li>
+                                            <li><span class="cat_of">오프라인 시안</span></li>
+                                            <li><span class="cat_st">세팅 시안</span></li>
+                                            <li><span class="cat_hp">홈페이지</span></li>
+                                            <li><span class="cat_pb">퍼블</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_subject">
+                                    <a href="">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
+                                    <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
+                                </td>
+                                <td class="design_wr_wkname">이슬</td>
+                            </tr>
+                            <tr>
+                                <td class="design_wr_wdate">2024.07.01</td>
+                                <td class="design_wr_fday">2024.07.15</td>
+                                <td class="design_wr_cp"><a href="#">안양바른플러스치과</a></td>
+                                <td class="design_wr_name">박세용 원장</td>
+                                <td class="design_wr_state">
+                                    <span class="main_board_wrstate state_hold"
+                                        >보류
+                                        <ul class="state_select">
+                                            <li><span class="state_receive">접수</span></li>
+                                            <li><span class="state_check">확인</span></li>
+                                            <li><span class="state_progress">진행</span></li>
+                                            <li><span class="state_complete">완료</span></li>
+                                            <li><span class="state_other">기타</span></li>
+                                            <li><span class="state_hold">보류</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_category">
+                                    <span class="main_board_wrcategory cat_pb"
+                                        >퍼블
+                                        <ul class="category_select">
+                                            <li><span class="cat_on">온라인 시안</span></li>
+                                            <li><span class="cat_of">오프라인 시안</span></li>
+                                            <li><span class="cat_st">세팅 시안</span></li>
+                                            <li><span class="cat_hp">홈페이지</span></li>
+                                            <li><span class="cat_pb">퍼블</span></li>
+                                        </ul>
+                                    </span>
+                                </td>
+                                <td class="design_wr_subject">
+                                    <a href="">홈페이지 수정 부탁드립니다.</a><span class="main_board_comment">3</span>
+                                    <img src="/img/main_board_file.svg" alt="파일첨부" class="main_board_file" />
+                                </td>
+                                <td class="design_wr_wkname">이슬</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav class="pg_wrap">
+                        <span class="pg">
+                            <a href="#" class="pg_page pg_start">처음</a>
+                            <a href="#" class="pg_page pg_prev">이전</a>
+                            <strong class="pg_current">1</strong>
+                            <a href="#" class="pg_page">2</a>
+                            <a href="#" class="pg_page">3</a>
+                            <a href="#" class="pg_page">4</a>
+                            <a href="#" class="pg_page">5</a>
+                            <a href="#" class="pg_page">6</a>
+                            <a href="#" class="pg_page">7</a>
+                            <a href="#" class="pg_page">8</a>
+                            <a href="#" class="pg_page">9</a>
+                            <a href="#" class="pg_page">10</a>
+                            <a href="#" class="pg_page pg_next">다음</a>
+                            <a href="#" class="pg_page pg_end">맨끝</a>
+                        </span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 디자인  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/admin/pif/design.js"></script>
+    </th:block>
+</html>

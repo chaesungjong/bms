@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+    <!-- 세팅 양식 조회  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/admin/pif/blog_skin_view.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="add_board_wrap">
+                <h2>세팅 양식</h2>
+                <div class="add_board">
+                    <form action="">
+                        <div class="add_board_info">
+                            <table>
+                                <div class="add_board_title">
+                                    <div>
+                                        <h3>블로그 스킨 양식</h3>
+                                    </div>
+                                    <div class="board_menu_wrap">
+                                        <a href="" class="download_jpg">JPG 내보내기</a>
+                                        <a href="" class="download_pdf">PDF 내보내기</a>
+                                        <select name="" id="">
+                                            <option value="">선택</option>
+                                            <option value="">접수</option>
+                                            <option value="">확인</option>
+                                            <option value="">진행</option>
+                                            <option value="">완료</option>
+                                            <option value="">기타</option>
+                                            <option value="">보류</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="board_title"><img src="/img/calendar_b.svg" alt="" style="margin-left: -2px" />의뢰일</div>
+                                            <input type="date" value="2024-04-20" style="width: 200px" />
+                                        </td>
+                                        <td>
+                                            <div class="board_title"><img src="/img/calendar.svg" alt="" style="margin-left: -2px" />업무기한</div>
+                                            <input type="date" style="width: 200px" />
+                                        </td>
+                                        <td>
+                                            <div class="board_title"><img src="/img/Face.svg" alt="" />기획</div>
+                                            <div class="ch_gr">
+                                                <div>
+                                                    <label>
+                                                        변가연<input type="checkbox" />
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td colspan="2">
+                                            <div class="board_title"><img src="/img/Face.svg" alt="" />디자인</div>
+                                            <div class="ch_gr">
+                                                <div>
+                                                    <label>
+                                                        변가연<input type="checkbox" />
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="board_file_wrap">
+                                        <td colspan="4">
+                                            <div class="file_list_wrap">
+                                                <div class="board_title">첨부파일</div>
+                                                <ul>
+                                                    <li>
+                                                        <span>임상 알집파일.zip</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>임상 이미지01.jpg</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>임상 이미지02.jpg</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>임상 이미지03.jpg</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>임상 이미지04.jpg</span>
+                                                    </li>
+                                                </ul>
+                                                <span>+2</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type="button"><img src="/img/File download.svg" alt="" />한번에 내려받기</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="write_wrap">
+                                <div class="write_box">
+                                    <div class="blog_skin_left">
+                                        <div class="blog_skin_title">
+                                            <img src="/img/place_logo.svg" alt="네이버로고" />
+                                            <span>블로그스킨 PC</span>
+                                        </div>
+                                        <div class="blog_skin_pc">
+                                            <img src="/img/blog_skin_pc.jpg" alt="샘플이미지pc" />
+                                        </div>
+                                    </div>
+                                    <div class="blog_skin_right">
+                                        <div class="blog_skin_title">
+                                            <span>블로그스킨 PC</span>
+                                        </div>
+                                        <div class="blog_skin_m">
+                                            <img src="/img/blog_skin_cover.png" alt="블로그스킨 커버M" />
+                                            <img src="/img/blog_skin_m.jpg" alt="샘플이미지m" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="add_emp_btn_wrap">
+                            <input type="button" value="목록" onclick="location.href='/pif/blog_skin_list'" class="add_board_btn" />
+                            <input type="button" value="수정" class="add_board_btn" />
+                            <input type="button" value="삭제" class="add_board_btn" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 세팅 양식 조회  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/admin/pif/blog_skin_view.js"></script>
+    </th:block>
+</html>

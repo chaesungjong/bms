@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+
+    <!-- 사원 목록 CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/admin/ems/employees.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="emp_wrap">
+                <h2>사원 목록</h2>
+                <div class="emp_board">
+                    <form class="emp_board_top" id="searchForm">
+                        <div class="emp_board_date">
+                            <label for="fr_date">
+                                <input type="date" name="fr_date" th:value="${fr_date}" id="fr_date" class="frm_input" size="10" maxlength="10" />
+                            </label>
+                            <span>~</span>
+                            <label for="to_date">
+                                <input type="date" name="to_date" th:value="${to_date}" id="to_date" class="frm_input" size="10" maxlength="10" />
+                            </label>
+                        </div>
+                        <div class="emp_board_search">
+                            <select name="searchType" id="searchType" class="search_sort" th:value="${searchType}">
+                                <option value="selName" th:selected="${searchType == 'selName'}">성명</option>
+                                <option value="selMemo" th:selected="${searchType == 'selMemo'}">비고</option>
+                            </select>
+                            <label for="sch_word">
+                                <input type="text" name="search" size="20" th:value="${search}" id="sch_word" class="frm_input" />
+                                <input type="button" value="검색" class="sch_btn" id="searchButton" />
+                            </label>
+                        </div>
+                        <div class="emp_board_btn"></div>
+                        <a href="#" id="add_employees" class="emp_reg">사원등록</a>
+                    </form>
+                    <table id="employeeTable" class="emp_board_table" cellspacing="0">
+                        <thead class="emp_board_th">
+                            <tr>
+                                <th>입사일</th>
+                                <th>사원명</th>
+                                <th>직급</th>
+                                <th>부서</th>
+                                <th>생년월일</th>
+                                <th>이메일</th>
+                                <th>비고</th>
+                            </tr>
+                        </thead>
+                        <tbody class="emp_board_td"></tbody>
+                    </table>
+                    <nav class="pg_wrap">
+                        <span class="pg" id="customPagination"></span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- 사원 목록 Javascript -->
+        <th:block layout:fragment="customJS">
+            <script src="/js/templates/admin/ems/employees.js"></script>
+        </th:block>
+    </body>
+</html>

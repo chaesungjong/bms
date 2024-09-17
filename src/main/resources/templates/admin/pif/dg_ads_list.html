@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
+    <!-- 세팅 양식  CSS -->
+    <th:block layout:fragment="customCSS">
+        <link rel="stylesheet" href="/css/admin/pif/dg_ads_list.css" />
+    </th:block>
+
+    <body>
+        <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
+            <div class="dg_ads_list_board_wrap">
+                <form action="">
+                    <div class="top_bar">
+                        <h2>세팅 양식</h2>
+                    </div>
+                    <div class="dg_ads_list_board">
+                        <div class="dg_ads_list_sub_wrap">
+                            <div class="sub_title">
+                                <h3>당근 광고</h3>
+                            </div>
+                            <ul class="btn_wrap">
+                                <li class="homepage">
+                                    <button type="button" onclick="location.href='/pif/place_list'"><span>플레이스</span></button>
+                                </li>
+                                <li class="setting">
+                                    <button type="button" onclick="location.href='/pif/blog_skin_list'"><span>블로그 스킨</span></button>
+                                </li>
+                                <li class="online">
+                                    <button type="button" onclick="location.href='/pif/naver_talk_list'"><span>네이버 톡톡</span></button>
+                                </li>
+                                <li class="offline">
+                                    <button type="button" onclick="location.href='/pif/place_ads_list'"><span>플레이스 광고</span></button>
+                                </li>
+                                <li class="offline click_on">
+                                    <button type="button" onclick="location.href='/pif/dg_ads_list'"><span>당근 광고</span></button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="input_wrap">
+                            <div>
+                                <div class="date_wrap">
+                                    <input type="date" name="" id="" value="2024-05-01" />
+                                    <small>~</small>
+                                    <input type="date" name="" id="" value="2024-05-02" />
+                                </div>
+                                <div class="sort_wrap">
+                                    <select name="" id="">
+                                        <option value="">업체명</option>
+                                        <option value="">담당자</option>
+                                        <option value="">지역</option>
+                                    </select>
+                                    <div class="search_bar">
+                                        <input type="search" />
+                                        <button type="button">
+                                            <img src="/img/search.svg" alt="" />
+                                        </button>
+                                    </div>
+                                    <button type="button" class="reset_btn" onClick="window.location.reload()"></button>
+                                    <button type="button" class="my_btn">My</button>
+                                </div>
+                            </div>
+                            <div class="guide_btn_wrap">
+                                <!-- <button type="button" class="guide_btn">양식 가이드</button> -->
+                                <button type="button" class="edit_btn" onclick="location.href='/pif/dg_ads_write'">양식 만들기</button>
+                            </div>
+                        </div>
+                        <div class="dg_ads_list_main_wrap">
+                            <table cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <th>순서</th>
+                                        <th>업체명</th>
+                                        <th>기획 담당자</th>
+                                        <th>디자인 담당자</th>
+                                        <th>진행상황</th>
+                                        <th>작업 기간</th>
+                                        <th>관리</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">서울김앤장치과</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">서울샤인치과</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">서울스마트치과</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">서울하이안치과</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">연세세브란스치과 경기광주</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">서울클리어치과 연신내</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">연세이로운치과</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">강남플란트치과</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">서울바른마음치과</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="num_box"></td>
+                                        <td class="name_box">
+                                            <a href="/pif/dg_ads_view">연세스위트치과</a>
+                                        </td>
+                                        <td class="planner_box"></td>
+                                        <td class="designer_box"></td>
+                                        <td class="confirm_box"></td>
+                                        <td class="date_box"></td>
+                                        <td class="btn_box">
+                                            <div class="btn_wrap">
+                                                <button type="button">
+                                                    <img src="/img/Mode edit.svg" alt="" />
+                                                </button>
+                                                <button type="button">
+                                                    <img src="/img/Close.svg" alt="" />
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <nav class="pg_wrap">
+                                <span class="pg">
+                                    <a href="#" class="pg_page pg_start">처음</a>
+                                    <a href="#" class="pg_page pg_prev">이전</a>
+                                    <strong class="pg_current">1</strong>
+                                    <a href="#" class="pg_page">2</a>
+                                    <a href="#" class="pg_page">3</a>
+                                    <a href="#" class="pg_page">4</a>
+                                    <a href="#" class="pg_page">5</a>
+                                    <a href="#" class="pg_page">6</a>
+                                    <a href="#" class="pg_page">7</a>
+                                    <a href="#" class="pg_page">8</a>
+                                    <a href="#" class="pg_page">9</a>
+                                    <a href="#" class="pg_page">10</a>
+                                    <a href="#" class="pg_page pg_next">다음</a>
+                                    <a href="#" class="pg_page pg_end">맨끝</a>
+                                </span>
+                            </nav>
+                        </div>
+                    </div>
+                </form>
+                <!-- <div class="popup_wrap">
+                    <div class="bg"></div>
+                    <div class="popup">
+                        <div class="popup_head">
+                            <span>플레이스 광고 양식 가이드</span>
+                            <button type="button" class="exit_btn">
+                                <img src="/img/Close_w.svg" alt="닫기버튼" />
+                            </button>
+                        </div>
+                        <div class="popup_inner">
+                            <img src="/img/dg_ads_guide.jpg" alt="가이드" />
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </body>
+
+    <!-- 세팅 양식  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/admin/pif/dg_ads_list.js"></script>
+    </th:block>
+</html>
