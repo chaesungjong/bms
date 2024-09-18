@@ -310,7 +310,7 @@ function validate() {
         if (!input.value.trim()) {
             allFilled = false;
             input.focus();
-            alert(input.placeholder + '를(을) 입력해주세요.');
+            alert(input.getAttribute('data-alert') + '를(을) 입력해주세요.');
             break; // 필수 필드가 비어있는 경우 루프 종료
         }
     }

@@ -31,7 +31,7 @@
                                     <tr class="add_bm_state">
                                         <td class="add_bm_title">업체 상태</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <select name="siteState" id="siteState" class="bm_state01" data-alert="업체 상태" >
+                                            <select name="siteState" id="siteState" class="bm_state01">
                                                 <th:block th:each="siteState : ${siteStateList}">
                                                     <option th:value="${siteState['code']}"
                                                             th:text="${siteState['codeName']}"
@@ -39,7 +39,7 @@
                                                     </option>
                                                 </th:block>
                                             </select>
-                                            <select name="siteStateLevel" id="siteStateLevel" class="bm_state02" data-alert="업체 상태">
+                                            <select name="siteStateLevel" id="siteStateLevel" class="bm_state02" >
                                                 <th:block th:each="siteStateLevel : ${siteStateLevelList}">
                                                     <option th:value="${siteStateLevel['code']}"
                                                             th:text="${siteStateLevel['codeName']}"
@@ -47,7 +47,7 @@
                                                     </option>
                                                 </th:block>
                                             </select>
-                                            <select name="siteOpenState" id="siteOpenState" class="bm_state03" data-alert="업체 상태">
+                                            <select name="siteOpenState" id="siteOpenState" class="bm_state03">
                                                 <th:block th:each="siteOpenState : ${siteOpenStateList}">
                                                     <option th:value="${siteOpenState['code']}"
                                                             th:text="${siteOpenState['codeName']}"
@@ -123,9 +123,9 @@
                                                     </option>
                                                 </th:block>
                                             </select>
-                                            <input type="date" name="contractSdate" id="contractSdate" th:value="${siteInfo?.contractSdate != null ? siteInfo.contractSdate : ''}" class="bm_cdate_s" />
+                                            <input type="date" name="contractSdate" id="contractSdate" required data-alert="계약 시작일" th:value="${siteInfo?.contractSdate != null ? siteInfo.contractSdate : ''}" class="bm_cdate_s" />
                                             <span>~</span>
-                                            <input type="date" name="contractEdate" id="contractEdate" th:value="${siteInfo?.contractEdate != null ? siteInfo.contractEdate : ''}" class="bm_cdate_e" />
+                                            <input type="date" name="contractEdate" id="contractEdate" required data-alert="계약 종료일" th:value="${siteInfo?.contractEdate != null ? siteInfo.contractEdate : ''}" class="bm_cdate_e" />
                                         </td>
                                     </tr>
                                     <tr class="add_bm_service02">
@@ -231,7 +231,7 @@
                                         <td class="add_bm_title">성명</td>
                                         <td class="add_bm_con">
                                             <label for="bm_hname">
-                                                <input type="text" class="bm_hname" id="ceoName" name="ceoName" placeholder="홍길동" maxlength="8" th:value="${siteInfo?.ceoName != null ? siteInfo.ceoName : ''}" />
+                                                <input type="text" class="bm_hname" id="ceoName" name="ceoName" placeholder="홍길동" required data-alert="원장명"  maxlength="8" th:value="${siteInfo?.ceoName != null ? siteInfo.ceoName : ''}" />
                                             </label>
                                         </td>
                                         <td class="add_bm_title">대표자 생년월일</td>

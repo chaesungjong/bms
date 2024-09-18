@@ -238,3 +238,25 @@ function formatPhoneNumber(input) {
 function getProxy(fileName) {
   return "/proxy/" + fileName;
 }
+
+/**
+ * 필수 파라미터 체크 함수
+ * @returns {Boolean}
+ */
+function validate() {
+  let form = document.getElementById('frmSubmit');
+  let inputs = form.querySelectorAll('input[required], select[required]');
+  let allFilled = true;
+
+  for (let input of inputs) {
+      if (!input.value.trim()) {
+          allFilled = false;
+          input.focus();
+          alert(input.getAttribute('data-alert') + "를(을) 입력해주세요.");
+          break; // 필수 필드가 비어있는 경우 루프 종료
+      }
+  }
+  
+  return allFilled;
+}
+

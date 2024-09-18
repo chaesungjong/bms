@@ -29,7 +29,7 @@
                                             </label>
                                             <label for="nameEng"
                                                 >영문명
-                                                <input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명" th:value="${memInfo?.nameEng}" maxlength='15' data-alert="영문명"/>
+                                                <input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명" th:value="${memInfo?.nameEng}" maxlength='15' required data-alert="영문명"/>
                                             </label>
                                             <label for="userid"
                                                 >아이디
@@ -37,7 +37,7 @@
                                             </label>
                                             <label for="pwd" th:if="${corrections != 'Y'}"
                                                 >비밀번호
-                                                <input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" maxlength='20' data-alert="비밀번호"/>
+                                                <input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" maxlength='20' required data-alert="비밀번호"/>
                                             </label>
                                             <label for="pwdCheck" th:if="${corrections != 'Y'}">비밀번호 확인
                                                 <input type="password" name="pwdCheck" id="pwdCheck" class="pwr_box"
@@ -50,25 +50,25 @@
                                         <td colspan="3" class="team_gr">
                                             <label for="departCode"
                                                 >부서 / 팀 / 직위 / 직책
-                                                <select id="departCode" name="departCode" class="team_wrap">
+                                                <select id="departCode" name="departCode" class="team_wrap" required data-alert="부서">
                                                     <th:block th:each="departName : ${departNameList}">
                                                         <option th:value="${departName['code']}" th:text="${departName['codeName']}" th:selected="${departName.codeName == memInfo?.departCode}"></option>
                                                     </th:block>
                                                 </select>
 
                                                 <select id="teamCode" name="teamCode">
-                                                    <th:block th:each="teamName : ${teamNameList}">
+                                                    <th:block th:each="teamName : ${teamNameList}" required data-alert="팀">
                                                         <option th:value="${teamName['code']}" th:text="${teamName['codeName']}" th:selected="${teamName.codeName == memInfo?.teamCode}"></option>
                                                     </th:block>
                                                 </select>
 
-                                                <select name="jobPosition" id="jobPosition">
+                                                <select name="jobPosition" id="jobPosition" required data-alert="직위">
                                                     <th:block th:each="jobPosition : ${jobPositionList}">
                                                         <option th:value="${jobPosition['code']}" th:text="${jobPosition['codeName']}" th:selected="${jobPosition.codeName == memInfo?.jobPosition}"></option>
                                                     </th:block>
                                                 </select>
 
-                                                <select name="jobTitle" id="jobTitle">
+                                                <select name="jobTitle" id="jobTitle" required data-alert="직책">
                                                     <th:block th:each="jobTitle : ${jobTitleList}">
                                                         <option th:value="${jobTitle['code']}" th:text="${jobTitle['codeName']}" th:selected="${jobTitle.codeName == memInfo?.jobTitle}"></option>
                                                     </th:block>
@@ -123,14 +123,14 @@
                                             </select>
 
                                             <label for="birthday">
-                                                <input type="date" name="birthday" id="birthday" class="birth_date" size="11" maxlength="10" placeholder="생년월일" th:value="${memInfo?.birthday}" required />
+                                                <input type="date" name="birthday" id="birthday" class="birth_date" size="11" maxlength="10" placeholder="생년월일" th:value="${memInfo?.birthday}" required data-alert="비밀번호" />
                                             </label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="add_emp_title">이메일</td>
                                         <td>
-                                            <input type="email" id="email" name="email" size="34" placeholder="이메일" th:value="${memInfo?.email}" maxlength="50" required />
+                                            <input type="email" id="email" name="email" size="34" placeholder="이메일" th:value="${memInfo?.email}" maxlength="50" required data-alert="비밀번호" />
                                         </td>
                                         <td class="add_emp_title">부서 이메일</td>
                                         <td>
@@ -140,7 +140,7 @@
                                     <tr>
                                         <td class="add_emp_title">휴대폰 번호</td>
                                         <td>
-                                            <input type="tel" id="hpno" name="hpno" size="34" placeholder="휴대폰 번호" th:value="${memInfo?.hpno}" maxlength="12" required />
+                                            <input type="tel" id="hpno" name="hpno" size="34" placeholder="휴대폰 번호" th:value="${memInfo?.hpno}" maxlength="15" required data-alert="비밀번호" />
                                         </td>
                                         <td class="add_emp_title">업무폰 번호</td>
                                         <td>
@@ -189,7 +189,7 @@
                                             </label>
                                             <label for="juminNo">
                                                 <span class="sub_span">주민번호</span>
-                                                <input type="text" id="juminNo" name="juminNo" placeholder="주민번호" th:value="${memInfo?.juminNo}" maxlength="14" oninput="formatRRN(this)" required />
+                                                <input type="text" id="juminNo" name="juminNo" th:value="${memInfo?.juminNo}" maxlength="14" oninput="formatRRN(this)" required data-alert="주민등록번호" />
                                             </label>
                                         </td>
                                     </tr>
