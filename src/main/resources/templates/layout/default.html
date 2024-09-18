@@ -17,11 +17,28 @@
         <div id="wrapper">
             <!-- 사이드바 영역  -->
             <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
+
                 <th:block th:if="${isLocalhost}">
-                    <div th:replace="/partials/admin/sidebar_dev :: sidebar"></div>
+
+                    <th:block th:if="${localUser}">
+                        <div th:replace="/partials/admin/sidebar_dev :: sidebar"></div>
+                    </th:block>
+
+                    <th:block th:unless="${localUser}">
+                        <div th:replace="/partials/enterprise/sidebar :: sidebar"></div>
+                    </th:block>
+                    
                 </th:block>
                 <th:block th:unless="${isLocalhost}">
-                    <div th:replace="/partials/admin/sidebar :: sidebar"></div>
+
+                    <th:block th:if="${localUser}">
+                        <div th:replace="/partials/enterprise/sidebar :: sidebar"></div>
+                    </th:block>
+
+                    <th:block th:unless="${localUser}">
+                        <div th:replace="/partials/enterprise/sidebar :: sidebar"></div>
+                    </th:block>
+                    
                 </th:block>
             </th:block>
             <div class="main_view">

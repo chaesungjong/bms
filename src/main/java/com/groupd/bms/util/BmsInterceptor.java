@@ -44,6 +44,13 @@ public class BmsInterceptor implements HandlerInterceptor {
         String host = request.getServerName();
         request.setAttribute("isLocalhost", "localhost".equals(host));
 
+        //사이드바 메뉴 구분 값
+        if(request.getRequestURI().contains("admin")){
+            request.setAttribute("localUser", true);
+        }else{
+            request.setAttribute("localUser", false);
+        }
+
 
         //디자이너 화면은 예외 처리 
         if(request.getRequestURI().contains("Designer")){
