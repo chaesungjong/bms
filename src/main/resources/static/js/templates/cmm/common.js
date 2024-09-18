@@ -260,3 +260,42 @@ function validate() {
   return allFilled;
 }
 
+
+/**
+ * 관리자의 부서명
+ * @param {*} row 
+ * @returns 
+ */
+function setdepartName(departNameClass){
+
+  if(departNameClass.indexOf('광고관리') != -1  ){
+    return 'cat_ec';
+  }
+
+  if(departNameClass.indexOf('디자인') != -1  ){
+    return 'cat_dg';
+  }
+
+  if(departNameClass.indexOf('퍼블리싱') != -1  ){
+    return 'cat_pb';
+  }
+
+  if(departNameClass.indexOf('영상') != -1 ){
+    return 'cat_bd';
+  }
+
+  if(departNameClass.indexOf('관리') != -1  ){
+    return 'cat_cp';
+  }
+
+  if(departNameClass.indexOf('재무')  != -1 ){
+    return 'cat_fn';
+  }
+
+  if( departNameClass.indexOf('마케팅') != -1 || departNameClass.indexOf('기획') != -1){
+    return 'cat_mk';
+  }
+
+  return "cat_dg";
+
+}

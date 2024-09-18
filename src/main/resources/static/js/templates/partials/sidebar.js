@@ -86,7 +86,6 @@ function showProfile(userID) {
         if (response.retVal == 0) {
             
             $('#userNameView').text(response.userName);
-            $('#departNameView').text(response.departName);
             $('#depart_total_infoView').text(response.depart_total_info);
             $('#jobStartDateView').text(response.jobStartDate);
             $('#jobDateView').text(response.jobDate);
@@ -103,6 +102,9 @@ function showProfile(userID) {
             $('#boardUseYNView').text(response.boardUseYN);
             $('#memoView').text(response.memo);
             $('#departName').text(response.departName);
+            $('#departName').removeClass(); 
+            $('#departName').addClass('member_info_team');
+            $('#departName').addClass(setdepartName(response.departName));
             $('#infoUrl').attr('data-userKey', userID);
 
             if(response.imgProfile == null || response.imgProfile == '')
