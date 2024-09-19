@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class BmsInterceptor implements HandlerInterceptor {
 
 
-    private static final String[] LOGIN_CHECK_EXCLUDE_PATHS = {"/acm/login","/","/error","/acm/loginProcess.do" };
+    private static final String[] LOGIN_CHECK_EXCLUDE_PATHS = {"/admin/acm/login","/","/error","/admin/acm/loginProcess.do" };
 
     @Autowired
     private UserService userService;
@@ -108,6 +108,12 @@ public class BmsInterceptor implements HandlerInterceptor {
 
                         }
                     }
+                }
+
+                // ㄹ로그인 페이지로 리다이렉트
+                if (request.getSession().getAttribute("member") != null) {
+                    response.sendRedirect("/admin/dsb/main");
+                    return false; // 현재 요청을 중지하고 메인 페이지로 리다이렉트
                 }
 
                  response.sendRedirect("/admin/acm/login");

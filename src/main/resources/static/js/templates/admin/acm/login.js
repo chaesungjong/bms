@@ -50,10 +50,10 @@ $(document).ready(function () {
         };
 
         // ajaxRequest 함수를 사용하여 로그인 처리
-        ajaxRequest("admin/acm/loginProcess.do", loginData, "POST", function (response) {
+        ajaxRequest("/admin/acm/loginProcess.do", loginData, "POST", function (response) {
             // 로그인 성공 시 대시보드 페이지로 리디렉트
             if (response.retVal == 0) {
-                location.href = "admin/dsb/main";
+                location.href = "/admin/dsb/main";
             } else {
                 alert(response.errMsg);
             }
