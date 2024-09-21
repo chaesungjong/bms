@@ -6,14 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bugsnag.Bugsnag;
 import com.groupd.bms.model.Member;
 import com.groupd.bms.model.MemberLogin;
+import com.groupd.bms.service.CommonService;
 import com.groupd.bms.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class BmsInterceptor implements HandlerInterceptor {
@@ -23,6 +27,12 @@ public class BmsInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CommonService commonService;
+
+    @Autowired
+    private Bugsnag bugsnag;
 
     /*
      * preHandle은 컨트롤러가 실행되기 전에 실행되는 메소드
@@ -110,7 +120,7 @@ public class BmsInterceptor implements HandlerInterceptor {
                     }
                 }
 
-                // ㄹ로그인 페이지로 리다이렉트
+                // 로그인 페이지로 리다이렉트
                 if (request.getSession().getAttribute("member") != null) {
                     response.sendRedirect("/admin/dsb/main");
                     return false; // 현재 요청을 중지하고 메인 페이지로 리다이렉트
@@ -176,6 +186,7 @@ public class BmsInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         if (ex != null) {
             log.error("Request processing error", ex);
+            bugsnag.notify(ex);
         }
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
@@ -189,5 +200,11 @@ public class BmsInterceptor implements HandlerInterceptor {
     private void setMember(HttpServletRequest request) {
         Member member = (Member) request.getSession().getAttribute("member");
         request.setAttribute("member", member);
+
+        //    // 전체 레코드 수 가져오기
+        // int totalRecords = Integer.parseInt(commonService.mng("SITE_LIST_CNT", member.getUserid(), "", "", "", "", "", "", "")));
+        // // 데이터 가져오기
+        // List<Map<String, Object>> employeeList = commonService.mngList("SITE_LIST", userId, String.valueOf(page), String.valueOf(length), startDate.replaceAll("-", ""), EndDate.replaceAll("-", ""), searchType, search, "");
+
     }
 }
