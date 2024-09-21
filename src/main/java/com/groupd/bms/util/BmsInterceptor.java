@@ -145,6 +145,38 @@ public class BmsInterceptor implements HandlerInterceptor {
 
          }
 
+        //로그인 되어 있는 유저 수신함 리스트 가져 오기
+        if (request.getSession().getAttribute("member") != null) {
+
+            Member member = (Member) request.getSession().getAttribute("member");
+            String userId = member.getUserid();
+
+             // 데이터 가져오기
+            List<Map<String, Object>> inBox_All_List = commonService.mngList("inBox_All_List", userId, "", "", "", "", "", "", "");
+            List<Map<String, Object>> inBox_All_CNT = commonService.mngList("inBox_All_CNT", userId, "", "", "", "", "", "", "");
+            List<Map<String, Object>> inBox_New_List = commonService.mngList("inBox_New_List", userId, "", "", "", "", "", "", "");
+            List<Map<String, Object>> inBox_New_CNT = commonService.mngList("inBox_New_CNT", userId, "", "", "", "", "", "", "");
+
+            //수신함 ALL 리스트 및 갯수 
+            if(inBox_All_CNT != null && inBox_All_CNT.size() > 0 ){
+                int cnt = com.groupd.bms.util.StringUtil.stringToInt(inBox_All_CNT.get(0).get("CNT").toString());
+                request.setAttribute("inBox_All_CNT", cnt);
+                request.setAttribute("inBox_All_List", inBox_All_List);
+
+            }
+
+            //수신함 미확인 리스트 및 갯수
+            if(inBox_New_CNT != null && inBox_New_CNT.size() > 0 ){
+                int cnt = com.groupd.bms.util.StringUtil.stringToInt(inBox_New_CNT.get(0).get("CNT").toString());
+                request.setAttribute("inBox_New_CNT", cnt);
+                request.setAttribute("inBox_New_List", inBox_New_List);
+            }
+
+        }
+
+
+         
+
         return true; // 로그인, 등록, 로그아웃 페이지는 세션 체크를 하지 않음
     }
 
@@ -200,11 +232,5 @@ public class BmsInterceptor implements HandlerInterceptor {
     private void setMember(HttpServletRequest request) {
         Member member = (Member) request.getSession().getAttribute("member");
         request.setAttribute("member", member);
-
-        //    // 전체 레코드 수 가져오기
-        // int totalRecords = Integer.parseInt(commonService.mng("SITE_LIST_CNT", member.getUserid(), "", "", "", "", "", "", "")));
-        // // 데이터 가져오기
-        // List<Map<String, Object>> employeeList = commonService.mngList("SITE_LIST", userId, String.valueOf(page), String.valueOf(length), startDate.replaceAll("-", ""), EndDate.replaceAll("-", ""), searchType, search, "");
-
     }
 }
