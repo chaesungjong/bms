@@ -58,7 +58,8 @@ $(document).ready(function () {
                 alert(response.errMsg);
             }
         }, function () {
-            alert('현재 기능 개발 준비중 입니다.');
+            //error.status 분기에 따른 오류메세지 노출 필요
+            alert('로그인 처리중 오류가 발생하였습니다. 재 시도 해주시기 바랍니다.');
         });
     });
 });
