@@ -1,4 +1,4 @@
-package com.groupd.bms.controller.designer;
+package com.groupd.bms.controller.Designer;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

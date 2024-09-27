@@ -23,7 +23,7 @@ import java.util.Map;
 public class BmsInterceptor implements HandlerInterceptor {
 
 
-    private static final String[] LOGIN_CHECK_EXCLUDE_PATHS = {"/admin/acm/login","/","/error","/admin/acm/loginProcess.do" };
+    private static final String[] LOGIN_CHECK_EXCLUDE_PATHS = {"/admin/acm/login","/","/error","/admin/acm/loginProcess.do","/enterprise/acm/login","/enterprise/acm/loginProcess.do"};
 
     @Autowired
     private UserService userService;
