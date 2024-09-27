@@ -1,4 +1,4 @@
-package com.groupd.bms.controller.Enterprise.csf;
+package com.groupd.bms.controller.enterprise.csf;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
