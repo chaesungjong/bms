@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
-    <!-- 업체 관리  CSS -->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorate="~{layout/default}">
+
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/enterprise/csf/maintenance_bulletin_board.css" />
     </th:block>
 
     <body>
         <div layout:fragment="content" id="content-wrapper">
-            <h1> 유지보수게시판 </h1>
-        </div>
+            <div>
+                브러쉬 크기<input id="input" type="number" min="0" max="100" value="1"></input> 
+                <button class="colorButton" style="background-color: black; width: 20px; height: 20px; border: solid 1px;"></button>
+                <button class="colorButton" style="background-color: blue; width: 20px; height: 20px; border: solid 1px;"></button>
+                <button class="colorButton" style="background-color: red; width: 20px; height: 20px; border: solid 1px;"></button>
+                <button class="colorButton" style="background-color: green; width: 20px; height: 20px; border: solid 1px;"></button>
+                <button class="colorButton" style="background-color: pink; width: 20px; height: 20px; border: solid 1px;"></button>
+                <button class="colorButton" style="background-color: yellow; width: 20px; height: 20px; border: solid 1px;"></button>
+                <button class="colorButton" style="background-color: skyblue; width: 20px; height: 20px; border: solid 1px;"></button>
+                <button class="colorButton" style="background-color: violet; width: 20px; height: 20px; border: solid 1px;"></button>
+                <button class="colorButton" style="background-color: lime; width: 20px; height: 20px; border: solid 1px;"></button>
+                
+                <button id="clearButton">전체지우기</button> <input type="file" id="imageUpload" accept="image/*"> 
+                <button id="saveButton">이미지 저장</button> 
+                <button id="addTextButton">텍스트</button> 
+                <button id="addArrowButton">화살표</button> 
+                <button id="backButton">뒤로</button>
+            </div>
+            <canvas id='canvas' width='500' height='500' style="border:1px solid black"></canvas> </div>
     </body>
 
-    <!-- 업체 관리  Javascript -->
     <th:block layout:fragment="customJS">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script> 
         <script src="/js/templates/enterprise/csf/maintenance_bulletin_board.js"></script>
     </th:block>
+
 </html>

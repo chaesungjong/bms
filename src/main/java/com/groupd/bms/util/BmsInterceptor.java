@@ -158,7 +158,7 @@ public class BmsInterceptor implements HandlerInterceptor {
             List<Map<String, Object>> inBox_New_CNT = commonService.mngList("inBox_New_CNT", userId, "", "", "", "", "", "", "");
 
             //수신함 ALL 리스트 및 갯수 
-            if(inBox_All_CNT != null && inBox_All_CNT.size() > 0 ){
+           if(inBox_All_CNT != null && inBox_All_CNT.size() > 0 ){
                 int cnt = com.groupd.bms.util.StringUtil.stringToInt(inBox_All_CNT.get(0).get("CNT").toString());
                 request.setAttribute("inBox_All_CNT", cnt);
                 request.setAttribute("inBox_All_List", inBox_All_List);
