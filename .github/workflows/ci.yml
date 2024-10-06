@@ -26,15 +26,31 @@ jobs:
           name: build-artifact
           path: build/libs/ROOT.war
 
-          # clean-destination-dir: false  # 더 이상 사용되지 않음 (필요 없으면 제거)
-      - name: Shutdown and Restart Tomcat
-        uses: appleboy/ssh-action@master
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
         with:
-          host: gdbmsdev.cafe24.com
+          name: build-artifact
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.1
+        with:
+          server: gdbmsdev.cafe24.com
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            sudo /tomcat/bin/shutdown.bat  # 톰캣 종료
-            sleep 6  # 6초 대기
-            sudo /tomcat/bin/startup.bat  # 톰캣 시작
+          server-dir: /tomcat/webapps-javaee/
+      - name: Shutdown and Restart Tomcat
+      uses: appleboy/ssh-action@master
+      with:
+        host: gdbmsdev.cafe24.com
+        port: 21
+        username: gdbmsdev
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: |
+          sudo /gdbmsdev/tomcat/bin/shutdown.bat  # 톰캣 종료
+          sleep 6  # 6초 대기
+          sudo /gdbmsdev/tomcat/bin/startup.bat  # 톰캣 시작
