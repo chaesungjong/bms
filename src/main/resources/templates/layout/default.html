@@ -33,12 +33,12 @@
                     
                 </th:block>
 
-
+                <!-- 로컬호스트 주소가 아닐 때 -->
                 <th:block th:unless="${isLocalhost}">
 
                     <!-- 관리자가 접근 하였을 때  -->
                     <th:block th:if="${localUser}">
-                        <div th:replace="/partials/admin/sidebar :: sidebar"></div>
+                      <!--   <div th:replace="/partials/admin/sidebar :: sidebar"></div> -->
                     </th:block>
 
                     <!-- 업체 담당자가 접근 하였을 때  -->

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+    <body>
+        <div th:fragment="common_popup">
+            <div class="member_info_wrap">
+                <div class="member_info_bg">
+                    <div class="member_info_window">
+                        <div class="member_info_top">
+                            <h2>담당자 기본정보</h2>
+                            <span class="member_info_close"><img src="/img/member_info_close.svg" alt="닫기" /></span>
+                        </div>
+                        <div class="member_info_section">
+                            <div class="member_info_s01">
+                            </div>
+                            <div class="member_info_s03">
+                                <h4>업체 담당자 정보</h4>
+                                <ul class="member_info_list03">
+                                    <li class="member_info_address">
+                                        <div class="member_info_title"><h5>이름</h5></div>
+                                        <div class="member_info_con"><p th:text="${member.name}"></p></div>
+                                    </li>
+                                    <li class="member_info_acc">
+                                        <div class="member_info_title"><h5>생년월일</h5></div>
+                                        <div class="member_info_con"><p th:text="${member.birthday}"></p></div>
+                                    </li>
+                                    <li class="member_info_fam">
+                                        <div class="member_info_title"><h5>이메일</h5></div>
+                                        <div class="member_info_con"><p th:text="${member.email}"></p></div> 
+                                    </li>
+                                    <li class="member_info_idn">
+                                        <div class="member_info_title"><h5>휴대폰 번호</h5></div>
+                                        <div class="member_info_con"><p th:text="${member.hpno}"></p></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bm_info_wrap" id="bm_info01">
+                <div class="bm_info_bg">
+                    <div class="bm_info_window">
+                        <div class="bm_info_top">
+                            <h2>업체 정보</h2>
+                            <span class="bm_info_close"><img src="/img/member_info_close.svg" alt="닫기" /></span>
+                        </div>
+                        <div class="bm_info_section">
+                            <div class="bm_info_s01">
+                                <h3>
+                                    <span class="bm_info_bname" id="siteName"></span>
+                                    <div class="bm_info_state_box">
+                                        <span class="bm_info_state01" id="strSiteStateLevel">보통</span>
+                                    </div>
+                                </h3>
+                                <ul class="bm_info_list01">
+                                    <li class="bm_info_cdate">
+                                        <div class="bm_info_title"><h5>계약 기간</h5></div>
+                                        <div class="bm_info_con">
+                                            <p><span class="bm_info_cdate_s" id="contractSdate"></span> ~ <span class="bm_info_cdate_e" id="contractEdate"></span></p>
+                                            <span class="bm_info_cont" id="strContractState"></span>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_etc">
+                                        <div class="bm_info_title"><h5>비고</h5></div>
+                                        <div class="bm_info_con"><p id="strSiteOpenState"></p></div>
+                                    </li>
+                                    <li class="bm_info_type">
+                                        <div class="bm_info_title"><h5>거래 내용</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>
+                                                <span class="bm_info_type1" id="transaction"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_homepage">
+                                        <div class="bm_info_title"><h5>홈페이지</h5></div>
+                                        <div class="bm_info_con"><p id="siteURL"></p></div>
+                                    </li>
+                                    <li class="bm_info_domein_date">
+                                        <div class="bm_info_title"><h5>도메인 만료</h5></div>
+                                        <div class="bm_info_con"><p id="siteDomainExpdt"></p></div>
+                                    </li>
+                                    <li class="bm_info_hosting_date">
+                                        <div class="bm_info_title"><h5>호스팅 만료</h5></div>
+                                        <div class="bm_info_con"><p id="siteHostingExpdt"></p></div>
+                                    </li>
+                                    <li class="bm_info_pic">
+                                        <div class="bm_info_title"><h5>담당자 정보</h5></div>
+                                        <div class="bm_info_con" ><p id="contactInformation"></p></div>
+                                    </li>
+                                    <li class="bm_info_address">
+                                        <div class="bm_info_title"><h5>주소</h5></div>
+                                        <div class="bm_info_con"><p id="adress"></p></div>
+                                    </li>
+                                    <li class="bm_info_memo">
+                                        <div class="bm_info_title">
+                                            <h5>특이사항 <span>(메모)</span></h5>
+                                        </div>
+                                        <div class="bm_info_con">
+                                            <p id="memo"></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bm_info_s02">
+                                <h4>계정정보</h4>
+                                <ul class="bm_info_list02">
+                                    <li class="bm_info_acc01">
+                                        <div class="bm_info_title"><h5>카페24</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="CAFE24siteDomain"></span>
+                                                <div class="bm_info_line"></div>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="CAFE24id"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="CAFE24pw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_acc02">
+                                        <div class="bm_info_title"><h5>FTP정보</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="FTPsiteDomain"></span>
+                                                <div class="bm_info_line"></div>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="FTPid"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="FTPpw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_acc03">
+                                        <div class="bm_info_title"><h5>홈페이지 관리자 정보</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="HOMEPAGEsiteDomain"></span>
+                                                <div class="bm_info_line"></div>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="HOMEPAGEid"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="HOMEPAGEpw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_acc04">
+                                        <div class="bm_info_title"><h5>네이버 블로그</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_BLOGsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_BLOGid"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_BLOGpw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_acc05">
+                                        <div class="bm_info_title"><h5>네이버 블로그2</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_BLOG2siteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_BLOG2id"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_BLOG2pw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_acc06">
+                                        <div class="bm_info_title"><h5>플레이스</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_PLACEsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_PLACEid"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_PLACEpw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_acc07">
+                                        <div class="bm_info_title"><h5>네이버 광고</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="NAVER_ADsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="NAVER_ADid"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="NAVER_ADpw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_acc08">
+                                        <div class="bm_info_title"><h5>카카오 비즈니스</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="KAKAO_BIZsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="KAKAO_BIZid"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="KAKAO_BIZpw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_acc09">
+                                        <div class="bm_info_title"><h5>인스타그램</h5></div>
+                                        <div class="bm_info_con">
+                                            <p>도메인 :&nbsp;<span class="bm_info_acc01_dm" id="INSTAGRAMsiteDomain"></span>
+                                                ID :&nbsp;<span class="bm_info_acc01_id" id="INSTAGRAMid"></span>
+                                                <div class="bm_info_line"></div>
+                                                PW :&nbsp;<span class="bm_info_acc01_pw" id="INSTAGRAMpw"></span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bm_info_s03">
+                                <h4>업체 담당자 정보</h4>
+                                <ul class="bm_info_list03">
+                                    <li class="bm_info_host">
+                                        <div class="bm_info_hname">
+                                            <div class="bm_info_title"><h5>성명</h5></div>
+                                            <div class="bm_info_con"><p id="ceoName"></p></div>
+                                        </div>
+                                        <div class="bm_info_hdate">
+                                            <div class="bm_info_title"><h5>생년월일</h5></div>
+                                            <div class="bm_info_con"><p>1999.12.12</p></div>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_hphone">
+                                        <div class="bm_info_title"><h5>연락처</h5></div>
+                                        <div class="bm_info_con">
+                                            <p id="managerPhone"></p>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_hmail">
+                                        <div class="bm_info_title"><h5>이메일</h5></div>
+                                        <div class="bm_info_con"><p id="managerEmail"></p></div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bm_info_s04">
+                                <h4>업체 관련 서류</h4>
+                                <ul class="bm_info_list04">
+                                    <li class="bm_info_file01">
+                                        <div class="bm_info_title"><h5>사업자등록증</h5></div>
+                                        <div class="bm_info_con">
+                                            <a href="#" id="imgBusinessRegNoView" onclick="downloadFile('imgBusinessRegNoView')" ></a>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_file02">
+                                        <div class="bm_info_title"><h5>개설필증</h5></div>
+                                        <div class="bm_info_con">
+                                            <a href="#" id="imgDoctorLicenseView" onclick="downloadFile('imgDoctorLicenseView')" ></a>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_file03">
+                                        <div class="bm_info_title"><h5>의사 면허증</h5></div>
+                                        <div class="bm_info_con">
+                                            <a href="#" id="imgDegreeCertificateView" onclick="downloadFile('imgDegreeCertificateView')" ></a>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_file04">
+                                        <div class="bm_info_title"><h5>전문의 자격증</h5></div>
+                                        <div class="bm_info_con">
+                                            <a href="#" id="imgDesignAssetsView" onclick="downloadFile('imgDesignAssetsView')" ></a>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_file05">
+                                        <div class="bm_info_title"><h5>학위증</h5></div>
+                                        <div class="bm_info_con">
+                                            <a href="#" id="imgOpenCertificateView" onclick="downloadFile('imgOpenCertificateView')" ></a>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_file06">
+                                        <div class="bm_info_title"><h5>이외 자료</h5></div>
+                                        <div class="bm_info_con">
+                                            <a href="#" id="imgSpecialistLicenseView" onclick="downloadFile('imgSpecialistLicenseView')" ></a>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_file07">
+                                        <div class="bm_info_title"><h5>디자인 활용 자료</h5></div>
+                                        <div class="bm_info_con">
+                                            <a href="#" id="imgEtcFilesView" onclick="downloadFile('imgEtcFilesView')" ></a>
+                                        </div>
+                                    </li>
+                                    <li class="bm_info_file08">
+                                        <div class="bm_info_title"><h5>이외 이미지</h5></div>
+                                        <div class="bm_info_con">
+                                            <a href="#" id="imgEtcView" onclick="downloadFile('imgEtcView')" ></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bm_info_btn_wrap">
+                                <a href="#" class="bm_info_btn" id="Registration" >정보수정</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <!-- 업체 관리 팝업  Javascript -->
+    <th:block layout:fragment="customJS">
+        <script src="/js/templates/partials/popup/common_popup.js"></script>
+    </th:block>
+</html>
