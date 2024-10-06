@@ -52,10 +52,10 @@ jobs:
           port: 22
           script: |
             # Tomcat 서비스 재시작 명령
-            cd ~/tomcat8/bin/  # 실제 Tomcat 설치 경로를 확인하여 수정하세요.
+            cd /tomcat/bin/
             ./shutdown.sh
             while pgrep -f 'tomcat'; do
               echo "Waiting for Tomcat to stop..."
-              sleep 2
+              sleep 2 || true  # sleep 명령어가 없더라도 오류 없이 대기할 수 있도록 처리
             done
             ./startup.sh
