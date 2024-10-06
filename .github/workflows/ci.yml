@@ -56,7 +56,27 @@ jobs:
             export JAVA_HOME=/usr/local/jdk17
             export PATH=$JAVA_HOME/bin:/bin:$PATH
             cd /gdbmsdev/tomcat/bin/
-            ./shutdown.bat
-            # 'read' 명령을 사용하여 5초간 대기
-            read -t 5
-            ./startup.bat
+            ./shutdown.sh
+            
+            # Tomcat 종료 확인
+            count=0
+            while [ $count -lt 10 ]; do
+              if ! ps aux | grep '[t]omcat' > /dev/null; then
+                echo "Tomcat stopped"
+                break
+              fi
+              echo "Waiting for Tomcat to stop..."
+              sleep 2
+              count=$((count+1))
+            done
+            
+            # Tomcat이 완전히 종료되지 않았다면 강제 종료 시도
+            if ps aux | grep '[t]omcat' > /dev/null; then
+              echo "Tomcat not stopped, killing process..."
+              pkill -f tomcat
+              sleep 2
+            fi
+            
+            # Tomcat 재시작
+            ./startup.sh
+  
