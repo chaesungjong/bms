@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           server-dir: /tomcat/webapps-javaee/
           # clean-destination-dir: false  # 더 이상 사용되지 않음 (필요 없으면 제거)
-      - name: Restart Tomcat on Cafe24 Server
+      - name: Delete Webapps Directory and Restart Tomcat on Cafe24 Server
         uses: appleboy/ssh-action@v0.1.2
         with:
           host: gdbmsdev.cafe24.com
@@ -63,10 +63,13 @@ jobs:
             cd /gdbmsdev/tomcat/bin/
             ./catalina.sh stop
             
+            # webapps 디렉토리 삭제
+            rm -rf /gdbmsdev/tomcat/webapps
+            
             # PID 파일 수동 삭제 (필요시)
             if [ -f $CATALINA_PID ]; then
               rm -f $CATALINA_PID
             fi
             
-            # Tomcat 시작     
+            # Tomcat 시작
             ./catalina.sh start
