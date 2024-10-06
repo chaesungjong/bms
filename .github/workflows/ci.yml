@@ -55,5 +55,13 @@ jobs:
             # Tomcat에 사용할 JAVA_HOME 설정
             export JAVA_HOME=/usr/local/jdk17
             export PATH=$JAVA_HOME/bin:/usr/sbin:/bin:$PATH
+            
+            # CATALINA_PID 경로 설정
+            export CATALINA_PID=/gdbmsdev/tomcat/temp/tomcat.pid
+            
+            # Tomcat 중지
             cd /gdbmsdev/tomcat/bin/
-            ./catalina.sh restart  # Tomcat 재시작
+            ./catalina.sh stop
+            
+            # Tomcat 시작
+            ./catalina.sh start
