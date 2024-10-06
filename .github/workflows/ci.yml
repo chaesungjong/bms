@@ -59,9 +59,14 @@ jobs:
             # CATALINA_PID 경로 설정
             export CATALINA_PID=/gdbmsdev/tomcat/temp/tomcat.pid
             
-            # Tomcat 중지
+            # Tomcat 중지 (sudo 사용)
             cd /gdbmsdev/tomcat/bin/
-            ./catalina.sh stop
+            sudo ./catalina.sh stop
+            
+            # PID 파일 수동 삭제
+            if [ -f $CATALINA_PID ]; then
+              sudo rm -f $CATALINA_PID
+            fi
             
             # Tomcat 시작
-            ./catalina.sh start
+            sudo ./catalina.sh start
