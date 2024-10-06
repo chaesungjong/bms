@@ -52,10 +52,25 @@ jobs:
           port: 22
           script: |
             # Tomcat 서비스 재시작 명령
-            cd /tomcat/bin/
-            ./shutdown.sh
-            while pgrep -f 'tomcat'; do
+            if [ -d "/tomcat/bin/" ]; then
+              cd /tomcat/bin/
+              if [ -f "./shutdown.sh" ]; then
+                ./shutdown.sh
+              else
+                echo "shutdown.sh not found, killing Tomcat process"
+                pkill -f 'tomcat' || true
+              fi
+
               echo "Waiting for Tomcat to stop..."
-              sleep 2 || true  # sleep 명령어가 없더라도 오류 없이 대기할 수 있도록 처리
-            done
-            ./startup.sh
+              sleep 5  # Tomcat이 종료될 시간을 대기
+
+              if [ -f "./startup.sh" ]; then
+                ./startup.sh
+              else
+                echo "startup.sh not found, unable to start Tomcat"
+                exit 1
+              fi
+            else
+              echo "/tomcat/bin/ directory not found"
+              exit 1
+            fi
