@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequestWrapper;
 public class CustomHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     private static final List<String> FORBIDDEN_WORDS = Arrays.asList(
-       "DROP TABLE", "UNION", "INSERT", "UPDATE", "DELETE"
+       "DROP TABLE", "UNION", "INSERT", "UPDATE", "DELETE" // SQL Injection 공격을 방어하기 위한 금지어 목록
    );
 
    public CustomHttpServletRequestWrapper(HttpServletRequest request) {
