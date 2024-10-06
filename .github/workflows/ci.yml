@@ -68,5 +68,5 @@ jobs:
               rm -f $CATALINA_PID
             fi
             
-            # Tomcat 시작
+            # Tomcat 시작    
             ./catalina.sh start
