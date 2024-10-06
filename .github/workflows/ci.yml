@@ -14,7 +14,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'  # 사용하는 JDK 버전에 맞게 수정
+          java-version: '17'
           distribution: 'temurin'
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -23,8 +23,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build-artifact  # 아티팩트 이름 설정 (build/libs 대신)
-          path: build/libs/ROOT.war  # ROOT.war 파일 경로 지정
+          name: build-artifact
+          path: build/libs/ROOT.war
 
   deploy:
     needs: build
@@ -36,24 +36,26 @@ jobs:
         with:
           name: build-artifact
       - name: Deploy to FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.1  # 액션 버전 확인 (최신 버전 사용 권장)
+        uses: SamKirkland/FTP-Deploy-Action@4.3.1
         with:
           server: gdbmsdev.cafe24.com
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
           server-dir: /tomcat/webapps-javaee/
-          # clean-destination-dir: false  # 더 이상 사용되지 않음 (필요 없으면 제거)
       - name: Restart Tomcat on Cafe24 Server
-        uses: appleboy/ssh-action@v0.1.2  # SSH 명령 실행 액션
+        uses: appleboy/ssh-action@v0.1.2
         with:
           host: gdbmsdev.cafe24.com
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
           script: |
-            # Tomcat 서비스 재시작 명령 (Cafe24에 맞게 적절한 명령어 사용)
-            cd /tomcat/bin/
+            # Tomcat 서비스 재시작 명령
+            cd ~/tomcat8/bin/  # 실제 Tomcat 설치 경로를 확인하여 수정하세요.
             ./shutdown.sh
-            sleep 5  # Tomcat이 완전히 종료될 때까지 잠시 대기
+            while pgrep -f 'tomcat'; do
+              echo "Waiting for Tomcat to stop..."
+              sleep 2
+            done
             ./startup.sh
