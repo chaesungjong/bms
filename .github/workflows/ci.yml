@@ -57,5 +57,6 @@ jobs:
             export PATH=$JAVA_HOME/bin:/bin:$PATH
             cd /gdbmsdev/tomcat/bin/
             ./shutdown.sh
-            sleep 5  # Tomcat이 완전히 종료될 때까지 잠시 대기
+            # 'read' 명령을 사용하여 5초간 대기
+            read -t 5
             ./startup.sh
