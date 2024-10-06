@@ -31,63 +31,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Tomcat 중지 및 webapps 내부 파일 삭제
-      - name: Stop Tomcat and Delete Contents of Webapps Directory
-        uses: appleboy/ssh-action@v0.1.2
+      - name: Download artifact
+        uses: actions/download-artifact@v3
         with:
-          host: gdbmsdev.cafe24.com
-          username: gdbmsdev
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: 22
-          script: |
-            # Tomcat에 사용할 JAVA_HOME 설정
-            export JAVA_HOME=/usr/local/jdk17
-            export PATH=$JAVA_HOME/bin:/usr/sbin:/bin:$PATH
-            
-            # CATALINA_PID 경로 설정
-            export CATALINA_PID=/gdbmsdev/tomcat/temp/tomcat.pid
-            
-            # Tomcat 중지
-            cd /gdbmsdev/tomcat/bin/
-            ./catalina.sh stop
-            
-            # webapps 디렉토리 안의 내용만 삭제
-            rm -rf /gdbmsdev/tomcat/webapps/*
-            
-            # PID 파일 수동 삭제 (필요시)
-            if [ -f $CATALINA_PID ]; then
-              rm -f $CATALINA_PID
-            fi
-
-      # 2. /tomcat/webapps-javaee/ 경로에 업로드
-      - name: Deploy to webapps-javaee via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.1
+          name: build-artifact
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.1  # 액션 버전 확인 (최신 버전 사용 권장)
         with:
           server: gdbmsdev.cafe24.com
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
           server-dir: /tomcat/webapps-javaee/
-
-      # 3. /gdbmsdev/tomcat/webapps/ 경로에 업로드
-      - name: Deploy to webapps via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.1
-        with:
-          server: gdbmsdev.cafe24.com
-          port: 21
-          username: gdbmsdev
-          password: ${{ secrets.SSH_PASSWORD }}
-          server-dir: /gdbmsdev/tomcat/webapps/
-
-      # 4. Tomcat 재시작
-      - name: Restart Tomcat
-        uses: appleboy/ssh-action@v0.1.2
-        with:
-          host: gdbmsdev.cafe24.com
-          username: gdbmsdev
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: 22
-          script: |
-            # Tomcat 시작
-            cd /gdbmsdev/tomcat/bin/
-            ./catalina.sh start
+          # clean-destination-dir: false  # 더 이상 사용되지 않음 (필요 없으면 제거)
