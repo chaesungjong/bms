@@ -56,7 +56,7 @@ jobs:
             export JAVA_HOME=/usr/local/jdk17
             export PATH=$JAVA_HOME/bin:/bin:$PATH
             cd /gdbmsdev/tomcat/bin/
-            ./shutdown.sh
+            ./shutdown.bat
             # 'read' 명령을 사용하여 5초간 대기
             read -t 5
-            ./startup.sh
+            ./startup.bat
