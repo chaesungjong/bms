@@ -491,6 +491,10 @@ body.modal-active {
     width: 50%;
     display: flex;
 }
+.bm_info_hphone > div {
+    width: 50%;
+    display: flex;
+}
 .bm_info_con > a {
     display: flex;
     align-items: center;
@@ -509,6 +513,17 @@ body.modal-active {
     font-size: 16px;
     font-weight: 500;
     padding: 0px 12px;
+}
+.bm_info_log {
+    display: inline-block;
+    background-color: #4f5463;
+    color: #fff;
+    line-height: 37px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0px 12px;
+    margin-right: 12px;
 }
 
 @media screen and (max-width: 1600px) {
