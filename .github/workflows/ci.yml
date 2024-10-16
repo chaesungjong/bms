@@ -42,5 +42,5 @@ jobs:
           port: 21
           username: gdbmsdev
           password: ${{ secrets.SSH_PASSWORD }}
-          server-dir: /tomcat/webapps/
+          server-dir: /tomcat/webapps-javaee/
           # clean-destination-dir: false  # 더 이상 사용되지 않음 (필요 없으면 제거)

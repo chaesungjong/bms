@@ -110,29 +110,46 @@ function customerShowProfile(searchval) {
             $('#managerEmail').text(response.managerEmail);
             $('#contactInformation').text(response.contactInformation);
 
-            $('#imgBusinessRegNoView').text("사업자등록증 다운로드");
-            $('#imgBusinessRegNoView').attr('data-img', getProxy(response.imgBusinessRegNo));
 
-            $('#imgOpenCertificateView').text("학위증 다운로드");
-            $('#imgOpenCertificateView').attr('data-img', getProxy(response.imgOpenCertificate));
+            if(response.imgBusinessRegNo != null && response.imgBusinessRegNo != '') {
+                $('#imgBusinessRegNoView').text("사업자등록증 다운로드");
+                $('#imgBusinessRegNoView').attr('data-img', getProxy(response.imgBusinessRegNo));
+            }
 
-            $('#imgDoctorLicenseView').text("개설필증 다운로드");
-            $('#imgDoctorLicenseView').attr('data-img', getProxy(response.imgDoctorLicense));
+            if(response.imgOpenCertificate != null && response.imgOpenCertificate != '') {
+                $('#imgOpenCertificateView').text("학위증 다운로드");
+                $('#imgOpenCertificateView').attr('data-img', getProxy(response.imgOpenCertificate));
+            }
 
-            $('#imgSpecialistLicenseView').text("이외 자료 다운로드");
-            $('#imgSpecialistLicenseView').attr('data-img', getProxy(response.imgSpecialistLicense));
+            if(response.imgDoctorLicense != null && response.imgDoctorLicense != '') {
+                $('#imgDoctorLicenseView').text("개설필증 다운로드");
+                $('#imgDoctorLicenseView').attr('data-img', getProxy(response.imgDoctorLicense));
+            }
 
-            $('#imgDegreeCertificateView').text("의사 면허증 다운로드");
-            $('#imgDegreeCertificateView').attr('data-img', getProxy(response.imgDegreeCertificate));
+            if(response.imgSpecialistLicense != null && response.imgSpecialistLicense != '') {
+                $('#imgSpecialistLicenseView').text("이외 자료 다운로드");
+                $('#imgSpecialistLicenseView').attr('data-img', getProxy(response.imgSpecialistLicense));
+            }
 
-            $('#imgDesignAssetsView').text("전문의 자격증 다운로드");
-            $('#imgDesignAssetsView').attr('data-img', getProxy(response.imgDesignAssets));
+            if(response.imgDegreeCertificate != null && response.imgDegreeCertificate != '') {
+                $('#imgDegreeCertificateView').text("의사 면허증 다운로드");
+                $('#imgDegreeCertificateView').attr('data-img', getProxy(response.imgDegreeCertificate));
+            }
 
-            $('#imgEtcFilesView').text("디자인 활용 자료 다운로드");
-            $('#imgEtcFilesView').attr('data-img', getProxy(response.imgEtcFiles));
+            if(response.imgDesignAssets != null && response.imgDesignAssets != '') {
+                $('#imgDesignAssetsView').text("전문의 자격증 다운로드");
+                $('#imgDesignAssetsView').attr('data-img', getProxy(response.imgDesignAssets));
+            }
 
-            $('#imgEtcView').text("디자인 활용 자료 다운로드");
-            $('#imgEtcView').attr('data-img', getProxy(response.imgEtc));
+            if(response.imgEtcFiles != null && response.imgEtcFiles != '') {
+                $('#imgEtcFilesView').text("디자인 활용 자료 다운로드");
+                $('#imgEtcFilesView').attr('data-img', getProxy(response.imgEtcFiles));
+            }
+
+            if(response.imgEtcFiles != null && response.imgEtcFiles != '') {
+                $('#imgEtcView').text("디자인 활용 자료 다운로드");
+                $('#imgEtcView').attr('data-img', getProxy(response.imgEtc));
+            }
 
             $('#Registration').attr('data-sitekey', response.siteKey);
 
