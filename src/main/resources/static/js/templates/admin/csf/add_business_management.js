@@ -21,6 +21,18 @@ $(document).ready(function () {
 
     });
 
+
+    // 변경 이력 닫기 버튼 클릭시
+    $(".bm_info_close_pop").click(function(){
+        $(".bm_info_popup_wrap").fadeOut();
+    });
+
+    //거래 변경 이력 버튼 클릭시
+    $('.bm_log').click(function () {
+        $('.bm_info_popup_wrap').fadeIn();
+    });
+
+
     // 등록 하기 버튼
     $('#Registration').click(function () {
 

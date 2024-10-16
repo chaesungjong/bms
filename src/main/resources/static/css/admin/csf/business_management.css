@@ -298,6 +298,11 @@ body.modal-active {
 .bm_info_wrap.on.out .bm_info_window {
     animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
+
+.bm_info_wrap.on .bm_info_window_pop {
+    transform: scale(0);
+    animation: zoomIn 0.3s 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
 @keyframes unfoldIn {
     0% {
         transform: scaleY(0.005) scaleX(0);
@@ -509,6 +514,43 @@ body.modal-active {
     font-size: 16px;
     font-weight: 500;
     padding: 0px 12px;
+}
+
+.bm_info_popup_wrap {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+    width: 80%; 
+    display: none;
+}
+
+.bm_info_close_pop {
+    cursor: pointer;
+}
+
+.bm_info_window_pop {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.bm_info_popup_section {
+    padding: 19px 29px 35px;
+    overflow-y: scroll;
+    height: 300px;
+}
+
+.bm_info_popup_section ul li {
+    display: inherit;
+}
+
+.bm_info_popup_section ul li span {
+    margin-right: 14px;
+}
+
+.bm_info_popup_section ul li:not(:last-child) {
+    margin-bottom: 10px;
 }
 
 @media screen and (max-width: 1600px) {

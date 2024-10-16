@@ -30,9 +30,22 @@ $(document).ready(function () {
 
     //프로필 상세 정보 삭제 시 
     $('.bm_info_close').click(function () {
-        $('.bm_info_wrap').addClass('out');
+        $('.bm_info_wrap, .bm_info_popup_wrap').addClass('out');
         $('body, html').removeClass('modal-active');
+        $(".bm_info_popup_wrap").hide();
     });
+
+    // 변경 이력 닫기 버튼 클릭시
+    $(".bm_info_close_pop").click(function(){
+        $(".bm_info_popup_wrap").fadeOut();
+    });
+
+    //거래 변경 이력 버튼 클릭시
+    $('.bm_info_log').click(function () {
+        $('.bm_info_popup_wrap').fadeIn();
+    });
+
+
 
     // 회사 상세 팝업 띄우기 
     $('body').on('click', 'tr', function() {
