@@ -226,18 +226,17 @@ function customerTransactionHistory(siteKey){
     $('#infoList').empty();
 
     ajaxRequest("/admin/csf/customer_transaction_history", data, "POST", function (data) {
-        
-        data.forEach(item => {
+        // 데이터를 순회하며 각각의 아이템을 li 요소로 추가합니다.
+        data.forEach((item, index) => {
             let listItem = `
                 <li>
                     <span class="bm_info_popup_date">${item.moddatetime}</span>
                     <span class="bm_info_popup_name">${item.modUserName}</span>
-                    <span class="bmn_info_popup_con">${item.colDesc}</span>
+                    ${index === 0 ? `<span class="bmn_info_popup_con">${item.colDesc} : ${item.oldVal}</span>` : `<span class="bmn_info_popup_con">${item.colDesc} </span>`}
                 </li>
             `;
             $('#infoList').append(listItem);
         });
-
     });
 
 }
