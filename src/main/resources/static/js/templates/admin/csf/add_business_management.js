@@ -87,6 +87,7 @@ $(document).ready(function () {
     setMember('bmMember1');
     setSnsInformation() ;
     setMemberList();
+    customerTransactionHistory();
 
 
 });
@@ -203,6 +204,34 @@ function setMember(name){
 
 }
 
+/**
+ * 거래 변경 이력 조회
+ */
+function customerTransactionHistory(){
+
+    var data = {
+        siteKey : $('#siteKey').val()
+    };
+
+    ajaxRequest("/admin/csf/customer_transaction_history", data, "POST", function (data) {
+        // 먼저 기존 리스트 내용을 지워줍니다.
+        $('#infoList').empty();
+
+        // 데이터를 순회하며 각각의 아이템을 li 요소로 추가합니다.
+        data.forEach(item => {
+            let listItem = `
+                <li>
+                    <span class="bm_info_popup_date">${item.moddatetime}</span>
+                    <span class="bm_info_popup_name">${item.modUserName}</span>
+                    <span class="bmn_info_popup_con">${item.colDesc}</span>
+                </li>
+            `;
+            $('#infoList').append(listItem);
+        });
+
+    });
+
+}
 
 document.addEventListener('DOMContentLoaded', (event) => {
     const blogUp = document.getElementById('blogUp');

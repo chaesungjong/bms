@@ -245,7 +245,29 @@ public class CustomerSupportForumController extends BaseController{
         }
         
         return ResponseEntity.status(500).build();
-    } 
+    }
+    
+    
+    /*
+     * 업체 정보 거래 변경 이력 가져오기
+     */
+    @RequestMapping(value = "/customer_transaction_history", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<?> customerTransactionHistory(HttpServletRequest request) {
+
+        HashMap<String, Object> requestMap = setRequest(request);
+        String userId     = StringUtil.objectToString(requestMap.get("userId"));                   //사용자ID
+        String siteKey    = StringUtil.objectToString(requestMap.get("siteKey"));                  //업체키
+
+        // 거래변경이력 리스트
+        List<Map<String, Object>> transactionHistoryList = commonService.mngList("changeLogList", userId, "0", "0", "", "", "siteInfo", siteKey, "");
+
+        // 데이터가 있을 경우
+        if(transactionHistoryList != null && transactionHistoryList.size() > 0) {
+            return ResponseEntity.ok(transactionHistoryList);
+        }
+        
+        return ResponseEntity.status(500).build();
+    }
 
     /**
      * 업체 등록
