@@ -42,7 +42,11 @@ $(document).ready(function () {
 
     //거래 변경 이력 버튼 클릭시
     $('.bm_info_log').click(function () {
-        $('.bm_info_popup_wrap').fadeIn();
+        if ($('#infoList li').length === 0) {
+            alert("데이터가 없습니다.");
+        }else{
+            $('.bm_info_popup_wrap').fadeIn();
+        }
     });
 
 
@@ -218,12 +222,11 @@ function customerTransactionHistory(siteKey){
     var data = {
         siteKey : siteKey
     };
+    
+    $('#infoList').empty();
 
     ajaxRequest("/admin/csf/customer_transaction_history", data, "POST", function (data) {
-        // 먼저 기존 리스트 내용을 지워줍니다.
-        $('#infoList').empty();
-
-        // 데이터를 순회하며 각각의 아이템을 li 요소로 추가합니다.
+        
         data.forEach(item => {
             let listItem = `
                 <li>
