@@ -232,7 +232,7 @@ function customerTransactionHistory(siteKey){
                 <li>
                     <span class="bm_info_popup_date">${item.moddatetime}</span>
                     <span class="bm_info_popup_name">${item.modUserName}</span>
-                    ${index === 0 ? `<span class="bmn_info_popup_con">${item.colDesc} : ${item.oldVal}</span>` : `<span class="bmn_info_popup_con">${item.colDesc} </span>`}
+                    <span class="bm_info_popup_name">${item.colDesc} : ${item.gubun ==="U" && item.oldVal != "" ? item.oldVal +"->" : ""} ${item.newVal}</span>
                 </li>
             `;
             $('#infoList').append(listItem);
