@@ -14,8 +14,19 @@
         <link rel="stylesheet" href="/css/cmm/common.css" />
         <!-- 공통 CSS -->
         <link rel="stylesheet" href="/css/partials/popup/common_popup.css" />
+        <!-- tui-color-picker CSS -->
+        <link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.css">
+        <!-- tui-image-editor CSS -->
+        <link rel="stylesheet" href="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.css" />
+
     </th:block>
     <th:block th:fragment="common_js">
+        <!-- fabric.js (tui-image-editor가 필요로 하는 의존성) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.6.0/fabric.min.js"></script>
+        <!-- tui-color-picker JavaScript -->
+        <script src="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.js"></script>
+        <!-- tui-image-editor JavaScript -->
+        <script src="https://uicdn.toast.com/tui-image-editor/latest/tui-image-editor.js"></script>
         <!-- bmsDate JS -->
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
         <!-- 풀캘린더 JS -->
