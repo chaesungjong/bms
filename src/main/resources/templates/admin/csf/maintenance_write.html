@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 유지보수  CSS -->
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/admin/csf/maintenance_write.css" />
@@ -33,7 +29,7 @@
                                         <td style="width: 42%">
                                             <div class="radio_wrap">
                                                 <label> <input type="radio" value="온라인 시안" name="design_sel" checked />온라인 시안 </label>
-                                                <label> <input type="radio" value="오프라인 시안" name="design_sel" />오프인 시안 </label>
+                                                <label> <input type="radio" value="오프라인 시안" name="design_sel" />오프라인 시안 </label>
                                                 <label> <input type="radio" value="세팅 시안" name="design_sel" />세팅 시안 </label>
                                                 <label> <input type="radio" value="홈페이지" name="design_sel" />홈페이지 </label>
                                                 <label> <input type="radio" value="기타" name="design_sel" />기타 </label>
@@ -41,21 +37,22 @@
                                         </td>
                                     </tr>
                                     <tr class="add_request_per">
-                                        <td class="add_request_title required_on">작성자</td>
+                                        <td class="add_request_title required_on">필요 날짜</td>
                                         <td colspan="3">
-                                            <label for=""> 작성자<input type="text" required class="name_box" /> </label>
-                                            <label for=""> 담당자<input type="text" class="name_box" /> </label>
-                                            <label for=""> 연락처<input type="tel" /> </label>
-                                            <label for=""> E-mail<input type="email" /> </label>
+                                            <div class="mt_board_date">
+                                                <input type="date" name="" id="fr_date" class="fr_date" value="2024-07-15" />
+                                                <span>~</span>
+                                                <input type="date" name="" id="to_date" class="to_date" value="2024-07-15" />
+                                                <p>
+                                                    ※ 디자인 작업의 경우, 내부 일정과 분량에 따라 일정 조율이 필요합니다. (ex. 시안: 최소 2일~7일)<br />
+                                                    디자인 담당자가 분량 확인 후 일정 재안내드립니다. 급건의 경우, 따로 담당자에게 연락 부탁드리겠습니다.
+                                                </p>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr class="add_request_ch">
                                         <td class="add_request_title">제목</td>
                                         <td colspan="3">
-                                            <label>
-                                                <input type="checkbox" />
-                                            </label>
-                                            <label> <input type="checkbox" />공지 </label>
                                             <input type="text" />
                                         </td>
                                     </tr>
@@ -63,7 +60,7 @@
                                         <td class="add_request_title">관련페이지</td>
                                         <td colspan="3">URL<input type="text" style="width: 1044px; margin-left: 60px" /></td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <td class="add_request_title">접수상태</td>
                                         <td colspan="3">
                                             <div class="radio_wrap">
@@ -71,7 +68,7 @@
                                                 <label> <input type="radio" value="접수" name="design_con" />접수 </label>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                     <tr>
                                         <td colspan="4" style="padding: 18px 22px; border: none">
                                             <textarea name="" id=""></textarea>
@@ -91,10 +88,7 @@
                                 <div class="file_bottom_box">
                                     <p>총 '10'개의 파일을 첨부할수 있습니다.</p>
                                     <p>파일당 용량 제한은 '100MB' 입니다.</p>
-                                    <p>
-                                        업로드는 [jpg, gif, png, bmp, doc, ppt, pdf, xls, zip, alz, swf, flv, hwp, xlsx, pptx, docx, pps, ppsx, tif,
-                                        wmv, hwpx, jpeg, pptm, txt]파일만 가능합니다.
-                                    </p>
+                                    <p>업로드는 [jpg, gif, png, bmp, doc, ppt, pdf, xls, zip, alz, swf, flv, hwp, xlsx, pptx, docx, pps, ppsx, tif, wmv, hwpx, jpeg, pptm, txt]파일만 가능합니다.</p>
                                     <p>업로드 파일 제한 해제는 관리자에게 문의 해주세요.</p>
                                 </div>
                             </div>
