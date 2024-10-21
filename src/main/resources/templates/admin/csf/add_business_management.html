@@ -278,14 +278,26 @@
                                     </tr>
                                     <tr class="add_bm_hphone">
                                         <td class="add_bm_title">연락처</td>
-                                        <td colspan="3" class="add_bm_con">
+                                        <td class="add_bm_con">
                                             <input type="text" class="bm_hphone" placeholder="010-1234-5678" id="managerPhone" name="managerPhone" maxlength="15"th:value="${siteInfo?.managerPhone != null ? siteInfo.managerPhone : ''}" />
+                                        </td>
+                                        <td class="add_bm_title">이메일</td>
+                                        <td class="add_bm_con">
+                                            <input type="text" class="bm_hmail"  placeholder="abc@def.com" id="managerEmail" name="managerEmail" maxlength="20" th:value="${siteInfo?.managerEmail != null ? siteInfo.managerEmail : ''}" />
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hmail">
-                                        <td class="add_bm_title">이메일</td>
+                                        <td class="add_bm_title">거래처 계정</td>
                                         <td colspan="3" class="add_bm_con">
-                                            <input type="text" class="bm_hmail"  placeholder="abc@def.com" id="managerEmail" name="managerEmail" maxlength="20" th:value="${siteInfo?.managerEmail != null ? siteInfo.managerEmail : ''}" />
+                                            <label for="">
+                                                아이디
+                                                <input type="text" class="bm_hid"  placeholder="ID" id="" name="" maxlength="20" />
+                                            </label>
+                                            <label for="">
+                                                현재 비밀번호
+                                                <input type="password" class="bm_hpw"  placeholder="PW" id="" name="" maxlength="20" />
+                                            </label>
+                                            <span class="pwd_modify" id="pwd_modify" >비밀번호 수정 </span>
                                         </td>
                                     </tr>
                                     <tr class="add_bm_hmemo">
@@ -371,6 +383,32 @@
                             <input type="button" value="업체 목록" id="businessManagement" name="businessManagement" class="add_bm_btn" />
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="modal-container" id="pwd_modify">
+                <div class="modal-background">
+                    <div class="modal">
+                        <div class="pwd_modify_wrap">
+                            <h3>
+                                비밀번호 수정 <span class="pwd_modify_close"><img src="/img/close_w.svg" alt="" /></span>
+                            </h3>
+                            <div class="pwd_modify_con">
+                                <div class="pwd_modify_con01">
+                                    <span>현재 비밀번호</span>
+                                    <div class="pw_wrap"><input type="password" name="now_pwd" id="now_pwd" class="pwd_m_box" required /><button type="button" class="btnView off" maxlength="30" ></button></div>
+                                </div>
+                                <div class="pwd_modify_con02">
+                                    <span>새 비밀번호</span>
+                                    <div class="pw_wrap"><input type="password" name="new_pwd" id="new_pwd" class="pwd_m_box" placeholder="새 비밀번호" required /><button type="button" class="btnView off" maxlength="30" ></button></div>
+                                </div>
+                                <div class="pwd_modify_con03">
+                                    <span>비밀번호 확인</span>
+                                    <div class="pw_wrap"><input type="password" name="new_pwd_check" id="new_pwd_check" class="pwd_m_box" placeholder="비밀번호 확인" required maxlength="30" /><button type="button" class="btnView off"></button></div>
+                                </div>
+                                <span class="pwd_modify_btn" id="changePwd">비밀번호 수정</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

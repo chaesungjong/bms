@@ -424,7 +424,8 @@
 .add_bm_hostinfo .add_bm_title {
     width: 8%;
 }
-.add_bm_hostinfo .add_bm_con {
+.add_bm_hostinfo .add_bm_con,
+.add_bm_hphone .add_bm_con {
     width: 25%;
 }
 .add_bm_hostinfo label {
@@ -464,7 +465,7 @@
 .bm_hphone {
     border-radius: 4px;
     border: 1px solid #ddd;
-    width: 349px;
+    width: 160px;
     padding: 9px 12px;
     font-size: 16px;
     font-weight: 400;
@@ -476,6 +477,16 @@
     padding: 9px 12px;
     font-size: 16px;
     font-weight: 400;
+}
+.bm_hid,
+.bm_hpw {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 160px;
+    padding: 9px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0px 15px;
 }
 .bm_hmemo {
     resize: none;
@@ -551,6 +562,235 @@
     padding: 0px 33px;
     cursor: pointer;
 }
+#pwd_modify.pwd_modify {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    background-color: #4f5463;
+    border-radius: 4px;
+    width: 112px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+/* modal */
+html.modal-active,
+body.modal-active {
+    overflow: hidden;
+}
+.modal-container {
+    position: fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    z-index: 99999;
+}
+.modal-container.on {
+    transform: scaleY(0.01) scaleX(0);
+    animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.modal-container.on .modal-background .modal {
+    transform: scale(0);
+    animation: zoomIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.modal-container.on.out {
+    transform: scale(1);
+    animation: unfoldOut 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.modal-container.on.out .modal-background .modal {
+    animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.modal-container .modal-background {
+    display: table-cell;
+    background: rgba(0, 0, 0, 0.8);
+    vertical-align: middle;
+    text-align: center;
+}
+.modal-container .modal-background .modal {
+    display: inline-block;
+    font-weight: 300;
+    position: relative;
+}
+.modal-container .modal-background .modal .inner {
+    display: flex;
+    align-items: center;
+}
+.close_btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.viewMore {
+    cursor: pointer;
+}
+.viewMore > img {
+    transition: all 0.2s;
+}
+.viewMore:hover > img {
+    margin-left: 50px;
+}
+
+@keyframes unfoldIn {
+    0% {
+        transform: scaleY(0.005) scaleX(0);
+    }
+    50% {
+        transform: scaleY(0.005) scaleX(1);
+    }
+    100% {
+        transform: scaleY(1) scaleX(1);
+    }
+}
+@keyframes unfoldOut {
+    0% {
+        transform: scaleY(1) scaleX(1);
+    }
+    50% {
+        transform: scaleY(0.005) scaleX(1);
+    }
+    100% {
+        transform: scaleY(0.005) scaleX(0);
+    }
+}
+@keyframes zoomIn {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes zoomOut {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@media (max-width: 1580px) {
+    .modal-container .modal-background .modal {
+        width: 90%;
+        padding: 40px 4vw;
+        padding-right: 2vw;
+    }
+    .close_btn {
+        top: 10px;
+        right: 30px;
+    }
+}
+
+/* btnView */
+.btnView {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    min-height: 1.5rem;
+    font-size: 0;
+    color: transparent;
+    background: transparent;
+    text-indent: 150%;
+    border: none;
+}
+.btnView:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.btnView.off:after {
+    background: url('/img/ico_pw_on.png') no-repeat;
+}
+.btnView.on:after {
+    background: url('/img/ico_pw_off.png') no-repeat;
+}
+
+.pw_wrap {
+    position: relative;
+}
+
+.pwd_modify_wrap {
+    width: 760px;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #fff;
+}
+.pwd_modify_wrap h3 {
+    background-color: #4446a9;
+    color: #fff;
+    line-height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    padding-left: 28px;
+    padding-right: 14px;
+    font-size: 22px;
+    font-weight: 600;
+}
+.pwd_modify_close {
+    cursor: pointer;
+}
+.pwd_modify_con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 59px 0px 55px;
+}
+.pwd_modify_con > div > span {
+    font-size: 18px;
+    font-weight: 400;
+    color: #555;
+    margin-right: 8px;
+    display: inline-block;
+}
+.pwd_modify_con > div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    max-width: 360px;
+}
+.pwd_m_box {
+    width: 100%;
+    max-width: 410px;
+    padding: 9px 12px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+}
+.pwd_modify_btn {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #4446a9;
+    border-radius: 4px;
+    text-align: center;
+    width: 111px;
+    line-height: 37px;
+    margin-top: 70px;
+    display: inline-block;
+    cursor: pointer;
+}
+.pwd_modify_con02 {
+    margin: 46px 0px;
+}
+
 @media screen and (max-width: 1600px) {
     .add_bm_wrap {
         padding: 20px;
