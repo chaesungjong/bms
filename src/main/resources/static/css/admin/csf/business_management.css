@@ -430,19 +430,19 @@ body.modal-active {
 }
 .bm_info_title {
     background-color: #f2f2f2;
-    padding-left: 27px;
-    max-width: 178px;
+    padding-left: 20px;
+    max-width: 140px;
     width: 100%;
     box-shadow: 1px 0px 0 0 #ddd, 0 1px 0 0 #ddd inset;
 }
 .bm_info_title h5 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #333;
     line-height: 48px;
 }
 .bm_info_con {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     color: #333;
     padding-left: 20px;
@@ -523,7 +523,7 @@ body.modal-active {
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 800px;
-    width: 80%; 
+    width: 80%;
     display: none;
 }
 
@@ -541,12 +541,10 @@ body.modal-active {
     height: 300px;
 }
 
-.bm_info_popup_section ul li {
-    display: inherit;
-}
-
 .bm_info_popup_section ul li span {
-    margin-right: 14px;
+    margin-right: 4px;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .bm_info_popup_section ul li:not(:last-child) {
