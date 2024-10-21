@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <!-- 유지보수  CSS -->
     <th:block layout:fragment="customCSS">
         <link rel="stylesheet" href="/css/admin/csf/maintenance_view.css" />
@@ -112,16 +108,16 @@
                                         <li>
                                             <img src="/img/link.svg" alt="url" />
                                             링크
-                                            <input type="text" placeholder="레퍼런스 링크" />
+                                            <input type="text" class="view_reference" placeholder="레퍼런스 링크" style="margin-left: 45px" />
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             요청자 연락처
                                             <input type="tel" placeholder="010-1234-5678" />
                                         </li>
                                         <li>
                                             요청자 메일
                                             <input type="email" placeholder="dental12@naver.com" />
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                                 <div class="write_box"></div>
@@ -142,9 +138,7 @@
                                             </div>
                                         </div>
                                         <div class="add_box_write">
-                                            <textarea name="" class="pre">
-@이수은 내용들어갑니다내용들어갑니다내용들어갑니다내용들어갑니다내용들어갑니다</textarea
-                                            >
+                                            <textarea name="" class="pre">@이수은 내용들어갑니다내용들어갑니다내용들어갑니다내용들어갑니다내용들어갑니다</textarea>
                                             <div class="file_box_write">
                                                 <div class="img_wrap">
                                                     <img src="/img/Frame 86.png" alt="" />

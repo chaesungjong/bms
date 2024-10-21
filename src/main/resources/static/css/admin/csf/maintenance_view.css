@@ -234,13 +234,13 @@ table .board_file_wrap button {
     justify-content: space-around;
     cursor: pointer;
 }
+.view_reference {
+    width: 100%;
+    max-width: 1000px;
+}
 
 .write_wrap .write_info {
     padding: 24px 27px;
-}
-
-.write_wrap .write_info ul {
-    display: flex;
 }
 
 .write_wrap .write_info ul li {
