@@ -28,8 +28,8 @@ $(document).ready(function () {
         $('.hd_ext').toggleClass('open');
     });
 
-    $('.hd_ext_tgl').click(function () {
+    $('.hd_ext_count01').click(function () {
         $(this).toggleClass('open');
-        $('.hd_ext_info').toggleClass('open');
+        $('.hd_ext_info_list').toggleClass('open');
     });
 });

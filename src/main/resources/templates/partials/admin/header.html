@@ -1,8 +1,4 @@
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/default}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <header th:fragment="header" class="header">
         <div class="modal_bg"></div>
         <div class="hd_wrap">
@@ -55,30 +51,23 @@
                         <h3>블로그 포스팅</h3>
                         <div class="hd_ext_con">
                             <div class="hd_ext_count">
-                                <div class="hd_ext_count01">이번달 작성 예정건<span>100</span></div>
-                                <div class="hd_ext_count02">현재 포스팅 발행 건<span>0</span></div>
-                                <div class="hd_ext_count03">남은 포스팅 건<span>6</span></div>
-                            </div>
-                            <div class="hd_ext_btn">
-                                <a href="#" class="hd_ext_btn01">업체 정보</a>
-                                <a href="#" class="hd_ext_btn02">사용자 관리</a>
-                                <a href="#" class="hd_ext_btn03">게시판 관리</a>
-                            </div>
-                            <div class="hd_ext_info">
-                                <div class="hd_ext_info_list">
-                                    <div class="hd_ext_info_list01">임상<span>100</span></div>
-                                    <div class="hd_ext_info_list02">일상<span>100</span></div>
-                                    <div class="hd_ext_info_list03">홍보<span>100</span></div>
-                                    <div class="hd_ext_info_list04">정보성<span>100</span></div>
-                                    <div class="hd_ext_info_list05">특화 진료<span>100</span></div>
+                                <div class="hd_ext_count01">
+                                    이번달 작성 예정건<span>24</span>
+                                    <div class="hd_ext_info_list">
+                                        <div class="hd_ext_info_list01">임상<span>20</span></div>
+                                        <div class="hd_ext_info_list02">일상<span>4</span></div>
+                                        <div class="hd_ext_info_list03">관리<span>0</span></div>
+                                    </div>
                                 </div>
-                                <div class="hd_ext_info_btn">
-                                    <a href="#" class="hd_ext_info_btn01">포스팅 이월</a>
-                                    <a href="#" class="hd_ext_info_btn02">이월 취소</a>
-                                </div>
+                                <div class="hd_ext_count02">현재 포스팅 발행<span>0</span></div>
+                                <div class="hd_ext_count03">남은 포스팅<span>0</span></div>
+                                <div class="hd_ext_count04">이월 포스팅<span>0</span></div>
                             </div>
                         </div>
-                        <span class="hd_ext_tgl"><img src="/img/hd_ext_tgl.svg" alt="확장토글" /></span>
+                    </div>
+                    <div class="hd_ext_btn">
+                        <a href="#" class="hd_ext_btn01">이월</a>
+                        <a href="#" class="hd_ext_btn02">취소</a>
                     </div>
                 </div>
             </div>
@@ -94,8 +83,7 @@
                 </div>
                 <div class="hd_menu04">
                     <a href="#"
-                        ><img src="/img/hd_menu04.png" alt="마이페이지" /><span class="hd_menu_arrow"
-                            ><img src="/img/hd_menu_arrow.svg" alt="확장" /></span
+                        ><img src="/img/hd_menu04.png" alt="마이페이지" /><span class="hd_menu_arrow"><img src="/img/hd_menu_arrow.svg" alt="확장" /></span
                     ></a>
                 </div>
             </aside>
