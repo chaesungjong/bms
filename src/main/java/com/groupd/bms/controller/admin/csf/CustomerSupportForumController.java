@@ -295,6 +295,22 @@ public class CustomerSupportForumController extends BaseController{
         RegistrationMap.put("contractSdate", StringUtil.objectToString(RegistrationMap.get("contractSdate")).replaceAll("-", ""));
         RegistrationMap.put("siteDomainExpdt", StringUtil.objectToString(RegistrationMap.get("siteDomainExpdt")).replaceAll("-", ""));
 
+        //거래 내역
+        RegistrationMap.put("blogYN", StringUtil.objectToString(RegistrationMap.get("blogYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("homepageYN", StringUtil.objectToString(RegistrationMap.get("homepageYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("blandvideoYN", StringUtil.objectToString(RegistrationMap.get("blandvideoYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("reviewYN", StringUtil.objectToString(RegistrationMap.get("reviewYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("reviewMCnt", StringUtil.objectToString(RegistrationMap.get("reviewMCnt")).equals("") ? "0" : StringUtil.objectToString(RegistrationMap.get("reviewMCnt")));
+        RegistrationMap.put("instagramYN", StringUtil.objectToString(RegistrationMap.get("instagramYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("youtubeYN", StringUtil.objectToString(RegistrationMap.get("youtubeYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("momcafeYN", StringUtil.objectToString(RegistrationMap.get("momcafeYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("cntBlogPos", StringUtil.objectToString(RegistrationMap.get("cntBlogPos")).equals("") ? "0" : StringUtil.objectToString(RegistrationMap.get("cntBlogPos")));
+        RegistrationMap.put("blogPostClinicYN", StringUtil.objectToString(RegistrationMap.get("blogPostClinicYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("blogPostPromoYN", StringUtil.objectToString(RegistrationMap.get("blogPostPromoYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("blogPostMgtYN", StringUtil.objectToString(RegistrationMap.get("blogPostMgtYN")).equals("Y") ? "Y" : "N");
+        RegistrationMap.put("contractPlanPDesign", StringUtil.objectToString(RegistrationMap.get("contractPlanPDesign")).equals("") ? "NO" : StringUtil.objectToString(RegistrationMap.get("contractPlanPDesign")));
+        RegistrationMap.put("contractPlanVideo", StringUtil.objectToString(RegistrationMap.get("contractPlanVideo")).equals("") ? "NO" : StringUtil.objectToString(RegistrationMap.get("contractPlanVideo")));
+        RegistrationMap.put("boardUseYN", StringUtil.objectToString(RegistrationMap.get("boardUseYN")).equals("") ? "N" : StringUtil.objectToString(RegistrationMap.get("boardUseYN")));
         //맴버 리스트를 가져온다.                                     
         Map<String, String> parameterMap = new HashMap<>();
         int counter = 1;
