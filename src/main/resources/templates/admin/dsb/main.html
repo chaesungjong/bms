@@ -9,7 +9,7 @@
         <div layout:fragment="content" id="content-wrapper" class="d-flex flex-column">
             <main class="main">
                 <section class="main_content">
-                    <div class="main_content_top">
+                    <!-- <div class="main_content_top">
                         <div class="main_content_info">
                             <ul class="main_content_list">
                                 <li class="main_content_list01">
@@ -64,8 +64,8 @@
                                 <a href="#"><img src="/img/main_plus.svg" alt="플러스" /></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="main_board">
+                    </div> -->
+                    <div class="main_board sub_center">
                         <div class="main_board_title">
                             <h2>유지보수 게시판</h2>
                             <a href="/csf/maintenance"><img src="/img/main_plus.svg" alt="플러스" /></a>
@@ -287,11 +287,20 @@
                             </li>
                         </ul>
                     </div>
-                    <span class="main_board_ext"><img src="/img/main_board_ext.svg" alt="확장" /></span>
+                    <span class="main_board_ext sub_center"><img src="/img/main_board_ext.svg" alt="확장" /></span>
                 </section>
                 <aside class="main_side main_right_side">
-                    <a href="#" class="main_side_alert"><img src="/img/main_side_alert.svg" alt="수신함" />수신함</a>
-                    <a href="#" class="main_side_request"
+                    <div class="main_side_alert_wrap">
+                        <a href="#" class="main_side_alert"><img src="/img/main_side_alert.svg" alt="수신함" />수신함</a>
+                        <div class="main_side_alert_box">
+                            <div class="alert_empty_box">
+                                <img src="/img/main_side_alert_empty.svg" alt="empty" />
+                                <h3>모두 확인했습니다.</h3>
+                                <p>수신함에서 @담당 추가, 페이지 활동, <br />페이지 초대 등에 대한 알림을 받습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="main_side_request"
                         ><div><img src="/img/main_side_request.svg" alt="연차신청" />연차신청</div>
                         <img src="/img/main_side_btn.svg" alt="버튼"
                     /></a>
@@ -330,10 +339,30 @@
                         <div class="calendar_wrap">
                             <div id="calendar"></div>
                         </div>
+                    </div> -->
+                    <div class="main_side_org_wrap">
+                        <span class="side_org_btn">수정</span>
+                        <a href="#" class="main_side_org"><img src="/img/main_side_org.svg" alt="조직도 & 연락망" />조직도 & 연락망</a>
+                        <div class="main_side_org_box">
+                            <h3>
+                                부서<button><img src="" alt="" /></button><button><img src="" alt="" /></button>
+                            </h3>
+                            <ul>
+                                <li>
+                                    그룹디 [GROUP-D]
+                                    <ul>
+                                        <li>
+                                            대표
+                                            <ul>
+                                                <li>양지웅 대표</li>
+                                                <li>최민우 대표</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <a href="#" class="main_side_org"
-                        ><div><img src="/img/main_side_org.svg" alt="조직도 & 연락망" />조직도 & 연락망</div></a
-                    >
                 </aside>
             </main>
         </div>

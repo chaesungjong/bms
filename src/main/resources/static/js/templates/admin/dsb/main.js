@@ -41,6 +41,9 @@ $(document).ready(function () {
     $('.main_board_wrcategory').click(function () {
         $(this).children('.category_select').slideToggle(100);
     });
+    $('.main_side_alert').click(function () {
+        $('.main_side_alert_box').slideToggle(300);
+    });
 });
 
 // 오늘 날짜 가져오기
