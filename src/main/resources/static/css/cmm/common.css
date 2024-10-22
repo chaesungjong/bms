@@ -17,6 +17,7 @@ body {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     word-break: keep-all;
+    background-color: #edf0f6;
 }
 .pre {
     font-family: 'Pretendard', sans-serif;
@@ -80,6 +81,8 @@ address {
     max-width: 227px;
     width: 100%;
     margin: 0 auto;
+    position: absolute;
+    right: 40px;
 }
 #wrapper {
     display: flex;
@@ -93,4 +96,9 @@ address {
 }
 .main_view {
     width: 83%;
+}
+@media screen and (max-width: 1600px) {
+    .sub_center {
+        max-width: 745px;
+    }
 }
