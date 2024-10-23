@@ -598,7 +598,7 @@ body.modal-active {
     display: flex;
     flex-wrap: nowrap;
 }
-input {
+.posting_modal_con input {
     height: 40px;
     padding: 7px 12px;
     border: 1px solid #dddddd;
@@ -641,7 +641,7 @@ input {
     border: none;
     border-radius: 8px;
 }
-button {
+.posting_modal_con button {
     outline: none;
     border: none;
     background-color: transparent;
