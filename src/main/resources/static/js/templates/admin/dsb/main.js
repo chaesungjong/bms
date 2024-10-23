@@ -43,6 +43,24 @@ $(document).ready(function () {
     });
     $('.main_side_alert').click(function () {
         $('.main_side_alert_box').slideToggle(300);
+        $('.main_side_org_box').slideUp(300);
+    });
+    $('.main_side_org').click(function () {
+        $('.main_side_org_box').slideToggle(300);
+        $('.main_side_alert_box').slideUp(300);
+        $('.side_org_btn').toggleClass('active');
+    });
+    $('.side_org_btn').click(function () {
+        var caseBtn = $(this).attr('id');
+        $('.org_modal').removeClass('on');
+        $('.org_modal').removeClass('out');
+        $('.org_modal#' + caseBtn).addClass('on');
+        $('body, html').addClass('modal-active');
+    });
+
+    $('.org_modal_close').click(function () {
+        $('.org_modal').addClass('out');
+        $('body, html').removeClass('modal-active');
     });
 });
 
