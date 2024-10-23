@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="hd_ext_count02">현재 포스팅 발행<span>0</span></div>
                                 <div class="hd_ext_count03">남은 포스팅<span>0</span></div>
-                                <div class="hd_ext_count04">이월 포스팅<span>0</span></div>
+                                <div class="hd_ext_count04" id="posting_modal">이월 포스팅<span>0</span></div>
                             </div>
                         </div>
                     </div>
@@ -87,6 +87,146 @@
                     ></a>
                 </div>
             </aside>
+        </div>
+        <div class="posting_modal" id="posting_modal">
+            <div class="posting_modal_bg">
+                <div class="posting_modal_window">
+                    <div class="posting_modal_top">
+                        <h2>이월 포스팅 건</h2>
+                        <span class="posting_modal_close"><img src="/img/member_info_close.svg" alt="닫기" /></span>
+                    </div>
+                    <div class="posting_modal_section">
+                        <div class="posting_modal_title">
+                            <h3>이월 상세페이지 <span>(10)</span></h3>
+                            <button class="posting_modal_modify">수정</button>
+                        </div>
+                        <div class="posting_modal_con">
+                            <div class="input_wrap">
+                                <div>
+                                    <div class="date_wrap">
+                                        <input type="date" name="" id="" value="2024-05-01" />
+                                        <small>~</small>
+                                        <input type="date" name="" id="" value="2024-05-02" />
+                                    </div>
+                                    <div class="sort_wrap">
+                                        <select name="" id="">
+                                            <option value="">업체명</option>
+                                            <option value="">담당자</option>
+                                            <option value="">지역</option>
+                                        </select>
+                                        <div class="search_bar">
+                                            <input type="search" />
+                                            <button type="button">
+                                                <img src="/img/search.svg" alt="" />
+                                            </button>
+                                        </div>
+                                        <button type="button" class="reset_btn" onclick="window.location.reload()"></button>
+                                        <button type="button" class="my_btn">My</button>
+                                    </div>
+                                </div>
+                                <div class="posting_modal_btn_wrap">
+                                    <button class="posting_modal_add"><img src="/img/org_modal_plus.svg" alt="추가" /></button>
+                                    <button class="posting_modal_del"><img src="/img/org_modal_minus.svg" alt="삭제" /></button>
+                                </div>
+                            </div>
+                            <table class="posting_modal_list" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>거래처명</th>
+                                        <th>회차</th>
+                                        <th>계약건수</th>
+                                        <th>이월 건수</th>
+                                        <th>비고</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>9회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>이월건수 해결 완료</td>
+                                    </tr>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>8회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>-2개 차감</td>
+                                    </tr>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>7회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>-2개 차감</td>
+                                    </tr>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>6회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>-2개 차감</td>
+                                    </tr>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>5회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>-2개 차감</td>
+                                    </tr>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>4회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>-2개 차감</td>
+                                    </tr>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>3회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>-2개 차감</td>
+                                    </tr>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>2회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>-2개 차감</td>
+                                    </tr>
+                                    <tr>
+                                        <td>안양바른플러스치과</td>
+                                        <td><span>1회차</span>2024.05.20~ 2024.06.20</td>
+                                        <td>14</td>
+                                        <td>2</td>
+                                        <td>-2개 차감</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <nav class="pg_wrap">
+                                <span class="pg">
+                                    <a href="#" class="pg_page pg_start">처음</a>
+                                    <a href="#" class="pg_page pg_prev">이전</a>
+                                    <strong class="pg_current">1</strong>
+                                    <a href="#" class="pg_page">2</a>
+                                    <a href="#" class="pg_page">3</a>
+                                    <a href="#" class="pg_page">4</a>
+                                    <a href="#" class="pg_page">5</a>
+                                    <a href="#" class="pg_page">6</a>
+                                    <a href="#" class="pg_page">7</a>
+                                    <a href="#" class="pg_page">8</a>
+                                    <a href="#" class="pg_page">9</a>
+                                    <a href="#" class="pg_page">10</a>
+                                    <a href="#" class="pg_page pg_next">다음</a>
+                                    <a href="#" class="pg_page pg_end">맨끝</a>
+                                </span>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 </html>

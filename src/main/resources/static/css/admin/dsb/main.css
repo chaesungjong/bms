@@ -1035,13 +1035,13 @@ body.modal-active {
 .org_list thead {
     background-color: #f6f6f6;
     font-size: 20px;
-    font-weight: 500;
     color: #333;
     border-bottom: 1px solid #ddd;
     line-height: 40px;
 }
 .org_list th {
     border-right: 1px solid #ddd;
+    font-weight: 500;
 }
 .org_list th:last-child {
     border: none;

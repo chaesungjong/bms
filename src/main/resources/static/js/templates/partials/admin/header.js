@@ -32,4 +32,16 @@ $(document).ready(function () {
         $(this).toggleClass('open');
         $('.hd_ext_info_list').toggleClass('open');
     });
+    $('.hd_ext_count04').click(function () {
+        var caseBtn = $(this).attr('id');
+        $('.posting_modal').removeClass('on');
+        $('.posting_modal').removeClass('out');
+        $('.posting_modal#' + caseBtn).addClass('on');
+        $('body, html').addClass('modal-active');
+    });
+
+    $('.posting_modal_close').click(function () {
+        $('.posting_modal').addClass('out');
+        $('body, html').removeClass('modal-active');
+    });
 });
