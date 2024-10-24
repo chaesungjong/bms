@@ -11,7 +11,8 @@
                 <h2>사원 기본정보</h2>
                 <div class="add_emp_board">
                     <form action="" id="addEmpForm">
-                        <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" />          <!-- 수정 여부 -->
+                        <input type="hidden" id="corrections" name="corrections" th:value="${corrections}" />
+                        <!-- 수정 여부 -->
                         <div class="add_emp_info">
                             <table cellspacing="0">
                                 <tbody>
@@ -25,25 +26,25 @@
                                         <td colspan="3">
                                             <label for="name"
                                                 >성명
-                                                <input type="text" name="name" id="name" class="name_box" placeholder="성명" th:value="${memInfo?.name}" maxlength='10'required data-alert="성명" />
+                                                <input type="text" name="name" id="name" class="name_box" placeholder="성명" th:value="${memInfo?.name}" maxlength="10" required data-alert="성명" />
                                             </label>
                                             <label for="nameEng"
                                                 >영문명
-                                                <input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명" th:value="${memInfo?.nameEng}" maxlength='15' required data-alert="영문명"/>
+                                                <input type="text" name="nameEng" id="nameEng" class="name_en_box" placeholder="영문명" th:value="${memInfo?.nameEng}" maxlength="15" required data-alert="영문명" />
                                             </label>
                                             <label for="userid"
                                                 >아이디
-                                                <input type="text" name="userid" id="userid" class="id_box" placeholder="아이디" th:value="${memInfo?.userid}" maxlength='20' required data-alert="아이디" />
+                                                <input type="text" name="userid" id="userid" class="id_box" placeholder="아이디" th:value="${memInfo?.userid}" maxlength="20" required data-alert="아이디" />
                                             </label>
                                             <label for="pwd" th:if="${corrections != 'Y'}"
                                                 >비밀번호
-                                                <input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" maxlength='20' required data-alert="비밀번호"/>
+                                                <input type="password" name="pwd" id="pwd" class="pw_box" placeholder="비밀번호" maxlength="20" required data-alert="비밀번호" />
                                             </label>
-                                            <label for="pwdCheck" th:if="${corrections != 'Y'}">비밀번호 확인
-                                                <input type="password" name="pwdCheck" id="pwdCheck" class="pwr_box"
-                                                placeholder="비밀번호 확인" th:value="${memInfo?.pwd}" required data-alert="비밀번호 확인" />
+                                            <label for="pwdCheck" th:if="${corrections != 'Y'}"
+                                                >비밀번호 확인
+                                                <input type="password" name="pwdCheck" id="pwdCheck" class="pwr_box" placeholder="비밀번호 확인" th:value="${memInfo?.pwd}" required data-alert="비밀번호 확인" />
                                             </label>
-                                            <span class="pwd_modify" th:if="${pwdChange == 'Y'}" id="pwd_modify" >비밀번호 수정 </span>
+                                            <span class="pwd_modify" th:if="${pwdChange == 'Y'}" id="pwd_modify">비밀번호 수정 </span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -104,11 +105,17 @@
                                     <tr>
                                         <td class="add_emp_title">채용구분</td>
                                         <td colspan="3">
-                                            <label for="hireType">
+                                            <label for="hireType" style="margin-right: 8px">
                                                 <select name="hireType" id="hireType">
                                                     <th:block th:each="hireType : ${hireTypeList}">
                                                         <option th:value="${hireType['code']}" th:text="${hireType['codeName']}" th:selected="${hireType.codeName == memInfo?.hireType}"></option>
                                                     </th:block>
+                                                </select>
+                                            </label>
+                                            <label for="recruit">
+                                                <select name="recruit" id="recruit">
+                                                    <option value="정직원">정직원</option>
+                                                    <option value="계약직">계약직</option>
                                                 </select>
                                             </label>
                                         </td>
@@ -134,7 +141,7 @@
                                         </td>
                                         <td class="add_emp_title">부서 이메일</td>
                                         <td>
-                                            <input type="email" id="emailDepart" name="emailDepart" size="34" placeholder="부서 메일" th:value="${memInfo?.emailDepart}" maxlength="50"/>
+                                            <input type="email" id="emailDepart" name="emailDepart" size="34" placeholder="부서 메일" th:value="${memInfo?.emailDepart}" maxlength="50" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -150,9 +157,9 @@
                                     <tr>
                                         <td class="add_emp_title">주소</td>
                                         <td colspan="3" class="post_wrap">
-                                            <input type="text" id="post" name="post" placeholder="우편번호" maxlength="10" th:value="${memInfo?.post}" required  />
+                                            <input type="text" id="post" name="post" placeholder="우편번호" maxlength="10" th:value="${memInfo?.post}" required />
                                             <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색" />
-                                            <input type="text" id="addr" name="addr" placeholder="주소" th:value="${memInfo?.addr}" maxlength="50" required  /><br />
+                                            <input type="text" id="addr" name="addr" placeholder="주소" th:value="${memInfo?.addr}" maxlength="50" required /><br />
                                             <input type="text" id="addrDesc" name="addrDesc" placeholder="상세주소" th:value="${memInfo?.addrDesc}" maxlength="50" required />
                                         </td>
                                     </tr>
@@ -169,7 +176,7 @@
                                             </label>
                                             <label for="bankName">
                                                 <span class="sub_span">은행</span>
-                                                <input type="text" id="bankName" name="bankName" class="bank_box" placeholder="은행명" maxlength="15" th:value="${memInfo?.bankName}" required data-alert="은행명"  />
+                                                <input type="text" id="bankName" name="bankName" class="bank_box" placeholder="은행명" maxlength="15" th:value="${memInfo?.bankName}" required data-alert="은행명" />
                                             </label>
                                             <label for="bankAccount">
                                                 <span class="sub_span">계좌번호</span>
@@ -219,7 +226,7 @@
                                         <td class="add_bm_con">
                                             <div>
                                                 <input type="file" name="imgBankbook" id="imgBankbook" th:value="${memInfo?.imgBankbook}" maxlength="50" />
-                                                <input type="hidden" name="imgBankbookFileName" id="imgBankbookFileName" th:value="${memInfo?.imgBankbookFileName}" maxlength="50"/>
+                                                <input type="hidden" name="imgBankbookFileName" id="imgBankbookFileName" th:value="${memInfo?.imgBankbookFileName}" maxlength="50" />
                                                 <label class="bm_file_btn" for="imgBankbook">파일선택</label>
                                                 <span class="bm_file_text" th:text="${memInfo?.imgBankbookFileName}"> 선택된 파일이 없습니다. </span>
                                             </div>
@@ -238,7 +245,7 @@
                                         <td class="add_emp_title">사원 프로필 사진</td>
                                         <td class="add_bm_con">
                                             <div>
-                                                <input type="file" name="imgProfile" id="imgProfile" th:value="${memInfo?.imgProfile}" maxlength="50"  />
+                                                <input type="file" name="imgProfile" id="imgProfile" th:value="${memInfo?.imgProfile}" maxlength="50" />
                                                 <input type="hidden" name="imgProfileFileName" id="imgProfileFileName" th:value="${memInfo?.imgProfileFileName}" maxlength="50" />
                                                 <label class="bm_file_btn" for="imgProfile">파일선택</label>
                                                 <span class="bm_file_text" th:text="${memInfo?.imgProfileFileName}"> 선택된 파일이 없습니다. </span>
@@ -249,7 +256,7 @@
                                             <div>
                                                 <input type="file" name="imgEtc" id="imgEtc" th:value="${memInfo?.imgEtc}" maxlength="50" />
                                                 <input type="hidden" name="imgEtcFimeName" id="imgEtcFimeName" th:value="${memInfo?.imgEtcFimeName}" maxlength="50" />
-                                                <input type="file" name="imgEtc" id="imgEtc"th:value="${memInfo?.imgEtc}" maxlength="50" />
+                                                <input type="file" name="imgEtc" id="imgEtc" th:value="${memInfo?.imgEtc}" maxlength="50" />
                                                 <label class="bm_file_btn" for="imgEtc">파일선택</label>
                                                 <span class="bm_file_text" th:text="${memInfo?.imgEtcFimeName}"> 선택된 파일이 없습니다. </span>
                                             </div>
@@ -275,11 +282,11 @@
                             <div class="pwd_modify_con">
                                 <div class="pwd_modify_con01">
                                     <span>현재 비밀번호</span>
-                                    <div class="pw_wrap"><input type="password" name="now_pwd" id="now_pwd" class="pwd_m_box" required /><button type="button" class="btnView off" maxlength="30" ></button></div>
+                                    <div class="pw_wrap"><input type="password" name="now_pwd" id="now_pwd" class="pwd_m_box" required /><button type="button" class="btnView off" maxlength="30"></button></div>
                                 </div>
                                 <div class="pwd_modify_con02">
                                     <span>새 비밀번호</span>
-                                    <div class="pw_wrap"><input type="password" name="new_pwd" id="new_pwd" class="pwd_m_box" placeholder="새 비밀번호" required /><button type="button" class="btnView off" maxlength="30" ></button></div>
+                                    <div class="pw_wrap"><input type="password" name="new_pwd" id="new_pwd" class="pwd_m_box" placeholder="새 비밀번호" required /><button type="button" class="btnView off" maxlength="30"></button></div>
                                 </div>
                                 <div class="pwd_modify_con03">
                                     <span>비밀번호 확인</span>
