@@ -203,8 +203,8 @@
                                     <tr>
                                         <td colspan="3" class="radio_wrap">
                                             <span>게시판 사용<br />가능 여부</span>
-                                            <label> <input type="radio" name="boardUseYN" value="Y" th:checked="${memInfo?.boardUseYN == 'Y'}" />사용가능 </label>
-                                            <label> <input type="radio" name="boardUseYN" value="N" th:checked="${memInfo?.boardUseYN == 'N'}" />사용중지 </label>
+                                            <label> <input type="radio" name="boardUseYN" value="Y" th:checked="${memInfo != null && memInfo['boardUseYN'] == 'Y'}" />사용가능 </label>
+                                            <label> <input type="radio" name="boardUseYN" value="N" th:checked="${memInfo != null && memInfo['boardUseYN'] == 'N'}" />사용중지 </label>                                            
                                         </td>
                                     </tr>
                                     <tr>
