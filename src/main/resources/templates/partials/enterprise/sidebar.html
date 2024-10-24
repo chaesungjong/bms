@@ -1,8 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/default}">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/default}">
     <aside th:fragment="sidebar" class="sidebar">
         <!-- Sidebar -->
         <input type="hidden" id="siteKey" th:value="${member.siteKey}" />
@@ -22,10 +18,10 @@
                         </div>
                     </div>
                     <div class="sidebar_user_menu">
-                        <a href="/admin/pif/design_portfolio" class="sidebar_user_menu02"><img src="/img/sidebar_user_menu02.svg" alt="my 요청건" />my 요청건</a>
-                        <a href="#" id="Modifying_Information" class="sidebar_user_menu03"><img src="/img/sidebar_user_menu03.svg" alt="정보 수정" />정보 수정</a>
+                        <a href="/admin/pif/design_portfolio" class="sidebar_user_menu02" style="width: 50%"><img src="/img/sidebar_user_menu02.svg" alt="my 요청건" />my 요청건</a>
+                        <a href="#" id="Modifying_Information" class="sidebar_user_menu03" style="width: 50%"><img src="/img/sidebar_user_menu03.svg" alt="정보 수정" />정보 수정</a>
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="sidebar_bot">
                 <ul class="side_menu">
@@ -43,11 +39,11 @@
                     <li class="side_menu03">
                         <a id="side_csf" href="#none"><img src="/img/side_menu03.svg" alt="고객지원 게시판" />고객지원 게시판</a>
                         <ul class="side_sub_menu">
-                              <li><a href="/enterprise/csf/maintenance_bulletin_board">유지보수 게시판</a></li>
-                              <li><a href="/enterprise/csf/medical_schedule_board">진료 일정 게시판</a></li>
-                              <li><a href="/enterprise/csf/clinical_letter_request_bulletin">임상글 요청 게시판</a></li>
-                              <li><a href="/enterprise/csf/test">에디터 테스트</a></li>
-                          </ul>
+                            <li><a href="/enterprise/csf/maintenance">유지보수 게시판</a></li>
+                            <li><a href="/enterprise/csf/medical_schedule_board">진료 일정 게시판</a></li>
+                            <li><a href="/enterprise/csf/clinical_letter_request_bulletin">임상글 요청 게시판</a></li>
+                            <li><a href="/enterprise/csf/test">에디터 테스트</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

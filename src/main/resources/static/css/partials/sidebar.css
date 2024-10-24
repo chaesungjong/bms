@@ -54,6 +54,7 @@
 .sidebar_user_menu {
     display: flex;
     width: 100%;
+    justify-content: center;
     align-items: center;
     background-color: #ecf3fc;
 }
@@ -74,18 +75,7 @@
 .sidebar_user_menu > a:hover {
     background-color: #b8d6fb;
 }
-.sidebar_user_menu02::after {
-    content: '';
-    display: block;
-    top: 50%;
-    right: 0px;
-    position: absolute;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 48px;
-    background-color: #c7d5e7;
-}
-.sidebar_user_menu02::before {
+.sidebar_user_menu > a::before {
     content: '';
     display: block;
     top: 50%;
@@ -96,6 +86,10 @@
     height: 48px;
     background-color: #c7d5e7;
 }
+.sidebar_user_menu > a:first-child:before {
+    display: none;
+}
+
 .sidebar_bot {
     padding: 0px 24px 29px;
     /* overflow-y: scroll; */
