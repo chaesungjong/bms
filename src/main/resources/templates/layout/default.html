@@ -17,10 +17,8 @@
         <div id="wrapper">
             <!-- 사이드바 영역  -->
             <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
-
                 <!-- 로컬호스트 주소 일 때 -->
                 <th:block th:if="${isLocalhost}">
-
                     <!-- 관리자가 접근 하였을 때  -->
                     <th:block th:if="${localUser}">
                         <div th:replace="/partials/admin/sidebar_dev :: sidebar"></div>
@@ -30,28 +28,28 @@
                     <th:block th:unless="${localUser}">
                         <div th:replace="/partials/enterprise/sidebar :: sidebar"></div>
                     </th:block>
-                    
                 </th:block>
 
                 <!-- 로컬호스트 주소가 아닐 때 -->
                 <th:block th:unless="${isLocalhost}">
-
                     <!-- 관리자가 접근 하였을 때  -->
                     <th:block th:if="${localUser}">
-                      <div th:replace="/partials/admin/sidebar :: sidebar"></div>
+                        <div th:replace="/partials/admin/sidebar :: sidebar"></div>
                     </th:block>
 
                     <!-- 업체 담당자가 접근 하였을 때  -->
                     <th:block th:unless="${localUser}">
                         <div th:replace="/partials/enterprise/sidebar :: sidebar"></div>
                     </th:block>
-                    
                 </th:block>
             </th:block>
             <div class="main_view">
                 <!-- 공통헤더 영역 -->
-                <th:block th:if="${not #strings.contains(currentUri, '/acm/login')}">
+                <th:block th:if="${localUser}">
                     <div th:replace="/partials/admin/header :: header"></div>
+                </th:block>
+                <th:block th:unless="${localUser}">
+                    <div th:replace="/partials/enterprise/header :: header"></div>
                 </th:block>
                 <!-- 메인화면 영역  -->
                 <div id="main-content" layout:fragment="content"></div>
