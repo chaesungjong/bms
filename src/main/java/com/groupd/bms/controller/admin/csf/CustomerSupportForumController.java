@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -313,21 +313,45 @@ public class CustomerSupportForumController extends BaseController{
         RegistrationMap.put("boardUseYN", StringUtil.objectToString(RegistrationMap.get("boardUseYN")).equals("") ? "N" : StringUtil.objectToString(RegistrationMap.get("boardUseYN")));
         //맴버 리스트를 가져온다.                                     
         Map<String, String> parameterMap = new HashMap<>();
-        int counter = 1;
+        // int counter = 1;
     
+        // while (true) {
+
+        //     String paramName = "bmMember" + counter;
+        //     String paramNum  = "bmMember" + counter + "seq";
+    
+        //     String paramValue = request.getParameter(paramName);
+        //     String paramNumValue = request.getParameter(paramNum);
+    
+        //     if (paramValue == null || paramValue.isEmpty()) 
+        //         break; // 더 이상 파라미터가 없으면 루프 종료
+            
+        //     parameterMap.put(paramName, paramValue);
+        //     parameterMap.put(paramNum, paramNumValue);
+        //     counter++;
+        // }
+        JSONArray jsonArray = new JSONArray();
+        int counter = 1;
+
         while (true) {
 
             String paramName = "bmMember" + counter;
+            String paramNum  = "bmMember" + counter + "seq";
+
             String paramValue = request.getParameter(paramName);
-    
+            String paramNumValue = request.getParameter(paramNum);
+
             if (paramValue == null || paramValue.isEmpty()) 
                 break; // 더 이상 파라미터가 없으면 루프 종료
             
-            parameterMap.put(paramName, paramValue);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put(paramName, paramValue);
+            jsonObject.put(paramNum, paramNumValue);
+            jsonArray.put(jsonObject);
             counter++;
         }
 
-        RegistrationMap.put("bmsMember", parameterMap); // 맴버 리스트
+        RegistrationMap.put("bmsMember", jsonArray); // 맴버 리스트
         
         // 파일 세팅
         if(imgBusinessRegNo != null && !imgBusinessRegNo.isEmpty()) {

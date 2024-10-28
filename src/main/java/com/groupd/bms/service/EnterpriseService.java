@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.groupd.bms.repository.EnterpriseRepository;
 import com.groupd.bms.util.StringUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -42,7 +43,7 @@ public class EnterpriseService {
             String sitekey = StringUtil.objectToString(requestHashMap.get("retSiteKey"));
             String userid = (String) requestHashMap.get("userId");
             JSONObject jsonObject = (JSONObject) requestHashMap.get("sns");
-
+            JSONArray jsonArray = (JSONArray) requestHashMap.get("bmsMember");
             // 필요한 정보 출력
             jsonObject.keys().forEachRemaining(key -> {
 
@@ -76,31 +77,25 @@ public class EnterpriseService {
                 enterpriseRepository.mngRegist(siteSnsInfoMap);
             });
 
-            // 담당자 등록 하기 
-            Map<String, String> parameterMap = requestHashMap.get("bmsMember") != null ? (Map<String, String>) requestHashMap.get("bmsMember") : null;
-            
-            if(parameterMap != null) {
+            for(int i = 0; i<jsonArray.length(); i++){
 
-                // 담당자 한명씩 등록
-                for (String key : parameterMap.keySet()) {
+                JSONObject bmsMember = jsonArray.getJSONObject(i);
+                Map<String, Object> memberReMap = new HashMap<>();
 
-                    String seq = StringUtil.objectToString(parameterMap.get(key+"seq"));
+                String seq = StringUtil.objectToString(bmsMember.get("bmMember" + (i +1) + "seq"));
+                String userKey = StringUtil.objectToString(bmsMember.get("bmMember" + (i + 1)));
 
-                    Map<String, Object> memberReMap = new HashMap<>();
+                if("".equals(seq)) memberReMap.put("gubun", "REGIST");
+                else memberReMap.put("gubun", "MODIFY");
 
-                    if("".equals(seq)) memberReMap.put("gubun", "REGIST");
-                    else memberReMap.put("gubun", "MODIFY");
-                    
-
-                    memberReMap.put("svrGubun", "siteMngUserInfo");
-                    memberReMap.put("loginUserid", userid);
-                    memberReMap.put("loginUserip", requestHashMap.get("ip"));
-                    memberReMap.put("i_param1", sitekey);
-                    memberReMap.put("i_param2", (String)parameterMap.get(key));
-                    memberReMap.put("i_param3","SITE_GD");
-                    enterpriseRepository.mngRegist(memberReMap);
-
-                }
+                memberReMap.put("svrGubun", "siteMngUserInfo");
+                memberReMap.put("loginUserid", userid);
+                memberReMap.put("loginUserip", requestHashMap.get("ip"));
+                memberReMap.put("i_param1", sitekey);
+                memberReMap.put("i_param2", userKey);
+                memberReMap.put("i_param3", seq);
+                memberReMap.put("i_param4", "SITE_GD");
+                enterpriseRepository.mngRegist(memberReMap);
             }
 
         } 
