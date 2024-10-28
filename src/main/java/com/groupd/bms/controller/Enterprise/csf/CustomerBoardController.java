@@ -349,4 +349,40 @@ public class CustomerBoardController extends BaseController{
 
         return resultJson;
     }
+
+        /*
+     * 업체 리스트 가져오기 
+     */
+    @RequestMapping(value = "/maintenance_list", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<?> maintenanceList( HttpServletRequest request) {
+
+        HashMap<String, Object> registrationMap = setRequest(request);
+        HashMap<String, Object> resMap = new HashMap<String, Object>();
+
+        String startDate  = StringUtil.objectToString(registrationMap.get("fr_date"));                   //시작일
+        String EndDate    = StringUtil.objectToString(registrationMap.get("to_date"));                   //종료일
+        String searchType = StringUtil.objectToString(registrationMap.get("searchType"));                //검색타입     
+        String search     = StringUtil.objectToString(registrationMap.get("search"));                    //검색어 
+        String userId     = StringUtil.objectToString(registrationMap.get("userId"));                    //사용자ID
+        String etcParam   = StringUtil.objectToString(registrationMap.get("siteKey"));                   //업체키
+
+
+        int draw = Integer.parseInt(request.getParameter("draw"));                                      //페이징
+        int start = Integer.parseInt(request.getParameter("start"));                                    //시작
+        int length = Integer.parseInt(request.getParameter("length"));                                  //갯수
+
+        // 페이지 번호 계산
+        int page = start / length + 1;
+        // 전체 레코드 수 가져오기
+        int totalRecords = Integer.parseInt(setPagination(commonService.mng("taskReqBoard_Out_ListCnt", userId, String.valueOf(page), String.valueOf(length), startDate.replaceAll("-", ""), EndDate.replaceAll("-", ""), searchType, search, etcParam)));
+        // 데이터 가져오기
+        List<Map<String, Object>> maintenanceList = commonService.mngList("taskReqBoard_Out_List", userId, String.valueOf(page), String.valueOf(length), startDate.replaceAll("-", ""), EndDate.replaceAll("-", ""), searchType, search, etcParam);
+
+        resMap.put("draw", draw);
+        resMap.put("recordsTotal", totalRecords);
+        resMap.put("data", maintenanceList);
+
+        return ResponseEntity.ok(resMap);
+    }
+
 }

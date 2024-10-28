@@ -52,6 +52,7 @@ public class BaseController {
         if(member != null){
             requestMap.put("userId", member.getUserid());
             requestMap.put("loginUserid", member.getUserid());
+            requestMap.put("siteKey", member.getSiteKey());
         }
 
         requestMap.put("ip", Util.getUserIP(request));
