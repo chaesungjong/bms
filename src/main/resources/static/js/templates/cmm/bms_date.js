@@ -70,5 +70,7 @@ function formatDate(dateInput) {
     if (dateInput.length === 8) {
         const formattedDate = dateInput.substring(0, 4) + '-' + dateInput.substring(4, 6) + '-' + dateInput.substring(6, 8);
         return formattedDate;
+    }else{
+        return "";
     }
 }

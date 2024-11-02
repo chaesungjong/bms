@@ -40,7 +40,7 @@
                         <!-- 업체측에서 글쓰기 -->
                         <a href="/enterprise/csf/maintenance_write" class="mt_reg">글쓰기</a>
                     </form>
-                    <table class="mt_board_table" cellspacing="0">
+                    <table class="mt_board_table" cellspacing="0" id="maintenanceTable">
                         <thead class="mt_board_th">
                             <tr>
                                 <th>업무 요청일</th>
@@ -53,7 +53,7 @@
                             </tr>
                         </thead>
                         <tbody class="mt_board_td">
-                            <tr>
+                            <!-- <tr>
                                 <td class="mt_wr_wdate"><span class="list_today">오늘</span>17:52</td>
                                 <td class="mt_wr_name">오휘성 원장</td>
                                 <td class="mt_wr_state">
@@ -143,22 +143,7 @@
                         </tbody>
                     </table>
                     <nav class="pg_wrap">
-                        <span class="pg">
-                            <a href="#" class="pg_page pg_start">처음</a>
-                            <a href="#" class="pg_page pg_prev">이전</a>
-                            <strong class="pg_current">1</strong>
-                            <a href="#" class="pg_page">2</a>
-                            <a href="#" class="pg_page">3</a>
-                            <a href="#" class="pg_page">4</a>
-                            <a href="#" class="pg_page">5</a>
-                            <a href="#" class="pg_page">6</a>
-                            <a href="#" class="pg_page">7</a>
-                            <a href="#" class="pg_page">8</a>
-                            <a href="#" class="pg_page">9</a>
-                            <a href="#" class="pg_page">10</a>
-                            <a href="#" class="pg_page pg_next">다음</a>
-                            <a href="#" class="pg_page pg_end">맨끝</a>
-                        </span>
+                        <span class="pg" id="customPagination"></span>
                     </nav>
                 </div>
             </div>
@@ -167,6 +152,6 @@
 
     <!-- 유지보수  Javascript -->
     <th:block layout:fragment="customJS">
-        <script src="/js/templates/admin/csf/maintenance.js"></script>
+        <script src="/js/templates/enterprise/csf/maintenance.js"></script>
     </th:block>
 </html>
