@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.groupd.bms.controller.BaseController;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -350,7 +349,7 @@ public class CustomerBoardController extends BaseController{
         return resultJson;
     }
 
-        /*
+    /*
      * 업체 리스트 가져오기 
      */
     @RequestMapping(value = "/maintenance_list", method = { RequestMethod.POST, RequestMethod.GET })
@@ -383,6 +382,51 @@ public class CustomerBoardController extends BaseController{
         resMap.put("data", maintenanceList);
 
         return ResponseEntity.ok(resMap);
+    }
+
+    /*
+     * 유지보수 게시판 글쓰기 페이지
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/maintenance_write", method = { RequestMethod.POST, RequestMethod.GET })
+    public String maintenance_write(HttpServletRequest request, Model model) {
+
+        HashMap<String, Object> registrationMap = setRequest(request);
+
+        
+
+        /**
+         * 게시판 구분 값을 가져온다.
+         */
+        List<Map<String, Object>> taskTypeList = commonService.codeMgtViewList("LIST", "taskType", "","");
+        model.addAttribute("taskTypeList", taskTypeList);
+
+
+        return "enterprise/csf/maintenance_write";
+    }
+
+    /**
+     * 고객 지원 게시판 글쓰기
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/maintenance/Registration.do", method = { RequestMethod.POST, RequestMethod.GET })
+    public ResponseEntity<?> maintenanceRegistration(HttpServletRequest request) {
+        
+        HashMap<String, Object> RegistrationMap = setRequest(request);
+
+
+        //유지보수 게시판 등록
+        enterpriseService.setMaintenancewrite(RegistrationMap);
+
+
+         if (RegistrationMap != null)
+            return ResponseEntity.ok(RegistrationMap);
+        else
+            return ResponseEntity.status(500).build();
+
     }
 
 }

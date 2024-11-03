@@ -56,6 +56,7 @@ public class BaseController {
         }
 
         requestMap.put("ip", Util.getUserIP(request));
+        requestMap.put("loginUserip", Util.getUserIP(request));
 
         return requestMap;
     }

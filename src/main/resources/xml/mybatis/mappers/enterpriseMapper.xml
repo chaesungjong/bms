@@ -95,4 +95,45 @@
   </select>
   <!-- 치과 계정 등록 End -->
 
+  <!-- 고객지원 게시판/유지보수 게시판 등록/수정/삭제 Procedure Start -->
+  <select id="taskReqBoardRegModify" parameterType="java.util.Map" statementType="CALLABLE">
+      {
+          #{retTrbSeq, mode=OUT, jdbcType=INTEGER} = call [dbo].[taskReqBoardRegModify] (
+              #{gubun, jdbcType=VARCHAR},
+              #{loginUserid, jdbcType=VARCHAR},
+              #{loginUserip, jdbcType=VARCHAR},
+              #{trbSeq, jdbcType=INTEGER},
+              
+              #{taskType, jdbcType=VARCHAR},
+              #{title, jdbcType=VARCHAR},
+              #{contents, jdbcType=VARCHAR},
+              #{contents2, jdbcType=VARCHAR},
+              #{contents3, jdbcType=VARCHAR},
+              #{dueDate, jdbcType=VARCHAR},
+              #{reqSDate, jdbcType=VARCHAR},
+              #{reqEDate, jdbcType=VARCHAR},
+              #{relatedPageURL, jdbcType=VARCHAR},
+              #{designType, jdbcType=VARCHAR},
+              #{reqType, jdbcType=VARCHAR},
+              #{postType, jdbcType=VARCHAR},
+              #{postCase, jdbcType=VARCHAR},
+              #{gdTeamCode, jdbcType=VARCHAR},
+              #{gdUserKey, jdbcType=VARCHAR},
+              #{taskState, jdbcType=VARCHAR},
+              #{file1, jdbcType=VARCHAR},
+              #{file2, jdbcType=VARCHAR},
+              #{file3, jdbcType=VARCHAR},
+              #{file4, jdbcType=VARCHAR},
+              #{file5, jdbcType=VARCHAR},
+              #{sitekey, jdbcType=INTEGER},
+              
+              #{retTrbSeq, mode=OUT, jdbcType=INTEGER},
+              #{retVal, mode=OUT, jdbcType=INTEGER},
+              #{retMsg, mode=OUT, jdbcType=VARCHAR}
+          )
+      }
+  </select>
+  <!-- 고객지원 게시판/유지보수 게시판 등록/수정/삭제 Procedure Procedure End -->
+
+
 </mapper>

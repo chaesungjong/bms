@@ -3,6 +3,13 @@
  */
 $(document).ready(function () {
     dataTableReload();
+
+    // 유지보수 요청 버튼 클릭 이벤트
+    $('body').on('click', 'tr', function() {
+        var sitekey = $(this).data('user-sitekey');
+        alert(sitekey);
+    });
+
 });
 
 
@@ -36,30 +43,41 @@ $(document).ready(function () {
                 "render": function(data, type, row) {
                     if(row.strTaskState =="접수"){
                         return '<span class="main_board_wrstate state_receive" style="cursor: default">' + row.strTaskState + '</span>'; 
-                    }else if(row.strTaskState =="미처리"){
-                        return '<span class="main_board_wrcategory cat_no" style="cursor: default">' + row.strTaskState + '</span>'; 
+                    }else if(row.strTaskState =="확인"){
+                        return '<span class="main_board_wrstate state_check" style="cursor: default">' + row.strTaskState + '</span>'; 
 
-                    }else if(row.strTaskState =="보류"){
-                        return '<span class="main_board_wrstate state_hold" style="cursor: default">' + row.strTaskState + '</span>'; 
                     }else if(row.strTaskState =="진행"){
                         return '<span class="main_board_wrstate state_progress" style="cursor: default">' + row.strTaskState + '</span>'; 
+                    }else if(row.strTaskState =="완료"){
+                        return '<span class="main_board_wrstate state_complete" style="cursor: default">' + row.strTaskState + '</span>'; 
+                    }else if(row.strTaskState =="기타"){
+                        return '<span class="main_board_wrstate state_other" style="cursor: default">' + row.strTaskState + '</span>'; 
+                    }else if(row.strTaskState =="보류"){
+                        return '<span class="main_board_wrstate state_hold" style="cursor: default">' + row.strTaskState + '</span>'; 
                     }else{
-                        return '<span class="main_board_wrcategory cat_no" style="cursor: default">' + row.strTaskState + '</span>'; 
+                        return '<span class="main_board_wrstate state_receive" style="cursor: default">' + row.strTaskState + '</span>'; 
                     }
                 } 
             },// 상태
             { "data": null, 
                 "className": "mt_wr_state",
                 "render": function(data, type, row) {
-                    if(row.strGdTeamCode =="광고관리팀"){
+                    if(row.strGdTeamCode =="미처리"){
+                        return '<span class="main_board_wrcategory cat_no" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                    }else if(row.strTaskState =="마케팅 / 기획"){
                         return '<span class="main_board_wrcategory cat_mk" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="미처리"){
-                        return '<span class="main_board_wrcategory cat_mk" style="cursor: default">' +row.strGdTeamCode+'</span>';
-
-                    }else if(row.strTaskState =="보류"){
-                        return '<span class="main_board_wrcategory cat_mk" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="진행"){
-                        return '<span class="main_board_wrcategory cat_mk" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                    }else if(row.strTaskState =="광고관리"){
+                        return '<span class="main_board_wrcategory cat_ec" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                    }else if(row.strTaskState =="디자인"){
+                        return '<span class="main_board_wrcategory cat_dg" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                    }else if(row.strTaskState =="퍼블리싱"){
+                        return '<span class="main_board_wrcategory cat_pb" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                    }else if(row.strTaskState =="영상"){
+                        return '<span class="main_board_wrcategory cat_bd" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                    }else if(row.strTaskState =="관리"){
+                        return '<span class="main_board_wrcategory cat_cp" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                    }else if(row.strTaskState =="재무"){
+                        return '<span class="main_board_wrcategory cat_fn" style="cursor: default">' +row.strGdTeamCode+'</span>';
                     }else{
                         return '<span class="main_board_wrcategory cat_mk" style="cursor: default">' +row.strGdTeamCode+'</span>';
                     }
@@ -101,8 +119,9 @@ $(document).ready(function () {
         },
         "dom": 'rtip', // 기본 페이징 네비게이션 컨트롤을 숨깁니다.
         "createdRow": function(row, data, dataIndex) {
+            console.log(data);
             // 행에 userId 값을 data 속성으로 추가
-            $(row).attr('data-user-id', data.userid);
+            $(row).attr('data-sitekey', data.sitekey);
         },
         "initComplete": function(settings, json) {
             updateCustomPagination(settings);

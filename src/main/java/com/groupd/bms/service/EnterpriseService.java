@@ -117,4 +117,22 @@ public class EnterpriseService {
         List<Map<String, Object>> reList = enterpriseRepository.codeMgtViewSiteState(getStateCode);
         return reList;
     }
+
+    /**
+     * 유지보수게시판을 등록/수정한다.
+     */
+    public void setMaintenancewrite(HashMap<String, Object> requestHashMap) {
+
+        requestHashMap.put("dueDate", StringUtil.objectToString(requestHashMap.get("dueDate")).replaceAll("-", ""));
+        requestHashMap.put("reqSDate", StringUtil.objectToString(requestHashMap.get("reqSDate")).replaceAll("-", ""));
+        requestHashMap.put("reqEDate", StringUtil.objectToString(requestHashMap.get("reqEDate")).replaceAll("-", ""));
+
+        String gubun = StringUtil.objectToString(requestHashMap.get("gubun"));
+
+        if("".equals(gubun)) {
+            requestHashMap.put("gubun", "REGIST");  
+        }
+
+        enterpriseRepository.taskReqBoardRegModify(requestHashMap);
+    }
 }

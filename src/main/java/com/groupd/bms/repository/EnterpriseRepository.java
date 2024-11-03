@@ -29,4 +29,11 @@ public interface EnterpriseRepository {
      */
     List<Map<String, Object>> codeMgtViewSiteState(Map<String, Object> params);
 
+    /**
+     * 유지보수 게시판 글쓰기
+     * 
+     * @return
+     */
+    void taskReqBoardRegModify(Map<String, Object> params);
+
 }
