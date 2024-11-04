@@ -34,7 +34,7 @@ $(document).ready(function () {
             { "data": null, 
                 "className": "mt_wr_wdate",
                 "render": function(data, type, row) {
-                return formatDate(row.reqSDate);
+                return formatDate(row.regdate);
                 } 
             }, // 업무 요청일
             { "data": "name" },//작성자
@@ -62,24 +62,22 @@ $(document).ready(function () {
             { "data": null, 
                 "className": "mt_wr_state",
                 "render": function(data, type, row) {
-                    if(row.strGdTeamCode =="미처리"){
-                        return '<span class="main_board_wrcategory cat_no" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="마케팅 / 기획"){
-                        return '<span class="main_board_wrcategory cat_mk" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="광고관리"){
-                        return '<span class="main_board_wrcategory cat_ec" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="디자인"){
-                        return '<span class="main_board_wrcategory cat_dg" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="퍼블리싱"){
-                        return '<span class="main_board_wrcategory cat_pb" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="영상"){
-                        return '<span class="main_board_wrcategory cat_bd" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="관리"){
-                        return '<span class="main_board_wrcategory cat_cp" style="cursor: default">' +row.strGdTeamCode+'</span>';
-                    }else if(row.strTaskState =="재무"){
-                        return '<span class="main_board_wrcategory cat_fn" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                    if(row.strGdDepartCode =="마케팅"){
+                        return '<span class="main_board_wrcategory cat_mk" style="cursor: default">' +row.strGdDepartCode+'</span>';
+                    }else if(row.strGdDepartCode =="광고관리"){
+                        return '<span class="main_board_wrcategory cat_ec" style="cursor: default">' +row.strGdDepartCode+'</span>';
+                    }else if(row.strGdDepartCode =="디자인"){
+                        return '<span class="main_board_wrcategory cat_dg" style="cursor: default">' +row.strGdDepartCode+'</span>';
+                    }else if(row.strGdDepartCode =="디자인"){
+                        return '<span class="main_board_wrcategory cat_pb" style="cursor: default">' +row.strGdDepartCode+'</span>';
+                    }else if(row.strGdDepartCode =="미디어제작"){
+                        return '<span class="main_board_wrcategory cat_bd" style="cursor: default">' +row.strGdDepartCode+'</span>';
+                    }else if(row.strGdDepartCode =="관리"){
+                        return '<span class="main_board_wrcategory cat_cp" style="cursor: default">' +row.strGdDepartCode+'</span>';
+                    }else if(row.strGdDepartCode =="재무"){
+                        return '<span class="main_board_wrcategory cat_fn" style="cursor: default">' +row.strGdDepartCode+'</span>';
                     }else{
-                        return '<span class="main_board_wrcategory cat_mk" style="cursor: default">' +row.strGdTeamCode+'</span>';
+                        return '<span class="main_board_wrcategory cat_no" style="cursor: default">' +row.strGdDepartCode+'</span>';
                     }
                 } 
             },// 부서
