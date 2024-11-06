@@ -125,7 +125,7 @@
               #{file3, jdbcType=VARCHAR},
               #{file4, jdbcType=VARCHAR},
               #{file5, jdbcType=VARCHAR},
-              #{sitekey, jdbcType=INTEGER},
+              #{siteKey, jdbcType=INTEGER},
               
               #{retTrbSeq, mode=OUT, jdbcType=INTEGER},
               #{retVal, mode=OUT, jdbcType=INTEGER},

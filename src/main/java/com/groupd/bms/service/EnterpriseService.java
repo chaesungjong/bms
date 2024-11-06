@@ -126,6 +126,7 @@ public class EnterpriseService {
         requestHashMap.put("dueDate", StringUtil.objectToString(requestHashMap.get("dueDate")).replaceAll("-", ""));
         requestHashMap.put("reqSDate", StringUtil.objectToString(requestHashMap.get("reqSDate")).replaceAll("-", ""));
         requestHashMap.put("reqEDate", StringUtil.objectToString(requestHashMap.get("reqEDate")).replaceAll("-", ""));
+        requestHashMap.put("siteKey", StringUtil.stringToInt(requestHashMap.get("siteKey").toString()));
 
         String gubun = StringUtil.objectToString(requestHashMap.get("gubun"));
 
