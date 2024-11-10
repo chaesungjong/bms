@@ -12,6 +12,6 @@ import com.bugsnag.Bugsnag;
 public class BugsnagConfig {
     @Bean
     public Bugsnag bugsnag() {
-        return new Bugsnag("0c232596f919827d22184b038d1ef0b1");
+        return new Bugsnag("3e9f4a2044df2def51dff54de8a886cc");
     }
 }
